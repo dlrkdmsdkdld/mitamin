@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:title="홈"
+        android:icon="@drawable/icon_home_mono"
+        />
+    <item
+        android:id="@+id/historyFragment"
+        android:title="처방기록"
+        android:enabled="true"
+        android:icon="@drawable/icon_card_mono"
+
+        />
+    <item
+        android:id="@+id/manageMentFragment"
+        android:title="감정관리"
+        android:enabled="true"
+        android:icon="@drawable/icon_headphone_mono"
+        />
+    <item
+        android:id="@+id/userInformationFragment"
+        android:title="마이페이지"
+        android:enabled="true"
+        android:icon="@drawable/icon_user_mono"/>
+</menu>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/manageMentFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.ManageMentFragment"
+        android:label="fragment_manage_ment"
+        tools:layout="@layout/fragment_manage_ment" />
+    <fragment
+        android:id="@+id/userInformationFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.UserInformationFragment"
+        android:label="fragment_user_information"
+        tools:layout="@layout/fragment_user_information" />
+</navigation>
