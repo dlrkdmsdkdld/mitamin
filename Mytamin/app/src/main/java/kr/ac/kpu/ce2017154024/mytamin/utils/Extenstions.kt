@@ -10,6 +10,4 @@ fun Int?.parseIntToTimeLine():String{
         parseSecond="0$second"
     }
     return "0$minute:$parseSecond"
-
-
 }

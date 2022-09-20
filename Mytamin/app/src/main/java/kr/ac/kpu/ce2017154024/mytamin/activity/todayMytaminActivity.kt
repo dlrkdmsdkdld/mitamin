@@ -22,7 +22,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mytaminViewModel: todayMytaminViewModel
 
     var step = 0 // 마이타민 단계별 차등을 주기위한 코드
-    var startbtn =1
+    var startbtn =1 // 타이머 시작버튼 처음에는 1 -> 작동하고있는데 멈추고싶으면 2 ->다시하고싶을땐 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG,"todayMytaminActivity onCreate")
@@ -48,6 +48,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                         mytamin_explain_text.text=Constant.explainTextStepTwo
                         mytamin_step_text.text = Constant.StepTextstepTwo
                         mytaminViewModel.timerPause()
+
                     }
                     1 ->{
                         todayMytamin_nextBtn.isEnabled=false

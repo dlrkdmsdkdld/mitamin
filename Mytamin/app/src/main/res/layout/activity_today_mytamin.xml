@@ -73,6 +73,7 @@
             android:id="@+id/mytamin_frameone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="invisible"
             android:orientation="vertical">
 
             <TextView
@@ -119,7 +120,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="250sp"
-                android:layout_height="300sp"
+                android:layout_height="250sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mytamin_chain2"
@@ -145,7 +146,58 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mytamin_frametwo"
 
+            >
+            <TextView
+                android:id="@+id/mytamin_frametwo_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15sp"
+                android:layout_marginTop="40sp"
+                android:text="오늘의 마음 컨디션은\n어떤가요?"
+                android:textSize="30sp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/mytamin_frametwo_title_ImageView"
+                android:layout_width="250sp"
+                android:layout_height="250sp"
+                app:layout_constraintTop_toBottomOf="@+id/mytamin_frametwo_title_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/sample_graph"
+                app:layout_constraintBottom_toTopOf="@+id/mytamin_frametwo_state"
+                />
+            <TextView
+                android:id="@+id/mytamin_frametwo_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/mytamin_frametwo_title_ImageView"
+                android:text="기분이 정말 좋아요!"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/mytamin_frametwo_seekbar"
+                />
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mytamin_frametwo_seekbar"
+                android:layout_marginLeft="13sp"
+                android:layout_marginRight="13sp"
+                app:layout_constraintTop_toBottomOf="@+id/mytamin_frametwo_state"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
 
