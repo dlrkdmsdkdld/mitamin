@@ -1,8 +1,10 @@
 package kr.ac.kpu.ce2017154024.mytamin.RecyclerView.home_RecyclerView
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.home_recycler_item.view.*
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
 class HomeRecyclerViewHolder (itemView: View,HomeRecylcerViewInterface:IHomeRecyclerView)
     :RecyclerView.ViewHolder(itemView),
@@ -15,9 +17,14 @@ class HomeRecyclerViewHolder (itemView: View,HomeRecylcerViewInterface:IHomeRecy
         this.MyHomeRecylcerViewInterface=HomeRecylcerViewInterface
         startbtn.setOnClickListener(this)
     }
-    fun bindWithView(stepdata:Int,Statedata:String){
+    fun bindWithView(stepdata:Int,Statedata:String,on:Boolean=true){
         step.text=stepdata.toString()
         state.text=Statedata
+        Log.d(TAG,"바인드함")
+        //3,4번째 리싸이클러뷰는 안되게막기위해 설정함 - 추후에 이미지만 보이게하면될듯?
+        if (on==false){
+            startbtn.isEnabled=false
+        }
 
     }
 

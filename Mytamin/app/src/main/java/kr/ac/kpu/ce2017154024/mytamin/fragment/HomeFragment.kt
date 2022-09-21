@@ -14,6 +14,8 @@ import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHomeBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToState
+import java.util.*
 
 
 class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
@@ -26,7 +28,12 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater,container,false)
         mBinding =binding
-        Log.d(Constant.TAG,"HomeFragment onCreateView")
+        Log.d(TAG,"HomeFragment onCreateView")
+        //스테이트 택스트 설정
+        val stateText= parseTimeToState("가탄")
+        mBinding?.homeStateText?.text= stateText
+
+
         return mBinding?.root
     }
 
@@ -34,27 +41,37 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         super.onViewCreated(view, savedInstanceState)
         //리싸이클러뷰 설정
         this.myHomeRecyclerAdapter = HomeRecyclerAdapter(this)
+        //this.myHomeRecyclerAdapter.AlreadyTodayMytamin() 3 ,4 번안되게할때쓰는함수
         home_recyclerView.adapter = myHomeRecyclerAdapter
-        todayMytaminBtn.setOnClickListener(this)
+
+       // todayMytaminBtn.setOnClickListener(this)
     }
 
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null
         super.onDestroyView()
-        Log.d(Constant.TAG,"HomeFragment onDestroyView")
+        Log.d(TAG,"HomeFragment onDestroyView")
     }
 
     override fun onClick(p0: View?) {
         when(p0){
-            todayMytaminBtn -> {
-                val intent = Intent(context,todayMytaminActivity::class.java)
-                startActivity(intent)
-            }
+//            todayMytaminBtn -> {
+//                val intent = Intent(context,todayMytaminActivity::class.java)
+//                startActivity(intent)
+//            }
         }
     }
 
     override fun onSearchItemClicked(position: Int) {
         Log.d(TAG,"클릭한 리싸이클러뷰 $position 번째")
+        val intent= Intent(context,todayMytaminActivity::class.java)
+        if(position==3){
+            intent.putExtra("step",position+2)
+        }
+        else{
+            intent.putExtra("step",position)
+        }
+        startActivity(intent)
     }
 
 }

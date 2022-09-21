@@ -10,7 +10,7 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
     private var iHomeRecyclerview:IHomeRecyclerView?=null
     private var stepArray=ArrayList<Int>()
     private var stateArray=ArrayList<String>()
-
+    private var onArray = ArrayList<Boolean>()
     init {
         stepArray.add(1)
         stepArray.add(2)
@@ -20,6 +20,10 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
         stateArray.add("감각 깨우기")
         stateArray.add("하루 진단하기")
         stateArray.add("칭찬 처방하기")
+        onArray.add(true)
+        onArray.add(true)
+        onArray.add(true)
+        onArray.add(true)
         this.iHomeRecyclerview = HomeRecyclerview
     }
 
@@ -32,7 +36,11 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
-        holder.bindWithView(this.stepArray[position],this.stateArray[position])
+        holder.bindWithView(this.stepArray[position],this.stateArray[position],this.onArray[position])
+    }
+    fun AlreadyTodayMytamin(){
+        onArray[2]=false
+        onArray[3]=false
     }
 
     override fun getItemCount(): Int {

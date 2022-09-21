@@ -40,9 +40,5 @@ class todayMytaminViewModel :ViewModel() {
         Observable.interval(1L, TimeUnit.MILLISECONDS).map { interval ->
             interval + 1
         }.take(100)
-    //초기화
-    init {
-        _timerCount.value =10
-        _progressPer.value=100
-    }
+
 }
