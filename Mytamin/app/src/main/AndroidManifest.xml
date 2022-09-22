@@ -14,14 +14,16 @@
         android:theme="@style/Theme.Mytamin"
         tools:targetApi="31">
         <activity
+            android:name=".activity.joinActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.firstActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activity.LoginActivity"
@@ -31,9 +33,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

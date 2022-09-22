@@ -30,7 +30,7 @@ class firstActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0){
             first_join_btn ->{
-                val intent = Intent(applicationContext,LoginActivity::class.java)
+                val intent = Intent(applicationContext,joinActivity::class.java)
                 startActivity(intent)
             }
             first_login_btn ->{
