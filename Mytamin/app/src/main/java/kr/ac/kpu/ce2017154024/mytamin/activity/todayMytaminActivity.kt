@@ -18,6 +18,8 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.explainTextStepOne
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.explainTextStepTwo
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToTimeLine
+import java.text.SimpleDateFormat
+import java.util.*
 
 class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mytaminBinding: ActivityTodayMytaminBinding
@@ -96,12 +98,9 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                 todayMytamin_nextBtn.isEnabled=true
             }
             mytamin_frametwo_calendar_btn->{
-                //val bottomSheetView = layoutInflater.inflate(R.layout.fragment_mytamin_bottom_sheet,null)
                 val bottomSheetDialogFragment=MytaminBottomSheetFragment()
                 bottomSheetDialogFragment.show(supportFragmentManager,bottomSheetDialogFragment.tag)
-               // val bottomSheetDialog = BottomSheetDialog(this)
-                //bottomSheetDialog.setContentView(bottomSheetView)
-               // bottomSheetDialog.show()
+
             }
 
 
@@ -111,6 +110,18 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG,"마이타민 액티비티 파괴")
+    }
+    fun submitDay(inputMonth:Int=0,inputDay:Int=0){
+        if(inputDay==0 && inputMonth==0){
+            val tmp = System.currentTimeMillis()
+            val timedata= Date(tmp)
+            val dateFormat = SimpleDateFormat("M월d일")
+            val parseTime=dateFormat.format(timedata)
+            Log.d(TAG,"todayMytaminActivity submitDay parseTime $parseTime")
+            mytamin_frametwo_calendar_text.text = parseTime
+        }else{
+            mytamin_frametwo_calendar_text.text = "${inputMonth}월 ${inputDay}일"
+        }
     }
 
     fun firstbreath(){
@@ -197,6 +208,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                 mytamin_start_btn.isEnabled=false
                 todayMytamin_nextBtn.isEnabled=false
                 //프레임2 버튼 클릭되게하는 작업
+                submitDay()
                 mytamin_frametwo_calendar_btn.isEnabled=true
                 mytamin_frametwo_image_one.isEnabled=true
                 mytamin_frametwo_image_two.isEnabled=true

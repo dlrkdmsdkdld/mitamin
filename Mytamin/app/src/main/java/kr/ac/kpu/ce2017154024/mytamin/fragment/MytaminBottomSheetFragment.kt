@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.fragment_mytamin_bottom_sheet.*
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
 
 class MytaminBottomSheetFragment : BottomSheetDialogFragment() {
+    private var returnmonth=0
+    private var returnday=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,6 +28,20 @@ class MytaminBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG,"MytaminBottomSheetFragment onViewCreated()")
+        mytamin_bottom_sheet_calendar.setOnDateChangeListener { calendarView, year, month,day ->
+            returnmonth=month
+            returnday=day
+            Log.d(TAG,"MytaminBottomSheetFragment setOnDateChangeListener() ${month+1} 월 $day")
+        }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG,"MytaminBottomSheetFragment onDestroy()")
+        if(returnday!=0){
+        (activity as todayMytaminActivity).submitDay(returnmonth+1,returnday)}
+    }
+
+
 
 }
