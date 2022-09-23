@@ -37,6 +37,7 @@
         app:boxBackgroundColor="@color/white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:hint="이메일을 입력해주세요."
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconCheckable="true"
         app:endIconDrawable="@drawable/ic_baseline_check_24"
@@ -70,8 +71,9 @@
         app:boxBackgroundColor="@color/white"
         android:layout_marginLeft="20dp"
         app:endIconCheckable="true"
+
         android:layout_marginRight="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        style="@style/hintTextSize"
         app:endIconMode="password_toggle"
         >
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
@@ -79,6 +81,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="영문,숫자를 포함한 8~30자리 조합으로 설정해주세요"
+
             android:inputType="textPassword"
             android:id="@+id/join_step_one_password_text"
             />
@@ -108,8 +112,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconMode="password_toggle"
         app:endIconCheckable="true"
-
+        android:hint="비밀번화 확인을 위해 다시 비밀번호를 입력해주세요"
         >
+
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
         <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
         <com.google.android.material.textfield.TextInputEditText

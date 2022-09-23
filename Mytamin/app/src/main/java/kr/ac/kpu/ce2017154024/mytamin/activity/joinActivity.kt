@@ -38,8 +38,13 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
         joinStepTwoFragment= joinStepTwoFragment()
         joinStepThreeFragment= joinStepThreeFragment()
         join_next_btn.setOnClickListener(this)
+        join_next_btn.isEnabled=false
 
 
+
+    }
+    fun canEnableNextbtn(){
+        join_next_btn.isEnabled=true
 
     }
 
@@ -50,6 +55,7 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
                     it
                 ).commit()
             }
+            join_next_btn.isEnabled=false
 
         }
         else if (index==1){
@@ -58,9 +64,11 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
                     it
                 ).commit()
             }
-       
+            join_next_btn.isEnabled=false
+
         }
         else if(index==2){
+            join_next_btn.isEnabled=false
 
         }
         val currentProgress = join_progress.progress

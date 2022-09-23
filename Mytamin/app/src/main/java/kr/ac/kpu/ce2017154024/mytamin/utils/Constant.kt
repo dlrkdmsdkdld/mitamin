@@ -21,3 +21,8 @@ object Constant {
     val frametwo_image_five_text = "매우 좋아요!"
 
 }
+enum class RESPONSE_STATUS{
+    OKAY,
+    FAIL,
+    NO_CONTENT
+}
