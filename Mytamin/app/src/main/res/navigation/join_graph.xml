@@ -9,5 +9,23 @@
         android:id="@+id/joinStepOneFragment"
         android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepOneFragment"
         android:label="fragment_join_step_one"
-        tools:layout="@layout/fragment_join_step_one" />
+        tools:layout="@layout/fragment_join_step_one" >
+        <action
+            android:id="@+id/action_joinStepOneFragment_to_joinStepTwoFragment"
+            app:destination="@id/joinStepTwoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinStepTwoFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepTwoFragment"
+        android:label="fragment_join_step_two"
+        tools:layout="@layout/fragment_join_step_two" >
+        <action
+            android:id="@+id/action_joinStepTwoFragment_to_joinStepThreeFragment"
+            app:destination="@id/joinStepThreeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/joinStepThreeFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepThreeFragment"
+        android:label="fragment_join_step_three"
+        tools:layout="@layout/fragment_join_step_three" />
 </navigation>
