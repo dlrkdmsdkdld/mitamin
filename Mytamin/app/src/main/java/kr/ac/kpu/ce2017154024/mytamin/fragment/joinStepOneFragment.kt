@@ -89,12 +89,12 @@ class joinStepOneFragment : Fragment() {
     }
     private fun CheckEmailAPICall(query:String): Boolean? {
         var result :Boolean = true
-        JoinRetrofitManager.instance.checkEmail(inputemail = query, completion = { responseStatus, checkEmailData ->
+        JoinRetrofitManager.instance.checkEmail(inputemail = query, completion = { responseStatus, checkOverlapData ->
             when(responseStatus){
                 RESPONSE_STATUS.OKAY -> {
-                    Log.d(TAG,"api 호출 성공 check  = $checkEmailData")
-                    if (checkEmailData?.status==200){
-                        result = checkEmailData.result
+                    Log.d(TAG,"api 호출 성공 check  = $checkOverlapData")
+                    if (checkOverlapData?.status==200){
+                        result = checkOverlapData.result
                         if (result==false){//"@drawable/ic_baseline_check_24"
                             join_step_one_email_layout.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_check_24)
                             join_step_one_email_layout.helperText="사용 가능한 이메일입니다"

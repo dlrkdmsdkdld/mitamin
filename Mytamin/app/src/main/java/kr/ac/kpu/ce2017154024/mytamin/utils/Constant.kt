@@ -19,7 +19,11 @@ object Constant {
     val frametwo_image_four_text = "좋은 편이에요:)"
     val frametwo_image_five_src = R.drawable.icons8grinningsquintingface96
     val frametwo_image_five_text = "매우 좋아요!"
-
+}
+object JOINSTRING{
+    val wrongNickNameEmpty = "닉네임에 공백이 있습니다."
+    val wrongNickNameoverlap = "이미 사용 중인 이메일입니다"
+    val goodNickname = "사용 가능한 닉네임입니다"
 }
 enum class RESPONSE_STATUS{
     OKAY,

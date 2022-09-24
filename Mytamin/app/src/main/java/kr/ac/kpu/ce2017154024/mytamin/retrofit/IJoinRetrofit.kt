@@ -10,5 +10,6 @@ interface IJoinRetrofit {
 //https://my-tamin.herokuapp.com/auth/check/email/mytamin@naver.com
     @GET("/auth/check/email/{emailAddress}")
     fun checkEmail(@Path("emailAddress")   emailAddress:String): Call<JsonElement>
-
+    @GET("/auth/check/nickname/{nickName}")
+    fun checkName(@Path("nickName") nickname:String): Call<JsonElement>
 }
