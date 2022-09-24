@@ -3,6 +3,8 @@ package kr.ac.kpu.ce2017154024.mytamin.fragment
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_join_step_one.*
 import kotlinx.android.synthetic.main.fragment_join_step_three.*
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.IntroduceActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.joinActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentJoinStepThreeBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentJoinStepTwoBinding
@@ -91,6 +94,22 @@ class joinStepThreeFragment : Fragment() {
         return result
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        join_step_three_name_text.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                (activity as joinActivity).canEnableNextbtn(false)
+
+            }
+
+        })
+    }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null
         super.onDestroyView()

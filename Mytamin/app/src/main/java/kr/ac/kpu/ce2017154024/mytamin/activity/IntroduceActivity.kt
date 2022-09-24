@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_introduce.*
@@ -63,13 +64,9 @@ class IntroduceActivity : AppCompatActivity() {
                 mbinding?.introduceNextBtn.text=JOINSTRING.start
                 val parseHour = inputHour.parseIntToHH()
                 val parseMinute = inputMinute.parseIntToMM()
-                //여기에 하기 TODO intet
                 val postUser=NewUser(email,password,nickname,parseHour,parseMinute)
                 newUserJoinAPICall(postUser)
-                Log.d(TAG,"postUser -> $postUser")
-                val intent=Intent(this,LoginActivity::class.java)
-                startActivity(intent)
-                finish()
+                goLogin()
             }
 
         }
@@ -79,17 +76,37 @@ class IntroduceActivity : AppCompatActivity() {
 
 
     }
+    fun goLogin(){
+        val intent=Intent(this,LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun getemailData():String{
+        return email
+    }
+    fun getnicknameData():String{
+        return nickname
+    }
+    fun getpasswordData():String{
+        return password
+    }
     fun submitTime(hour:Int,minute:Int){
         inputHour=hour
         inputMinute= minute
     }
-    private fun newUserJoinAPICall(query: NewUser) {
+    fun canEnableNextbtn(data:Boolean){
+        introduce_next_btn.isEnabled=false
+    }
+     fun newUserJoinAPICall(query: NewUser) {
         JoinRetrofitManager.instance.newUserJoin(inputData = query, completion = {responseStatus, intdata ->
             when(responseStatus){
                 RESPONSE_STATUS.OKAY ->{
-                    if (intdata==200){
+                    if (intdata==201){
                         Log.d(Constant.TAG,"api 호출 성공 회원가입완료 !!")
 
+                    }else{
+                        Toast.makeText(this,"현재 문제가 있어서 회원가입이 안되는중입니다..",Toast.LENGTH_SHORT).show()
                     }
                 }
             }

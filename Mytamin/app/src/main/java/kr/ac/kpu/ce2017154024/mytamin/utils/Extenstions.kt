@@ -5,6 +5,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_one
+import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_two
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.time.Duration.Companion.hours
@@ -88,4 +90,9 @@ fun String?.isJsonArray():Boolean{
     }else{
         return false
     }
+}
+fun String?.IntroduceHello():String{
+    val nickname=this
+    val result = introduce_first_talk_one+nickname+introduce_first_talk_two
+    return result
 }

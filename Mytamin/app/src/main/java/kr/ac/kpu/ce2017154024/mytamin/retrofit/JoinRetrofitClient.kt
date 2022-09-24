@@ -64,11 +64,11 @@ object JoinRetrofitClient {
                     .build()
 //                return chain.proceed(finalRequest)
                 val response = chain.proceed(finalRequest)
-                if(response.code !=200){
-                    Handler(Looper.getMainLooper()).post{
-                        Toast.makeText(MyApplication.instance, "${response.code} 에러입니다", Toast.LENGTH_SHORT).show()
-                    }
-                }
+//                if(response.code !=200){
+//                    Handler(Looper.getMainLooper()).post{
+//                        Toast.makeText(MyApplication.instance, "${response.code} 에러입니다", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
                 return response
             }
 

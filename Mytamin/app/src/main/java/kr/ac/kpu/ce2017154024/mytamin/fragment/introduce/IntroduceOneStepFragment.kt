@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.IntroduceActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentIntroduceOneStepBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.IntroduceHello
 
 
 class IntroduceOneStepFragment : Fragment() {
@@ -22,6 +24,9 @@ class IntroduceOneStepFragment : Fragment() {
         val binding = FragmentIntroduceOneStepBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(TAG,"IntroduceOneStepFragment onCreateView")
+        val nickname = (activity as IntroduceActivity).getnicknameData()
+        val sayhello = nickname.IntroduceHello()
+        mBinding?.introduceUsernameText?.text = sayhello
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행

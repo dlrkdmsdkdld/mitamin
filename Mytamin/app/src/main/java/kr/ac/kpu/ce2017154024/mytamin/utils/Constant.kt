@@ -26,6 +26,9 @@ object JOINSTRING{
     val goodNickname = "사용 가능한 닉네임입니다"
     val start = "시작하기"
     val next="다음"
+    val introduce_first_talk_one = "안녕하세요, "
+    val introduce_first_talk_two = "님!\n매일 챙겨먹는 마음 비타민\n마이타민입니다!"
+
 }
 enum class RESPONSE_STATUS{
     OKAY,

@@ -183,7 +183,8 @@ class joinStepOneFragment : Fragment() {
             joinViewModel.setpassword(passwordValue!!)
         }else{
             (activity as joinActivity).canEnableNextbtn(false)
-
+            Log.d(TAG,"joinStepOneFragment OkAllItem -> RepasswordValue : $RepasswordValue" +
+                    "  passwordValue : $passwordValue  emailValue:$emailValue")
         }
     }
 

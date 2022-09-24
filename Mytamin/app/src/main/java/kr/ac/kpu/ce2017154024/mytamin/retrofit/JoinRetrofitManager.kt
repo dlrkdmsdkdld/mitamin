@@ -54,8 +54,6 @@ class JoinRetrofitManager {
 
         call.enqueue(object : retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-                when(response.code()){
-                    200 ->{
                         response.body()?.let {
                             val body = it.asJsonObject
                             val status = body.get("statusCode").asInt
@@ -63,8 +61,7 @@ class JoinRetrofitManager {
                             val resultData = CheckOverlapData(status = status ,result = check )
                             completion(RESPONSE_STATUS.OKAY,resultData)
                         }
-                    }
-                }
+
             }
 
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
@@ -78,17 +75,12 @@ class JoinRetrofitManager {
         iJoinRetrofit?.postUser(inputData)
             ?.enqueue(object :Callback<JsonElement>{
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-                    when(response.code()){
-                        200 ->{
                             response.body()?.let {
                                 Log.d(TAG,"newUserJoin onResponse ${response} ")
                                 val body = it.asJsonObject
                                 val status = body.get("statusCode").asInt
                                 completion(RESPONSE_STATUS.OKAY,status)
                             }
-                        }
-
-                    }
 
                 }
 
