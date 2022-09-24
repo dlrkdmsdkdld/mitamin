@@ -48,7 +48,7 @@ class joinStepThreeFragment : Fragment() {
                         var tmp = it.toString().replace(" ","")
                         (it.toString()=="")
                         if (it.toString()=="" ){tmp="1"}
-                        if (it.toString()==tmp ){
+                        if (it.toString()==tmp && it.toString()!="" ){
                             CheckNameAPICall(it.toString())
                         }else{
                             Handler(Looper.getMainLooper()).post(Runnable {
@@ -76,6 +76,7 @@ class joinStepThreeFragment : Fragment() {
                             join_step_three_name_layout.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_check_24)
                             join_step_three_name_layout.helperText=JOINSTRING.goodNickname
                             (activity as joinActivity).canEnableNextbtn(true)
+                            joinViewModel.setname(query!!)
 
 
                         }else{

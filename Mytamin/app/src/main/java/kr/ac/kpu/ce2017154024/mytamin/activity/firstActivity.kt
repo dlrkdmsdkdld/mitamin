@@ -32,10 +32,12 @@ class firstActivity : AppCompatActivity(),View.OnClickListener {
             first_join_btn ->{
                 val intent = Intent(applicationContext,joinActivity::class.java)
                 startActivity(intent)
+                finish()
             }
             first_login_btn ->{
                 val intent = Intent(applicationContext,LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }
     }

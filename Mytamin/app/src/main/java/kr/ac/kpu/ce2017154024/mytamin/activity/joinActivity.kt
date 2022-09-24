@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import kotlinx.android.synthetic.main.activity_introduce.*
 import kotlinx.android.synthetic.main.activity_join.*
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
@@ -15,6 +17,7 @@ import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityJoinBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepOneFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepThreeFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepTwoFragment
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.joinViewModel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
@@ -29,6 +32,7 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
         super.onCreate(savedInstanceState)
         mbinding= ActivityJoinBinding.inflate(layoutInflater)
         setContentView(mbinding.root)
+        Log.d(Constant.TAG,"joinActivity onCreate")
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.join_fragment) as NavHostFragment
         val navController = navHostFragment.navController
@@ -52,12 +56,6 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
         val fragmentManager = supportFragmentManager
         if(index==0){
 
-//            fragmentManager.executePendingTransactions()
-//            val tmp :joinStepOneFragment=fragmentManager.findFragmentById(R.id.joinStepOneFragment) as joinStepOneFragment
-//            val tmpEmail = tmp.submitUseremailValue()
-//            val tmpPassword = tmp.submitpasswordValue()
-//            myjoinViewModel.setemail(tmpEmail)
-//            myjoinViewModel.setpassword(tmpPassword)
             joinStepTwoFragment?.let {
                 fragmentManager.beginTransaction().replace(R.id.join_fragment,
                     it
@@ -86,11 +84,28 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(Constant.TAG,"joinActivity onDestroy")
+    }
+
     override fun onClick(p0: View?) {
         when(p0){
             join_next_btn ->{
                 onFragmentChaned(step)
                 step+=1
+                if (step==3){
+                    val intent = Intent(this,IntroduceActivity::class.java)
+                    val email =myjoinViewModel.getemail.value
+                    val password = myjoinViewModel.getpassword.value
+                    val nickname = myjoinViewModel.getname.value
+                    Log.d(TAG, "JoinActivity ->IntroduceActivity email: $email password:$password  nickname:$nickname")
+                    intent.putExtra("email",email)
+                    intent.putExtra("password",password)
+                    intent.putExtra("nickname",nickname)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
     }

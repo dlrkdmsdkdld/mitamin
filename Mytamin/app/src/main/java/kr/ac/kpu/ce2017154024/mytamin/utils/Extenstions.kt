@@ -19,6 +19,22 @@ fun Int?.parseIntToTimeLine():String{
     }
     return "0$minute:$parseSecond"
 }
+fun Int?.parseIntToHH():String{
+    val hour:Int? =this
+    var parseHour = hour.toString()
+    if (hour!!<10){
+        parseHour="0$hour"
+    }
+    return parseHour
+}
+fun Int?.parseIntToMM():String{
+    val minute:Int?=this
+    var parseminute = minute.toString()
+    if (minute!!<10){
+        parseminute="0$minute"
+    }
+    return parseminute
+}
 
 fun parseTimeToState(username:String):String{
     val tmp = System.currentTimeMillis()
