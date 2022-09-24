@@ -70,8 +70,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     //레트로핏 로깅 인터셉터
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
-    //Rx
-    //
-
+    //Rxkotlin
+    implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
+    //rx android rx binding
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
 
 }

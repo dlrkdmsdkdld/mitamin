@@ -28,17 +28,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/join_step_two_layout"
         >
-        <RadioButton
+        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:id="@+id/join_step_two_all_radio"
+            android:id="@+id/join_step_two_all_check"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="전체 동의하기"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -61,20 +60,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         >
-        <RadioButton
+        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="20dp"
-            android:id="@+id/join_step_two_first_radio"
+            android:id="@+id/join_step_two_first_check"
             />
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@+id/join_step_two_first_radio"
+            app:layout_constraintLeft_toRightOf="@+id/join_step_two_first_check"
             android:text="(필수)이용약관에 동의합니다."
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -100,20 +101,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/join_step_two_layout_two"
         >
-        <RadioButton
+        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:layout_marginLeft="20dp"
+            android:id="@+id/join_step_two_second_check"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/join_step_two_second_radio"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@+id/join_step_two_second_radio"
+            app:layout_constraintLeft_toRightOf="@+id/join_step_two_second_check"
             android:text="(필수)개인정보 처리방침에 동의합니다."
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

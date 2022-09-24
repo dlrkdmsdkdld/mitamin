@@ -43,24 +43,32 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
 
 
     }
-    fun canEnableNextbtn(){
-        join_next_btn.isEnabled=true
+    fun canEnableNextbtn(bool:Boolean){
+        join_next_btn.isEnabled=bool
 
     }
 
     fun onFragmentChaned( index:Int) {
+        val fragmentManager = supportFragmentManager
         if(index==0){
+
+//            fragmentManager.executePendingTransactions()
+//            val tmp :joinStepOneFragment=fragmentManager.findFragmentById(R.id.joinStepOneFragment) as joinStepOneFragment
+//            val tmpEmail = tmp.submitUseremailValue()
+//            val tmpPassword = tmp.submitpasswordValue()
+//            myjoinViewModel.setemail(tmpEmail)
+//            myjoinViewModel.setpassword(tmpPassword)
             joinStepTwoFragment?.let {
-                supportFragmentManager.beginTransaction().replace(R.id.join_fragment,
+                fragmentManager.beginTransaction().replace(R.id.join_fragment,
                     it
                 ).commit()
             }
-            join_next_btn.isEnabled=false
+             join_next_btn.isEnabled=false
 
         }
         else if (index==1){
             joinStepThreeFragment?.let {
-                supportFragmentManager.beginTransaction().replace(R.id.join_fragment,
+                fragmentManager.beginTransaction().replace(R.id.join_fragment,
                     it
                 ).commit()
             }

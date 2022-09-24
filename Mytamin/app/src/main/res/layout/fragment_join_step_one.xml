@@ -40,7 +40,7 @@
         android:hint="이메일을 입력해주세요."
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconCheckable="true"
-        app:endIconDrawable="@drawable/ic_baseline_check_24"
+        app:endIconMode="custom"
         >
 <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
 <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
@@ -113,6 +113,7 @@
         app:endIconMode="password_toggle"
         app:endIconCheckable="true"
         android:hint="비밀번화 확인을 위해 다시 비밀번호를 입력해주세요"
+        app:hintTextAppearance="@style/TextLabel"
         >
 
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->

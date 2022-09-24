@@ -26,7 +26,8 @@
         <item name="colorAccent">@color/white</item>
     </style>
     <style name="TextLabel">
-        <item name="android:textSize">1sp</item>
+        <item name="android:textSize">0sp</item>
+
     </style>
     <style name="hintTextSize" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
         <item name="android:textSize">1sp</item>
