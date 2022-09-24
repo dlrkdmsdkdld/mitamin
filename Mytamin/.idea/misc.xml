@@ -9,6 +9,8 @@
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_baseline_play_circle_filled_24.xml" value="0.1765" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_baseline_replay_24.xml" value="0.1765" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_launcher_background.xml" value="0.152" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/indicator_circle_gray.xml" value="0.1655" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/indicator_circle_orange.xml" value="0.1655" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/play_btn.xml" value="0.1765" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/progressbar_image.xml" value="0.1765" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/round_check_box.xml" value="0.1765" />
@@ -19,12 +21,17 @@
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/textinputlayout_boxstroke.xml" value="0.1765" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/white_round.xml" value="0.1" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_first.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_introduce.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_join.xml" value="0.32592592592592595" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_login.xml" value="0.32592592592592595" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_today_mytamin.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_history.xml" value="0.22" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_introduce_one_step.xml" value="0.32592592592592595" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_introduce_three_step.xml" value="0.31296296296296294" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_introduce_two_step.xml" value="0.31296296296296294" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_introducefour_step.xml" value="0.32592592592592595" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_join_step_one.xml" value="0.32592592592592595" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_join_step_three.xml" value="0.32592592592592595" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_join_step_two.xml" value="0.32592592592592595" />

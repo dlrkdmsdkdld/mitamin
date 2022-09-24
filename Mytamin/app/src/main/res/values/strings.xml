@@ -2,4 +2,17 @@
     <string name="app_name">Mytamin</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="introduce_first_talk_one">안녕하세요,</string>
+    <string name="introduce_first_talk_two">님!\n매일 챙겨먹는 마음 비타민\n 마이타민입니다!</string>
+    <string name="introduce_second_talk">하루의 끝에서\n오늘의 나를 진단해보고\n칭찬 처방을 내려보세요.</string>
+    <string name="introduce_third_talk">적어도 한달에 한번은\n오로지 자신의 행복을 위한\n하루가 되도록 도울게요.</string>
+
+    <string name="introduce_four_title">하루를 마무리하는 시간은\n언제쯤 인가요?</string>
+    <string name="introduce_four_subtitle">마이타민 섭취 알림을 보내드릴게요!</string>
+    <string name="introduce_four_not">나중에 할게요</string>
+    <string name="next_talk">다음</string>
+
+
 </resources>

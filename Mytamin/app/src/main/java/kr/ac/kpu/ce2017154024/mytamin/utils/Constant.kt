@@ -24,6 +24,8 @@ object JOINSTRING{
     val wrongNickNameEmpty = "닉네임에 공백이 있습니다."
     val wrongNickNameoverlap = "이미 사용 중인 이메일입니다"
     val goodNickname = "사용 가능한 닉네임입니다"
+    val start = "시작하기"
+    val next="다음"
 }
 enum class RESPONSE_STATUS{
     OKAY,

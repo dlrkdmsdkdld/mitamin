@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="semiGray">#CECFD6</color>
     <color name="LawnGreen">#FF7CFc00</color>
+    <color name="primary">#FF7F57</color>
 </resources>

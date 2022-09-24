@@ -75,5 +75,7 @@ dependencies {
     //rx android rx binding
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+    //dot indicator
+    implementation "com.tbuonomo:dotsindicator:4.3"
 
 }
