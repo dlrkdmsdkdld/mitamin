@@ -50,11 +50,7 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
         val fragmentManager = supportFragmentManager
         if(index==0){
 
-            joinStepTwoFragment?.let {
-                fragmentManager.beginTransaction().replace(R.id.join_fragment,
-                    it
-                ).commit()
-            }
+            joinStepTwoFragment?.let { fragmentManager.beginTransaction().replace(R.id.join_fragment, it).commit() }
              join_next_btn.isEnabled=false
 
         }

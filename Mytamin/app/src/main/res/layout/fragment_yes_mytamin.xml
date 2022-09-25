@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    android:layout_marginTop="24dp"
     tools:context=".fragment.home.YesMytaminFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,14 +14,16 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginTop="24dp"
             android:src="@drawable/orange_round"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/yes_mytamin_image"
             />
         <FrameLayout
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_width="174dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="27dp"
             app:layout_constraintStart_toEndOf="@+id/yes_mytamin_image"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,15 +41,16 @@
                 android:textSize="12dp"
 
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="기분이 매우 좋아요!"
-                android:textSize="16dp"
-                android:fontFamily="@font/appmainfont_medium"
-                android:textColor="@color/primary"
-                android:paddingLeft="20dp"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/appmainfont_medium"
+                android:paddingLeft="20dp"
+                android:text="기분이 매우 좋아요!"
+                android:textColor="@color/primary"
+                android:textSize="16dp"
 
                 />
 

@@ -7,24 +7,24 @@
         android:id="@+id/homeFragment"
         android:enabled="true"
         android:title="홈"
-        android:icon="@drawable/icon_home_mono"
+        android:icon="@drawable/ic_icon_home_mono"
         />
     <item
         android:id="@+id/historyFragment"
         android:title="처방기록"
         android:enabled="true"
-        android:icon="@drawable/icon_card_mono"
+        android:icon="@drawable/ic_icon_card_mono"
 
         />
     <item
         android:id="@+id/manageMentFragment"
         android:title="감정관리"
         android:enabled="true"
-        android:icon="@drawable/icon_headphone_mono"
+        android:icon="@drawable/ic_icon_headphone_mono"
         />
     <item
         android:id="@+id/userInformationFragment"
         android:title="마이페이지"
         android:enabled="true"
-        android:icon="@drawable/icon_user_mono"/>
+        android:icon="@drawable/ic_icon_user_mono"/>
 </menu>

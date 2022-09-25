@@ -56,6 +56,13 @@ fun parseTimeToState(username:String):String{
     Log.d(TAG,"현재 시간 ${timedata.minutes}")
 
 }
+fun parseTimeToHome():String{
+    val tmp = System.currentTimeMillis()
+    val home_dateFormat= SimpleDateFormat("MM.dd.E", Locale("En", "KR"))
+    val parseData=home_dateFormat.format(tmp)
+    Log.d(TAG,"현재 날짜 ${parseData}")
+    return parseData
+}
 
 // 에딧 텍스트에 대한 익스텐션
 fun EditText.onMyTextChanged(completion: (Editable?) -> Unit){

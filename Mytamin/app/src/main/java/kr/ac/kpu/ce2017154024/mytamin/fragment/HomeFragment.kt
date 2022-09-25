@@ -17,6 +17,7 @@ import kr.ac.kpu.ce2017154024.mytamin.fragment.home.NoMytaminFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.home.YesMytaminFragment
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToHome
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToState
 import java.util.*
 
@@ -34,6 +35,8 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         Log.d(TAG,"HomeFragment onCreateView")
         //스테이트 택스트 설정
         val stateText= parseTimeToState("가탄")
+        val hoemdatatext = parseTimeToHome()
+        mBinding?.homeDateText?.text=hoemdatatext
         mBinding?.homeStateText?.text= stateText
 
 
@@ -46,7 +49,7 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         this.myHomeRecyclerAdapter = HomeRecyclerAdapter(this)
         //this.myHomeRecyclerAdapter.AlreadyTodayMytamin() 3 ,4 번안되게할때쓰는함수
         home_recyclerView.adapter = myHomeRecyclerAdapter
-//        val noMytaminFragment = NoMytaminFragment()
+            // val noMytaminFragment = NoMytaminFragment()
         val yesMytaminFragment = YesMytaminFragment()
         childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
        // todayMytaminBtn.setOnClickListener(this)
@@ -71,10 +74,10 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         Log.d(TAG,"클릭한 리싸이클러뷰 $position 번째")
         val intent= Intent(context,todayMytaminActivity::class.java)
         if(position==3){
-            intent.putExtra("step",position+2)
+            intent.putExtra("step",position+3)
         }
         else{
-            intent.putExtra("step",position)
+            intent.putExtra("step",position+1)
         }
         startActivity(intent)
     }

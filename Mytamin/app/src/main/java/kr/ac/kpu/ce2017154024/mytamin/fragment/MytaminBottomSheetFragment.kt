@@ -39,7 +39,8 @@ class MytaminBottomSheetFragment : BottomSheetDialogFragment() {
         super.onDestroy()
         Log.d(TAG,"MytaminBottomSheetFragment onDestroy()")
         if(returnday!=0){
-        (activity as todayMytaminActivity).submitDay(returnmonth+1,returnday)}
+        //(activity as todayMytaminActivity).submitDay(returnmonth+1,returnday)}
+         }
     }
 
 

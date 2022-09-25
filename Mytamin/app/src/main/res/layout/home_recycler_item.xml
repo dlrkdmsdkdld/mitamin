@@ -46,7 +46,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/round_layout_background_orange"
+            android:background="@drawable/ic_home_btn"
             android:layout_margin="20dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"

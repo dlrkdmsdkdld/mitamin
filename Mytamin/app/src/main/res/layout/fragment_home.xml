@@ -19,6 +19,18 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginBottom="70dp"
         >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_home_vitamin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="80dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
     <androidx.constraintlayout.widget.Guideline
@@ -36,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="13dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/icon_title"
+        android:src="@drawable/ic_icon_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
@@ -44,7 +56,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_search_mono"
+        android:src="@drawable/ic_icon_search_mono"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/home_search_btn"
         android:layout_marginRight="12dp"
@@ -54,7 +66,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_notice"
+        android:src="@drawable/ic_icon_notice"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"
@@ -105,7 +117,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="09.25.fri"
             android:id="@+id/home_date_text"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,7 +135,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/icon_retouch"
+            android:background="@drawable/ic_retouch_btn"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

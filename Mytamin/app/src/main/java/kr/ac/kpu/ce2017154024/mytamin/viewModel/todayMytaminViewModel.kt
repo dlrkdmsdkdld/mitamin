@@ -18,6 +18,20 @@ class todayMytaminViewModel :ViewModel() {
     val timerCount : LiveData<Int>
         get() = _timerCount
 
+
+    private val emojiState = MutableLiveData<Int>()
+    val selectemojiState : LiveData<Int>
+        get() = step
+    fun setselectemojiState(emojiState:Int){
+        step.value = emojiState
+    }
+
+    private val step = MutableLiveData<Int>()
+    val getstep : LiveData<Int>
+        get() = step
+    fun setstep(inputstep:Int){
+        step.value = inputstep
+    }
     fun timerStart(){
         a=viewModelScope.launch {
             while (_timerCount.value!! > 0 ){
