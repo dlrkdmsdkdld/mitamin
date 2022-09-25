@@ -1,4 +1,4 @@
-package kr.ac.kpu.ce2017154024.mytamin.fragment
+package kr.ac.kpu.ce2017154024.mytamin.fragment.join
 
 import android.os.Bundle
 import android.os.Handler

@@ -1,4 +1,4 @@
-package kr.ac.kpu.ce2017154024.mytamin.fragment
+package kr.ac.kpu.ce2017154024.mytamin.fragment.join
 
 import android.os.Bundle
 import android.os.Handler
@@ -16,13 +16,10 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_join_step_one.*
 import kotlinx.android.synthetic.main.fragment_join_step_three.*
 import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.activity.IntroduceActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.joinActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentJoinStepThreeBinding
-import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentJoinStepTwoBinding
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING

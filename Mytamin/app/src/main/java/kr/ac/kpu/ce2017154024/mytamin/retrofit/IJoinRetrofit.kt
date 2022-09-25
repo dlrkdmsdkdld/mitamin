@@ -2,6 +2,7 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit
 
 
 import com.google.gson.JsonElement
+import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
 import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
 import retrofit2.Call
 import retrofit2.http.*
@@ -22,10 +23,9 @@ interface IJoinRetrofit {
 //
 //    ): Call<JsonElement>
     @POST("/auth/signup")
-    fun postUser(
-        @Body data:NewUser,
+    fun postUser(@Body data:NewUser): Call<JsonElement>
 
-
-        ): Call<JsonElement>
+    @POST("/auth/default/login")
+    fun postLogin(@Body data:LoginData): Call<JsonElement>
 
 }

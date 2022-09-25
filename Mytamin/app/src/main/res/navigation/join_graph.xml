@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/joinStepOneFragment"
-        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepOneFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.join.joinStepOneFragment"
         android:label="fragment_join_step_one"
         tools:layout="@layout/fragment_join_step_one" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinStepTwoFragment"
-        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepTwoFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.join.joinStepTwoFragment"
         android:label="fragment_join_step_two"
         tools:layout="@layout/fragment_join_step_two" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/joinStepThreeFragment"
-        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepThreeFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.join.joinStepThreeFragment"
         android:label="fragment_join_step_three"
         tools:layout="@layout/fragment_join_step_three" />
 </navigation>

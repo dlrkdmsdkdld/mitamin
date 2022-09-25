@@ -32,7 +32,7 @@ class IntroduceActivity : AppCompatActivity() {
     private lateinit var password:String
     private lateinit var nickname:String
     private lateinit var viewPager:ViewPager2
-    private lateinit var customProgressDialog: Dialog
+    lateinit var customProgressDialog: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding= ActivityIntroduceBinding.inflate(layoutInflater)
@@ -105,7 +105,7 @@ class IntroduceActivity : AppCompatActivity() {
     fun canEnableNextbtn(data:Boolean){
         introduce_next_btn.isEnabled=false
     }
-     fun newUserJoinAPICall(query: NewUser) {
+     fun newUserJoinAPICall(query: NewUser,parent:Boolean=true) {
         JoinRetrofitManager.instance.newUserJoin(inputData = query, completion = {responseStatus, intdata ->
             when(responseStatus){
                 RESPONSE_STATUS.OKAY ->{

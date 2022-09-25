@@ -5,28 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import kotlinx.android.synthetic.main.activity_introduce.*
 import kotlinx.android.synthetic.main.activity_join.*
-import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityJoinBinding
-import kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepOneFragment
-import kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepThreeFragment
-import kr.ac.kpu.ce2017154024.mytamin.fragment.joinStepTwoFragment
+import kr.ac.kpu.ce2017154024.mytamin.fragment.join.joinStepThreeFragment
+import kr.ac.kpu.ce2017154024.mytamin.fragment.join.joinStepTwoFragment
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.joinViewModel
-import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 class joinActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding : ActivityJoinBinding
     private lateinit var myjoinViewModel :joinViewModel
-    private var joinStepTwoFragment:joinStepTwoFragment?=null
-    private var joinStepThreeFragment:joinStepThreeFragment?=null
+    private var joinStepTwoFragment: joinStepTwoFragment?=null
+    private var joinStepThreeFragment: joinStepThreeFragment?=null
     private var step =0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -51,8 +51,11 @@ class IntroducefourStepFragment : Fragment() {
             val password = (activity as IntroduceActivity).getpasswordData()
             val nickname = (activity as IntroduceActivity).getnicknameData()
             val userData = NewUser(email,password,nickname)
-            (activity as IntroduceActivity).newUserJoinAPICall(userData)
-            (activity as IntroduceActivity).goLogin()
+            (activity as IntroduceActivity).customProgressDialog.show()
+            (activity as IntroduceActivity).newUserJoinAPICall(userData,false)
+          //  (activity as IntroduceActivity).customProgressDialog.dismiss()
+
+           // (activity as IntroduceActivity).goLogin()
         }
 
     }

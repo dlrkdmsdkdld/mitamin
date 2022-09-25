@@ -3,7 +3,9 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit
 import android.util.Log
 import com.google.gson.JsonElement
 import kr.ac.kpu.ce2017154024.mytamin.model.CheckOverlapData
+import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
 import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
+import kr.ac.kpu.ce2017154024.mytamin.model.ReturnLoginData
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import retrofit2.Call
@@ -41,6 +43,7 @@ class JoinRetrofitManager {
             }
 
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                //completion(R)
             }
 
         })
@@ -81,16 +84,35 @@ class JoinRetrofitManager {
                                 val status = body.get("statusCode").asInt
                                 completion(RESPONSE_STATUS.OKAY,status)
                             }
-
                 }
-
                 override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                     Log.d(TAG,"newUserJoin onFailure ${t.message} ")
                 }
+            })
+    }
+    //유저 로그인 모듈
+    fun UserLogin(inputData:LoginData , completion: (RESPONSE_STATUS, ReturnLoginData?) -> Unit){
+        iJoinRetrofit?.postLogin(inputData)
+            ?.enqueue(object : Callback<JsonElement>{
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        Log.d(TAG, "user Login onResponse ${response}" )
+                        val body = it.asJsonObject
+                        val status = body.get("statusCode").asInt
+                        val message = body.get("message").asString
+                        val accessToken = body.get("data").asJsonObject.get("accessToken").asString
+                        val refreshToken = body.get("data").asJsonObject.get("refreshToken").asString
+                        val loginResult = ReturnLoginData(statusCode = status, message = message,
+                        accessToken = accessToken, refreshToken = refreshToken)
+                        completion(RESPONSE_STATUS.OKAY,loginResult)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                }
 
             })
-
-
     }
 
 
