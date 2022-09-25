@@ -14,5 +14,14 @@
     <string name="introduce_four_not">나중에 할게요</string>
     <string name="next_talk">다음</string>
 
+    <!--    mainActivity home 부분 String-->
+    <string name="home_start">시작하기</string>
+    <string name="home_today_mytamin">오늘의 마이타민</string>
+    <string name="home_retouch">수정하기</string>
+    <string name="home_no">&#160;&#160;&#160;&#160;&#160;아직 섭취한\n마이타민이 없어요</string>
+    <string name="home_yesmytamin_talk">하루진단</string>
+    <string name="home_yesmytamin_talktwo">칭찬 처방</string>
+    <string name="home_yesmytamin_talk_tmp_one">오늘 아침에 미리 날씨를 보고 우산을 챙겨서\n이전처럼 편의점에서 불필요하게 우산을 살\n필요가 없었어.\n학교에서는 좀 많이 졸렸어. 다음부터는 일찍 자는\n게 좋을 것 같아.</string>
+    <string name="home_yesmytamin_talk_tmp_two">오늘 계획했던 일을 전부 했어.\n성실하려 노력하는 내 모습이 좋아.</string>
 
 </resources>

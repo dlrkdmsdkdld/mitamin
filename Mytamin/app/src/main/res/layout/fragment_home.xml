@@ -9,27 +9,71 @@
     android:orientation="vertical"
     tools:context=".fragment.HomeFragment">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/subYellow"
+        app:layout_constraintBottom_toBottomOf="@+id/home_recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="70dp"
+        >
+
+    </FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/home_guideline"
+        app:layout_constraintGuide_percent="0.60"
+
+        />
+
+
     <ImageView
         android:id="@+id/home_title_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/icon_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
         />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_search_mono"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/home_search_btn"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/home_notice_btn"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_notice"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="13dp"
+        android:id="@+id/home_notice_btn"
+        />
+
 
     <TextView
         android:id="@+id/home_state_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
-        android:layout_margin="20dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="20dp"
         android:orientation="vertical"
         android:text="가탄님, 오늘도 \n힘차게 시작해볼?"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        android:fontFamily="@font/appmainfont_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_title_image" />
@@ -37,13 +81,61 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="20dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/home_state_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/home_layout_chain"
         tools:listitem="@layout/home_recycler_item" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/home_recyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="32dp"
+        android:id="@+id/home_layout_chain"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09.25.fri"
+            android:id="@+id/home_date_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_today_mytamin"
+            app:layout_constraintTop_toBottomOf="@+id/home_date_text"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/appmainfont_bold"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="88dp"
+            android:layout_height="24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/icon_retouch"
+            />
 
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/home_layout_chain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/home_fragment_container"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

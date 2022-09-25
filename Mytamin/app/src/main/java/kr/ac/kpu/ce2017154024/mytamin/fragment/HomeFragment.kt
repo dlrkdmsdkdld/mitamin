@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_home.*
+import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.RecyclerView.home_RecyclerView.HomeRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.RecyclerView.home_RecyclerView.IHomeRecyclerView
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHomeBinding
+import kr.ac.kpu.ce2017154024.mytamin.fragment.home.NoMytaminFragment
+import kr.ac.kpu.ce2017154024.mytamin.fragment.home.YesMytaminFragment
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToState
@@ -43,7 +46,9 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         this.myHomeRecyclerAdapter = HomeRecyclerAdapter(this)
         //this.myHomeRecyclerAdapter.AlreadyTodayMytamin() 3 ,4 번안되게할때쓰는함수
         home_recyclerView.adapter = myHomeRecyclerAdapter
-
+//        val noMytaminFragment = NoMytaminFragment()
+        val yesMytaminFragment = YesMytaminFragment()
+        childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
        // todayMytaminBtn.setOnClickListener(this)
     }
 

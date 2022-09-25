@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_title"
-        app:boxBackgroundColor="@color/white"
+        app:boxBackgroundColor="@color/background_white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="이메일을 입력해주세요."
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/join_step_one_password_title"
-        app:boxBackgroundColor="@color/white"
+        app:boxBackgroundColor="@color/background_white"
         android:layout_marginLeft="20dp"
         app:endIconCheckable="true"
 
@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/join_step_one_password_confirm_title"
 
-        app:boxBackgroundColor="@color/white"
+        app:boxBackgroundColor="@color/background_white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"

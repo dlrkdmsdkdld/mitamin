@@ -181,7 +181,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:src="@drawable/ic_baseline_calendar_today_24"
                     android:id="@+id/mytamin_frametwo_calendar_btn"
-                    android:background="@color/white"
+                    android:background="@color/background_white"
                     android:padding="10dp"
 
                     />
@@ -237,7 +237,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/icons8ogre48"
                     android:padding="10dp"
-                    android:background="@color/white"
+                    android:background="@color/background_white"
                     android:tag="5"
                     />
                 <ImageButton
@@ -246,7 +246,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/icons8angryface48"
                     android:padding="10dp"
-                    android:background="@color/white"
+                    android:background="@color/background_white"
                     android:tag="4"
                     />
                 <ImageButton
@@ -256,7 +256,7 @@
                     android:src="@drawable/icons8facwithrollingeyes48"
                     android:padding="10dp"
                     android:tag="3"
-                    android:background="@color/white"
+                    android:background="@color/background_white"
                     />
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -265,7 +265,7 @@
                     android:id="@+id/mytamin_frametwo_image_four"
                     android:tag="2"
                     android:padding="10dp"
-                    android:background="@color/white"
+                    android:background="@color/background_white"
                     />
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -274,7 +274,7 @@
                     android:id="@+id/mytamin_frametwo_image_five"
                     android:tag="1"
                     android:padding="10dp"
-                    android:background="@color/white"
+                    android:background="@color/background_white"
                     />
 
             </LinearLayout>
@@ -289,7 +289,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_marginStart="14dp"
-        android:background="@drawable/round_layout_background_semigray"
+        android:background="@drawable/round_layout_background_orange"
         android:backgroundTint="@color/semiGray"
         android:text="다음으로 넘어가기"
         app:layout_constraintBottom_toBottomOf="parent"

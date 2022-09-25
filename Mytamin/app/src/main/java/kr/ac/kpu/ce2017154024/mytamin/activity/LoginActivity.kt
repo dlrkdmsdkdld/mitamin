@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         customProgressDialog= LoadingDialog(this)
         customProgressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         login_login_Btn.setOnClickListener(this)
+        login_back_btn.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -44,6 +45,11 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 loginAPICall(query = inputdata)
                 customProgressDialog.show()
 
+            }
+            login_back_btn->{
+                val intent= Intent(this,firstActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }

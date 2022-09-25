@@ -17,7 +17,7 @@
             <size
                 android:width="26dp"
                 android:height="26dp" />
-            <solid android:color="@color/white" />
+            <solid android:color="@color/background_white" />
         </shape>
     </item>
     <item

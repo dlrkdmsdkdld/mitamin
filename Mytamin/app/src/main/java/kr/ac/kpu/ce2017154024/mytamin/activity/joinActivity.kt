@@ -37,7 +37,7 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
         joinStepThreeFragment= joinStepThreeFragment()
         join_next_btn.setOnClickListener(this)
         join_next_btn.isEnabled=false
-
+        join_back_btn.setOnClickListener(this)
 
 
     }
@@ -100,6 +100,11 @@ class joinActivity : AppCompatActivity(),View.OnClickListener {
                     startActivity(intent)
                     finish()
                 }
+            }
+            join_back_btn->{
+                val intent= Intent(this,firstActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }

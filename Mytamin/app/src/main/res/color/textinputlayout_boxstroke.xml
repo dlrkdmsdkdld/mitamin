@@ -2,5 +2,5 @@
     <item android:state_enabled="true" android:color="#00000000"/>
     <item android:state_hovered="true" android:color="#00000000"/>
     <item android:state_focused="true" android:color="#00000000"/>
-    <item android:color="@color/white"/>
+    <item android:color="@color/background_white"/>
 </selector>
