@@ -164,6 +164,18 @@ class joinStepOneFragment : Fragment() {
             }
 
         })
+        join_step_one_email_text.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                (activity as joinActivity).canEnableNextbtn(false)
+            }
+
+        })
 
 
     }

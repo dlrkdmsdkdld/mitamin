@@ -1,6 +1,8 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_introduce.*
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kotlinx.android.synthetic.main.fragment_join_step_one.*
+import kr.ac.kpu.ce2017154024.mytamin.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.ViewPager2.IntroduceViewPagerFragmentAdapter
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityIntroduceBinding
@@ -29,6 +32,7 @@ class IntroduceActivity : AppCompatActivity() {
     private lateinit var password:String
     private lateinit var nickname:String
     private lateinit var viewPager:ViewPager2
+    private lateinit var customProgressDialog: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding= ActivityIntroduceBinding.inflate(layoutInflater)
@@ -39,6 +43,8 @@ class IntroduceActivity : AppCompatActivity() {
 
         Log.d(Constant.TAG, "IntroduceActivity onCreate email: $email password:$password  nickname:$nickname")
 
+        customProgressDialog= LoadingDialog(this)
+        customProgressDialog.window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
 
         //mbinding?.introduceViewpager.adapter = IntroduceActivity@adapter!!
@@ -65,8 +71,9 @@ class IntroduceActivity : AppCompatActivity() {
                 val parseHour = inputHour.parseIntToHH()
                 val parseMinute = inputMinute.parseIntToMM()
                 val postUser=NewUser(email,password,nickname,parseHour,parseMinute)
+                customProgressDialog.show()
                 newUserJoinAPICall(postUser)
-                goLogin()
+              //  goLogin()
             }
 
         }
@@ -104,8 +111,10 @@ class IntroduceActivity : AppCompatActivity() {
                 RESPONSE_STATUS.OKAY ->{
                     if (intdata==201){
                         Log.d(Constant.TAG,"api 호출 성공 회원가입완료 !!")
-
+                        customProgressDialog.dismiss()
+                        goLogin()
                     }else{
+                        customProgressDialog.dismiss()
                         Toast.makeText(this,"현재 문제가 있어서 회원가입이 안되는중입니다..",Toast.LENGTH_SHORT).show()
                     }
                 }
