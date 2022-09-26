@@ -33,6 +33,7 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
         mBinding =binding
         Log.d(Constant.TAG,"MytaminStepOneFragment onCreateView")
         val step=todayMytaminViewModel.getstep.value
+
         if (step==1){
             timer=10
             val parsetime=timer.parseIntToTimeLine()
@@ -61,21 +62,28 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
        // todayMytamin_nextBtn.setOnClickListener(this)
+        val auto = todayMytaminViewModel._auto.value
+        if (auto == true){
+            mBinding?.mytaminSwitch?.isChecked=true
+            firstbreath()
+        }
     }
     fun firstbreath(){
         // 시간이 1초당 1씩줄는거 코루틴으로 observe후 text에 쏴줌
         if (startbtn==1) { // 스타트버튼 시작
             todayMytaminViewModel.timerStart()
             val timeObserver = Observer<Int> { currentTime ->
-                mytamin_timer_text.text = currentTime.parseIntToTimeLine()
+                mBinding?.mytaminTimerText?.text = currentTime.parseIntToTimeLine()
                 Log.d(Constant.TAG,"currentTime currentTime$currentTime")
                 if (currentTime==0){
                     startbtn=0
-                    mytamin_start_btn.background= getDrawable(requireContext(),R.drawable.ic_restart_button)
+                    mBinding?.mytaminStartBtn?.background= getDrawable(requireContext(),R.drawable.ic_restart_button)
                     //스위치가 체크되어있으면 자동으로 다음 단계로 넘어가짐
-                    if(mytamin_switch.isChecked){
+                    if(mBinding?.mytaminSwitch?.isChecked!!){
                         val nowstep = todayMytaminViewModel.getstep.value
                         todayMytaminViewModel.setstep(nowstep!!+1)
+                        todayMytaminViewModel.timerDestory()
+                        todayMytaminViewModel.autoset(true)
                         (activity as todayMytaminActivity).replaceFragment(nowstep!!+1)
                         startbtn=2
                     }else{
@@ -83,14 +91,14 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
                         (activity as todayMytaminActivity).setEnableNextBtn(true)
                     }
                 }else{
-                    mytamin_start_btn.background= getDrawable(requireContext(),R.drawable.ic_stop_button)
+                    mBinding?.mytaminStartBtn?.background= getDrawable(requireContext(),R.drawable.ic_stop_button)
                 }
             }
-            todayMytaminViewModel.timerCount.observe(this, timeObserver)
+            todayMytaminViewModel.timerCount.observe(viewLifecycleOwner, timeObserver)
             startbtn=2
         }else if (startbtn==2){ //일시정지
             todayMytaminViewModel.timerPause()
-            mytamin_start_btn.background= getDrawable(requireContext(),R.drawable.ic_play_button) //  이미지변경
+            mBinding?.mytaminStartBtn?.background= getDrawable(requireContext(),R.drawable.ic_play_button) //  이미지변경
             startbtn=1
         }else if (startbtn==0){
             todayMytaminViewModel.timerset(timer)

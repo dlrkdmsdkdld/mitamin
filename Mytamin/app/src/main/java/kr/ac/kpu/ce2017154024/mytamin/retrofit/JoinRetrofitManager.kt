@@ -95,8 +95,18 @@ class JoinRetrofitManager {
         iJoinRetrofit?.postLogin(inputData)
             ?.enqueue(object : Callback<JsonElement>{
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+                    if (response.code()==404){
+                        Log.d(TAG,"onResponse--- ${response.code()}-------------------------------------------- ")
+                        completion(RESPONSE_STATUS.USER_NOT_FOUND_ERROR,null)
+                    }else if (response.code()==400){
+                        Log.d(TAG,"onResponse--- ${response.code()}-------------------------------------------- ")
+                        completion(RESPONSE_STATUS.NO_CONTENT,null)
+                    }
                     response.body()?.let {
                         Log.d(TAG, "user Login onResponse ${response}" )
+                        Log.d(TAG, "------------------ ${response}" )
+                        Log.d(TAG, "------------------ ${response}" )
                         val body = it.asJsonObject
                         val status = body.get("statusCode").asInt
                         val message = body.get("message").asString
@@ -110,6 +120,7 @@ class JoinRetrofitManager {
                 }
 
                 override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "user Login onResponse ${t}" )
                 }
 
             })

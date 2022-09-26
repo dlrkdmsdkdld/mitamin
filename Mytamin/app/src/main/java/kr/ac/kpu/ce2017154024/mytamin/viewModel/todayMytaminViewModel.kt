@@ -53,12 +53,11 @@ class todayMytaminViewModel :ViewModel() {
         if (::a.isInitialized) a.cancel()
     }
     //프로그래스 관련함수들
-    var _progressPer = MutableLiveData<Int>()
-    val progressPer : LiveData<Int>
-        get() = _progressPer
-    fun getInterval(): Observable<Long> =
-        Observable.interval(1L, TimeUnit.MILLISECONDS).map { interval ->
-            interval + 1
-        }.take(100)
+    var _auto = MutableLiveData<Boolean>()
+    val auto : LiveData<Boolean>
+        get() = _auto
+    fun autoset(data:Boolean){
+        _auto.value=data
+    }
 
 }

@@ -64,11 +64,13 @@ object JoinRetrofitClient {
                     .build()
 //                return chain.proceed(finalRequest)
                 val response = chain.proceed(finalRequest)
-//                if(response.code !=200){
+//                if(response.code !=200){ //응답코드가 200이아닐때 
 //                    Handler(Looper.getMainLooper()).post{
+//                        Log.d(TAG,"RetrofitClient - Interceptor 오류오류발생 !!response ")
 //                        Toast.makeText(MyApplication.instance, "${response.code} 에러입니다", Toast.LENGTH_SHORT).show()
 //                    }
 //                }
+
                 return response
             }
 
@@ -77,10 +79,10 @@ object JoinRetrofitClient {
         //위에서 설정한 기본인터셉터를 okhttp 클라이언트에 추가한다.
         client.addInterceptor(baseParameterInterceptor)
         //커넷션 타임아웃
-        client.connectTimeout(10, TimeUnit.SECONDS)
-        client.readTimeout(10, TimeUnit.SECONDS)
-        client.writeTimeout(10, TimeUnit.SECONDS)
-        client.retryOnConnectionFailure(true) // 실패했을때 다시시도
+       // client.connectTimeout(10, TimeUnit.SECONDS)
+      //  client.readTimeout(10, TimeUnit.SECONDS)
+       // client.writeTimeout(10, TimeUnit.SECONDS)
+        //client.retryOnConnectionFailure(true) // 실패했을때 다시시도
 
 
 

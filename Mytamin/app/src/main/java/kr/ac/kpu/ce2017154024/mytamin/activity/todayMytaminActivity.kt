@@ -76,7 +76,9 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         finish()
     }
     override fun onClick(p0: View?) {
+        step= mytaminViewModel.getstep.value!!
         when(p0){
+
             mytamin_next_btn ->{
                 step+=1
                 replaceFragment(step)

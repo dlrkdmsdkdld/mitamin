@@ -80,8 +80,6 @@
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_password_text"
-        android:button="@null"
-        android:background="@drawable/round_result_check_box"
         android:id="@+id/login_check"
         />
     <TextView

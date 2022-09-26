@@ -19,6 +19,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
@@ -34,16 +35,28 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         customProgressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         login_login_Btn.setOnClickListener(this)
         login_back_btn.setOnClickListener(this)
+        PreferenceUtil.clearUserData()
+        val email= PreferenceUtil.obtainUserData().first
+        val password  = PreferenceUtil.obtainUserData().second
+        Log.d(Constant.TAG,"LoginActivity PreferenceUtil email : $email passowrd:$password ")
+        if(email !="null" && password!="null"){
+            val inputdata = LoginData(email,password)
+            loginAPICall(query = inputdata)
+            customProgressDialog.show()
+        }else{
+
+        }
+
     }
 
     override fun onClick(p0: View?) {
         when(p0){
             login_login_Btn ->{
+                customProgressDialog.show()
                 val email = login_email_text.text
                 val password = login_password_text.text
                 val inputdata = LoginData(email.toString(),password.toString())
                 loginAPICall(query = inputdata)
-                customProgressDialog.show()
 
             }
             login_back_btn->{
@@ -55,6 +68,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
     }
     fun loginAPICall(query:LoginData){
         JoinRetrofitManager.instance.UserLogin(inputData = query, completion = { responseStatus, returnLoginData ->
+            Log.d(TAG,"로그인  -> ${returnLoginData}")
             when(responseStatus){
                 RESPONSE_STATUS.OKAY ->{
                     if(returnLoginData?.statusCode==200 && returnLoginData?.message=="기본 로그인"){
@@ -63,6 +77,8 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                         PrivateUserDataSingleton.refreshToken=returnLoginData?.refreshToken
                         PrivateUserDataSingleton.userEmail = query.email
                         PrivateUserDataSingleton.userPassword = query.password
+                        PreferenceUtil.storeUserData(query.email, query.password)
+                        //유저 데이터 preference에 저장
                         Log.d(TAG,"PrivateUserDataSingleton 성공" +
                                 "PrivateUserDataSingleton.accessToken -> ${returnLoginData?.accessToken}"+"" +
                                 "userEmail -> $PrivateUserDataSingleton.userEmail")
@@ -70,11 +86,26 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                         val intent = Intent(this,MainActivity::class.java)
                         startActivity(intent)
                         finish()
-                    }else{
+                    }
+                    else if (returnLoginData?.statusCode==404){
+                      }
+                    else{
+                        Log.d(TAG,"로그인 실패 -> ")
+                        customProgressDialog.dismiss()
                         Toast.makeText(this,"${returnLoginData?.message}", Toast.LENGTH_SHORT).show()
 
                     }
-                }
+                }RESPONSE_STATUS.USER_NOT_FOUND_ERROR ->{
+                    Log.d(TAG,"로그인 실패 유저 찾을수없음 ")
+                    customProgressDialog.dismiss()
+                    Toast.makeText(this,"유저를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+
+            }RESPONSE_STATUS.PASSWORD_PATTERN_ERROR ->{
+                    Log.d(TAG,"로그인 실패 비번이나 아이디 틀림")
+                    customProgressDialog.dismiss()
+                    Toast.makeText(this,"로그인 실패 비번이나 아이디 틀림", Toast.LENGTH_SHORT).show()
+            }
+
 
             }
         })
