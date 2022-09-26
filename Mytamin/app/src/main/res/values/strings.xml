@@ -23,5 +23,14 @@
     <string name="home_yesmytamin_talktwo">칭찬 처방</string>
     <string name="home_yesmytamin_talk_tmp_one">오늘 아침에 미리 날씨를 보고 우산을 챙겨서\n이전처럼 편의점에서 불필요하게 우산을 살\n필요가 없었어.\n학교에서는 좀 많이 졸렸어. 다음부터는 일찍 자는\n게 좋을 것 같아.</string>
     <string name="home_yesmytamin_talk_tmp_two">오늘 계획했던 일을 전부 했어.\n성실하려 노력하는 내 모습이 좋아.</string>
+    <!--    마이타민섭취 부분 String-->
+
+    <string name="mytamin_step_title">오늘의 마이타민</string>
+    <string name="mytamin_step_one_title">1.&#160;숨고르기</string>
+    <string name="mytamin_step_one_state"> 코로 천천히 숨을 들이마셨다가 \n배에 가득 담긴 공기를 잠시 느끼고\n    천천히 내뱉어 보세요.</string>
+    <string name="mytamin_step_one_pass">패스하기</string>
+    <string name="mytamin_step_one_next">다음으로</string>
+    <string name="mytamin_step_one_auto">자동진행</string>
+
 
 </resources>

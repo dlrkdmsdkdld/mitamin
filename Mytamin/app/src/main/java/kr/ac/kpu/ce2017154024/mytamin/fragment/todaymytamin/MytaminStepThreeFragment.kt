@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kotlinx.android.synthetic.main.fragment_mytamin_step_threeragment.*
-import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepOneBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepThreeragmentBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.MytaminBottomSheetFragment
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
@@ -48,31 +46,31 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 mytamin_frametwo_select_ImageView.setImageResource(Constant.frametwo_image_one_src)
                 mytamin_frametwo_state.text  = Constant.frametwo_image_one_text
                 todayMytaminViewModel.setselectemojiState(1)
-                todayMytamin_nextBtn.isEnabled=true
+                mytamin_next_btn.isEnabled=true
             }
             mytamin_frametwo_image_two->{
                 mytamin_frametwo_select_ImageView.setImageResource(Constant.frametwo_image_two_src)
                 mytamin_frametwo_state.text  = Constant.frametwo_image_two_text
                 todayMytaminViewModel.setselectemojiState(2)
-                todayMytamin_nextBtn.isEnabled=true
+                mytamin_next_btn.isEnabled=true
             }
             mytamin_frametwo_image_three->{
                 mytamin_frametwo_select_ImageView.setImageResource(Constant.frametwo_image_three_src)
                 mytamin_frametwo_state.text  = Constant.frametwo_image_three_text
                 todayMytaminViewModel.setselectemojiState(3)
-                todayMytamin_nextBtn.isEnabled=true
+                mytamin_next_btn.isEnabled=true
             }
             mytamin_frametwo_image_four->{
                 mytamin_frametwo_select_ImageView.setImageResource(Constant.frametwo_image_four_src)
                 mytamin_frametwo_state.text  = Constant.frametwo_image_four_text
-                todayMytamin_nextBtn.isEnabled=true
+                mytamin_next_btn.isEnabled=true
                 todayMytaminViewModel.setselectemojiState(4)
             }
             mytamin_frametwo_image_five->{
                 mytamin_frametwo_select_ImageView.setImageResource(Constant.frametwo_image_five_src)
                 mytamin_frametwo_state.text  = Constant.frametwo_image_five_text
                 todayMytaminViewModel.setselectemojiState(5)
-                todayMytamin_nextBtn.isEnabled=true
+                mytamin_next_btn.isEnabled=true
             }
             mytamin_frametwo_calendar_btn->{
                 val bottomSheetDialogFragment= MytaminBottomSheetFragment()

@@ -30,6 +30,12 @@ object JOINSTRING{
     val introduce_first_talk_two = "님!\n매일 챙겨먹는 마음 비타민\n마이타민입니다!"
 
 }
+object MYTAMIN{
+    val step_one_title = "1. 숨고르기"
+    val step_one_diagnosis = "   코로 천천히 숨을 들이마셨다가 \n배에 가득 담긴 공기를 잠시 느끼고\n       천천히 내뱉어 보세요."
+    val step_two_title = "2. 감각 깨우기"
+    val step_two_diagnosis = "편한 자세로 눈을 감고 주변의 소리에 귀를\n   기울여보세요. 다음에는 코로 들어오는\n주변의 냄새를 느껴보고 손바닥에 느껴지는\n           감각에도 신경을 기울여봅니다."
+}
 enum class RESPONSE_STATUS{
     OKAY,
     FAIL,

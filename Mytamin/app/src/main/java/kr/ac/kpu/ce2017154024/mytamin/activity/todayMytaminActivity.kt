@@ -4,24 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityTodayMytaminBinding
-import kr.ac.kpu.ce2017154024.mytamin.fragment.MytaminBottomSheetFragment
-import kr.ac.kpu.ce2017154024.mytamin.fragment.home.YesMytaminFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepOneFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepThreeFragment
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.explainTextStepOne
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.explainTextStepTwo
-import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToTimeLine
-import java.text.SimpleDateFormat
 import java.util.*
 
 class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
@@ -39,8 +29,8 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(mytaminBinding.root)
         mytaminViewModel=ViewModelProvider(this).get(todayMytaminViewModel::class.java)
         mytaminViewModel.setstep(step)
-        todayMytamin_nextBtn.setOnClickListener(this)
-        mytamin_back_btn.setOnClickListener(this)
+        mytamin_next_btn.setOnClickListener(this)
+        mytamin_exit_btn.setOnClickListener(this)
        // setOnClickjoin()
         //stepParse(step)
         replaceFragment(step)
@@ -51,14 +41,24 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             1->{
                 val MytaminStepOneFragment = MytaminStepOneFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
+                mytamin_vitamin_right.visibility=View.VISIBLE
+                mytamin_vitamin_left.visibility=View.INVISIBLE
             }
             2->{
                 val MytaminStepOneFragment = MytaminStepOneFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
+                mytamin_vitamin_right.visibility=View.INVISIBLE
+                mytamin_vitamin_left.visibility=View.VISIBLE
+                mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
+                mytamin_indicator_three.setImageResource(R.drawable.ic_idcator_no)
+                mytamin_indicator_four.setImageResource(R.drawable.ic_idcator_no)
             }
             3->{
                 val MytaminStepThreeFragment = MytaminStepThreeFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepThreeFragment).commit()
+                mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
+                mytamin_indicator_three.setImageResource(R.drawable.ic_indicator_yes)
+                mytamin_indicator_four.setImageResource(R.drawable.ic_idcator_no)
 
             }
 
@@ -73,16 +73,17 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0){
 
-            todayMytamin_nextBtn ->{
+            mytamin_next_btn ->{
                 step+=1
                 replaceFragment(step)
                 mytaminViewModel.setstep(step)
-                //progress 증가
-                val currentProgress = mytamin_progress.progress
-                mytaminViewModel.getInterval().subscribe(){
-                    mytamin_progress.progress=currentProgress + it.toInt()
-                }
 
+
+            }
+            mytamin_pass_btn ->{
+                step+=1
+                replaceFragment(step)
+                mytaminViewModel.setstep(step)
             }
             mytamin_back_btn ->{
                 onBackPressed()

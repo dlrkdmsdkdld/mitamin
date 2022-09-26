@@ -13,10 +13,9 @@ import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kotlinx.android.synthetic.main.fragment_mytamin_step_one.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepOneBinding
-import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentUserInformationBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.MYTAMIN
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToTimeLine
-import kr.ac.kpu.ce2017154024.mytamin.viewModel.joinViewModel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 
@@ -35,8 +34,18 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
         val step=todayMytaminViewModel.getstep.value
         if (step==1){
             timer=60
+            val parsetime=timer.parseIntToTimeLine()
+            mBinding?.mytaminTimerText?.text = parsetime
+            mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_one_title
+            mBinding?.mytaminStepOneDiagnosis?.text = MYTAMIN.step_one_diagnosis
+            mBinding?.mytaminStepOneImage?.background= getDrawable(requireContext(),R.drawable.ic_step_one_image)
         }else{
             timer=180
+            val parsetime=timer.parseIntToTimeLine()
+            mBinding?.mytaminTimerText?.text = parsetime
+            mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_two_title
+            mBinding?.mytaminStepOneDiagnosis?.text = MYTAMIN.step_two_diagnosis
+            mBinding?.mytaminStepOneImage?.background= getDrawable(requireContext(),R.drawable.ic_step_two_image)
         }
         todayMytaminViewModel.timerset(timer)
         mBinding?.mytaminStartBtn?.setOnClickListener(this)
@@ -64,7 +73,7 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
                     mytamin_start_btn.background= getDrawable(requireContext(),R.drawable.ic_restart_button)
                     //스위치가 체크되어있으면 자동으로 다음 단계로 넘어가짐
                     if(mytamin_switch.isChecked){
-                        todayMytamin_nextBtn.performClick()
+                        mytamin_next_btn.performClick()
                         startbtn=2
                     }
                 }else{

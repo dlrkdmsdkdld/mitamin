@@ -17,7 +17,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_arrow_left_small_black"
+            android:src="@drawable/icon_arraow_left_small_black"
             android:background="@color/background_white"
             android:id="@+id/login_back_btn"
             android:padding="10dp"

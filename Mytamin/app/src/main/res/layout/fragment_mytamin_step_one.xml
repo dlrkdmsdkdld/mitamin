@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+
+<FrameLayout
     android:id="@+id/mytamin_frameone"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,81 +11,109 @@
     android:visibility="visible"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/mytamin_step_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="40dp"
-        android:text="숨고르기"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/mytamin_chain2"
-        app:layout_constraintStart_toStartOf="@+id/mytamin_chain2"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mytamin_chain2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mytamin_step_text">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="13dp"
-            android:text="자동 진행"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/mytamin_switch"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mytamin_chain2"
+            android:layout_width="0dp"
+            android:layout_marginTop="24dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/mytamin_step_one_auto"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/appmainfont_medium"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/mytamin_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:track="@drawable/selector_custom_swich"
+                android:thumb="@drawable/shpae_switch_thumb"
+                android:layout_marginRight="20dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/mytamin_step_one_image"
+            app:layout_constraintTop_toBottomOf="@+id/mytamin_chain2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/ic_step_one_image"
+            >
+            <TextView
+                android:fontFamily="@font/appmainfont_bold"
+                android:textSize="40sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/mytamin_timer_text"
+                android:textColor="@color/black"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:padding="10dp"
+            android:id="@+id/mytamin_start_btn"
+            app:layout_constraintTop_toBottomOf="@+id/mytamin_step_one_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/ic_play_button"
+            android:layout_marginTop="20dp"
+
+            />
+        <TextView
+            android:includeFontPadding="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mytamin_step_one_title"
+            android:fontFamily="@font/appmainfont_bold"
+            app:layout_constraintTop_toBottomOf="@+id/mytamin_start_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="40dp"
+            android:id="@+id/mytamin_step_one_title_text"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/mytamin_step_one_title_text"
+            android:id="@+id/mytamin_step_one_diagnosis"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/darkGray"
+            android:fontFamily="@font/appmainfont_medium"
+            android:text="@string/mytamin_step_one_state"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mytamin_chain2"
-        android:layout_gravity="center"
-        android:text="01:00"
-        android:textSize="40sp"
-        android:id="@+id/mytamin_timer_text"
-        app:layout_constraintBottom_toTopOf="@+id/mytamin_explain_text"
-        />
-    <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/mytamin_start_btn"
-        app:layout_constraintTop_toBottomOf="@+id/mytamin_timer_text"
-        app:layout_constraintBottom_toTopOf="@+id/mytamin_explain_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/ic_baseline_play_circle_filled_24"
 
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/mytamin_timer_text"
-        android:id="@+id/mytamin_explain_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="   코로 천천히 숨을 들이마셨다가 \n배에 가득 담긴 공기를 잠시 느끼고\n    천천히 내뱉어 보세요."
-        android:textSize="15sp"
-        app:layout_constraintVertical_bias="0.1"
-        />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
