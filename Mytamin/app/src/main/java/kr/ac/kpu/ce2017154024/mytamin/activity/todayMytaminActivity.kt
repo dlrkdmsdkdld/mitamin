@@ -29,12 +29,17 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(mytaminBinding.root)
         mytaminViewModel=ViewModelProvider(this).get(todayMytaminViewModel::class.java)
         mytaminViewModel.setstep(step)
-        mytamin_next_btn.setOnClickListener(this)
-        mytamin_exit_btn.setOnClickListener(this)
+        connectClicklistner()
        // setOnClickjoin()
         //stepParse(step)
         replaceFragment(step)
 
+    }
+    fun setEnableNextBtn(can:Boolean){
+        mytamin_next_btn.isEnabled = can
+        if (can){
+            mytamin_next_btn.background = getDrawable(R.drawable.ic_large_button_abled)
+        }else{mytamin_next_btn.background = getDrawable(R.drawable.ic_large_button_disabled)}
     }
     fun replaceFragment(Pstep:Int){
         when(Pstep){
@@ -43,6 +48,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
                 mytamin_vitamin_right.visibility=View.VISIBLE
                 mytamin_vitamin_left.visibility=View.INVISIBLE
+                mytamin_indicator_two.setImageResource(R.drawable.ic_idcator_no)
             }
             2->{
                 val MytaminStepOneFragment = MytaminStepOneFragment()
@@ -51,7 +57,6 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                 mytamin_vitamin_left.visibility=View.VISIBLE
                 mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
                 mytamin_indicator_three.setImageResource(R.drawable.ic_idcator_no)
-                mytamin_indicator_four.setImageResource(R.drawable.ic_idcator_no)
             }
             3->{
                 val MytaminStepThreeFragment = MytaminStepThreeFragment()
@@ -72,26 +77,43 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
     }
     override fun onClick(p0: View?) {
         when(p0){
-
             mytamin_next_btn ->{
                 step+=1
                 replaceFragment(step)
+                mytaminViewModel.timerDestory()
                 mytaminViewModel.setstep(step)
-
+                Log.d(TAG,"현재 단계 : -> $step")
 
             }
             mytamin_pass_btn ->{
                 step+=1
+                mytaminViewModel.timerDestory()
                 replaceFragment(step)
                 mytaminViewModel.setstep(step)
+                Log.d(TAG,"현재 단계 : -> $step")
             }
-            mytamin_back_btn ->{
+            mytamin_exit_btn ->{
                 onBackPressed()
+                mytaminViewModel.timerDestory()//타이머 코루틴 종료
+            }
+            mytamin_back_btn->
+            {
+                step-=1
+                mytaminViewModel.timerDestory()
+                replaceFragment(step)
+                mytaminViewModel.setstep(step)
+                Log.d(TAG,"현재 단계 : -> $step")
             }
 
         }
     }
-
+    fun connectClicklistner(){
+        setEnableNextBtn(false)
+        mytamin_next_btn.setOnClickListener(this)
+        mytamin_exit_btn.setOnClickListener(this)
+        mytamin_pass_btn.setOnClickListener(this)
+        mytamin_back_btn.setOnClickListener(this)
+    }
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG,"마이타민 액티비티 파괴")

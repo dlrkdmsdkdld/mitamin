@@ -5,18 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.reactivex.rxjava3.core.Observable
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import java.util.concurrent.TimeUnit
 
 class todayMytaminViewModel :ViewModel() {
-    ///타이머 카운트 변수관련 함수들
-    private val _timerCount = MutableLiveData<Int>()
-    private lateinit var a: Job
-    val timerCount : LiveData<Int>
-        get() = _timerCount
 
 
     private val emojiState = MutableLiveData<Int>()
@@ -32,6 +25,11 @@ class todayMytaminViewModel :ViewModel() {
     fun setstep(inputstep:Int){
         step.value = inputstep
     }
+    ///타이머 카운트 변수관련 함수들
+    private val _timerCount = MutableLiveData<Int>()
+    private lateinit var a: Job
+    val timerCount : LiveData<Int>
+        get() = _timerCount
     fun timerStart(){
         a=viewModelScope.launch {
             while (_timerCount.value!! > 0 ){
@@ -42,6 +40,14 @@ class todayMytaminViewModel :ViewModel() {
     }
     fun timerset(time:Int){
         _timerCount.value = time
+    }
+    fun timerDestory(){
+        viewModelScope.launch {
+            //job이 초기화 됐는지 확인하고 완료되지않았을때 돌림
+            if ( ::a.isInitialized &&a.isCompleted==false  ){
+            a.cancelAndJoin()
+            }
+        }
     }
     fun timerPause(){
         if (::a.isInitialized) a.cancel()

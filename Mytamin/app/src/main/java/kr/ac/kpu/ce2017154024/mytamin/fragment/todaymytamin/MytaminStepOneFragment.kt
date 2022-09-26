@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kotlinx.android.synthetic.main.fragment_mytamin_step_one.*
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepOneBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.MYTAMIN
@@ -33,7 +34,7 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
         Log.d(Constant.TAG,"MytaminStepOneFragment onCreateView")
         val step=todayMytaminViewModel.getstep.value
         if (step==1){
-            timer=60
+            timer=10
             val parsetime=timer.parseIntToTimeLine()
             mBinding?.mytaminTimerText?.text = parsetime
             mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_one_title
@@ -67,14 +68,19 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
             todayMytaminViewModel.timerStart()
             val timeObserver = Observer<Int> { currentTime ->
                 mytamin_timer_text.text = currentTime.parseIntToTimeLine()
+                Log.d(Constant.TAG,"currentTime currentTime$currentTime")
                 if (currentTime==0){
-                    mytamin_timer_text.text ="다시하기"
                     startbtn=0
                     mytamin_start_btn.background= getDrawable(requireContext(),R.drawable.ic_restart_button)
                     //스위치가 체크되어있으면 자동으로 다음 단계로 넘어가짐
                     if(mytamin_switch.isChecked){
-                        mytamin_next_btn.performClick()
+                        val nowstep = todayMytaminViewModel.getstep.value
+                        todayMytaminViewModel.setstep(nowstep!!+1)
+                        (activity as todayMytaminActivity).replaceFragment(nowstep!!+1)
                         startbtn=2
+                    }else{
+                        todayMytaminViewModel.timerDestory()
+                        (activity as todayMytaminActivity).setEnableNextBtn(true)
                     }
                 }else{
                     mytamin_start_btn.background= getDrawable(requireContext(),R.drawable.ic_stop_button)

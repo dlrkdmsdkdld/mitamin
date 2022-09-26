@@ -170,7 +170,7 @@
 
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_large_button_disabled"
+        android:background="@drawable/ic_large_button_abled"
         android:enabled="true"
         android:text="다음으로 넘어가기"
         app:layout_constraintBottom_toBottomOf="parent"
