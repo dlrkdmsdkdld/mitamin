@@ -9,8 +9,12 @@
     <color name="background_white">#FFFFFFFF</color>
     <color name="background_gray">#F2F4F6</color>
     <color name="background_yellow">#FFF3AB</color>
+
     <color name="semiGray">#CECFD6</color>
     <color name="LawnGreen">#FF7CFc00</color>
+
+
+
     <color name="primary">#FF7F57</color>
     <color name="subGreen">#1BD689</color>
     <color name="subBlue">#3FA3FF</color>

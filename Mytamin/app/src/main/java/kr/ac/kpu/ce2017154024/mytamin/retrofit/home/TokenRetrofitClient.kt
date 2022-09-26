@@ -1,4 +1,4 @@
-package kr.ac.kpu.ce2017154024.mytamin.retrofit.join
+package kr.ac.kpu.ce2017154024.mytamin.retrofit.home
 
 import android.util.Log
 import kr.ac.kpu.ce2017154024.mytamin.BuildConfig
@@ -16,28 +16,27 @@ import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object JoinRetrofitClient {
-
-    private var joinRetrofitClient: Retrofit? = null
+object TokenRetrofitClient {
+    private var TokenRetrofitClient: Retrofit? = null
 
     //레트로핏 클라이언트 가져오기
     fun getClient(): Retrofit?{
-        Log.d(TAG,"RetorfitClient - getClient() called" )
+        Log.d(Constant.TAG,"RetorfitClient - getClient() called" )
         //okhttp 인스턴스 생성
         val client = OkHttpClient.Builder()
         //로그를 찍기 위해 로깅 인터셉터 설정
         val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
             override fun log(message: String) {
-                Log.d(TAG,"RetrofitClient - log() called / message: $message")
+                Log.d(Constant.TAG,"RetrofitClient - log() called / message: $message")
                 when{
-                    message.isJsonObject() -> Log.d(TAG, JSONObject(message).toString(4))
+                    message.isJsonObject() -> Log.d(Constant.TAG, JSONObject(message).toString(4))
 
-                    message.isJsonArray() -> Log.d(TAG, JSONArray(message).toString(4))
+                    message.isJsonArray() -> Log.d(Constant.TAG, JSONArray(message).toString(4))
                     else ->{
                         try {
-                            Log.d(TAG, JSONObject(message).toString(4))
+                            Log.d(Constant.TAG, JSONObject(message).toString(4))
                         }catch (e:Exception){
-                            Log.d(TAG,message)
+                            Log.d(Constant.TAG,message)
                         }
                     }
 
@@ -51,16 +50,15 @@ object JoinRetrofitClient {
         //기본 파라미터 인터셉터 설정
         val baseParameterInterceptor : Interceptor = (object  : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
-                Log.d(TAG,"RetrofitClient - Interceptor called ")
+                Log.d(Constant.TAG,"RetrofitClient - Interceptor called ")
                 val originalRequest = chain.request().newBuilder()
-                    //.addHeader("Authorization", "token ${BuildConfig.GIT_TOKEN}" )
+                    .addHeader("X-AUTH-TOKEN", "${PrivateUserDataSingleton.accessToken}" )
                     .build()
-
+                Log.d(TAG,"추가한 토큰 ${PrivateUserDataSingleton.accessToken} ")
                 val finalRequest = originalRequest.newBuilder()
                     .method(originalRequest.method,originalRequest.body)
                     .build()
 
-//                return chain.proceed(finalRequest)
                 val response = chain.proceed(finalRequest)
 //                if(response.code !=200){ //응답코드가 200이아닐때
 //                    Handler(Looper.getMainLooper()).post{
@@ -77,23 +75,22 @@ object JoinRetrofitClient {
         //위에서 설정한 기본인터셉터를 okhttp 클라이언트에 추가한다.
         client.addInterceptor(baseParameterInterceptor)
         //커넷션 타임아웃
-       // client.connectTimeout(10, TimeUnit.SECONDS)
-      //  client.readTimeout(10, TimeUnit.SECONDS)
-       // client.writeTimeout(10, TimeUnit.SECONDS)
+        // client.connectTimeout(10, TimeUnit.SECONDS)
+        //  client.readTimeout(10, TimeUnit.SECONDS)
+        // client.writeTimeout(10, TimeUnit.SECONDS)
         //client.retryOnConnectionFailure(true) // 실패했을때 다시시도
 
 
 
-        if(joinRetrofitClient == null){
+        if(TokenRetrofitClient == null){
             //레트로핏 빌더
-            joinRetrofitClient = Retrofit.Builder()
+            TokenRetrofitClient = Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 //위에서 설정한 클라이언트로 레트로핏 클라이언트를 설정한다.
                 .client(client.build())
                 .build()
         }
-        return joinRetrofitClient
+        return TokenRetrofitClient
     }
-
 }

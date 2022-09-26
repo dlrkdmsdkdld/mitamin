@@ -75,7 +75,6 @@
         android:id="@+id/home_notice_btn"
         />
 
-
     <TextView
         android:id="@+id/home_state_text"
         android:layout_width="0dp"
@@ -85,13 +84,11 @@
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
         android:orientation="vertical"
-        android:text="가탄님, 오늘도 \n힘차게 시작해볼?"
         android:textSize="24sp"
         android:fontFamily="@font/appmainfont_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_title_image" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recyclerView"
         android:layout_width="match_parent"
