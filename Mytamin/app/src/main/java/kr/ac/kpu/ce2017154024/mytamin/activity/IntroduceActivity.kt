@@ -7,20 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_introduce.*
-import kotlinx.android.synthetic.main.activity_today_mytamin.*
-import kotlinx.android.synthetic.main.fragment_join_step_one.*
 import kr.ac.kpu.ce2017154024.mytamin.LoadingDialog
-import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.ViewPager2.IntroduceViewPagerFragmentAdapter
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityIntroduceBinding
-import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityLoginBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.JoinRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.*
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
 class IntroduceActivity : AppCompatActivity() {
     private lateinit var mbinding: ActivityIntroduceBinding
@@ -106,7 +100,7 @@ class IntroduceActivity : AppCompatActivity() {
         introduce_next_btn.isEnabled=false
     }
      fun newUserJoinAPICall(query: NewUser,parent:Boolean=true) {
-        JoinRetrofitManager.instance.newUserJoin(inputData = query, completion = {responseStatus, intdata ->
+        JoinRetrofitManager.instance.newUserJoin(inputData = query, completion = { responseStatus, intdata ->
             when(responseStatus){
                 RESPONSE_STATUS.OKAY ->{
                     if (intdata==201){

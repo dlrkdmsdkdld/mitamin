@@ -1,4 +1,4 @@
-package kr.ac.kpu.ce2017154024.mytamin.retrofit
+package kr.ac.kpu.ce2017154024.mytamin.retrofit.join
 
 
 import com.google.gson.JsonElement

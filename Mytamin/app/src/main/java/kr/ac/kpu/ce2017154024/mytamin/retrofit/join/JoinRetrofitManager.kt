@@ -1,4 +1,4 @@
-package kr.ac.kpu.ce2017154024.mytamin.retrofit
+package kr.ac.kpu.ce2017154024.mytamin.retrofit.join
 
 import android.util.Log
 import com.google.gson.JsonElement
@@ -6,19 +6,18 @@ import kr.ac.kpu.ce2017154024.mytamin.model.CheckOverlapData
 import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
 import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
 import kr.ac.kpu.ce2017154024.mytamin.model.ReturnLoginData
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitClient
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
 
 class JoinRetrofitManager {
     companion object{
         val instance = JoinRetrofitManager()
     }
-    private val iJoinRetrofit:IJoinRetrofit? = JoinRetrofitClient.getClient()?.create(IJoinRetrofit::class.java)
+    private val iJoinRetrofit: IJoinRetrofit? = JoinRetrofitClient.getClient()?.create(IJoinRetrofit::class.java)
 
     fun checkEmail(inputemail:String? , completion:(RESPONSE_STATUS, CheckOverlapData?) -> Unit){
         val term = inputemail ?:""
@@ -105,8 +104,6 @@ class JoinRetrofitManager {
                     }
                     response.body()?.let {
                         Log.d(TAG, "user Login onResponse ${response}" )
-                        Log.d(TAG, "------------------ ${response}" )
-                        Log.d(TAG, "------------------ ${response}" )
                         val body = it.asJsonObject
                         val status = body.get("statusCode").asInt
                         val message = body.get("message").asString

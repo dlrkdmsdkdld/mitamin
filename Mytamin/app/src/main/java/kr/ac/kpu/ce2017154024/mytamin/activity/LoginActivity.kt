@@ -11,12 +11,9 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 import kr.ac.kpu.ce2017154024.mytamin.LoadingDialog
-import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityLoginBinding
-import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityMainBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
-import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.JoinRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
@@ -35,10 +32,10 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         customProgressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         login_login_Btn.setOnClickListener(this)
         login_back_btn.setOnClickListener(this)
-        PreferenceUtil.clearUserData()
+       // PreferenceUtil.clearUserData()
         val email= PreferenceUtil.obtainUserData().first
         val password  = PreferenceUtil.obtainUserData().second
-        Log.d(Constant.TAG,"LoginActivity PreferenceUtil email : $email passowrd:$password ")
+        Log.d(TAG,"LoginActivity PreferenceUtil email : $email passowrd:$password ")
         if(email !="null" && password!="null"){
             val inputdata = LoginData(email,password)
             loginAPICall(query = inputdata)
@@ -52,6 +49,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0){
             login_login_Btn ->{
+
                 customProgressDialog.show()
                 val email = login_email_text.text
                 val password = login_password_text.text
@@ -77,7 +75,9 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                         PrivateUserDataSingleton.refreshToken=returnLoginData?.refreshToken
                         PrivateUserDataSingleton.userEmail = query.email
                         PrivateUserDataSingleton.userPassword = query.password
-                        PreferenceUtil.storeUserData(query.email, query.password)
+                        if(login_check.isChecked){
+                            PreferenceUtil.storeUserData(query.email, query.password)
+                        }
                         //유저 데이터 preference에 저장
                         Log.d(TAG,"PrivateUserDataSingleton 성공" +
                                 "PrivateUserDataSingleton.accessToken -> ${returnLoginData?.accessToken}"+"" +

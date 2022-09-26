@@ -1,12 +1,7 @@
-package kr.ac.kpu.ce2017154024.mytamin.retrofit
+package kr.ac.kpu.ce2017154024.mytamin.retrofit.join
 
-import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import kr.ac.kpu.ce2017154024.mytamin.BuildConfig
-import kr.ac.kpu.ce2017154024.mytamin.MyApplication
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.isJsonArray
 import kr.ac.kpu.ce2017154024.mytamin.utils.isJsonObject
@@ -18,7 +13,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 object JoinRetrofitClient {
 
@@ -29,7 +23,6 @@ object JoinRetrofitClient {
         //okhttp 인스턴스 생성
         val client = OkHttpClient.Builder()
         //로그를 찍기 위해 로깅 인터셉터 설정
-
         val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
             override fun log(message: String) {
                 Log.d(TAG,"RetrofitClient - log() called / message: $message")
@@ -64,7 +57,7 @@ object JoinRetrofitClient {
                     .build()
 //                return chain.proceed(finalRequest)
                 val response = chain.proceed(finalRequest)
-//                if(response.code !=200){ //응답코드가 200이아닐때 
+//                if(response.code !=200){ //응답코드가 200이아닐때
 //                    Handler(Looper.getMainLooper()).post{
 //                        Log.d(TAG,"RetrofitClient - Interceptor 오류오류발생 !!response ")
 //                        Toast.makeText(MyApplication.instance, "${response.code} 에러입니다", Toast.LENGTH_SHORT).show()
@@ -88,7 +81,7 @@ object JoinRetrofitClient {
 
         if(joinRetrofitClient == null){
             //레트로핏 빌더
-            joinRetrofitClient= Retrofit.Builder()
+            joinRetrofitClient = Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 //위에서 설정한 클라이언트로 레트로핏 클라이언트를 설정한다.

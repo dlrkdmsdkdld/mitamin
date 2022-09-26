@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_join_step_one.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.activity.joinActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentJoinStepOneBinding
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.JoinRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
