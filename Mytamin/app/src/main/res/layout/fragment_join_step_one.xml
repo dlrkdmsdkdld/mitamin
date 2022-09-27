@@ -73,7 +73,7 @@
         app:endIconCheckable="true"
 
         android:layout_marginRight="20dp"
-        style="@style/hintTextSize"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconMode="password_toggle"
         >
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
@@ -113,7 +113,6 @@
         app:endIconMode="password_toggle"
         app:endIconCheckable="true"
         android:hint="비밀번화 확인을 위해 다시 비밀번호를 입력해주세요"
-        app:hintTextAppearance="@style/TextLabel"
         >
 
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->

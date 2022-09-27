@@ -46,9 +46,12 @@ class joinStepThreeFragment : Fragment() {
                 .subscribeBy(
                     onNext ={
                         var tmp = it.toString().replace(" ","")
+                        var inputName = it.toString().trim()
                         (it.toString()=="")
                         if (it.toString()=="" ){tmp="1"}
                         if (it.toString()==tmp && it.toString()!="" ){
+                            mBinding?.joinStepThreeNameLayout?.endIconDrawable=resources.getDrawable(R.drawable.ic_baseline_replay_24)
+                            mBinding?.joinStepThreeNameLayout?.helperText = JOINSTRING.searchingEmail
                             CheckNameAPICall(it.toString())
                         }else{
                             Handler(Looper.getMainLooper()).post(Runnable {

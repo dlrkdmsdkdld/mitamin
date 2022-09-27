@@ -24,7 +24,9 @@ import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentJoinStepOneBinding
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.searchingEmail
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
+import kr.ac.kpu.ce2017154024.mytamin.utils.checkEmail
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.joinViewModel
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
@@ -56,12 +58,16 @@ class joinStepOneFragment : Fragment() {
                 .subscribeOn(Schedulers.io())
                 .subscribeBy(
                     onNext = {
-                        if((it.toString()=="") || (!Patterns.EMAIL_ADDRESS.matcher(it.toString()).matches()) ){
+                        val inputEmail = it.toString().trim()
+                        checkEmail(inputEmail)
+                        if(!checkEmail(inputEmail)){
                             //아이디 검색조건에 맞지않음
                         }else{
                             //ui 쓰레드에서돌리기
                             Handler(Looper.getMainLooper()).post(Runnable {
-                                CheckEmailAPICall(it.toString())
+                                mBinding?.joinStepOneEmailLayout?.endIconDrawable=resources.getDrawable(R.drawable.ic_baseline_replay_24)
+                                mBinding?.joinStepOneEmailLayout?.helperText = searchingEmail
+                                CheckEmailAPICall(inputEmail)
                             })
                         }
                         Log.d(TAG,"checkEmailTextSubscription onNext : $it")
@@ -129,10 +135,10 @@ class joinStepOneFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                Log.d(TAG,"join_step_one_password_text afterTextChanged $p0")
-                if (Pattern.matches("^[a-zA-Z0-9]*\$", p0) and ((8 <=p0!!.count()) and (p0!!.count()<31) )) {
+                Log.d(TAG,"join_step_one_password_text afterTextChanged $p0  ${p0?.trim()}")
+                if (Pattern.matches("^[a-zA-Z0-9]*\$", p0) && (8 <=p0!!.count() && p0!!.count()<31 )  && p0.toString()==p0.toString().trim()) {
                     join_step_one_password_layout.helperText="사용 가능한 비밀번호입니다"
-                    passwordValue=p0.toString()
+                    passwordValue=p0.toString().trim()
                     OkAllItem()
                 }
                 else {

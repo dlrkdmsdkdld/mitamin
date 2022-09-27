@@ -35,7 +35,7 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
         val step=todayMytaminViewModel.getstep.value
 
         if (step==1){
-            timer=10
+            timer=60
             val parsetime=timer.parseIntToTimeLine()
             mBinding?.mytaminTimerText?.text = parsetime
             mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_one_title

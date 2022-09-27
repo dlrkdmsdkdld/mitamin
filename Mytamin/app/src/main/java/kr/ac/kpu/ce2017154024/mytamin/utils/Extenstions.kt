@@ -9,6 +9,7 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_one
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_two
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
@@ -102,4 +103,16 @@ fun String?.IntroduceHello():String{
     val nickname=this
     val result = introduce_first_talk_one+nickname+introduce_first_talk_two
     return result
+}
+fun checkEmail(email:String):Boolean{
+    var email = email.trim() //공백제거
+    val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+    val p = Pattern.matches(emailValidation, email) // 서로 패턴이 맞닝?
+    if (p) {
+        //이메일 형태가 정상일 경우
+        return true
+    } else {
+        //또는 questionEmail.setTextColor(R.color.red.toInt())
+        return false
+    }
 }

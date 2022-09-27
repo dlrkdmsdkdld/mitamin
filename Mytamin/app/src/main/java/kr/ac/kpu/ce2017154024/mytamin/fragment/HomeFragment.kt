@@ -42,7 +42,7 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         mBinding =binding
         Log.d(TAG,"HomeFragment onCreateView")
         //스테이트 택스트 설정
-        val stateText= parseTimeToState("가탄")
+        //val stateText= parseTimeToState("가탄")
         val hoemdatatext = parseTimeToHome()
         mBinding?.homeDateText?.text=hoemdatatext
         myHomeViewModel= ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -95,7 +95,5 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         }
         startActivity(intent)
     }
-    fun getWellcometext(){
 
-    }
 }

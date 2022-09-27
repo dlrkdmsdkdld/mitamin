@@ -28,7 +28,8 @@ object JOINSTRING{
     val next="다음"
     val introduce_first_talk_one = "안녕하세요, "
     val introduce_first_talk_two = "님!\n매일 챙겨먹는 마음 비타민\n마이타민입니다!"
-
+    val searchingEmail = "현재 이메일 중복검사 중입니다.."
+    val searchingNickname = "현재 닉네임 중복검사 중입니다.."
 }
 object MYTAMIN{
     val step_one_title = "1. 숨고르기"
