@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
-import kr.ac.kpu.ce2017154024.mytamin.LoadingDialog
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityLoginBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitManager

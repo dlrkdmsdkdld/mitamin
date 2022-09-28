@@ -1,23 +1,14 @@
 package kr.ac.kpu.ce2017154024.mytamin.viewModel
 
-import android.os.Handler
-import android.os.Looper
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.work.WorkManager
-import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.*
-import kr.ac.kpu.ce2017154024.mytamin.MyApplication
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.home.HomeRetrofitManager
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
-import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
-import java.util.concurrent.TimeUnit
+import kr.ac.kpu.ce2017154024.mytamin.Repository.MytaminRepository
 
 class todayMytaminViewModel :ViewModel() {
-    private val mytaminRepository=MytaminRepository()  //레포지토리 ##
+    private val mytaminRepository= MytaminRepository()  //레포지토리 ##
     private val emojiState = MutableLiveData<Int>()
     val selectemojiState : LiveData<Int>
         get() = emojiState
@@ -63,7 +54,6 @@ class todayMytaminViewModel :ViewModel() {
     fun timerPause(){
         if (::a.isInitialized) a.cancel()
     }
-    //프로그래스 관련함수들
     var _auto = MutableLiveData<Boolean>()
     val auto : LiveData<Boolean>
         get() = _auto
@@ -87,6 +77,12 @@ class todayMytaminViewModel :ViewModel() {
     }
     fun completeSense(){
         mytaminRepository.completeSense()
+    }
+    var _report = MutableLiveData<String>()
+    val report : LiveData<String>
+        get() = _report
+    fun reportset(data:String){
+        _report.value=data
     }
 //    with(CoroutineScope(Dispatchers.IO)){
 //        val job: Job = launch { completeBreath() }

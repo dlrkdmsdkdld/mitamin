@@ -1,22 +1,13 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment.introduce
 
-import android.app.Dialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_introducefour_step.*
-import kotlinx.android.synthetic.main.fragment_join_step_one.*
-import kotlinx.android.synthetic.main.fragment_join_step_three.*
-import kr.ac.kpu.ce2017154024.mytamin.LoadingDialog
-import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.activity.IntroduceActivity
-import kr.ac.kpu.ce2017154024.mytamin.activity.joinActivity
-import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentIntroduceOneStepBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentIntroducefourStepBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant

@@ -1,4 +1,4 @@
-package kr.ac.kpu.ce2017154024.mytamin.viewModel
+package kr.ac.kpu.ce2017154024.mytamin.Repository
 
 import android.os.Handler
 import android.os.Looper

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepFourBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
@@ -110,13 +111,15 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
 
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
         var tmp = mutableListOf<String>()
+        if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtn(true)}
+        else{(activity as todayMytaminActivity).setEnableNextBtn(false)}
         checkedIds.forEach {
             val chip = group.getChildAt(it-1  - previousChildCount )
             val tmpS=  chip.getTag()
             tmp.add(tmpS.toString())
         }
-        Log.d(TAG,"chip  mutableListOf mutableListOf -> ${tmp}")
         todayMytaminViewModel.setdiagnosis(tmp)
+        Log.d(TAG,"chip  mutableListOf mutableListOf -> ${todayMytaminViewModel.selectediagnosis.value}")
 
     }
 

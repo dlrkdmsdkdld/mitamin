@@ -1,10 +1,9 @@
 package kr.ac.kpu.ce2017154024.mytamin.retrofit.home
 
 import com.google.gson.JsonElement
+import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface IHomeRetrofit {
 
@@ -16,4 +15,7 @@ interface IHomeRetrofit {
 
     @PATCH("/home/sense")
     fun completeSense() : Call<JsonElement>
+//    @POST("/auth/signup")
+//    fun postUser(@Body data: NewUser): Call<JsonElement>
+
 }

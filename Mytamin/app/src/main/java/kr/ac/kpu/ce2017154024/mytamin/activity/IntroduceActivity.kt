@@ -9,7 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_introduce.*
-import kr.ac.kpu.ce2017154024.mytamin.LoadingDialog
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.IntroduceViewPagerFragmentAdapter
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityIntroduceBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.NewUser

@@ -19,9 +19,7 @@ import kr.ac.kpu.ce2017154024.mytamin.MyApplication
 import kr.ac.kpu.ce2017154024.mytamin.MytaminWorker
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityTodayMytaminBinding
-import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepFourFragment
-import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepOneFragment
-import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepThreeFragment
+import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.home.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
@@ -87,10 +85,16 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
 
             }
             5->{
+                val MytaminStepFiveFragment = MytaminStepFiveFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepFiveFragment).commit()
 
             }
             6->{
-
+                val MytaminStepSixFragment = MytaminStepSixFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepSixFragment).commit()
+                mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
+                mytamin_indicator_three.setImageResource(R.drawable.ic_indicator_yes)
+                mytamin_indicator_four.setImageResource(R.drawable.ic_indicator_yes)
             }
 
         }

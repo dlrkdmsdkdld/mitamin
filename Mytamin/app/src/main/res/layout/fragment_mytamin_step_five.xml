@@ -36,6 +36,7 @@
 
         />
     <EditText
+        android:id="@+id/mytamin_step_five_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/mytamin_step_five_hint"
