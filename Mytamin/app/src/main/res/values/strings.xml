@@ -47,6 +47,9 @@
     <string name="mytamin_step_four_chip_eleven">만족스러운</string>
     <string name="mytamin_step_four_chip_twelve">설레는</string>
     <string name="mytamin_step_four_chip_thirty">샹쾌한</string>
+    <!--마이타민 섭취 단계 5 String-->
+    <string name="mytamin_step_five_subtitle">오늘&#160;하루를&#160;진단해주세요</string>
+    <string name="mytamin_step_five_hint">오늘&#160;하루를&#160;진단해주세요</string>
 
 
 </resources>

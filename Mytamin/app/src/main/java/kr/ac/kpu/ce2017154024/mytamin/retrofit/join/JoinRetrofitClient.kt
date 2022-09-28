@@ -15,6 +15,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object JoinRetrofitClient {
 
@@ -77,10 +78,10 @@ object JoinRetrofitClient {
         //위에서 설정한 기본인터셉터를 okhttp 클라이언트에 추가한다.
         client.addInterceptor(baseParameterInterceptor)
         //커넷션 타임아웃
-       // client.connectTimeout(10, TimeUnit.SECONDS)
-      //  client.readTimeout(10, TimeUnit.SECONDS)
-       // client.writeTimeout(10, TimeUnit.SECONDS)
-        //client.retryOnConnectionFailure(true) // 실패했을때 다시시도
+        client.connectTimeout(10, TimeUnit.SECONDS)
+        client.readTimeout(10, TimeUnit.SECONDS)
+        client.writeTimeout(10, TimeUnit.SECONDS)
+        client.retryOnConnectionFailure(true) // 실패했을때 다시시도
 
 
 

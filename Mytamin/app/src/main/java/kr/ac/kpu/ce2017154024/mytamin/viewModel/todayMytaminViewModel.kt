@@ -1,17 +1,23 @@
 package kr.ac.kpu.ce2017154024.mytamin.viewModel
 
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.WorkManager
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.*
+import kr.ac.kpu.ce2017154024.mytamin.MyApplication
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.home.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import java.util.concurrent.TimeUnit
 
 class todayMytaminViewModel :ViewModel() {
-
-
+    private val mytaminRepository=MytaminRepository()  //레포지토리 ##
     private val emojiState = MutableLiveData<Int>()
     val selectemojiState : LiveData<Int>
         get() = emojiState
@@ -76,6 +82,15 @@ class todayMytaminViewModel :ViewModel() {
     fun dayset(data:Int){
         _day.value=data
     }
+    fun completeBreath(){
+        mytaminRepository.completeBreath()
+    }
+    fun completeSense(){
+        mytaminRepository.completeSense()
+    }
+//    with(CoroutineScope(Dispatchers.IO)){
+//        val job: Job = launch { completeBreath() }
+//    }
 
 //    if(returnday!=0){
 //        //(activity as todayMytaminActivity).submitDay(returnmonth+1,returnday)}

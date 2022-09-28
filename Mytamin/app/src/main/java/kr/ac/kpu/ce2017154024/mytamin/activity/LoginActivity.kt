@@ -33,16 +33,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         login_login_Btn.setOnClickListener(this)
         login_back_btn.setOnClickListener(this)
        // PreferenceUtil.clearUserData()
-        val email= PreferenceUtil.obtainUserData().first
-        val password  = PreferenceUtil.obtainUserData().second
-        Log.d(TAG,"LoginActivity PreferenceUtil email : $email passowrd:$password ")
-        if(email !="null" && password!="null"){
-            val inputdata = LoginData(email,password)
-            loginAPICall(query = inputdata)
-            customProgressDialog.show()
-        }else{
 
-        }
 
     }
 

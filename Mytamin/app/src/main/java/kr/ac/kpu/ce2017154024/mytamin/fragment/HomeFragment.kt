@@ -14,19 +14,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.RecyclerView.home_RecyclerView.HomeRecyclerAdapter
-import kr.ac.kpu.ce2017154024.mytamin.RecyclerView.home_RecyclerView.IHomeRecyclerView
+import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView.HomeRecyclerAdapter
+import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView.IHomeRecyclerView
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHomeBinding
-import kr.ac.kpu.ce2017154024.mytamin.fragment.home.NoMytaminFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.home.YesMytaminFragment
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToHome
-import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToState
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.HomeViewModel
-import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
-import java.util.*
 
 
 class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
@@ -41,8 +36,7 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         val binding = FragmentHomeBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(TAG,"HomeFragment onCreateView")
-        //스테이트 택스트 설정
-        //val stateText= parseTimeToState("가탄")
+
         val hoemdatatext = parseTimeToHome()
         mBinding?.homeDateText?.text=hoemdatatext
         myHomeViewModel= ViewModelProvider(this).get(HomeViewModel::class.java)

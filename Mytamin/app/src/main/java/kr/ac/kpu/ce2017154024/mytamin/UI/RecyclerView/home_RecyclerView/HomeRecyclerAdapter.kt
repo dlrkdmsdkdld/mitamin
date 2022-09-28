@@ -1,10 +1,9 @@
-package kr.ac.kpu.ce2017154024.mytamin.RecyclerView.home_RecyclerView
+package kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.fragment.HomeFragment
 
 class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
     private var iHomeRecyclerview:IHomeRecyclerView?=null

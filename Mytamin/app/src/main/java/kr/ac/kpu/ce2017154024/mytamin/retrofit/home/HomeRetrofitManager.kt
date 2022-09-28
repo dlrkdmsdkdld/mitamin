@@ -41,6 +41,50 @@ class HomeRetrofitManager {
             })
 
     }
+    fun doCompleteBreath(completion:(RESPONSE_STATUS) -> Unit){
+        iHomeRetrofit?.completeBreath()
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        val body =it.asJsonObject
+                        //TODO 잊지말고 토큰 추가해야함
+                        val message = body.get("message").asString
+                        val updatedTime = body.get("data").asJsonObject.get("updatedTime").asString
+                        Log.d(TAG, "user doCompleteBreath response message:${message}  updatedTime:$updatedTime" )
+                        completion(RESPONSE_STATUS.OKAY)
+
+                    }
+                }
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "user doCompleteBreath fail${t}" )
+                    completion(RESPONSE_STATUS.FAIL)
+                }
+
+            })
+
+    }
+    fun doCompleteSense(completion:(RESPONSE_STATUS) -> Unit){
+        iHomeRetrofit?.completeSense()
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        val body =it.asJsonObject
+                        //TODO 잊지말고 토큰 추가해야함
+                        val message = body.get("message").asString
+                        val updatedTime = body.get("data").asJsonObject.get("updatedTime").asString
+                        Log.d(TAG, "user doCompleteBreath response message:${message}  updatedTime:$updatedTime" )
+                        completion(RESPONSE_STATUS.OKAY)
+
+                    }
+                }
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "user doCompleteBreath fail${t}" )
+                    completion(RESPONSE_STATUS.FAIL)
+                }
+
+            })
+
+    }
 
 
 }
