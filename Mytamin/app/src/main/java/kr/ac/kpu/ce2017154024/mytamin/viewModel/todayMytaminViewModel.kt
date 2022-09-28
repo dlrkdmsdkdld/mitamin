@@ -14,11 +14,16 @@ class todayMytaminViewModel :ViewModel() {
 
     private val emojiState = MutableLiveData<Int>()
     val selectemojiState : LiveData<Int>
-        get() = step
-    fun setselectemojiState(emojiState:Int){
-        step.value = emojiState
+        get() = emojiState
+    fun setselectemojiState(i:Int){
+        emojiState.value = i
     }
-
+    private val diagnosis = MutableLiveData<List<String>>()
+    val selectediagnosis : LiveData<List<String>>
+        get() = diagnosis
+    fun setdiagnosis(i:List<String>){
+        diagnosis.value = i
+    }
     private val step = MutableLiveData<Int>()
     val getstep : LiveData<Int>
         get() = step
@@ -59,5 +64,20 @@ class todayMytaminViewModel :ViewModel() {
     fun autoset(data:Boolean){
         _auto.value=data
     }
+    var _month = MutableLiveData<Int>()
+    val month : LiveData<Int>
+        get() = _month
+    fun monthset(data:Int){
+        _month.value=data
+    }
+    var _day= MutableLiveData<Int>()
+    val day : LiveData<Int>
+        get() = _day
+    fun dayset(data:Int){
+        _day.value=data
+    }
 
+//    if(returnday!=0){
+//        //(activity as todayMytaminActivity).submitDay(returnmonth+1,returnday)}
+//    }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityTodayMytaminBinding
+import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepFourFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepOneFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepThreeFragment
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
@@ -66,6 +67,17 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                 mytamin_indicator_four.setImageResource(R.drawable.ic_idcator_no)
 
             }
+            4->{
+                val MytaminStepFourFragment = MytaminStepFourFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepFourFragment).commit()
+
+            }
+            5->{
+
+            }
+            6->{
+
+            }
 
         }
     }
@@ -81,7 +93,10 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
 
             mytamin_next_btn ->{
                 step+=1
-                replaceFragment(step)
+                if (step==4){
+                    replaceFragment(step)
+
+                }
                 mytaminViewModel.timerDestory()
                 mytaminViewModel.setstep(step)
                 Log.d(TAG,"현재 단계 : -> $step")
@@ -89,6 +104,9 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             }
             mytamin_pass_btn ->{
                 step+=1
+                if (step==4){
+                    replaceFragment(step+2)
+                }
                 mytaminViewModel.timerDestory()
                 replaceFragment(step)
                 mytaminViewModel.setstep(step)

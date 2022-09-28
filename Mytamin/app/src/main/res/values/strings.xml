@@ -31,6 +31,22 @@
     <string name="mytamin_step_one_pass">패스하기</string>
     <string name="mytamin_step_one_next">다음으로</string>
     <string name="mytamin_step_one_auto">자동진행</string>
+    <!--마이타민 섭취 단계 4 String-->
+    <string name="mytamin_step_four_title">3.&#160;하루진단하기</string>
+    <string name="mytamin_step_four_state">감정을 진찰해볼까요?</string>
+    <string name="mytamin_step_four_chip_one">신나는</string>
+    <string name="mytamin_step_four_chip_two">즐거운</string>
+    <string name="mytamin_step_four_chip_three">활기찬</string>
+    <string name="mytamin_step_four_chip_four">행복한</string>
+    <string name="mytamin_step_four_chip_five">감사한</string>
+    <string name="mytamin_step_four_chip_six">감동적인</string>
+    <string name="mytamin_step_four_chip_seven">기대되는</string>
+    <string name="mytamin_step_four_chip_eight">편안한</string>
+    <string name="mytamin_step_four_chip_nine">평화로운</string>
+    <string name="mytamin_step_four_chip_ten">홀가분한</string>
+    <string name="mytamin_step_four_chip_eleven">만족스러운</string>
+    <string name="mytamin_step_four_chip_twelve">설레는</string>
+    <string name="mytamin_step_four_chip_thirty">샹쾌한</string>
 
 
 </resources>
