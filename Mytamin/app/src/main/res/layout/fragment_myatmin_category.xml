@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.todaymytamin.MyatminCategoryFragment">
+
+    <TextView
+        android:id="@+id/mytamin_bottom_text_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mytamin_step_six_sheet1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/Gray"
+        app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_text_one"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

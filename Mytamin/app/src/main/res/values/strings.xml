@@ -49,7 +49,19 @@
     <string name="mytamin_step_four_chip_thirty">샹쾌한</string>
     <!--마이타민 섭취 단계 5 String-->
     <string name="mytamin_step_five_subtitle">오늘&#160;하루를&#160;진단해주세요</string>
-    <string name="mytamin_step_five_hint">오늘&#160;하루를&#160;진단해주세요</string>
+    <string name="mytamin_step_five_hint">오늘&#160;아침의&#160;나에게&#160;하루를&#160;진단해준다면?</string>
+    <!--마이타민 섭취 단계 6 String-->
+    <string name="mytamin_step_six_title">4.&#160;칭찬&#160;처방하기</string>
+    <string name="mytamin_step_six_subtitle">어떤&#160;부분을&#160;칭찬해볼까요?</string>
+    <string name="mytamin_step_six_hint">스스로를&#160;칭찬해주세요!</string>
+    <string name="mytamin_step_six_subtitle_two">칭찬의&#160;문장으로&#160;마무리해주세요.</string>
+    <string name="mytamin_step_six_hint_two">대단해,발전하고&#160;있어,역시&#160;나야&#160;등</string>
+    <string name="mytamin_step_six_sheet0">카테고리를 골라주세요</string>
+    <string name="mytamin_step_six_sheet1">이루어&#160;낸&#160;일</string>
+    <string name="mytamin_step_six_sheet2">잘한&#160;일이나&#160;행동</string>
+    <string name="mytamin_step_six_sheet3">이루어&#160;낸&#160;일</string>
+    <string name="mytamin_step_six_sheet4">이루어&#160;낸&#160;일</string>
+    <string name="mytamin_step_six_sheet5">이루어&#160;낸&#160;일</string>
 
 
 </resources>

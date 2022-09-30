@@ -51,7 +51,9 @@
         android:fontFamily="@font/appmainfont_medium"
         android:lines="10"
         android:gravity="top"
+        android:padding="10dp"
 
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

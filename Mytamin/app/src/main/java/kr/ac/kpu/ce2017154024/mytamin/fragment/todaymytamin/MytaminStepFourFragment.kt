@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.jakewharton.rxbinding4.view.detaches
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
@@ -103,6 +104,14 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                         isCheckable = true
                         isClickable = true
                         tag = statetext
+//                        setCloseIconVisible(true)
+//                        this.setCloseIconResource(R.drawable.ic_x)
+//                        setOnCloseIconClickListener {
+//                            Log.d(TAG,"삭제버튼클릭")
+//                            val tab =it.tag
+//
+//                            chipGroup.removeView(chipGroup.getChildAt(1))
+//                        }
                     })
                 }
             }
@@ -113,6 +122,21 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         var tmp = mutableListOf<String>()
         if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtn(true)}
         else{(activity as todayMytaminActivity).setEnableNextBtn(false)}
+        if (checkedIds.count()==3){
+            //액티비티가 파괴되면 그전에 있던 id값들이 누적돼서 이렇게해야함
+            for(i in 1+previousChildCount until group.childCount+1+previousChildCount){
+                if(i in checkedIds){
+                }
+                else{
+                    group.getChildAt(i-1 - previousChildCount).isClickable=false
+                }
+            }
+        }else{
+            for(i in 1+previousChildCount until group.childCount+1){
+                group.getChildAt(i-1 - previousChildCount).isClickable=true
+            }
+
+        }
         checkedIds.forEach {
             val chip = group.getChildAt(it-1  - previousChildCount )
             val tmpS=  chip.getTag()
