@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHistoryBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
 
 
 class HistoryFragment : Fragment() {
@@ -19,6 +20,9 @@ class HistoryFragment : Fragment() {
     ): View? {
         val binding = FragmentHistoryBinding.inflate(inflater,container,false)
         mBinding =binding
+        mBinding?.historyBtn?.setOnClickListener {
+            PreferenceUtil.clearUserData()
+        }
         Log.d(TAG,"HistoryFragment onCreateView")
         return mBinding?.root
     }

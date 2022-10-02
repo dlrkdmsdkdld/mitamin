@@ -109,6 +109,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         when(step){
             2->mytaminViewModel.completeBreath()
             3->mytaminViewModel.completeSense()
+            6->mytaminViewModel.completeReport()//5단계까지 마치고 next버튼눌렀을때 데이터전송
         }
         replaceFragment(step)
         mytaminViewModel.timerDestory()

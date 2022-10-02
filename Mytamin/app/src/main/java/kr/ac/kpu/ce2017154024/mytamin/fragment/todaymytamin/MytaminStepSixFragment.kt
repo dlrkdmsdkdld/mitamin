@@ -12,7 +12,7 @@ import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepSixBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 
 
-class MytaminStepSixFragment : Fragment() {
+class MytaminStepSixFragment : Fragment(),View.OnClickListener {
     private var mBinding : FragmentMytaminStepSixBinding?=null
 
     override fun onCreateView(
@@ -22,11 +22,22 @@ class MytaminStepSixFragment : Fragment() {
         val binding = FragmentMytaminStepSixBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(Constant.TAG,"MytaminStepSixFragment onCreateView")
+        mBinding?.mytaminStepSixLayout?.setOnClickListener(this)
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null
         super.onDestroyView()
         Log.d(Constant.TAG,"MytaminStepSixFragment onDestroyView")
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            mBinding?.mytaminStepSixLayout ->{
+                val bottomSheetDialogFragment= MyatminCategoryFragment()
+                bottomSheetDialogFragment.show(childFragmentManager,bottomSheetDialogFragment.tag)
+
+            }
+        }
     }
 }

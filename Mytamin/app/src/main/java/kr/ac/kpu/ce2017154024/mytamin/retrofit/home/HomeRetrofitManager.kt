@@ -3,6 +3,7 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.home
 import android.util.Log
 import com.google.gson.JsonElement
 import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
+import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitClient
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
@@ -84,6 +85,27 @@ class HomeRetrofitManager {
 
             })
 
+    }
+    fun doCompleteReport(inputdata:ReportData,completion: (RESPONSE_STATUS) -> Unit){
+        iHomeRetrofit?.completeReport(inputdata)
+            ?.enqueue(object :retrofit2.Callback<JsonElement>{
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        val body =it.asJsonObject
+                        val message = body.get("message").asString
+                        val takeAtTime = body.get("data").asJsonObject.get("takeAt").asString
+                        Log.d(TAG, "user doCompleteReport response message:${message}  updatedTime:$takeAtTime" )
+                        completion(RESPONSE_STATUS.OKAY)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "user doCompleteBreath fail${t}" )
+                    completion(RESPONSE_STATUS.FAIL)
+                }
+
+            })
     }
 
 

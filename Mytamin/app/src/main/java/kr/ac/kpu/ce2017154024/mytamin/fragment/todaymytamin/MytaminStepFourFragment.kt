@@ -37,12 +37,12 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         chipGroup.clearDisappearingChildren()
       //  val childCount = chipGroup.childCount
       //  Log.d(Constant.TAG,"MytaminStepFourFragment childCount $childCount")
-        chipGroup.setOnCheckedStateChangeListener(this)
 
         Log.d(Constant.TAG,"MytaminStepFourFragment onCreateView")
         val emojitState = todayMytaminViewModel.selectemojiState.value
         setChip(emojitState!!)
         chipChildCount=chipGroup.childCount
+        chipGroup.setOnCheckedStateChangeListener(this)
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
@@ -132,7 +132,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                 }
             }
         }else{
-            for(i in 1+previousChildCount until group.childCount+1){
+            for(i in 1+previousChildCount until group.childCount+1+previousChildCount){
                 group.getChildAt(i-1 - previousChildCount).isClickable=true
             }
 

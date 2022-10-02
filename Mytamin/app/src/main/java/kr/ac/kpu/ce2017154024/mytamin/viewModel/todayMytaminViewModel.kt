@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import kr.ac.kpu.ce2017154024.mytamin.Repository.MytaminRepository
+import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
 
 class todayMytaminViewModel :ViewModel() {
     private val mytaminRepository= MytaminRepository()  //레포지토리 ##
@@ -77,6 +78,15 @@ class todayMytaminViewModel :ViewModel() {
     }
     fun completeSense(){
         mytaminRepository.completeSense()
+    }
+    fun completeReport(){
+        var inputdata:ReportData
+        when(selectediagnosis.value!!.count()){
+            1 -> inputdata=ReportData(mentalConditionCode = selectemojiState.value!!, tag1 =selectediagnosis!!.value!!.get(0) ,todayReport=report.value!!)
+            2 -> inputdata=ReportData(mentalConditionCode = selectemojiState.value!!, tag1 =selectediagnosis!!.value!!.get(0) , tag2 = selectediagnosis!!.value!!.get(1) ,todayReport=report.value!!)
+            else -> inputdata=ReportData(mentalConditionCode = selectemojiState.value!!, tag1 =selectediagnosis!!.value!!.get(0) , tag2 = selectediagnosis!!.value!!.get(1), tag3 =selectediagnosis!!.value!!.get(2),todayReport=report.value!!)
+        }
+        mytaminRepository.completeReport(inputdata)
     }
     var _report = MutableLiveData<String>()
     val report : LiveData<String>

@@ -5,6 +5,7 @@ import kr.ac.kpu.ce2017154024.mytamin.BuildConfig
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.accessToken
 import kr.ac.kpu.ce2017154024.mytamin.utils.isJsonArray
 import kr.ac.kpu.ce2017154024.mytamin.utils.isJsonObject
 import okhttp3.Interceptor
@@ -51,9 +52,13 @@ object TokenRetrofitClient {
         val baseParameterInterceptor : Interceptor = (object  : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
                 Log.d(Constant.TAG,"RetrofitClient - Interceptor called ")
-                val originalRequest = chain.request().newBuilder()
-                    .addHeader("X-AUTH-TOKEN", "${PrivateUserDataSingleton.accessToken}" )
+                var originalRequest = chain.request().newBuilder()
                     .build()
+                if(PrivateUserDataSingleton.isTokenINitialized()){//토큰초기화됐는지확인하고 토큰넣음
+                     originalRequest = chain.request().newBuilder()
+                        .addHeader("X-AUTH-TOKEN", "${PrivateUserDataSingleton.accessToken}" )
+                        .build()
+                }
                 Log.d(TAG,"추가한 토큰 ${PrivateUserDataSingleton.accessToken} ")
                 val finalRequest = originalRequest.newBuilder()
                     .method(originalRequest.method,originalRequest.body)
