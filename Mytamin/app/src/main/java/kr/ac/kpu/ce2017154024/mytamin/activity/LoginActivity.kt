@@ -75,6 +75,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                                 "userEmail -> $PrivateUserDataSingleton.userEmail")
                         customProgressDialog.dismiss()
                         val intent = Intent(this,MainActivity::class.java)
+                        finishAffinity() // 로그인 액티비티를 스택에서 삭제
                         startActivity(intent)
                         finish()
                     }

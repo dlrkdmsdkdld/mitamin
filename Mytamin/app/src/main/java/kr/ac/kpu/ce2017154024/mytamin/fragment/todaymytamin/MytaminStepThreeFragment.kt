@@ -50,31 +50,31 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_one_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_one_text
                 todayMytaminViewModel.setselectemojiState(1)
-                (activity as todayMytaminActivity).setEnableNextBtn(true)
+                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
             mBinding?.mytaminFrametwoImageTwo->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_two_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_two_text
                 todayMytaminViewModel.setselectemojiState(2)
-                (activity as todayMytaminActivity).setEnableNextBtn(true)
+                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
             mytamin_frametwo_image_three->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_three_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_three_text
                 todayMytaminViewModel.setselectemojiState(3)
-                (activity as todayMytaminActivity).setEnableNextBtn(true)
+                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
             mytamin_frametwo_image_four->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_four_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_four_text
-                (activity as todayMytaminActivity).setEnableNextBtn(true)
+                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
                 todayMytaminViewModel.setselectemojiState(4)
             }
             mytamin_frametwo_image_five->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_five_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_five_text
                 todayMytaminViewModel.setselectemojiState(5)
-                (activity as todayMytaminActivity).setEnableNextBtn(true)
+                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
             mytamin_frametwo_calendar_btn->{
                 val bottomSheetDialogFragment= MytaminBottomSheetFragment()

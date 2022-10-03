@@ -1,6 +1,7 @@
 package kr.ac.kpu.ce2017154024.mytamin.retrofit.home
 
 import com.google.gson.JsonElement
+import kr.ac.kpu.ce2017154024.mytamin.model.CareData
 import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
 import retrofit2.Call
@@ -19,6 +20,11 @@ interface IHomeRetrofit {
 
     @POST("/report/new")
     fun completeReport(@Body data:ReportData): Call<JsonElement>
+    @POST("/care/new")
+    fun completeCare(@Body data:CareData): Call<JsonElement>
+
+    @GET("/mytamin/latest")
+    fun getlatestMytamin() : Call<JsonElement>
 
 
 //    @POST("/auth/signup")

@@ -120,8 +120,8 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
 
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
         var tmp = mutableListOf<String>()
-        if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtn(true)}
-        else{(activity as todayMytaminActivity).setEnableNextBtn(false)}
+        if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)}
+        else{(activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)}
         if (checkedIds.count()==3){
             //액티비티가 파괴되면 그전에 있던 id값들이 누적돼서 이렇게해야함
             for(i in 1+previousChildCount until group.childCount+1+previousChildCount){

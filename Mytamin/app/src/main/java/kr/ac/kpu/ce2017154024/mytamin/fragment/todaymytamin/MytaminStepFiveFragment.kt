@@ -43,9 +43,9 @@ class MytaminStepFiveFragment : Fragment() {
                 todayMytaminViewModel.reportset(p0.toString())
                 Log.d(Constant.TAG,"MytaminStepFiveFragment todayMytaminViewModel -. ${todayMytaminViewModel._report.value}")
                 if (p0.toString()!=""){
-                    (activity as todayMytaminActivity).setEnableNextBtn(true)
+                    (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
                 }else{
-                    (activity as todayMytaminActivity).setEnableNextBtn(false)
+                    (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
                 }
             }
 

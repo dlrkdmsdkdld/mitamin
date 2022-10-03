@@ -8,6 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.MyApplication
+import kr.ac.kpu.ce2017154024.mytamin.model.CareData
+import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.home.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -56,6 +58,23 @@ class MytaminRepository {
                         RESPONSE_STATUS.OKAY ->{
                             Handler(Looper.getMainLooper()).post{
                                 Toast.makeText(MyApplication.instance, "마이타민 하루진단하기 완료", Toast.LENGTH_SHORT).show()
+                            }
+
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    fun completeCare(data:CareData){
+        with(CoroutineScope(Dispatchers.IO)){
+            val job:Job = launch {
+                HomeRetrofitManager.instance.doCompleteCare(data) { responseStatus ->
+                    when(responseStatus){
+                        RESPONSE_STATUS.OKAY ->{
+                            Handler(Looper.getMainLooper()).post{
+                                Toast.makeText(MyApplication.instance, "마이타민 칭찬 처방하기 완료", Toast.LENGTH_SHORT).show()
                             }
 
                         }

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_home.*
 import kr.ac.kpu.ce2017154024.mytamin.R
@@ -18,6 +19,7 @@ import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerVi
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView.IHomeRecyclerView
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHomeBinding
+import kr.ac.kpu.ce2017154024.mytamin.fragment.home.NoMytaminFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.home.YesMytaminFragment
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToHome
@@ -46,6 +48,7 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
             colorOrangeText(alltext,nickname!!.length)
         })
 
+
         return mBinding?.root
     }
     fun colorOrangeText(textdata:String,endpoint:Int){
@@ -59,8 +62,21 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         //리싸이클러뷰 설정
         this.myHomeRecyclerAdapter = HomeRecyclerAdapter(this)
         home_recyclerView.adapter = myHomeRecyclerAdapter
-        val yesMytaminFragment = YesMytaminFragment()
-        childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
+        myHomeViewModel.getLatestMytaminAPI()
+        myHomeViewModel.getlatestMytamin.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "  getlatestMytamin  observe 중 데이터 it ->$it" )
+            if (it != null){
+                val yesMytaminFragment = YesMytaminFragment()
+                childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
+                Log.d(TAG,"최근 마이타민 섭취기록있음")
+
+            }else{
+                val NoMytaminFragment = NoMytaminFragment()
+                childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,NoMytaminFragment).commit()
+                Log.d(TAG,"최근 마이타민 섭취기록없음")
+
+            }
+        })
     }
 
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행

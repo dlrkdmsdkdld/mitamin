@@ -9,15 +9,15 @@ object Constant {
     val StepTextstepOne = "숨고르기"
     val StepTextstepTwo = "감각 깨우기"
 
-    val frametwo_image_one_src = R.drawable.icons8ogre96
+    val frametwo_image_one_src = R.drawable.ic_so_bad
     val frametwo_image_one_text ="매우 나빠요.."
-    val frametwo_image_two_src = R.drawable.icons8angryface96
+    val frametwo_image_two_src = R.drawable.ic_bad
     val frametwo_image_two_text = "나쁜 편이에요:("
-    val frametwo_image_three_src = R.drawable.icons8facewitrollingeyes96
+    val frametwo_image_three_src = R.drawable.ic_so_so
     val frametwo_image_three_text = "그럭저럭이에요"
-    val frametwo_image_four_src = R.drawable.icons8facewithhandovermouth96
+    val frametwo_image_four_src = R.drawable.ic_good
     val frametwo_image_four_text = "좋은 편이에요:)"
-    val frametwo_image_five_src = R.drawable.icons8grinningsquintingface96
+    val frametwo_image_five_src = R.drawable.ic_so_good
     val frametwo_image_five_text = "매우 좋아요!"
 }
 object JOINSTRING{

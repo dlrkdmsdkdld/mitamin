@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import kr.ac.kpu.ce2017154024.mytamin.Repository.MytaminRepository
+import kr.ac.kpu.ce2017154024.mytamin.model.CareData
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
 
 class todayMytaminViewModel :ViewModel() {
@@ -94,6 +95,33 @@ class todayMytaminViewModel :ViewModel() {
     fun reportset(data:String){
         _report.value=data
     }
+
+    ///마이타민 5단계
+    private val careCategoryCode = MutableLiveData<Int>()
+    val getcareCategoryCode : LiveData<Int>
+        get() = careCategoryCode
+    fun setcareCategoryCode(inputstep:Int){
+        careCategoryCode.value = inputstep
+    }
+    private val careMsg1 = MutableLiveData<String>()
+    val getcareMsg1 : LiveData<String>
+        get() = careMsg1
+    fun setcareMsg1(inputstep:String){
+        careMsg1.value = inputstep
+    }
+    private val careMsg2 = MutableLiveData<String>()
+    val getcareMsg2: LiveData<String>
+        get() = careMsg2
+    fun setcareMsg2(inputstep:String){
+        careMsg2.value = inputstep
+    }
+    ///마이타민 6단계
+    fun completeCare(){
+        val inputdata = CareData(careCategoryCode = getcareCategoryCode.value!!, careMsg1 =  getcareMsg1.value!!, careMsg2 = getcareMsg2.value!!  )
+        mytaminRepository.completeCare(inputdata)
+    }
+
+
 //    with(CoroutineScope(Dispatchers.IO)){
 //        val job: Job = launch { completeBreath() }
 //    }

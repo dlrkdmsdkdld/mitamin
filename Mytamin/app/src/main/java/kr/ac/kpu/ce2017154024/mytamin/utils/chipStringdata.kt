@@ -14,4 +14,8 @@ object chipStringdata {
         Log.d(TAG,"verysad:${verysad.size}, sad:${sad.size} , soso:${soso.size} , good:${good.size} , verygood:${verygood.size}   ")
     }
     var previousChildCount=0
+
+    val category = arrayOf("이루어 낸 일","잘한 일이나 행동","노력하고 있는 부분","긍정적인 변화나 깨달음","경험,생각 혹은 신체 일부분","과거의 나","기타")
+
+
 }
