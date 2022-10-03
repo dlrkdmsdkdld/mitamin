@@ -62,21 +62,21 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         //리싸이클러뷰 설정
         this.myHomeRecyclerAdapter = HomeRecyclerAdapter(this)
         home_recyclerView.adapter = myHomeRecyclerAdapter
-        myHomeViewModel.getLatestMytaminAPI()
-        myHomeViewModel.getlatestMytamin.observe(viewLifecycleOwner, Observer {
-            Log.d(TAG, "  getlatestMytamin  observe 중 데이터 it ->$it" )
-            if (it != null){
+        //val yesMytaminFragment = YesMytaminFragment()
+        //childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
+        //myHomeViewModel.getLatestMytaminAPI()
+        myHomeViewModel.getstatus.observe(viewLifecycleOwner, Observer {
+            if (it.reportIsDone == true ||it.careIsDone ==true ){
                 val yesMytaminFragment = YesMytaminFragment()
                 childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
                 Log.d(TAG,"최근 마이타민 섭취기록있음")
-
             }else{
                 val NoMytaminFragment = NoMytaminFragment()
                 childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,NoMytaminFragment).commit()
                 Log.d(TAG,"최근 마이타민 섭취기록없음")
-
             }
         })
+
     }
 
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행

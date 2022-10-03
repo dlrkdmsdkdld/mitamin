@@ -13,6 +13,7 @@ import kr.ac.kpu.ce2017154024.mytamin.Repository.HomeRepository
 import kr.ac.kpu.ce2017154024.mytamin.Repository.MytaminRepository
 import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
+import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.home.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -29,32 +30,8 @@ class HomeViewModel: ViewModel() {
         }
     }
 
-    fun getLatestMytaminAPI(){
-        viewModelScope.launch {
-            val tmp = HomeRepository.getLatestMytamin()
-            Log.d(TAG,"tmp 값은 제발.. $tmp")
-            Log.d(TAG,"[][][][][][][]][[][]] [][][][][][]")
-            Log.d(TAG,"[][][][][][][]][[][]] [][][][][][]")
-            Log.d(TAG,"[][][][][][][]][[][]] [][][][][][]")
-            Log.d(TAG,"[][][][][][][]][[][]] [][][][][][]")
-          //  setlatestMytamin(tmp)
-//            if (tmp.isCompleted){
-//                Log.d(TAG,"뷰모델에서 코루틴 값  -> ${tmp.await()}")
-//            }
-//            if (tmp!=null){
-//                setlatestMytamin(tmp.await())
-//            }
-        }
 
-    }
-//    fun timerStart(){
-//        a=viewModelScope.launch {
-//            while (_timerCount.value!! > 0 ){
-//                _timerCount.value = _timerCount.value!!.minus(1)
-//                delay(1000L)
-//            }
-//        }
-//    }
+
 
     private val nickname = MutableLiveData<String>()
     val getnickname : LiveData<String>
@@ -73,6 +50,7 @@ class HomeViewModel: ViewModel() {
     }
     init {
         wellcomAPICall()
+        StatusAPI()
     }
 
     fun wellcomAPICall(){
@@ -86,5 +64,22 @@ class HomeViewModel: ViewModel() {
             }
         })
     }
+    fun StatusAPI(){
+        HomeRetrofitManager.instance.getStatus(completion = {responseStatus,Status ->
+            when(responseStatus){
+                RESPONSE_STATUS.OKAY ->{
+                    setstatus(Status!!)
+                }
+            }
+        })
+    }
+    private val status = MutableLiveData<Status>()
+    val getstatus : LiveData<Status>
+        get() = status
+
+    fun setstatus(time:Status){
+        status.value = time
+    }
+
 
 }

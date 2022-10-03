@@ -2,10 +2,10 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.home
 
 import android.util.Log
 import com.google.gson.JsonElement
-import kr.ac.kpu.ce2017154024.mytamin.model.CareData
-import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
-import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
-import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kr.ac.kpu.ce2017154024.mytamin.model.*
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitClient
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
@@ -130,10 +130,38 @@ class HomeRetrofitManager {
 
             })
     }
+    fun getStatus(completion: (RESPONSE_STATUS,Status?) -> Unit){
+        iHomeRetrofit?.getStatus()
+            ?.enqueue(object :retrofit2.Callback<JsonElement>{
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        val body =it.asJsonObject
+                        val message = body.get("message").asString
+                        val breathIsDone = body.get("data").asJsonObject.get("breathIsDone").asBoolean
+                        val senseIsDone = body.get("data").asJsonObject.get("senseIsDone").asBoolean
+                        val reportIsDone = body.get("data").asJsonObject.get("reportIsDone").asBoolean
+                        val careIsDone = body.get("data").asJsonObject.get("careIsDone").asBoolean
+                        val result = Status(breathIsDone,senseIsDone,reportIsDone,careIsDone)
+                        Log.d(TAG, "user getStatus response message:${message}  result:$result" )
+                        completion(RESPONSE_STATUS.OKAY,result)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "user doCompleteBreath fail${t}" )
+                    completion(RESPONSE_STATUS.FAIL,null)
+                }
+
+            })
+    }
 //    data class LatestMytamin(val takeAt:String="",val canEdit:Boolean,val mentalConditionCode:Int=0
 //                             ,val feelingTag:String ="", val mentalConditionMsg:String="" , val todayReport:String="" ,val  careMsg1:String="",val careMsg2:String=""
 //    ) {
 //    }
+
+
+
     fun getlatestMytamin (completion: (RESPONSE_STATUS,LatestMytamin?) -> Unit){
         iHomeRetrofit?.getlatestMytamin()
             ?.enqueue(object :retrofit2.Callback<JsonElement>{
@@ -163,5 +191,6 @@ class HomeRetrofitManager {
 
             })
     }
+
 
 }

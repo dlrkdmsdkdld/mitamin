@@ -19,6 +19,7 @@ import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
     private var mBinding : FragmentMytaminStepThreeragmentBinding?=null
     private val todayMytaminViewModel by activityViewModels<todayMytaminViewModel>()
+    private var nowselect
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +50,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
             mBinding?.mytaminFrametwoImageOne->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_one_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_one_text
+
                 todayMytaminViewModel.setselectemojiState(1)
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
