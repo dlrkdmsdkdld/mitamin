@@ -177,6 +177,7 @@ class HomeRetrofitManager {
                         val todayReport = body.get("data").asJsonObject.get("todayReport").asString
                         val careMsg1 = body.get("data").asJsonObject.get("careMsg1").asString
                         val careMsg2 = body.get("data").asJsonObject.get("careMsg2").asString
+
                         val result = LatestMytamin(takeAtTime,canEdit,memtalConditionCode,feelingTag,mentalConditionMsg,todayReport,careMsg1,careMsg2)
                         Log.d(TAG, "user doCompleteReport response message:${message}  updatedTime:$takeAtTime" )
                         completion(RESPONSE_STATUS.OKAY,result)

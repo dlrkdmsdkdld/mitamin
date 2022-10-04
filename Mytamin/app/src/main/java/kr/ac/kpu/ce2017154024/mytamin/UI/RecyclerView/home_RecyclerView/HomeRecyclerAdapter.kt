@@ -37,9 +37,14 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
         holder.bindWithView(this.stepArray[position],this.stateArray[position],this.onArray[position])
     }
-    fun AlreadyTodayMytamin(){
-        onArray[2]=false
-        onArray[3]=false
+    fun AlreadyTodayMytamin(no: ArrayList<Boolean>){
+        var i=0
+        no.forEach {
+            onArray[i]=it
+            i+=1
+        }
+      //  onArray[2]=false
+      //  onArray[3]=false
     }
 
     override fun getItemCount(): Int {

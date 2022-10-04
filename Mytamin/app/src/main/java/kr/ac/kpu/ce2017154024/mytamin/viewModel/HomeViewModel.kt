@@ -73,6 +73,16 @@ class HomeViewModel: ViewModel() {
             }
         })
     }
+    fun LatestMytaminAPI(){
+        HomeRetrofitManager.instance.getlatestMytamin(completion = {responseStatus,LatestMytamin ->
+            when(responseStatus){
+                RESPONSE_STATUS.OKAY ->{
+                    Log.d(TAG,"LatestMytaminAPI call -->${LatestMytamin}")
+                    setLatestMytamin(LatestMytamin!!)
+                }
+            }
+        })
+    }
     private val status = MutableLiveData<Status>()
     val getstatus : LiveData<Status>
         get() = status
@@ -81,5 +91,12 @@ class HomeViewModel: ViewModel() {
         status.value = time
     }
 
+    private val LatestMytamin = MutableLiveData<LatestMytamin>()
+    val getLatestMytamin : LiveData<LatestMytamin>
+        get() = LatestMytamin
+
+    fun setLatestMytamin(time:LatestMytamin){
+        LatestMytamin.value = time
+    }
 
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.home_recycler_item.view.*
+import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
 class HomeRecyclerViewHolder (itemView: View,HomeRecylcerViewInterface:IHomeRecyclerView)
@@ -24,6 +25,7 @@ class HomeRecyclerViewHolder (itemView: View,HomeRecylcerViewInterface:IHomeRecy
         //3,4번째 리싸이클러뷰는 안되게막기위해 설정함 - 추후에 이미지만 보이게하면될듯?
         if (on==false){
             startbtn.isEnabled=false
+            startbtn.setBackgroundResource(R.drawable.ic_large_button_disabled)
         }
 
     }

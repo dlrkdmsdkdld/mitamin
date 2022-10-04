@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityTodayMytaminBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.*
+import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
@@ -19,12 +20,17 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mytaminViewModel: todayMytaminViewModel
     private val workManager=WorkManager.getInstance(application)
     private var step=0  // 마이타민 단계별 차등을 주기위한 코드
+    private lateinit var resultBoolean :Status
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG,"todayMytaminActivity onCreate")
         step=intent.getIntExtra("step",0)
         Log.d(TAG,"step $step")
 
+        var bundle = intent.getBundleExtra("bundle")
+        resultBoolean = bundle?.getSerializable("statusData") as Status
+       Log.d(TAG,"resultBoolean $resultBoolean")
+       Log.d(TAG,"resultBooleantype ${resultBoolean?.javaClass?.name}")
 
         mytaminBinding = ActivityTodayMytaminBinding.inflate(layoutInflater)
         setContentView(mytaminBinding.root)
@@ -109,8 +115,11 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         finish()
     }
     fun next_btn(step:Int){
+
         when(step){
-            2->mytaminViewModel.completeBreath()
+            2->{
+                    mytaminViewModel.completeBreath()
+            }
             3->{
                 mytaminViewModel.completeSense()
             }

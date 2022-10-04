@@ -21,6 +21,7 @@ import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHomeBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.home.NoMytaminFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.home.YesMytaminFragment
+import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToHome
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.HomeViewModel
@@ -31,6 +32,8 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     //홈 리싸이클러뷰
     private lateinit var myHomeRecyclerAdapter: HomeRecyclerAdapter
     private lateinit var myHomeViewModel: HomeViewModel
+    private var resultBoolean=ArrayList<Boolean>()
+    private lateinit var statusData:Status
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,15 +64,20 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         super.onViewCreated(view, savedInstanceState)
         //리싸이클러뷰 설정
         this.myHomeRecyclerAdapter = HomeRecyclerAdapter(this)
-        home_recyclerView.adapter = myHomeRecyclerAdapter
-        //val yesMytaminFragment = YesMytaminFragment()
-        //childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
-        //myHomeViewModel.getLatestMytaminAPI()
+        //뷰모델에서마이타민섭취확인후 그에따른 초기데이터 지정
         myHomeViewModel.getstatus.observe(viewLifecycleOwner, Observer {
+            statusData= it
+            resultBoolean.add(it.breathIsDone)
+            resultBoolean.add(it.senseIsDone)
+            resultBoolean.add(it.reportIsDone)
+            resultBoolean.add(it.careIsDone)
+            myHomeRecyclerAdapter.AlreadyTodayMytamin(resultBoolean) // 이미 한것은 다시 못하게 막음
+            home_recyclerView.adapter = myHomeRecyclerAdapter //어뎁터연결
             if (it.reportIsDone == true ||it.careIsDone ==true ){
                 val yesMytaminFragment = YesMytaminFragment()
                 childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
                 Log.d(TAG,"최근 마이타민 섭취기록있음")
+            //    myHomeViewModel.LatestMytaminAPI()
             }else{
                 val NoMytaminFragment = NoMytaminFragment()
                 childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,NoMytaminFragment).commit()
@@ -103,6 +111,12 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         else{
             intent.putExtra("step",position+1)
         }
+        val bundle = Bundle()
+        bundle.putSerializable("statusData",statusData)
+        intent.putExtra("bundle",bundle)
+      //  val k = resultBoolean
+     //   intent.putExtra("resultBoolean",resultBoolean)
+
         startActivity(intent)
     }
 
