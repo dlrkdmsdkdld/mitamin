@@ -19,7 +19,7 @@ import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
     private var mBinding : FragmentMytaminStepThreeragmentBinding?=null
     private val todayMytaminViewModel by activityViewModels<todayMytaminViewModel>()
-    private var nowselect
+    private var nowselect:Int =100
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,40 +43,76 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
         super.onDestroyView()
         Log.d(Constant.TAG,"MytaminStepOneFragment onDestroyView")
     }
+    fun nochoiceImage(choice:Int){
+        when(choice){
+            1->{
+                mBinding?.mytaminFrametwoImageOne?.setBackgroundResource(Constant.frametwo_image_one_src_no)
+            }
+            2->{
+                mBinding?.mytaminFrametwoImageTwo?.setBackgroundResource(Constant.frametwo_image_two_src_no)
+            }
+            3->{
+                mBinding?.mytaminFrametwoImageThree?.setBackgroundResource(Constant.frametwo_image_three_src_no)
+            }
+            4->{
+                mBinding?.mytaminFrametwoImageFour?.setBackgroundResource(Constant.frametwo_image_four_src_no)
 
+            }
+            5->{
+                mBinding?.mytaminFrametwoImageFive?.setBackgroundResource(Constant.frametwo_image_five_src_no)
+            }
+            else->{
+
+            }
+        }
+    }
     override fun onClick(p0: View?) {
         when(p0){
 
             mBinding?.mytaminFrametwoImageOne->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_one_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_one_text
-
+                nochoiceImage(nowselect)
+                mBinding?.mytaminFrametwoImageOne?.setBackgroundResource(Constant.frametwo_image_one_src)
+                nowselect=1
                 todayMytaminViewModel.setselectemojiState(1)
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
             mBinding?.mytaminFrametwoImageTwo->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_two_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_two_text
+                nochoiceImage(nowselect)
+                mBinding?.mytaminFrametwoImageTwo?.setBackgroundResource(Constant.frametwo_image_two_src)
+                nowselect=2
                 todayMytaminViewModel.setselectemojiState(2)
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
             mytamin_frametwo_image_three->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_three_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_three_text
+                nochoiceImage(nowselect)
+                mBinding?.mytaminFrametwoImageThree?.setBackgroundResource(Constant.frametwo_image_three_src)
+                nowselect=3
                 todayMytaminViewModel.setselectemojiState(3)
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
             mytamin_frametwo_image_four->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_four_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_four_text
+                nochoiceImage(nowselect)
+                nowselect=4
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                mBinding?.mytaminFrametwoImageFour?.setBackgroundResource(Constant.frametwo_image_four_src)
                 todayMytaminViewModel.setselectemojiState(4)
             }
             mytamin_frametwo_image_five->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_five_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_five_text
+                nochoiceImage(nowselect)
+                nowselect=5
                 todayMytaminViewModel.setselectemojiState(5)
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                mBinding?.mytaminFrametwoImageFive?.setBackgroundResource(Constant.frametwo_image_five_src)
             }
             mytamin_frametwo_calendar_btn->{
                 val bottomSheetDialogFragment= MytaminBottomSheetFragment()
