@@ -9,6 +9,8 @@ object Constant {
     val StepTextstepOne = "숨고르기"
     val StepTextstepTwo = "감각 깨우기"
 
+    var emojiArray = arrayOf(0,R.drawable.ic_so_bad,R.drawable.ic_bad, R.drawable.ic_so_so,R.drawable.ic_good,R.drawable.ic_so_good)
+
     val frametwo_image_one_src = R.drawable.ic_so_bad
     val frametwo_image_one_src_no = R.drawable.ic_so_bad_disabled
     val frametwo_image_one_text ="매우 나빠요.."

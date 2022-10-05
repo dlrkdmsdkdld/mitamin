@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -31,7 +32,8 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     private var mBinding : FragmentHomeBinding?=null
     //홈 리싸이클러뷰
     private lateinit var myHomeRecyclerAdapter: HomeRecyclerAdapter
-    private lateinit var myHomeViewModel: HomeViewModel
+    private val myHomeViewModel: HomeViewModel by viewModels()
+//    private lateinit var myHomeViewModel: HomeViewModel
     private var resultBoolean=ArrayList<Boolean>()
     private lateinit var statusData:Status
     override fun onCreateView(
@@ -44,7 +46,9 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
 
         val hoemdatatext = parseTimeToHome()
         mBinding?.homeDateText?.text=hoemdatatext
-        myHomeViewModel= ViewModelProvider(this).get(HomeViewModel::class.java)
+        //myHomeViewModel= ViewModelProvider(this).get(HomeViewModel::class.java)
+
+//        myHomeViewModel= ViewModelProvider(this).get(HomeViewModel::class.java)
         myHomeViewModel.getcomment.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             val nickname = myHomeViewModel.getnickname.value
             val alltext =nickname+"님, "+it
@@ -67,22 +71,28 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         //뷰모델에서마이타민섭취확인후 그에따른 초기데이터 지정
         myHomeViewModel.getstatus.observe(viewLifecycleOwner, Observer {
             statusData= it
-            resultBoolean.add(it.breathIsDone)
-            resultBoolean.add(it.senseIsDone)
-            resultBoolean.add(it.reportIsDone)
-            resultBoolean.add(it.careIsDone)
+            resultBoolean.add(!(it.breathIsDone) )
+            resultBoolean.add(!(it.senseIsDone))
+            resultBoolean.add(!(it.reportIsDone))
+            resultBoolean.add(!(it.careIsDone))
             myHomeRecyclerAdapter.AlreadyTodayMytamin(resultBoolean) // 이미 한것은 다시 못하게 막음
             home_recyclerView.adapter = myHomeRecyclerAdapter //어뎁터연결
+
             if (it.reportIsDone == true ||it.careIsDone ==true ){
-                val yesMytaminFragment = YesMytaminFragment()
-                childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
-                Log.d(TAG,"최근 마이타민 섭취기록있음")
+                myHomeViewModel.LatestMytaminAPI(statusData)
+
+                  Log.d(TAG,"최근 마이타민 섭취기록있음")
             //    myHomeViewModel.LatestMytaminAPI()
             }else{
                 val NoMytaminFragment = NoMytaminFragment()
                 childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,NoMytaminFragment).commit()
                 Log.d(TAG,"최근 마이타민 섭취기록없음")
             }
+        })
+        myHomeViewModel.getLatestMytamin.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG,"getlatestMytamin observe -> $it")
+            val yesMytaminFragment = YesMytaminFragment()
+            childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
         })
 
     }

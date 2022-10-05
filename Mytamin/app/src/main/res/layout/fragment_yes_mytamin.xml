@@ -20,10 +20,10 @@
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/yes_mytamin_image"
             />
-        <FrameLayout
+        <LinearLayout
             android:layout_marginTop="24dp"
-            android:layout_width="174dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="27dp"
             app:layout_constraintStart_toEndOf="@+id/yes_mytamin_image"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,29 +32,33 @@
 
             >
             <TextView
+                android:id="@+id/yes_mytamin_feelingTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#감동적인"
                 android:fontFamily="@font/appmainfont_medium"
                 android:textColor="@color/subGray"
                 android:paddingLeft="20dp"
-                android:textSize="12dp"
+                android:textSize="12sp"
+                android:includeFontPadding="false"
+                android:layout_marginTop="12dp"
 
                 />
 
             <TextView
+                android:id="@+id/yes_mytamin_mentalConditionMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:fontFamily="@font/appmainfont_medium"
                 android:paddingLeft="20dp"
-                android:text="기분이 매우 좋아요!"
                 android:textColor="@color/primary"
-                android:textSize="16dp"
-
+                android:textSize="16sp"
+                android:includeFontPadding="false"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
                 />
 
-        </FrameLayout>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,24 +68,23 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/appmainfont_bold"
-            android:id="@+id/yesmytamin_talk_one"
+            android:id="@+id/yesmytamin_todayReport_title"
             />
         <LinearLayout
             android:id="@+id/yes_mytamin_layout_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/yesmytamin_talk_one"
+            app:layout_constraintTop_toBottomOf="@+id/yesmytamin_todayReport_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/round_layout_background_gray"
             >
             <TextView
-                android:id="@+id/yesmytamin_diagnosis_text"
+                android:id="@+id/yesmytamin_todayReport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/appmainfont_medium"
                 android:textColor="@color/subGray"
-                android:text="@string/home_yesmytamin_talk_tmp_one"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="16dp"
@@ -108,19 +111,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/round_layout_background_gray"
+            android:orientation="vertical"
             >
             <TextView
-                android:id="@+id/yesmytamin_prescription_text"
+                android:id="@+id/yesmytamin_careMsg1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/appmainfont_medium"
                 android:textColor="@color/subGray"
-                android:text="@string/home_yesmytamin_talk_tmp_two"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="16dp"
                 android:textSize="14sp"
+                android:includeFontPadding="false"
+                />
+            <TextView
+                android:id="@+id/yesmytamin_careMsg2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/appmainfont_medium"
+                android:textColor="@color/subGray"
                 android:layout_marginBottom="16dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

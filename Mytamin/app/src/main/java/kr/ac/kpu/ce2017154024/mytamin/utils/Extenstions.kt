@@ -4,12 +4,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
+import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_one
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_two
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.collections.ArrayList
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
@@ -115,4 +117,12 @@ fun checkEmail(email:String):Boolean{
         //또는 questionEmail.setTextColor(R.color.red.toInt())
         return false
     }
+}
+fun parseStatus(Status:Status):ArrayList<Boolean>{
+    val parseStatus = ArrayList<Boolean>()
+    parseStatus.add(Status.breathIsDone)
+    parseStatus.add(Status.senseIsDone)
+    parseStatus.add(Status.reportIsDone)
+    parseStatus.add(Status.careIsDone)
+    return parseStatus
 }

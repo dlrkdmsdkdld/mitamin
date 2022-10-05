@@ -132,6 +132,12 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
 
             }
         }
+
+/*        if(resultBoolean.careIsDone==false){
+            val intent= Intent(this,MainActivity::class.java)
+            finishAffinity()
+            startActivity(intent)
+        }*/
         replaceFragment(step)
         mytaminViewModel.timerDestory()
         mytaminViewModel.setstep(step)

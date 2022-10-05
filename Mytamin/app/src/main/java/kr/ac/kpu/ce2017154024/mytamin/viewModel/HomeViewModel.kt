@@ -20,17 +20,6 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
 class HomeViewModel: ViewModel() {
     private val HomeRepository= HomeRepository()  //레포지토리 ##
-    private val latestMytamin = MutableLiveData<LatestMytamin>()
-    val getlatestMytamin : LiveData<LatestMytamin>
-        get() = latestMytamin
-    fun setlatestMytamin(data:LatestMytamin?){
-        Log.d(TAG,"뷰모델에서 코루틴 값  -> ${data}")
-        if (data!=null){
-            latestMytamin.value = data!!
-        }
-    }
-
-
 
 
     private val nickname = MutableLiveData<String>()
@@ -73,12 +62,12 @@ class HomeViewModel: ViewModel() {
             }
         })
     }
-    fun LatestMytaminAPI(){
-        HomeRetrofitManager.instance.getlatestMytamin(completion = {responseStatus,LatestMytamin ->
+    fun LatestMytaminAPI(status:Status){
+        HomeRetrofitManager.instance.getlatestMytamin(status,completion = {responseStatus,LatestMytamin ->
             when(responseStatus){
                 RESPONSE_STATUS.OKAY ->{
-                    Log.d(TAG,"LatestMytaminAPI call -->${LatestMytamin}")
                     setLatestMytamin(LatestMytamin!!)
+                    Log.d(TAG,"LatestMytaminAPI call -->${getLatestMytamin.value}")
                 }
             }
         })

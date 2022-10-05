@@ -13,17 +13,17 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
 class HomeRepository {
-
-    suspend fun getlatestMytaminAPI(){
-        val responseStatus = HomeRetrofitManager.instance.getlatestMytamin(){
-            responseStatus, latestMytamin ->
-            Log.d(TAG,"return@getlatestMytamin  ${return@getlatestMytamin}")
-            return@getlatestMytamin
-        }
-
-
-
-    }
+//
+//    suspend fun getlatestMytaminAPI(){
+//        val responseStatus = HomeRetrofitManager.instance.getlatestMytamin(){
+//            responseStatus, latestMytamin ->
+//            Log.d(TAG,"return@getlatestMytamin  ${return@getlatestMytamin}")
+//            return@getlatestMytamin
+//        }
+//
+//
+//
+//    }
 
 
 }
