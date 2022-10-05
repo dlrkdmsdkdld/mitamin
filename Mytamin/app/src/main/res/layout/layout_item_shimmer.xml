@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="74dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/shimmer_text"
+        android:background="@color/semiGray"
+        />
+    <ImageView
+        android:id="@+id/shimmer_image1"
+        android:layout_width="150dp"
+        android:layout_height="140dp"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/semiGray"
+        />
+    <ImageView
+        android:id="@+id/shimmer_image2"
+        android:layout_width="150dp"
+        android:layout_height="140dp"
+        app:layout_constraintLeft_toRightOf="@+id/shimmer_image1"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_text"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/semiGray"
+        />
+    <TextView
+        android:layout_width="130dp"
+        android:layout_height="38dp"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_image2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/shimmer_text2"
+        android:background="@color/semiGray"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="88dp"
+        android:layout_height="38dp"
+        android:background="@color/semiGray"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_image2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="20dp"
+        />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_text2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/semiGray"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

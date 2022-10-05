@@ -14,7 +14,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView.HomeRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView.IHomeRecyclerView
@@ -43,6 +45,7 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         val binding = FragmentHomeBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(TAG,"HomeFragment onCreateView")
+        showSampleData(isLoading = true)
 
         val hoemdatatext = parseTimeToHome()
         mBinding?.homeDateText?.text=hoemdatatext
@@ -64,6 +67,17 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         mBinding?.homeStateText?.append(builder)
     }
 
+    private fun showSampleData(isLoading: Boolean) {
+        if (isLoading) {
+            mBinding?.shimmerLayout?.startShimmer()
+            mBinding?.shimmerLayout?.visibility = View.VISIBLE
+            mBinding?.homeMainLayout?.visibility = View.GONE
+        } else {
+            mBinding?.shimmerLayout?.stopShimmer()
+            mBinding?.shimmerLayout?.visibility = View.GONE
+            mBinding?.homeMainLayout?.visibility = View.VISIBLE
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //리싸이클러뷰 설정
@@ -84,6 +98,7 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
                   Log.d(TAG,"최근 마이타민 섭취기록있음")
             //    myHomeViewModel.LatestMytaminAPI()
             }else{
+                showSampleData(isLoading = false)
                 val NoMytaminFragment = NoMytaminFragment()
                 childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,NoMytaminFragment).commit()
                 Log.d(TAG,"최근 마이타민 섭취기록없음")
@@ -91,6 +106,7 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         })
         myHomeViewModel.getLatestMytamin.observe(viewLifecycleOwner, Observer {
             Log.d(TAG,"getlatestMytamin observe -> $it")
+            showSampleData(isLoading = false)
             val yesMytaminFragment = YesMytaminFragment()
             childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
         })
