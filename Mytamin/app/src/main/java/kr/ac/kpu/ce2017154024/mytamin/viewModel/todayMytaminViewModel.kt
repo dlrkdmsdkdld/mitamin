@@ -62,18 +62,7 @@ class todayMytaminViewModel :ViewModel() {
     fun autoset(data:Boolean){
         _auto.value=data
     }
-    var _month = MutableLiveData<Int>()
-    val month : LiveData<Int>
-        get() = _month
-    fun monthset(data:Int){
-        _month.value=data
-    }
-    var _day= MutableLiveData<Int>()
-    val day : LiveData<Int>
-        get() = _day
-    fun dayset(data:Int){
-        _day.value=data
-    }
+
     fun completeBreath(){
         mytaminRepository.completeBreath()
     }

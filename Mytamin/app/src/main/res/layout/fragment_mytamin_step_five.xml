@@ -10,50 +10,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mytamin_step_four_title"
-        android:fontFamily="@font/appmainfont_medium"
-        android:textStyle="bold"
+        android:fontFamily="@font/appmainfont_bold"
         android:includeFontPadding="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:id="@+id/mytamin_step_five_title"
+        android:textColor="@color/black"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mytamin_step_five_subtitle"
         android:fontFamily="@font/appmainfont_medium"
-        android:textStyle="bold"
         android:includeFontPadding="false"
         android:id="@+id/mytamin_step_five_subtitle"
         app:layout_constraintTop_toBottomOf="@+id/mytamin_step_five_title"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
-        android:textSize="15sp"
+        android:textSize="18sp"
+        android:textColor="@color/darkGray"
 
         />
+
+
     <EditText
         android:id="@+id/mytamin_step_five_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/mytamin_step_five_hint"
-        app:layout_constraintTop_toBottomOf="@+id/mytamin_step_five_subtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/memo_border"
         android:ems="10"
-        android:textSize="15sp"
-        android:fontFamily="@font/appmainfont_medium"
+        android:textSize="14sp"
+        android:fontFamily="@font/appsubfont_r"
         android:lines="10"
         android:gravity="top"
         android:padding="10dp"
+        android:background="@drawable/edit_box"
+        app:layout_constraintTop_toBottomOf="@+id/mytamin_step_five_subtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
 
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

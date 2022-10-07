@@ -33,9 +33,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickjoin()
-        todayMytaminViewModel.month.observe(viewLifecycleOwner , Observer {
-            mBinding?.mytaminFrametwoCalendarText?.text = "${it}월 ${todayMytaminViewModel.day.value}일"
-        })
+
 
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
@@ -114,16 +112,11 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
                 mBinding?.mytaminFrametwoImageFive?.setBackgroundResource(Constant.frametwo_image_five_src)
             }
-            mytamin_frametwo_calendar_btn->{
-                val bottomSheetDialogFragment= MytaminBottomSheetFragment()
-                bottomSheetDialogFragment.show(childFragmentManager,bottomSheetDialogFragment.tag)
 
-            }
         }
     }
     private fun setOnClickjoin(){
         //프레임 2
-        mytamin_frametwo_calendar_btn.setOnClickListener(this)
         mytamin_frametwo_image_one.setOnClickListener(this)
         mytamin_frametwo_image_two.setOnClickListener(this)
         mytamin_frametwo_image_three.setOnClickListener(this)

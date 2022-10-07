@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.todaymytamin.MyatminCategoryFragment">
+    tools:context=".fragment.todaymytamin.MyatminCategoryFragment"
+    android:layout_marginBottom="24dp"
+    >
 
     <TextView
         android:id="@+id/mytamin_bottom_text_one"
@@ -13,18 +15,22 @@
         android:text="@string/mytamin_step_six_sheet1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/appsubfont_m"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"
         />
     <View
         android:id="@+id/mytamin_bottom_view_one"
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/Gray"
+        android:layout_height="1px"
+        android:background="@color/LineColorshort"
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_text_one"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         />
     <TextView
         android:id="@+id/mytamin_bottom_text_two"
@@ -33,17 +39,23 @@
         android:text="@string/mytamin_step_six_sheet2"
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_view_one"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/appsubfont_m"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"
         />
     <View
         android:id="@+id/mytamin_bottom_view_two"
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/Gray"
+
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_text_two"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="1px"
+        android:background="@color/LineColorshort"
 
         />
     <TextView
@@ -53,17 +65,24 @@
         android:text="@string/mytamin_step_six_sheet3"
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_view_two"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/appsubfont_m"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"
         />
     <View
         android:id="@+id/mytamin_bottom_view_three"
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/Gray"
+
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_text_three"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="1px"
+        android:background="@color/LineColorshort"
+
 
         />
     <TextView
@@ -73,17 +92,24 @@
         android:text="@string/mytamin_step_six_sheet4"
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_view_three"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/appsubfont_m"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"
         />
     <View
         android:id="@+id/mytamin_bottom_view_four"
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/Gray"
+
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_text_four"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="1px"
+        android:background="@color/LineColorshort"
+
 
         />
     <TextView
@@ -93,17 +119,24 @@
         android:text="@string/mytamin_step_six_sheet5"
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_view_four"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/appsubfont_m"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"
         />
     <View
         android:id="@+id/mytamin_bottom_view_five"
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/Gray"
+
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_text_five"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="1px"
+        android:background="@color/LineColorshort"
+
 
         />
     <TextView
@@ -113,17 +146,23 @@
         android:text="@string/mytamin_step_six_sheet6"
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_view_five"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/appsubfont_m"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"
         />
     <View
         android:id="@+id/mytamin_bottom_view_six"
         android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/Gray"
+
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_text_six"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="1px"
+        android:background="@color/LineColorshort"
 
         />
     <TextView
@@ -133,8 +172,24 @@
         android:text="@string/mytamin_step_six_sheet7"
         app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_view_six"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/appsubfont_m"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"
         />
+    <View
+        android:id="@+id/mytamin_bottom_view_seven"
+        android:layout_width="match_parent"
 
+        app:layout_constraintTop_toBottomOf="@+id/mytamin_bottom_text_seven"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="1px"
+        android:background="@color/background_white"
+
+
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
