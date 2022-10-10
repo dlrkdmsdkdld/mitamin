@@ -1,11 +1,13 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -55,64 +57,32 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
             1->{
                 stateText=chipStringdata.verysad
                 chipStringdata.verysad.forEach { statetext ->
-                    chipGroup?.addView(Chip(requireContext()).apply {
-                        text  =statetext
-                        isCheckable=true
-                        isClickable=true
-                        tag = statetext
-                    })
+                    chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
             }
             2->{
                 stateText=chipStringdata.sad
                 chipStringdata.sad.forEach { statetext ->
-                    chipGroup?.addView(Chip(requireContext()).apply {
-                        text  =statetext
-                        isCheckable=true
-                        isClickable=true
-                        tag = statetext
-                    })
+                    chipGroup?.addView(createTagChip(requireContext(),statetext))
+
                 }
             }
             3-> {
                 stateText=chipStringdata.soso
                 chipStringdata.soso.forEach { statetext ->
-                    chipGroup?.addView(Chip(requireContext()).apply {
-                        text = statetext
-                        isCheckable = true
-                        isClickable = true
-                        tag = statetext
-                    })
+                    chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
             }
             4-> {
                 stateText=chipStringdata.good
                 chipStringdata.good.forEach { statetext ->
-                    chipGroup?.addView(Chip(requireContext()).apply {
-                        text = statetext
-                        isCheckable = true
-                        isClickable = true
-                        tag = statetext
-                    })
+                    chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
             }
             5-> {
                 stateText=chipStringdata.verygood
                 chipStringdata.verygood.forEach { statetext ->
-                    chipGroup?.addView(Chip(requireContext()).apply {
-                        text = statetext
-                        isCheckable = true
-                        isClickable = true
-                        tag = statetext
-//                        setCloseIconVisible(true)
-//                        this.setCloseIconResource(R.drawable.ic_x)
-//                        setOnCloseIconClickListener {
-//                            Log.d(TAG,"삭제버튼클릭")
-//                            val tab =it.tag
-//
-//                            chipGroup.removeView(chipGroup.getChildAt(1))
-//                        }
-                    })
+                    chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
             }
         }
@@ -151,5 +121,16 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         previousChildCount=chipChildCount+previousChildCount
         //뷰가 삭제되도 어찌된일인지 chipgroup 새로생성되는 child id가 이전꺼로부터 갱신되어서 싱글톤변수이용함 ex. 이전꺼 childcount:15 다음꺼 childcount:30됨
         super.onDestroy()
+    }
+    private fun createTagChip(context: Context, statetext: String): Chip {
+        return Chip(context).apply {
+            setChipBackgroundColorResource(R.color.chip_background_color)
+            text  =statetext
+            isCheckable=true
+            isClickable=true
+            tag = statetext
+            setChipStrokeColorResource(R.color.primary)
+        }
+
     }
 }

@@ -209,8 +209,20 @@
                 android:id="@+id/mytamin_layout2"
                 >
                 <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="154dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mytamin_correction_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/ic_large_button_outline"
+                    android:text="@string/mytamin_step_one_correction"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/primary"
+                    />
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/mytamin_next_btn_part2"
-                    android:layout_width="match_parent"
+                    android:layout_width="154dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"

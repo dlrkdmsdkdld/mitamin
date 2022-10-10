@@ -67,6 +67,23 @@ class MytaminRepository {
             }
         }
     }
+    fun CorrectionReport(data:ReportData,reportId:Int){
+        with(CoroutineScope(Dispatchers.IO)){
+            val job:Job = launch {
+                HomeRetrofitManager.instance.doCorrectionReportReport(data,reportId) { responseStatus ->
+                    when(responseStatus){
+                        RESPONSE_STATUS.OKAY ->{
+                            Handler(Looper.getMainLooper()).post{
+                                Toast.makeText(MyApplication.instance, "마이타민 하루진단하기 완료", Toast.LENGTH_SHORT).show()
+                            }
+
+                        }
+                    }
+
+                }
+            }
+        }
+    }
     fun completeCare(data:CareData){
         with(CoroutineScope(Dispatchers.IO)){
             val job:Job = launch {

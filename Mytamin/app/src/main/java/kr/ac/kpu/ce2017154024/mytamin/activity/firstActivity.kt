@@ -69,12 +69,12 @@ class firstActivity : AppCompatActivity(),View.OnClickListener {
                         Log.d(TAG,"로그인 성공 -> ${returnLoginData?.accessToken}")
                         PrivateUserDataSingleton.accessToken = returnLoginData?.accessToken
                         PrivateUserDataSingleton.refreshToken=returnLoginData?.refreshToken
-                        PrivateUserDataSingleton.userEmail = query.email
+                        PrivateUserDataSingleton.userEmail = query.email.trim()
                         PrivateUserDataSingleton.userPassword = query.password
                         //유저 데이터 preference에 저장
                         Log.d(TAG,"PrivateUserDataSingleton 성공" +
                                 "PrivateUserDataSingleton.accessToken -> ${returnLoginData?.accessToken}"+"" +
-                                "userEmail -> $PrivateUserDataSingleton.userEmail")
+                                "userEmail -> ${PrivateUserDataSingleton.userEmail}end")
                         customProgressDialog.dismiss()
                         val intent = Intent(this,MainActivity::class.java)
                         startActivity(intent)

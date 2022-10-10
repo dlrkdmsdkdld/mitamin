@@ -30,6 +30,7 @@
     <string name="mytamin_step_one_state"> 코로 천천히 숨을 들이마셨다가 \n배에 가득 담긴 공기를 잠시 느끼고\n    천천히 내뱉어 보세요.</string>
     <string name="mytamin_step_one_pass">패스하기</string>
     <string name="mytamin_step_one_next">다음으로</string>
+    <string name="mytamin_step_one_correction">수정하기</string>
     <string name="mytamin_step_one_auto">자동진행</string>
     <!--마이타민 섭취 단계 4 String-->
     <string name="mytamin_step_three_state">오늘의 마음 컨디션은 어떤가요?</string>
@@ -65,6 +66,15 @@
     <string name="mytamin_step_six_sheet5">경험,생각&#160;혹은&#160;신체&#160;일부분</string>
     <string name="mytamin_step_six_sheet6">과거의&#160;나</string>
     <string name="mytamin_step_six_sheet7">기타</string>
+
+    <!--마이페이지-->
+    <!--마이페이지-->
+    <!--마이페이지-->
+    <string name="user_title">마이페이지</string>
+    <string name="user_beMyMessage">날먹하고싶은</string>
+    <string name="user_myday_title">이번달 마이데이는</string>
+    <string name="user_myday_day">00월 00일</string>
+    <string name="user_myday_subtitle1">이번달 마이데이는</string>
 
 
 </resources>

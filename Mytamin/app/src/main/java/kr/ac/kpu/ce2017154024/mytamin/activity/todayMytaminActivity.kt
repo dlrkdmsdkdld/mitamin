@@ -1,9 +1,11 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkManager
@@ -11,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityTodayMytaminBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.*
+import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
@@ -21,6 +24,8 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
     private val workManager=WorkManager.getInstance(application)
     private var step=0  // 마이타민 단계별 차등을 주기위한 코드
     private lateinit var resultBoolean :Status
+    private lateinit var LatestMytamin :LatestMytamin
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG,"todayMytaminActivity onCreate")
@@ -31,6 +36,10 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         resultBoolean = bundle?.getSerializable("statusData") as Status
        Log.d(TAG,"resultBoolean $resultBoolean")
        Log.d(TAG,"resultBooleantype ${resultBoolean?.javaClass?.name}")
+        if (resultBoolean.reportIsDone || resultBoolean.careIsDone){
+            var bundleL = intent.getBundleExtra("bundleL")
+            LatestMytamin = bundleL?.getSerializable("LatestMytamin") as LatestMytamin
+        }
 
         mytaminBinding = ActivityTodayMytaminBinding.inflate(layoutInflater)
         setContentView(mytaminBinding.root)
@@ -54,6 +63,14 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             mytamin_next_btn_part2.background = getDrawable(R.drawable.ic_large_button_abled)
         }else{mytamin_next_btn_part2.background = getDrawable(R.drawable.ic_large_button_disabled)}
     }
+    fun setEnableCorrection(can:Boolean){
+        mytamin_correction_btn.isEnabled=can
+        if (can){
+            mytamin_correction_btn.background = getDrawable(R.drawable.ic_large_button_outline)
+        }else{mytamin_correction_btn.background = getDrawable(R.drawable.ic_large_button_disabled)}
+
+    }
+
     fun replaceFragment(Pstep:Int){
         when(Pstep){
             1->{
@@ -104,6 +121,11 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                 mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
                 mytamin_indicator_three.setImageResource(R.drawable.ic_indicator_yes)
                 mytamin_indicator_four.setImageResource(R.drawable.ic_indicator_yes)
+                mytamin_layout1.visibility=View.INVISIBLE
+                mytamin_pass_btn.isEnabled=false
+                mytamin_next_btn.isEnabled=false
+                mytamin_correction_btn.isEnabled=false
+                mytamin_layout2.visibility=View.VISIBLE
             }
 
         }
@@ -114,6 +136,34 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         super.onBackPressed()
         finish()
     }
+    fun Correctionstep3(){
+        if (resultBoolean.reportIsDone==true){
+            val builder = AlertDialog.Builder(this)
+            builder
+                .setTitle("수정하시겠습니까?")
+                .setMessage("확인버튼을 누르시면 수정이 되고 거절하시면 그다음 단계로넘어갑니다.")
+                .setPositiveButton("수정",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        // 수정 버튼 선택시 수행
+                        mytaminViewModel.setcorrectionStep3(true)
+                        setEnableCorrection(false)
+                    })
+                .setNegativeButton("넘어가기",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        // 넘어가기 버튼 선택시 수행
+                        this.step =6
+                        setEnableCorrection(false)
+                        replaceFragment(step)
+                    }
+                )
+            builder.create()
+            builder.show()
+        }else{
+            setEnableCorrection(false)
+
+        }
+    }
+
     fun next_btn(step:Int){
 
         when(step){
@@ -122,6 +172,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             }
             3->{
                 mytaminViewModel.completeSense()
+                Correctionstep3()
             }
             6->mytaminViewModel.completeReport()//5단계까지 마치고 next버튼눌렀을때 데이터전송
             7->{
@@ -160,6 +211,10 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             mytamin_pass_btn ->{
                 step+=1
                 mytaminViewModel.timerDestory()
+                if (step==3){
+                    Correctionstep3()
+                }
+
                 replaceFragment(step)
                 mytaminViewModel.setstep(step)
                 Log.d(TAG,"현재 단계 : -> $step")
@@ -177,6 +232,15 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                 mytaminViewModel.setstep(step)
                 Log.d(TAG,"현재 단계 : -> $step")
             }
+            mytamin_correction_btn->{
+                if(mytaminViewModel.getcorrectionStep3.value!= null){
+                    mytaminViewModel.CorrectionReport(LatestMytamin.reportId)
+                }
+                val intent= Intent(this,MainActivity::class.java)
+                finishAffinity()
+                startActivity(intent)
+
+            }
 
         }
     }
@@ -188,6 +252,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         mytamin_pass_btn.setOnClickListener(this)
         mytamin_back_btn.setOnClickListener(this)
         mytamin_next_btn_part2.setOnClickListener(this)
+        mytamin_correction_btn.setOnClickListener(this)
     }
     override fun onDestroy() {
         super.onDestroy()

@@ -8,9 +8,18 @@ import kotlinx.coroutines.*
 import kr.ac.kpu.ce2017154024.mytamin.Repository.MytaminRepository
 import kr.ac.kpu.ce2017154024.mytamin.model.CareData
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
 
 class todayMytaminViewModel :ViewModel() {
     private val mytaminRepository= MytaminRepository()  //레포지토리 ##
+
+    private val correctionStep3 = MutableLiveData<Boolean>()
+    val getcorrectionStep3 : LiveData<Boolean>
+        get() = correctionStep3
+    fun setcorrectionStep3(i:Boolean){
+        correctionStep3.value = i
+    }
+
     private val emojiState = MutableLiveData<Int>()
     val selectemojiState : LiveData<Int>
         get() = emojiState
@@ -68,6 +77,16 @@ class todayMytaminViewModel :ViewModel() {
     }
     fun completeSense(){
         mytaminRepository.completeSense()
+    }
+    fun CorrectionReport(reportId:Int){
+        var inputdata:ReportData
+        when(selectediagnosis.value!!.count()){
+            1 -> inputdata=ReportData(mentalConditionCode = selectemojiState.value!!, tag1 =selectediagnosis!!.value!!.get(0) ,todayReport=report.value!!)
+            2 -> inputdata=ReportData(mentalConditionCode = selectemojiState.value!!, tag1 =selectediagnosis!!.value!!.get(0) , tag2 = selectediagnosis!!.value!!.get(1) ,todayReport=report.value!!)
+            else -> inputdata=ReportData(mentalConditionCode = selectemojiState.value!!, tag1 =selectediagnosis!!.value!!.get(0) , tag2 = selectediagnosis!!.value!!.get(1), tag3 =selectediagnosis!!.value!!.get(2),todayReport=report.value!!)
+        }
+        mytaminRepository.CorrectionReport(inputdata,reportId)
+        //mytaminRepository.CorrectionReport(inputdata,"가탄")
     }
     fun completeReport(){
         var inputdata:ReportData

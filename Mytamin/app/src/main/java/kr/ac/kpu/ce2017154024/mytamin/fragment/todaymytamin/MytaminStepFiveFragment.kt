@@ -21,7 +21,7 @@ import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 class MytaminStepFiveFragment : Fragment() {
     private var mBinding : FragmentMytaminStepFiveBinding?=null
     private val todayMytaminViewModel by activityViewModels<todayMytaminViewModel>()
-
+    private var getcorrectionStep3=false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +31,9 @@ class MytaminStepFiveFragment : Fragment() {
         Log.d(Constant.TAG,"MytaminStepFiveFragment onCreateView")
         if(todayMytaminViewModel._report.value!=null){         // 그전에 쓴것이있으면 적용
             mBinding?.mytaminStepFiveText?.setText("${todayMytaminViewModel._report.value}")
+        }
+        if (todayMytaminViewModel.getcorrectionStep3.value!=null){
+            getcorrectionStep3=todayMytaminViewModel.getcorrectionStep3.value?:false
         }
         mBinding?.mytaminStepFiveText?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -43,9 +46,17 @@ class MytaminStepFiveFragment : Fragment() {
                 todayMytaminViewModel.reportset(p0.toString())
                 Log.d(Constant.TAG,"MytaminStepFiveFragment todayMytaminViewModel -. ${todayMytaminViewModel._report.value}")
                 if (p0.toString()!=""){
-                    (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                    if (getcorrectionStep3==true){
+                        (activity as todayMytaminActivity).setEnableCorrection(true)
+                    }else{
+                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                    }
                 }else{
-                    (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                    if (getcorrectionStep3==true){
+                        (activity as todayMytaminActivity).setEnableCorrection(false)
+                    }else{
+                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                    }
                 }
             }
 
