@@ -14,6 +14,7 @@ import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepSixBinding
+import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata.category
@@ -23,7 +24,7 @@ import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 class MytaminStepSixFragment : Fragment(),View.OnClickListener {
     private var mBinding : FragmentMytaminStepSixBinding?=null
     private val todayMytaminViewModel by activityViewModels<todayMytaminViewModel>()
-
+    private var status:Status?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +38,23 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
             val selectcategory = category[it-1]
             mBinding?.mytaminStepSixCategory?.text = selectcategory
         })
+
+        if (todayMytaminViewModel.getstatus.value?.careIsDone ==true){
+            mBinding?.mytaminStepSixCareText?.setText(todayMytaminViewModel.getcareMsg1.value)
+            mBinding?.mytaminStepSixCareSub?.setText(todayMytaminViewModel.getcareMsg2.value)
+            mBinding?.mytaminStepSixCategory?.text = todayMytaminViewModel.getcareCategoryCodeMsg.value
+            var k =0
+            category.forEach {
+                if (it == todayMytaminViewModel.getcareCategoryCodeMsg.value){
+                    todayMytaminViewModel.setcareCategoryCode(k+1)
+                    Log.d(Constant.TAG,"카테고리코드 ${todayMytaminViewModel.getcareCategoryCode.value}")
+                }
+                k+=1
+            }
+        }
+
+        status= todayMytaminViewModel.getstatus.value?:null
+
         mBinding?.mytaminStepSixCareText?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -48,9 +66,17 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
                 todayMytaminViewModel.setcareMsg1(p0.toString())
 
                 if (todayMytaminViewModel.getcareCategoryCode.value!=null &&p0.toString()!="" && (todayMytaminViewModel.getcareMsg2.value !="" &&todayMytaminViewModel.getcareMsg2.value!=null  )){
-                    (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                    if (status?.careIsDone==true){
+                        (activity as todayMytaminActivity).setEnableCorrection(true)
+                    }else{
+                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                    }
                 }else{
-                    (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                    if (status?.careIsDone==false){
+                        (activity as todayMytaminActivity).setEnableCorrection(false)
+                    }else{
+                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                    }
                 }
             }
 
@@ -65,32 +91,24 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
             override fun afterTextChanged(p0: Editable?) {
                 todayMytaminViewModel.setcareMsg2(p0.toString())
                 if (todayMytaminViewModel.getcareCategoryCode.value!=null &&p0.toString()!="" && (todayMytaminViewModel.getcareMsg1.value !="" &&todayMytaminViewModel.getcareMsg1.value!=null)){
-                    (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                    if (status?.careIsDone==true){
+                        (activity as todayMytaminActivity).setEnableCorrection(true)
+                    }else{
+                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                    }
                 }else{
-                    (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                    if (status?.careIsDone==false){
+                        (activity as todayMytaminActivity).setEnableCorrection(false)
+                    }else{
+                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                    }
                 }
             }
 
         })
 
-//        mBinding?.mytaminStepFiveText?.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//                todayMytaminViewModel.reportset(p0.toString())
-//                Log.d(Constant.TAG,"MytaminStepFiveFragment todayMytaminViewModel -. ${todayMytaminViewModel._report.value}")
-//                if (p0.toString()!=""){
-//                    (activity as todayMytaminActivity).setEnableNextBtn(true)
-//                }else{
-//                    (activity as todayMytaminActivity).setEnableNextBtn(false)
-//                }
-//            }
-//
-//        })
+
+
 
         return mBinding?.root
     }

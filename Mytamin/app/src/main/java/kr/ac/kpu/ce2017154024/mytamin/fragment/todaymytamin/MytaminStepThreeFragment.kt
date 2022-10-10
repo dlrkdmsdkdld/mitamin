@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.jakewharton.rxbinding4.view.clicks
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kotlinx.android.synthetic.main.fragment_mytamin_step_threeragment.*
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
@@ -27,13 +28,41 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
         val binding = FragmentMytaminStepThreeragmentBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(Constant.TAG,"MytaminStepOneFragment onCreateView")
+
+        (activity as todayMytaminActivity).setEnableCorrection(false)
+
+
+
         return mBinding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickjoin()
+        Log.d(Constant.TAG,"MytaminStepOneFragment todayMytaminViewModel.selectemojiState.value ${todayMytaminViewModel.selectemojiState.value}")
+        if (todayMytaminViewModel.selectemojiState.value !=null){
+            when(todayMytaminViewModel.selectemojiState.value){
+                1->{
+                    mBinding?.mytaminFrametwoImageOne?.performClick()
+                }
+                2->{
+                    mBinding?.mytaminFrametwoImageTwo?.performClick()
 
+                }
+                3->{
+                    mBinding?.mytaminFrametwoImageThree?.performClick()
+
+                }
+                4->{
+                    mBinding?.mytaminFrametwoImageFour?.performClick()
+
+                }
+                5->{
+                    mBinding?.mytaminFrametwoImageFive?.performClick()
+
+                }
+            }
+        }
 
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행

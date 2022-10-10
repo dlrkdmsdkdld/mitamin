@@ -8,16 +8,19 @@ import kotlinx.coroutines.*
 import kr.ac.kpu.ce2017154024.mytamin.Repository.MytaminRepository
 import kr.ac.kpu.ce2017154024.mytamin.model.CareData
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
+import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
 
 class todayMytaminViewModel :ViewModel() {
     private val mytaminRepository= MytaminRepository()  //레포지토리 ##
 
-    private val correctionStep3 = MutableLiveData<Boolean>()
-    val getcorrectionStep3 : LiveData<Boolean>
-        get() = correctionStep3
-    fun setcorrectionStep3(i:Boolean){
-        correctionStep3.value = i
+
+    private val status = MutableLiveData<Status>()
+    val getstatus : LiveData<Status>
+        get() = status
+
+    fun setstatus(time: Status){
+        status.value = time
     }
 
     private val emojiState = MutableLiveData<Int>()
@@ -111,6 +114,12 @@ class todayMytaminViewModel :ViewModel() {
     fun setcareCategoryCode(inputstep:Int){
         careCategoryCode.value = inputstep
     }
+    private val careCategoryCodeMsg = MutableLiveData<String>()
+    val getcareCategoryCodeMsg : LiveData<String>
+        get() = careCategoryCodeMsg
+    fun setcareCategoryCodeMsg(inputstep:String){
+        careCategoryCodeMsg.value = inputstep
+    }
     private val careMsg1 = MutableLiveData<String>()
     val getcareMsg1 : LiveData<String>
         get() = careMsg1
@@ -128,7 +137,10 @@ class todayMytaminViewModel :ViewModel() {
         val inputdata = CareData(careCategoryCode = getcareCategoryCode.value!!, careMsg1 =  getcareMsg1.value!!, careMsg2 = getcareMsg2.value!!  )
         mytaminRepository.completeCare(inputdata)
     }
-
+    fun correctionCare(careId: Int){
+        val inputdata = CareData(careCategoryCode = getcareCategoryCode.value!!, careMsg1 =  getcareMsg1.value!!, careMsg2 = getcareMsg2.value!!  )
+        mytaminRepository.correctionCare(inputdata,careId)
+    }
 
 //    with(CoroutineScope(Dispatchers.IO)){
 //        val job: Job = launch { completeBreath() }

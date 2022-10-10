@@ -151,6 +151,28 @@ class HomeRetrofitManager {
 
             })
     }
+    fun docorrectionCare(inputdata:CareData,careId:Int,completion: (RESPONSE_STATUS) -> Unit){
+        iHomeRetrofit?.correctionCare(inputdata, careId )
+            ?.enqueue(object :retrofit2.Callback<JsonElement>{
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        val body =it.asJsonObject
+                        val message = body.get("message").asString
+                        //val takeAtTime = body.get("data").asJsonObject.get("takeAt").asString
+                        Log.d(TAG, "user doCompleteReport response message:${message}  " )
+                        completion(RESPONSE_STATUS.OKAY)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "user doCompleteBreath fail${t}" )
+                    completion(RESPONSE_STATUS.FAIL)
+                }
+
+            })
+    }
+
     fun getStatus(completion: (RESPONSE_STATUS,Status?) -> Unit){
         iHomeRetrofit?.getStatus()
             ?.enqueue(object :retrofit2.Callback<JsonElement>{
@@ -221,8 +243,9 @@ class HomeRetrofitManager {
                             val careMsg1 = care.get("careMsg1").asString
                             val careMsg2 = care.get("careMsg2").asString
                             val canEditCare = care.get("canEdit").asBoolean
+                            val careCategory = care.get("careCategory").asString
 
-                            val result = LatestMytamin(takeAtTime,canEditReport,canEditCare,reportId,mentalConditionCode,feelingTag,mentalConditionMsg,todayReport,careId,careMsg1,careMsg2)
+                            val result = LatestMytamin(takeAtTime,canEditReport,canEditCare,reportId,mentalConditionCode,feelingTag,mentalConditionMsg,todayReport,careId,careCategory,careMsg1,careMsg2)
                             Log.d(TAG, "user doCompleteReport response message:${message}  updatedTime:$takeAtTime" )
                             completion(RESPONSE_STATUS.OKAY,result)
 

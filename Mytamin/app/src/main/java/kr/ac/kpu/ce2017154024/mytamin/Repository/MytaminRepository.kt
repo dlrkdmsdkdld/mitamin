@@ -90,6 +90,23 @@ class MytaminRepository {
                 HomeRetrofitManager.instance.doCompleteCare(data) { responseStatus ->
                     when(responseStatus){
                         RESPONSE_STATUS.OKAY ->{
+//                            Handler(Looper.getMainLooper()).post{
+//                                Toast.makeText(MyApplication.instance, "마이타민 칭찬 처방하기 완료", Toast.LENGTH_SHORT).show()
+//                            }
+
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    fun correctionCare(data:CareData,careId: Int){
+        with(CoroutineScope(Dispatchers.IO)){
+            val job:Job = launch {
+                HomeRetrofitManager.instance.docorrectionCare(data,careId) { responseStatus ->
+                    when(responseStatus){
+                        RESPONSE_STATUS.OKAY ->{
                             Handler(Looper.getMainLooper()).post{
                                 Toast.makeText(MyApplication.instance, "마이타민 칭찬 처방하기 완료", Toast.LENGTH_SHORT).show()
                             }
