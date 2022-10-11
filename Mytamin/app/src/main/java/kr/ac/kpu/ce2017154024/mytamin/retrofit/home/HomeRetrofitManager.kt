@@ -159,7 +159,7 @@ class HomeRetrofitManager {
                         val body =it.asJsonObject
                         val message = body.get("message").asString
                         //val takeAtTime = body.get("data").asJsonObject.get("takeAt").asString
-                        Log.d(TAG, "user doCompleteReport response message:${message}  " )
+                        Log.d(TAG, "user docorrectionCare response message:${message}  " )
                         completion(RESPONSE_STATUS.OKAY)
 
                     }

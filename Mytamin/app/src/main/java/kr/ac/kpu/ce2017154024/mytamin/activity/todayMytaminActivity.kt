@@ -16,6 +16,7 @@ import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
@@ -170,9 +171,10 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                             finishAffinity()
                             startActivity(intent)
                         }else{ // 4단계안한상태에서 넘어가면 4단계로 넘어감감
-                           this.step =6
+                            setStep(6)
                             setEnableCorrection(false)
-                            replaceFragment(step)
+                            setEnableNextBtnPartTwo(false)
+                            replaceFragment(this.step)
                         }
                     }
                 )
@@ -182,6 +184,10 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             setEnableCorrection(false)
 
         }
+    }
+    fun setStep(k : Int){
+        this.step = k
+        mytaminViewModel.setstep(k)
     }
     fun Correctionstep4(){ //4단계를 미리한상태에서 3단계에서 다음으로넘어갔을때
         if (resultBoolean.careIsDone){
@@ -212,7 +218,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun next_btn(step:Int){
-
+        Log.d(TAG,"Step -> $step")
         when(step){
             2->{
                     mytaminViewModel.completeBreath()
@@ -287,10 +293,11 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
                 if(mytaminViewModel.getstatus.value?.reportIsDone==true && step==5){
                     mytaminViewModel.CorrectionReport(LatestMytamin.reportId)
                 }
-                if(mytaminViewModel.getstatus.value?.careIsDone==true  && step==6){
+                else if(mytaminViewModel.getstatus.value?.careIsDone==true  && step==6){
+                    Log.d(TAG,"LatestMytamin token ::: ${PrivateUserDataSingleton.accessToken}")
+                    Log.d(TAG,"LatestMytamin.careId ::: ${LatestMytamin.careId}")
                     mytaminViewModel.correctionCare(LatestMytamin.careId)
                 }
-
                 val intent= Intent(this,MainActivity::class.java)
                 finishAffinity()
                 startActivity(intent)

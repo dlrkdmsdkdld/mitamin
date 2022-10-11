@@ -108,7 +108,7 @@ class MytaminRepository {
                     when(responseStatus){
                         RESPONSE_STATUS.OKAY ->{
                             Handler(Looper.getMainLooper()).post{
-                                Toast.makeText(MyApplication.instance, "마이타민 칭찬 처방하기 완료", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(MyApplication.instance, "마이타민 칭찬 처방하기 수정 완료", Toast.LENGTH_SHORT).show()
                             }
 
                         }
