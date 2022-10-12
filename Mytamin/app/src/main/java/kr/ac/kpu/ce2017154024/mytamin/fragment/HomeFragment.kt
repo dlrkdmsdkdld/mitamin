@@ -82,10 +82,11 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //리싸이클러뷰 설정
-        this.myHomeRecyclerAdapter = HomeRecyclerAdapter(this)
         //뷰모델에서마이타민섭취확인후 그에따른 초기데이터 지정
         myHomeViewModel.getstatus.observe(viewLifecycleOwner, Observer {
+            this.myHomeRecyclerAdapter = HomeRecyclerAdapter(this)
             statusData= it
+            resultBoolean.clear()
             resultBoolean.add(!(it.breathIsDone) )
             resultBoolean.add(!(it.senseIsDone))
             resultBoolean.add(!(it.reportIsDone))

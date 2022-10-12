@@ -1,9 +1,11 @@
 package kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
 class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
     private var iHomeRecyclerview:IHomeRecyclerView?=null
@@ -39,6 +41,8 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
     }
     fun AlreadyTodayMytamin(no: ArrayList<Boolean>){
         var i=0
+        Log.d(TAG,"no -> $no")
+
         no.forEach {
             onArray[i]=it
             i+=1

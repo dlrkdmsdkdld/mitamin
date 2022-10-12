@@ -129,11 +129,16 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
     private fun createTagChip(context: Context, statetext: String): Chip {
         return Chip(context).apply {
             setChipBackgroundColorResource(R.color.chip_background_color)
+
+//            setBackgroundResource(R.drawable.ic_chip)
+            isCheckedIconVisible=false
             text  =statetext
             isCheckable=true
             isClickable=true
             tag = statetext
-            setChipStrokeColorResource(R.color.primary)
+            setTextColor(resources.getColor(R.color.Gray))
+            chipStrokeWidth= 1F
+            setChipStrokeColorResource(R.color.Gray)
         }
 
     }

@@ -15,7 +15,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/orange_round"
+            android:src="@drawable/ic_bad"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/yes_mytamin_image"
@@ -38,6 +38,7 @@
                 android:fontFamily="@font/appmainfont_medium"
                 android:textColor="@color/subGray"
                 android:paddingLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textSize="12sp"
                 android:includeFontPadding="false"
                 android:layout_marginTop="12dp"
@@ -66,6 +67,7 @@
             android:text="@string/home_yesmytamin_talk"
             app:layout_constraintTop_toBottomOf="@+id/yes_mytamin_image"
             app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/appmainfont_bold"
             android:id="@+id/yesmytamin_todayReport_title"
@@ -77,7 +79,13 @@
             android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@+id/yes_mytamin_image"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/ic_retouch_btn"
+            android:background="@drawable/ic_select_button_outline"
+            android:drawableLeft="@drawable/ic_pencil"
+
+            android:paddingLeft="8.8dp"
+            android:paddingRight="5dp"
+            android:text="수정하기"
+            android:textColor="@color/primary"
             android:id="@+id/yes_mytamin_step3_btn"
             />
         <LinearLayout
@@ -114,6 +122,7 @@
             android:fontFamily="@font/appmainfont_bold"
             android:id="@+id/yesmytamin_talk_two"
             android:includeFontPadding="false"
+            android:textColor="@color/black"
             />
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="88dp"
@@ -122,6 +131,7 @@
             app:layout_constraintTop_toBottomOf="@+id/yes_mytamin_layout_one"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/ic_retouch_btn"
+
             android:id="@+id/yes_mytamin_step4_btn"
             />
         <LinearLayout

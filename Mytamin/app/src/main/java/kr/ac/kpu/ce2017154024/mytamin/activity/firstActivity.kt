@@ -28,6 +28,9 @@ class firstActivity : AppCompatActivity(),View.OnClickListener {
         first_join_btn.setOnClickListener(this)
         first_login_btn.setOnClickListener(this)
         customProgressDialog= LoadingDialog(this)
+
+
+
         val email= PreferenceUtil.obtainUserData().first
         val password  = PreferenceUtil.obtainUserData().second
         Log.d(TAG,"LoginActivity PreferenceUtil email : $email passowrd:$password ")
