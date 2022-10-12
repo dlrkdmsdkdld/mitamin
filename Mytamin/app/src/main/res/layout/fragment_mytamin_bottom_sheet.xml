@@ -6,7 +6,7 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.todaymytamin.MytaminBottomSheetFragment">
+    >
     <CalendarView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

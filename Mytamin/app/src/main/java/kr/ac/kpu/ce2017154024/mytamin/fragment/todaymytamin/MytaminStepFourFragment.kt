@@ -37,20 +37,21 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         mBinding =binding
         chipGroup=mBinding?.mytaminStepFourChipgroup!!
         chipGroup.clearDisappearingChildren()
-      //  val childCount = chipGroup.childCount
-      //  Log.d(Constant.TAG,"MytaminStepFourFragment childCount $childCount")
-
         Log.d(Constant.TAG,"MytaminStepFourFragment onCreateView")
         val emojitState = todayMytaminViewModel.selectemojiState.value
         setChip(emojitState!!)
         chipChildCount=chipGroup.childCount
-        chipGroup.setOnCheckedStateChangeListener(this)
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null
         super.onDestroyView()
         Log.d(Constant.TAG,"MytaminStepFourFragment onDestroyView")
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        chipGroup.setOnCheckedStateChangeListener(this)
     }
     fun setChip(state:Int){
         when(state){
@@ -89,6 +90,9 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
     }
 
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
+
+
+
         var tmp = mutableListOf<String>()
         if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)}
         else{(activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)}
