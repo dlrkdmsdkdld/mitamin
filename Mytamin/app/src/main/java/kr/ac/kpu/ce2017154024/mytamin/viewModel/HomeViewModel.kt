@@ -4,17 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.Repository.HomeRepository
-import kr.ac.kpu.ce2017154024.mytamin.Repository.MytaminRepository
 import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
-import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
 import kr.ac.kpu.ce2017154024.mytamin.model.Status
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.home.HomeRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 

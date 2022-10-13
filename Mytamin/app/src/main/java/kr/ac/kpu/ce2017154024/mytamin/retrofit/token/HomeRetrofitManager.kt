@@ -1,18 +1,12 @@
-package kr.ac.kpu.ce2017154024.mytamin.retrofit.home
+package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import android.util.Log
 import com.google.gson.JsonElement
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kr.ac.kpu.ce2017154024.mytamin.model.*
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitClient
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class HomeRetrofitManager {
 

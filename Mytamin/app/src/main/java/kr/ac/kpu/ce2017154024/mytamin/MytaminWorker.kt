@@ -6,7 +6,7 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.work.*
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.home.HomeRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 

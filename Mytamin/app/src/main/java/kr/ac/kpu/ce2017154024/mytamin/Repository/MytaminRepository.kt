@@ -9,9 +9,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.MyApplication
 import kr.ac.kpu.ce2017154024.mytamin.model.CareData
-import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.home.HomeRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
 class MytaminRepository {

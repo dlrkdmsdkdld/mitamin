@@ -1,9 +1,8 @@
-package kr.ac.kpu.ce2017154024.mytamin.retrofit.home
+package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import com.google.gson.JsonElement
 import kr.ac.kpu.ce2017154024.mytamin.model.CareData
 import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
-import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
 import retrofit2.Call
 import retrofit2.Response

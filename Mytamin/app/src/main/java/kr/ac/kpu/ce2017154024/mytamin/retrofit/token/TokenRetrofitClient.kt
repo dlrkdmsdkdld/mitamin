@@ -1,11 +1,10 @@
-package kr.ac.kpu.ce2017154024.mytamin.retrofit.home
+package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import android.util.Log
 import kr.ac.kpu.ce2017154024.mytamin.BuildConfig
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
-import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.accessToken
 import kr.ac.kpu.ce2017154024.mytamin.utils.isJsonArray
 import kr.ac.kpu.ce2017154024.mytamin.utils.isJsonObject
 import okhttp3.Interceptor
