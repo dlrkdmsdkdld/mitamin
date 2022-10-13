@@ -10,22 +10,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.jakewharton.rxbinding4.view.clicks
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
-import kotlinx.android.synthetic.main.fragment_mytamin_step_threeragment.*
+import kotlinx.android.synthetic.main.fragment_introduce_three_step.*
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
-import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepThreeragmentBinding
+import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepThreeBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 
 class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
-    private var mBinding : FragmentMytaminStepThreeragmentBinding?=null
+    private var mBinding : FragmentMytaminStepThreeBinding?=null
     private val todayMytaminViewModel by activityViewModels<todayMytaminViewModel>()
     private var nowselect:Int =100
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMytaminStepThreeragmentBinding.inflate(inflater,container,false)
+        val binding = FragmentMytaminStepThreeBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(Constant.TAG,"MytaminStepOneFragment onCreateView")
 
@@ -114,7 +114,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 todayMytaminViewModel.setselectemojiState(2)
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
-            mytamin_frametwo_image_three->{
+            mBinding?.mytaminFrametwoImageThree->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_three_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_three_text
                 nochoiceImage(nowselect)
@@ -123,7 +123,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 todayMytaminViewModel.setselectemojiState(3)
                 (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
             }
-            mytamin_frametwo_image_four->{
+            mBinding?.mytaminFrametwoImageFour->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_four_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_four_text
                 nochoiceImage(nowselect)
@@ -132,7 +132,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 mBinding?.mytaminFrametwoImageFour?.setBackgroundResource(Constant.frametwo_image_four_src)
                 todayMytaminViewModel.setselectemojiState(4)
             }
-            mytamin_frametwo_image_five->{
+            mBinding?.mytaminFrametwoImageFive->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_five_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_five_text
                 nochoiceImage(nowselect)
@@ -146,11 +146,11 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
     }
     private fun setOnClickjoin(){
         //프레임 2
-        mytamin_frametwo_image_one.setOnClickListener(this)
-        mytamin_frametwo_image_two.setOnClickListener(this)
-        mytamin_frametwo_image_three.setOnClickListener(this)
-        mytamin_frametwo_image_four.setOnClickListener(this)
-        mytamin_frametwo_image_five.setOnClickListener(this)
+        mBinding?.mytaminFrametwoImageOne?.setOnClickListener(this)
+        mBinding?.mytaminFrametwoImageTwo?.setOnClickListener(this)
+        mBinding?.mytaminFrametwoImageThree?.setOnClickListener(this)
+        mBinding?.mytaminFrametwoImageFour?.setOnClickListener(this)
+        mBinding?.mytaminFrametwoImageFive?.setOnClickListener(this)
         ///
     }
 }

@@ -1,36 +1,40 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityLoginBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityProfileEditBinding
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okio.BufferedSink
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.FileDescriptor
 import java.io.IOException
-import java.security.Permissions
-import java.util.jar.Manifest
+
 
 class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
 
     private lateinit var mbinding: ActivityProfileEditBinding
-
+    private var fileToUpload = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding=ActivityProfileEditBinding.inflate(layoutInflater)
@@ -98,6 +102,10 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
                 if( selectedImageURI != null) {
                     showImage(selectedImageURI)
                   //  mbinding?.profileEditImage?.setImageURI(selectedImageURI)
+//                    val file = File(getFullPathFromUri(this,selectedImageURI))
+//                    val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+//                    val fileToUpload = MultipartBody.Part.createFormData("file",file.name,requestBody)
+//                    InformationRetrofitManager.instance.oneImageAPICall(fileToUpload)
                 }else {
                     Toast.makeText(this,"사진을 가져오지 못했습니다",Toast.LENGTH_SHORT).show()
                 }
@@ -109,20 +117,35 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
     }
     private fun showImage(uri: Uri) {
         GlobalScope.launch {    // 1
-            val bitmap = getBitmapFromUri(uri)    // 2
+            val bitmap = getBitmapFromUri(uri) // 2
             withContext(Dispatchers.Main) {
                 mbinding?.profileEditImage?.setImageBitmap(bitmap)    // 3
             }
         }
     }
-
     @Throws(IOException::class)
     private fun getBitmapFromUri(uri: Uri): Bitmap {
         val parcelFileDescriptor: ParcelFileDescriptor? = contentResolver.openFileDescriptor(uri, "r")
         val fileDescriptor: FileDescriptor = parcelFileDescriptor!!.fileDescriptor
         val image: Bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
         parcelFileDescriptor.close()
+        //선택한 데이터 서버전송
+        val bitmapRequestBody = image?.let {  BitmapRequestBody(it)}
+        val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
+        InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody)
+//////////////////////////////////
+
+
         return image
     }
+    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
+        override fun contentType(): MediaType = "image/jpeg".toMediaType()
+        override fun writeTo(sink: BufferedSink) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
+        }
+    }
+
+
+
 }
 

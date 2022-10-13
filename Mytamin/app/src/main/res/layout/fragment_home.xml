@@ -129,7 +129,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textSize="12dp"
-                android:fontFamily="@font/appmainfont_medium"
+                android:textColor="@color/subGray"
+                android:fontFamily="@font/appsubfont_r"
                 android:includeFontPadding="false"
                 />
             <TextView

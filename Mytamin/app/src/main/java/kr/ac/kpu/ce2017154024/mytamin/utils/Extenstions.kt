@@ -1,5 +1,8 @@
 package kr.ac.kpu.ce2017154024.mytamin.utils
 
+import android.content.Context
+import android.net.Uri
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -125,4 +128,42 @@ fun parseStatus(Status:Status):ArrayList<Boolean>{
     parseStatus.add(Status.reportIsDone)
     parseStatus.add(Status.careIsDone)
     return parseStatus
+}
+//절대경로변환
+fun getFullPathFromUri(ctx: Context, fileUri: Uri?): String? {
+    var fullPath: String? = null
+    val column = "_data"
+    var cursor = ctx.contentResolver.query(fileUri!!, null, null, null, null)
+    if (cursor != null) {
+        cursor.moveToFirst()
+        var document_id = cursor.getString(0)
+        if (document_id == null) {
+            for (i in 0 until cursor.columnCount) {
+                if (column.equals(cursor.getColumnName(i), ignoreCase = true)) {
+                    fullPath = cursor.getString(i)
+                    break
+                }
+            }
+        } else {
+            document_id = document_id.substring(document_id.lastIndexOf(":") + 1)
+            cursor.close()
+            val projection = arrayOf(column)
+            try {
+                cursor = ctx.contentResolver.query(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    projection,
+                    MediaStore.Images.Media._ID + " = ? ",
+                    arrayOf(document_id),
+                    null
+                )
+                if (cursor != null) {
+                    cursor.moveToFirst()
+                    fullPath = cursor.getString(cursor.getColumnIndexOrThrow(column))
+                }
+            } finally {
+                if (cursor != null) cursor.close()
+            }
+        }
+    }
+    return fullPath
 }
