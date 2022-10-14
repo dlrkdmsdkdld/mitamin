@@ -5,13 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ProfileEditActivity">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/user_edit_title"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/icon_arraow_left_small_black"
+        android:id="@+id/profile_edit_backbtn"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        />
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profile_edit_backbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/profile_edit_image"
@@ -24,4 +43,90 @@
         app:layout_constraintEnd_toEndOf="@+id/profile_edit_image"
         app:layout_constraintBottom_toBottomOf="@+id/profile_edit_image"
         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/profile_edit_image"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/user_myday_nickname"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/profile_edit_nickname_title"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_edit_nickname_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/profile_edit_nickname_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+        style="@style/TextInputLayoutStyle2"
+        app:endIconMode="clear_text"
+        >
+        <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_edit_nickname_text"
+            android:gravity="left|center"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/profile_edit_nickname_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/user_myday_tobe"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/profile_edit_tobe_title"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_edit_tobe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/profile_edit_tobe_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="20dp"
+        style="@style/TextInputLayoutStyle2"
+        app:endIconMode="clear_text"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        >
+        <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_edit_tobe_text"
+            android:gravity="left|center"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_myday_tobe_sub"
+        app:layout_constraintTop_toBottomOf="@+id/profile_edit_tobe_title"
+        app:layout_constraintStart_toEndOf="@+id/profile_edit_tobe_layout"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/black"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_layout_background_orange"
+        android:text="@string/user_myday_complete"
+        android:textColor="@color/background_white"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

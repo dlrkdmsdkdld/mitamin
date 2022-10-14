@@ -72,9 +72,14 @@
     <!--마이페이지-->
     <string name="user_title">마이페이지</string>
     <string name="user_beMyMessage">날먹하고싶은</string>
-    <string name="user_myday_title">이번달 마이데이는</string>
     <string name="user_myday_day">00월 00일</string>
     <string name="user_myday_subtitle1">이번달 마이데이는</string>
-
-
+    <string name="user_mydaytitle">마이데이</string>
+    <string name="user_myday_state">이번 마이데이에는 무엇을 해볼까요?</string>
+    <string name="user_myday_btn">마이데이 바로가기</string>
+    <string name="user_edit_title">프로필 편집</string>
+    <string name="user_myday_nickname">닉네임</string>
+    <string name="user_myday_tobe">되고 싶은 내모습</string>
+    <string name="user_myday_tobe_sub">내가 될</string>
+    <string name="user_myday_complete">완료</string>
 </resources>

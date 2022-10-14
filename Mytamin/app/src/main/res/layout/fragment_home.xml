@@ -32,12 +32,14 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:includeFontPadding="false"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_home_vitamin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="80dp"
+                    android:clipToOutline="true"
+                    android:layout_marginLeft="240dp"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

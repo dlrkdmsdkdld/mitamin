@@ -19,6 +19,7 @@ import kotlinx.coroutines.withContext
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityProfileEditBinding
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
