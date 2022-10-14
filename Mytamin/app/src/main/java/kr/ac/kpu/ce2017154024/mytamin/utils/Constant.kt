@@ -50,5 +50,13 @@ enum class RESPONSE_STATUS{
     NO_CONTENT,
     USER_NOT_FOUND_ERROR,
     PASSWORD_PATTERN_ERROR
-
+}
+enum class choice{
+    basic,
+    gallery
+}
+enum class fragment{
+    home,
+    information,
+    history
 }

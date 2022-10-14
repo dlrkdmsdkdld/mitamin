@@ -127,6 +127,7 @@
         android:background="@drawable/round_layout_background_orange"
         android:text="@string/user_myday_complete"
         android:textColor="@color/background_white"
+        android:id="@+id/profile_edit_completebtn"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

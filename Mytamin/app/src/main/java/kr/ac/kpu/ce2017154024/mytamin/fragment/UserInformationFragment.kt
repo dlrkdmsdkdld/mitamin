@@ -31,6 +31,15 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         mBinding =binding
         Log.d(Constant.TAG,"UserInformationFragment onCreateView")
         mBinding?.informationUserImage?.setOnClickListener(this)
+        val tmp = arguments?.getByteArray("Image")
+        if (tmp!=null){
+            Log.d(Constant.TAG," 전달받은 사진있음")
+
+        }else{
+            Log.d(Constant.TAG,"전달받은 사진없음")
+
+        }
+
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행

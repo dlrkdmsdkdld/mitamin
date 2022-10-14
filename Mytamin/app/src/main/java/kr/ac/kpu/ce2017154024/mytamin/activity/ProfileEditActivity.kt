@@ -12,14 +12,20 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityProfileEditBinding
+import kr.ac.kpu.ce2017154024.mytamin.fragment.information.BottomProfileEditFragment
+import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MyatminCategoryFragment
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.choice
+import kr.ac.kpu.ce2017154024.mytamin.utils.fragment
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -33,7 +39,7 @@ import java.io.IOException
 
 
 class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
-
+    private var correctionImage:Boolean=false
     private lateinit var mbinding: ActivityProfileEditBinding
     private var fileToUpload = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +53,8 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
             mbinding?.profileEditImage.setImageBitmap(b)
         }
         mbinding?.profileEditImage.setOnClickListener(this)
+        mbinding?.profileEditBackbtn.setOnClickListener(this)
+        mbinding?.profileEditCompletebtn.setOnClickListener(this)
        // mbinding?.profileEditImage
 
     }
@@ -55,10 +63,32 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
 
         when(p0){
             mbinding?.profileEditImage ->{
+                val bottomProfileEditFragment= BottomProfileEditFragment()
+                bottomProfileEditFragment.show(supportFragmentManager,bottomProfileEditFragment.tag)
+
+
+            }
+            mbinding?.profileEditBackbtn ->{
+                onBackPressed()
+            }
+            mbinding?.profileEditCompletebtn->{
+                completeBtn()
+            }
+
+        }
+    }
+    fun choiceOption(select: choice){
+        correctionImage=true
+        when(select){
+            choice.basic ->{
+                Log.d(TAG,"기본선택")
+                mbinding?.profileEditImage.setImageResource(R.drawable.cat)
+            }
+            choice.gallery ->{
+                Log.d(TAG,"갤러리선택")
                 val requestPermissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 requestPermissions(requestPermissions,101)
             }
-
         }
     }
 
@@ -131,9 +161,9 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         val image: Bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
         parcelFileDescriptor.close()
         //선택한 데이터 서버전송
-        val bitmapRequestBody = image?.let {  BitmapRequestBody(it)}
-        val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
-        InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody)
+//        val bitmapRequestBody = image?.let {  BitmapRequestBody(it)}
+//        val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
+//        InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody)
 //////////////////////////////////
 
 
@@ -144,6 +174,22 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         override fun writeTo(sink: BufferedSink) {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
         }
+    }
+    fun completeBtn(){
+        val intent = Intent(this,MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        if (correctionImage){
+            val bitmap :Bitmap = mbinding?.profileEditImage.drawable.toBitmap()
+            val bitmapRequestBody = bitmap?.let {  BitmapRequestBody(it)}
+            val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
+            InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody)
+        }else{}
+        finish()
+
+        intent.putExtra("fragment",fragment.information)
+        startActivity(intent)
+
+
     }
 
 

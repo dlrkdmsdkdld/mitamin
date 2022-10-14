@@ -145,9 +145,18 @@
 
 
     </FrameLayout>
+    <View
+        android:id="@+id/mytamin_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/Gray"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/mytamin_frame_layout3"
+        />
     <androidx.constraintlayout.widget.ConstraintLayout
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/mytamin_frame_layout3"
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <FrameLayout
@@ -164,14 +173,7 @@
                 android:visibility="visible"
                 android:id="@+id/mytamin_layout1"
                 >
-                <View
-                    android:id="@+id/mytamin_vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/Gray"
-                    app:layout_constraintBottom_toTopOf="@+id/mytamin_pass_btn"
-                    android:layout_marginBottom="12dp"
-                    />
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="154dp"
                     android:layout_height="wrap_content"

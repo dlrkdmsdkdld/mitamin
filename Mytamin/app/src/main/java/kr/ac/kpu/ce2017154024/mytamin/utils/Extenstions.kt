@@ -121,14 +121,7 @@ fun checkEmail(email:String):Boolean{
         return false
     }
 }
-fun parseStatus(Status:Status):ArrayList<Boolean>{
-    val parseStatus = ArrayList<Boolean>()
-    parseStatus.add(Status.breathIsDone)
-    parseStatus.add(Status.senseIsDone)
-    parseStatus.add(Status.reportIsDone)
-    parseStatus.add(Status.careIsDone)
-    return parseStatus
-}
+
 //절대경로변환
 fun getFullPathFromUri(ctx: Context, fileUri: Uri?): String? {
     var fullPath: String? = null
