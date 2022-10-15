@@ -6,15 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHistoryBinding
+import kotlinx.android.synthetic.main.fragment_wishlist.*
+import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.IWishRecyclerAdapter
+import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.WishlistRecyclerAdapter
+import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView.IHomeRecyclerView
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentWishlistBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
-import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
 
-class WishlistFragment : Fragment() {
+class WishlistFragment : Fragment(), IWishRecyclerAdapter {
     private var mBinding : FragmentWishlistBinding?=null
+    private lateinit var myWishlistRecyclerAdapter: WishlistRecyclerAdapter
+    private lateinit var HiddenWishlistRecyclerAdapter: WishlistRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,9 +30,40 @@ class WishlistFragment : Fragment() {
         Log.d(Constant.TAG,"WishlistFragment onCreateView")
         return mBinding?.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val tmptitle = ArrayList<String>()
+        tmptitle.add("하하")
+        tmptitle.add("하1")
+        tmptitle.add("하2")
+        tmptitle.add("하2213132132132")
+        val tmpcount = ArrayList<Int>()
+        tmpcount.add(1)
+        tmpcount.add(2)
+        tmpcount.add(3)
+        tmpcount.add(4)
+        this.myWishlistRecyclerAdapter= WishlistRecyclerAdapter(this,tmptitle,tmpcount)
+        wishlist_recyclerview.adapter = this.myWishlistRecyclerAdapter
+
+        val tmptitleH = ArrayList<String>()
+        tmptitleH.add("숨겨진")
+        val tmpcountH = ArrayList<Int>()
+        tmpcountH.add(10)
+        HiddenWishlistRecyclerAdapter = WishlistRecyclerAdapter(itemclickListener={
+
+        },tmptitleH,tmpcountH)
+        Log.d(TAG,"wishlist_recyclerview.adapter  ->${wishlist_recyclerview.adapter} ")
+       // mBinding?.wishlistRecyclerview?
+    }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null
         super.onDestroyView()
         Log.d(Constant.TAG,"WishlistFragment onDestroyView")
+    }
+
+
+    override fun onSearchItemClicked(position: Int) {
+        myWishlistRecyclerAdapter.getItemId(position)
     }
 }

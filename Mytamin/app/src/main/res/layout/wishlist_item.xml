@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/wishlist_layout_item"
+    android:background="@drawable/round_layout_background_gray"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="10dp"
+    >
     <TextView
+        android:id="@+id/wishlist_title_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="하이하이"
@@ -15,13 +22,25 @@
         android:layout_marginLeft="20dp"
         />
     <TextView
+        android:id="@+id/wishlist_count_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toStartOf="@+id/wishlist_count_text"
+        android:text="0"
+        android:textSize="15sp"
+        />
+    <TextView
+        android:id="@+id/wishlist_count_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/primary"
-        android:text="0회"
+        android:text="회"
         android:textSize="15sp"
         android:layout_marginRight="20dp"
         />

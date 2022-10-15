@@ -85,6 +85,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/wishlist_recyclerview"
+                    tools:listitem="@layout/wishlist_item"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,7 +95,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/wishlist_recyclerview"
                     app:layout_constraintStart_toStartOf="parent"
                     android:text="@string/wishlist_hidden_title"
-
+                    android:id="@+id/wishlist_hidden_title"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/wishlist_hidden_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/wishlist_recyclerview_hidden"
+                    tools:listitem="@layout/wishlist_item"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
