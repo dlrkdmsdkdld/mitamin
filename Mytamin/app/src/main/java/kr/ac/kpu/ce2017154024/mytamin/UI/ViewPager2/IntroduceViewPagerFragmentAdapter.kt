@@ -8,6 +8,7 @@ import kr.ac.kpu.ce2017154024.mytamin.fragment.introduce.IntroduceThreeStepFragm
 import kr.ac.kpu.ce2017154024.mytamin.fragment.introduce.IntroduceTwoStepFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.introduce.IntroducefourStepFragment
 
+
 class IntroduceViewPagerFragmentAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
 
     val fragmentList = listOf<Fragment>(IntroduceOneStepFragment(),IntroduceTwoStepFragment(),IntroduceThreeStepFragment(),IntroducefourStepFragment())

@@ -131,6 +131,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/ic_large_button_abled"
         android:drawableRight="@drawable/icon_arrow_right_small_mono"
+        android:id="@+id/user_myday_Btn"
         >
         <TextView
             android:layout_width="wrap_content"

@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.drawToBitmap
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.MydayActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.ProfileEditActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentInformationBinding
@@ -31,6 +32,7 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         mBinding =binding
         Log.d(Constant.TAG,"UserInformationFragment onCreateView")
         mBinding?.informationUserImage?.setOnClickListener(this)
+        mBinding?.userMydayBtn?.setOnClickListener(this)
         val tmp = arguments?.getByteArray("Image")
         if (tmp!=null){
             Log.d(Constant.TAG," 전달받은 사진있음")
@@ -59,17 +61,12 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
                 val intent= Intent(context, ProfileEditActivity::class.java)
                 intent.putExtra("profile_image",bos.toByteArray())
                 startActivity(intent)
-//                bitmap.compress(Bitmap.CompressFormat.JPEG,100,bos)
-//                val  file : File =  File(Environment.getExternalStorageDirectory() + File.separator + "your_file.jpg");
-//                try {
-//                    file.createNewFile();
-//                    val fos : FileOutputStream = FileOutputStream(file);
-//                    fos.write(bos.toByteArray());
-//                } catch (IOException  e) {
-//                    e.printStackTrace();
-//                }
 
 
+            }
+            mBinding?.userMydayBtn ->{
+                val intent = Intent(context,MydayActivity::class.java)
+                startActivity(intent)
             }
         }
 
