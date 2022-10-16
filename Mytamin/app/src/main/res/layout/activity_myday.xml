@@ -24,6 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:text="@string/myday_title"
         />
     <TextView
@@ -41,6 +42,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/myday_back_btn"
         android:id="@+id/myday_tablayout"
+        app:tabIndicatorColor="@color/primary"
+        app:tabTextColor="@color/black"
         />
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
