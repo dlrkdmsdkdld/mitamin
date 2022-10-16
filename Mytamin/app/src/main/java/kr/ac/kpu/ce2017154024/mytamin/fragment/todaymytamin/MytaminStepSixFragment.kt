@@ -60,27 +60,30 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
                 }
                 k+=1
             }
+
+            val dialog = MytaminCorrectionDialog(requireContext(),"칭찬 처방하기")
+            if (todayMytaminViewModel.getstatus.value?.careIsDone != false){
+                dialog.show()
+                dialog.setOnClickListener(object : MytaminCorrectionDialog.OnClickedDialogBtn{
+                    override fun OnNegativeBtn() {
+                        Log.d(TAG,"OnNegativeBtn")
+                        dialog.dismiss()
+                        (activity as todayMytaminActivity).onBackPressed()
+
+                    }
+
+                    override fun OnPositiveBtn() {
+                        Log.d(TAG,"OnPositiveBtn")
+                        dialog.dismiss()
+                    }
+
+                })
+            }
+
         }
 
         status= todayMytaminViewModel.getstatus.value?:null
-        val dialog = MytaminCorrectionDialog(requireContext(),"칭찬 처방하기")
-        if (todayMytaminViewModel.getstatus.value?.careIsDone != false){
-            dialog.show()
-            dialog.setOnClickListener(object : MytaminCorrectionDialog.OnClickedDialogBtn{
-                override fun OnNegativeBtn() {
-                    Log.d(TAG,"OnNegativeBtn")
-                    dialog.dismiss()
-                    (activity as todayMytaminActivity).onBackPressed()
 
-                }
-
-                override fun OnPositiveBtn() {
-                    Log.d(TAG,"OnPositiveBtn")
-                    dialog.dismiss()
-                }
-
-            })
-        }
         mBinding?.mytaminStepSixCareText?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
