@@ -50,29 +50,36 @@ class MyatminCategoryFragment : BottomSheetDialogFragment(),View.OnClickListener
         when(p0){
             mBinding?.mytaminBottomTextOne ->{
                 todayMytaminViewModel.setcareCategoryCode(1)
+                onDestroyView()
             }
             mBinding?.mytaminBottomTextTwo->{
                 todayMytaminViewModel.setcareCategoryCode(2)
 
+                onDestroyView()
             }
             mBinding?.mytaminBottomTextThree->{
                 todayMytaminViewModel.setcareCategoryCode(3)
+                onDestroyView()
 
             }
             mBinding?.mytaminBottomTextFour->{
                 todayMytaminViewModel.setcareCategoryCode(4)
+                onDestroyView()
 
             }
             mBinding?.mytaminBottomTextFive->{
                 todayMytaminViewModel.setcareCategoryCode(5)
+                onDestroyView()
 
             }
             mBinding?.mytaminBottomTextSix->{
                 todayMytaminViewModel.setcareCategoryCode(6)
+                onDestroyView()
 
             }
             mBinding?.mytaminBottomTextSeven->{
                 todayMytaminViewModel.setcareCategoryCode(7)
+                onDestroyView()
 
             }
 

@@ -30,7 +30,7 @@ class WishlistRecyclerViewHolder(itemView: View, HomeRecylcerViewInterface: IWis
     override fun onClick(p0: View?) {
         when(p0){
             layout ->{
-                this.RecyclerViewInterface.onSearchItemClicked(adapterPosition)
+                this.RecyclerViewInterface.onSearchItemClicked(adapterPosition,title.text.toString())
 
             }
         }

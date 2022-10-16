@@ -50,9 +50,11 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter {
         tmptitleH.add("숨겨진")
         val tmpcountH = ArrayList<Int>()
         tmpcountH.add(10)
-        HiddenWishlistRecyclerAdapter = WishlistRecyclerAdapter(itemclickListener={
+        HiddenWishlistRecyclerAdapter = WishlistRecyclerAdapter(this,tmptitleH,tmpcountH)
+        wishlist_recyclerview_hidden.adapter = this.HiddenWishlistRecyclerAdapter
 
-        },tmptitleH,tmpcountH)
+
+
         Log.d(TAG,"wishlist_recyclerview.adapter  ->${wishlist_recyclerview.adapter} ")
        // mBinding?.wishlistRecyclerview?
     }
@@ -63,7 +65,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter {
     }
 
 
-    override fun onSearchItemClicked(position: Int) {
-        myWishlistRecyclerAdapter.getItemId(position)
+    override fun onSearchItemClicked(position: Int, statetext: String) {
+        Log.d(TAG,"stateText - > $statetext")
     }
 }

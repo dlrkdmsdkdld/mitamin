@@ -11,9 +11,11 @@ import androidx.lifecycle.Observer
 import com.jakewharton.rxbinding4.view.clicks
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kotlinx.android.synthetic.main.fragment_introduce_three_step.*
+import kr.ac.kpu.ce2017154024.mytamin.UI.MytaminCorrectionDialog
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepThreeBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 
@@ -30,8 +32,25 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
         Log.d(Constant.TAG,"MytaminStepOneFragment onCreateView")
 
         (activity as todayMytaminActivity).setEnableCorrection(false)
+        val dialog = MytaminCorrectionDialog(requireContext(),"하루 진단하기")
+        if (todayMytaminViewModel.getstatus.value?.reportIsDone != false){
+            dialog.show()
+            dialog.setOnClickListener(object :MytaminCorrectionDialog.OnClickedDialogBtn{
+                override fun OnNegativeBtn() {
+                   Log.d(TAG,"OnNegativeBtn")
+                    dialog.dismiss()
+                    (activity as todayMytaminActivity).onBackPressed()
 
+                }
 
+                override fun OnPositiveBtn() {
+                    Log.d(TAG,"OnPositiveBtn")
+                    dialog.dismiss()
+
+                }
+
+            })
+        }
 
         return mBinding?.root
     }

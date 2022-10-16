@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.WorkManager
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
@@ -150,71 +151,9 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
         super.onBackPressed()
         finish()
     }
-    fun Correctionstep3(){
-        if (resultBoolean.reportIsDone==true){
-            val builder = AlertDialog.Builder(this)
-            builder
-                .setTitle("수정하시겠습니까?")
-                .setMessage("확인버튼을 누르시면 수정이 되고 거절하시면 그다음 단계로넘어갑니다.")
-                .setPositiveButton("수정",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        // 수정 버튼 선택시 수행
-
-                             setEnableCorrection(false)
-                    })
-                .setNegativeButton("넘어가기",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        // 넘어가기 버튼 선택시 수행
-
-                        if (resultBoolean.careIsDone){ // 4단계도했으면 메인액티비티로 돌아감
-                            val intent= Intent(this,MainActivity::class.java)
-                            finishAffinity()
-                            startActivity(intent)
-                        }else{ // 4단계안한상태에서 넘어가면 4단계로 넘어감감
-                            setStep(6)
-                            setEnableCorrection(false)
-                            setEnableNextBtnPartTwo(false)
-                            replaceFragment(this.step)
-                        }
-                    }
-                )
-            builder.create()
-            builder.show()
-        }else{
-            setEnableCorrection(false)
-
-        }
-    }
     fun setStep(k : Int){
         this.step = k
         mytaminViewModel.setstep(k)
-    }
-    fun Correctionstep4(){ //4단계를 미리한상태에서 3단계에서 다음으로넘어갔을때
-        if (resultBoolean.careIsDone){
-            val builder = AlertDialog.Builder(this)
-            builder
-                .setTitle("수정하시겠습니까?")
-                .setMessage("확인버튼을 누르시면 수정이 되고 넘어가면 메인메뉴로 넘어갑니다.")
-                .setPositiveButton("수정",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        // 수정 버튼 선택시 수행
-
-                        setEnableCorrection(false)
-                    })
-                .setNegativeButton("넘어가기",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        // 넘어가기 버튼 선택시 수행
-                        val intent= Intent(this,MainActivity::class.java)
-                        finishAffinity()
-                        startActivity(intent)
-                    }
-                )
-            builder.create()
-            builder.show()
-        }else{
-            setEnableCorrection(false)
-
-        }
     }
 
     fun next_btn(step:Int){
@@ -225,10 +164,8 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             }
             3->{
                 mytaminViewModel.completeSense()
-                Correctionstep3()
             }
             6->{mytaminViewModel.completeReport()//5단계까지 마치고 next버튼눌렀을때 데이터전송
-                Correctionstep4()
                  }
             7->{
                 mytaminViewModel.completeCare()
@@ -239,11 +176,6 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-/*        if(resultBoolean.careIsDone==false){
-            val intent= Intent(this,MainActivity::class.java)
-            finishAffinity()
-            startActivity(intent)
-        }*/
         replaceFragment(step)
         mytaminViewModel.timerDestory()
         mytaminViewModel.setstep(step)
@@ -266,9 +198,6 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
             mytamin_pass_btn ->{
                 step+=1
                 mytaminViewModel.timerDestory()
-                if (step==3){
-                    Correctionstep3()
-                }
 
                 replaceFragment(step)
                 mytaminViewModel.setstep(step)
@@ -306,6 +235,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener {
 
         }
     }
+
 
     fun connectClicklistner(){
         setEnableNextBtn(false)

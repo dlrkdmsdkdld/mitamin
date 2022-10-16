@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,9 +9,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.UI.MytaminCorrectionDialog
+import kr.ac.kpu.ce2017154024.mytamin.activity.MainActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepSixBinding
@@ -33,6 +37,11 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
         mBinding =binding
         Log.d(Constant.TAG,"MytaminStepSixFragment onCreateView")
         mBinding?.mytaminStepSixLayout?.setOnClickListener(this)
+
+
+
+
+
         todayMytaminViewModel.getcareCategoryCode.observe(viewLifecycleOwner , Observer {
             Log.d(TAG,"현재 선택 카테고리 $it")
             val selectcategory = category[it-1]
@@ -54,7 +63,24 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
         }
 
         status= todayMytaminViewModel.getstatus.value?:null
+        val dialog = MytaminCorrectionDialog(requireContext(),"칭찬 처방하기")
+        if (todayMytaminViewModel.getstatus.value?.careIsDone != false){
+            dialog.show()
+            dialog.setOnClickListener(object : MytaminCorrectionDialog.OnClickedDialogBtn{
+                override fun OnNegativeBtn() {
+                    Log.d(TAG,"OnNegativeBtn")
+                    dialog.dismiss()
+                    (activity as todayMytaminActivity).onBackPressed()
 
+                }
+
+                override fun OnPositiveBtn() {
+                    Log.d(TAG,"OnPositiveBtn")
+                    dialog.dismiss()
+                }
+
+            })
+        }
         mBinding?.mytaminStepSixCareText?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -127,4 +153,5 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
             }
         }
     }
+
 }
