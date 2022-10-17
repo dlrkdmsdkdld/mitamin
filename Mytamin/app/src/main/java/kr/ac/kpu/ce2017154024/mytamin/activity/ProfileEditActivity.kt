@@ -184,10 +184,9 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
             val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
             InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody)
         }else{}
-        finish()
-
         intent.putExtra("fragment",fragment.information)
         startActivity(intent)
+        finish()
 
 
     }

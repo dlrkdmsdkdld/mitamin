@@ -2,6 +2,8 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import android.util.Log
 import com.google.gson.JsonElement
+import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
+import kr.ac.kpu.ce2017154024.mytamin.model.ProfileData
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -24,9 +26,7 @@ class InformationRetrofitManager {
                 response.body()?.let {
                     val body =it.asJsonObject
                     val message = body.get("message").asString
-                    val uri = body.get("data").asString
                     Log.d(TAG, "user doCompleteBreath response message:${message} " )
-                    Log.d(TAG, "user doCompleteBreath response updatedTime:$uri" )
                 }
             }
 
@@ -35,6 +35,38 @@ class InformationRetrofitManager {
             }
 
         })
+
+    }
+
+    fun getProfileData(completion:(RESPONSE_STATUS, ProfileData?) -> Unit){
+        iInformationRetrofit?.getProfile()
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        Log.d(TAG, "user getWelcomeMessage onResponse ${response}" )
+                        val data =it.asJsonObject.get("data").asJsonObject
+                        val nickname = data.get("nickname").asString
+                        var profileImgUrl:String? =null
+                        if (!data.get("profileImgUrl").isJsonNull){
+                            profileImgUrl = data.get("profileImgUrl").asString
+
+                        }
+
+                        val beMyMessage = data.get("beMyMessage").asString
+
+                        val result = ProfileData(nickname=nickname,profileImgUrl=profileImgUrl ,beMyMessage=beMyMessage)
+
+                        completion(RESPONSE_STATUS.OKAY,result)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "user Login onFailure ${t}" )
+                    completion(RESPONSE_STATUS.FAIL,null)
+                }
+
+            })
 
     }
 

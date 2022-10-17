@@ -90,14 +90,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/information_user_image"
-            android:text="나를 가장 아껴줄 수 있는\n 내가될 윌로 "
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginLeft="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="22dp"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:fontFamily="@font/appmainfont_bold"
             android:includeFontPadding="false"
+            android:id="@+id/information_bemy_text"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/appmainfont_bold"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toBottomOf="@+id/information_bemy_text"
+            app:layout_constraintStart_toEndOf="@+id/information_user_image"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/information_nickname_text"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

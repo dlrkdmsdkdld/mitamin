@@ -10,6 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.drawToBitmap
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.activity.MydayActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.ProfileEditActivity
@@ -17,12 +20,16 @@ import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentInformationBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.viewModel.HomeViewModel
+import kr.ac.kpu.ce2017154024.mytamin.viewModel.InformationViewModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
 class UserInformationFragment : Fragment(),View.OnClickListener {
     private var mBinding : FragmentInformationBinding?=null
+    private val myInformationViewModel: InformationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +48,19 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
             Log.d(Constant.TAG,"전달받은 사진없음")
 
         }
+        myInformationViewModel.getprofile.observe(viewLifecycleOwner , Observer {
+            mBinding?.informationNicknameText?.text = "내가 될 ${it.nickname}"
+            mBinding?.informationBemyText?.text = it.beMyMessage
+            Log.d(TAG, "profileImgUrl -> ${it.profileImgUrl} ")
+            if(it.profileImgUrl !=null){
+                mBinding?.informationUserImage?.let { it1 ->
+                    Glide.with(this)
+                        .load("${it.profileImgUrl}")
+                        .into(it1)
+                }
+            }
 
+        })
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
