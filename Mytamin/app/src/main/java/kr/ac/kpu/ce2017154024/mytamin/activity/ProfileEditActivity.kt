@@ -8,12 +8,20 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.ParcelFileDescriptor
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
+import com.jakewharton.rxbinding4.widget.textChanges
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_today_mytamin.*
+import kotlinx.android.synthetic.main.fragment_join_step_three.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -23,12 +31,10 @@ import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityProfileEditBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.information.BottomProfileEditFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MyatminCategoryFragment
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
-import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
-import kr.ac.kpu.ce2017154024.mytamin.utils.choice
-import kr.ac.kpu.ce2017154024.mytamin.utils.fragment
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -39,6 +45,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileDescriptor
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 
 class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
@@ -47,6 +54,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
     private var fileToUpload = null
     private lateinit var nickname:String
     private lateinit var customProgressDialog: Dialog
+    private var okNickname:Boolean =false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding=ActivityProfileEditBinding.inflate(layoutInflater)
@@ -68,6 +76,61 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
        // mbinding?.profileEditImage
         customProgressDialog= LoadingDialog(this)
 
+        val edittextChangeObservable = mbinding.profileEditNicknameText.textChanges()
+
+        val checkNameTextSubscription : Disposable =
+            edittextChangeObservable!!.debounce(500, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                    onNext ={
+                        Handler(Looper.getMainLooper()).post(Runnable {
+                            if (it.toString()!=""){
+                                setEnableCompleteBtn(false)
+                                mbinding?.profileEditNicknameLayout?.endIconDrawable=resources.getDrawable(R.drawable.ic_baseline_replay_24)
+                                mbinding?.profileEditNicknameLayout?.helperText = JOINSTRING.searchingEmail
+                                CheckNameAPICall(it.toString())
+                            }
+                        })
+
+                    }
+                )
+
+
+
+    }
+    fun setEnableCompleteBtn(can:Boolean){
+        mbinding?.profileEditCompletebtn.isEnabled=can
+        if (can){
+            mbinding?.profileEditCompletebtn.background = getDrawable(R.drawable.round_layout_background_orange)
+        }else{
+            mbinding?.profileEditCompletebtn.background = getDrawable(R.drawable.ic_large_button_disabled)
+        }
+
+    }
+    private fun CheckNameAPICall(query:String):Boolean?{
+        var result: Boolean = true
+        JoinRetrofitManager.instance.checkName(inputemail = query, completion ={ responseStatus, checkOverlapData ->
+            when(responseStatus){
+                RESPONSE_STATUS.OKAY -> {
+                    Log.d(Constant.TAG,"api 호출 성공 check  = $checkOverlapData")
+                    if (checkOverlapData?.status==200){
+                        result = checkOverlapData.result
+                        if (result==false){//"@drawable/ic_baseline_check_24"
+                            mbinding?.profileEditNicknameLayout?.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_check_24)
+                            mbinding?.profileEditNicknameLayout?.helperText=JOINSTRING.goodNickname
+                            setEnableCompleteBtn(true)
+                            okNickname=true
+                        }else{
+                            mbinding?.profileEditNicknameLayout?.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_error_24)
+                            mbinding?.profileEditNicknameLayout?.helperText=JOINSTRING.wrongNickNameoverlap
+                            setEnableCompleteBtn(false)
+                            okNickname=false
+                        }
+                    }
+                }
+            }
+        } )
+        return result
     }
 
     override fun onClick(p0: View?) {
@@ -84,9 +147,9 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
             }
             mbinding?.profileEditCompletebtn->{
                 if (mbinding?.profileEditTobeText.text.toString() !=""){
-                    completeBtn(correctionImage,true,false)
+                    completeBtn(correctionImage,okNickname,false)
                 }else{
-                    completeBtn(correctionImage,true,true)
+                    completeBtn(correctionImage,okNickname,true)
                 }
             }
 
@@ -107,10 +170,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }){
@@ -191,8 +251,10 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         }
     }
     fun completeBtn(image:Boolean,nickname:Boolean, tobe:Boolean){
+        val tmpNickname = mbinding?.profileEditNicknameText.text.toString()
+        customProgressDialog.show()
         var isImageComplete = !image
-        var isnicknameComplete = nickname
+        var isnicknameComplete = !nickname
         var istobeComplete = tobe
         if (correctionImage){
             val bitmap :Bitmap = mbinding?.profileEditImage.drawable.toBitmap()
@@ -200,7 +262,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
             val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
             InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody, completion = {responseStatus, i ->
                 isImageComplete =true
-                if (istobeComplete &&isnicknameComplete &&isImageComplete){
+                if (istobeComplete &&(isnicknameComplete || tmpNickname=="")  &&isImageComplete){
                     startMainActivity()
                 }
             })
@@ -210,13 +272,27 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         if (!istobeComplete){
             InformationRetrofitManager.instance.CorrectionBeMyMessage(mbinding?.profileEditTobeText.text.toString()) { RESPONSE_STATUS, it ->
                 istobeComplete =true
-                if (istobeComplete &&isnicknameComplete &&isImageComplete){
+                if (istobeComplete &&(isnicknameComplete || tmpNickname=="") &&isImageComplete){
                     startMainActivity()
+                    Log.d(TAG,"istobeComplete ->$istobeComplete  isnicknameComplete->$isnicknameComplete isImageComplete ->$isImageComplete ")
                 }
             }
 
         }
-        if (istobeComplete &&isnicknameComplete &&isImageComplete)startMainActivity()
+        if (okNickname  && tmpNickname!="" ){
+            InformationRetrofitManager.instance.CorrectionNickname(tmpNickname){reponsestatus,statuscode->
+                if (RESPONSE_STATUS.OKAY ==reponsestatus  ){
+                    isnicknameComplete = true
+                    if (istobeComplete &&(isnicknameComplete || tmpNickname=="")  &&isImageComplete){
+                        startMainActivity()
+                        Log.d(TAG,"istobeComplete ->$istobeComplete  isnicknameComplete->$isnicknameComplete isImageComplete ->$isImageComplete ")
+                    }
+                }
+
+
+            }
+        }
+        if (istobeComplete &&(isnicknameComplete || tmpNickname=="")  &&isImageComplete)startMainActivity()
 
 
 
@@ -227,11 +303,12 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         }
     }
     fun startMainActivity(){
+        customProgressDialog.dismiss()
         val intent = Intent(this,MainActivity::class.java)
         intent.putExtra("fragment",fragment.information)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-        finish()
+        finishAffinity()
     }
 
 

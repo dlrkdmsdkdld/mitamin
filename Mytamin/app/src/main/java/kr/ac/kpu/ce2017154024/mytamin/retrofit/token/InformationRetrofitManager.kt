@@ -93,6 +93,28 @@ class InformationRetrofitManager {
 
     }
 
+    fun CorrectionNickname(nickname:String,completion:(RESPONSE_STATUS,Int?) -> Unit){
+        iInformationRetrofit?.CorrectionNickname(nickname)
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        Log.d(TAG, "user CorrectionBeMyMessage onResponse ${response}" )
+                        val body =it.asJsonObject
+                        //TODO 잊지말고 토큰 추가해야함
+                        val nickname = body.get("statusCode").asInt
 
+                        completion(RESPONSE_STATUS.OKAY,nickname)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "CorrectionBeMyMessage onFailure ${t}" )
+                    completion(RESPONSE_STATUS.OKAY,null)
+                }
+
+            })
+
+    }
 
 }
