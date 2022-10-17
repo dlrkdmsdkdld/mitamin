@@ -1,6 +1,7 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -18,6 +19,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityProfileEditBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.information.BottomProfileEditFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MyatminCategoryFragment
@@ -44,6 +46,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding: ActivityProfileEditBinding
     private var fileToUpload = null
     private lateinit var nickname:String
+    private lateinit var customProgressDialog: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding=ActivityProfileEditBinding.inflate(layoutInflater)
@@ -63,6 +66,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         mbinding?.profileEditBackbtn.setOnClickListener(this)
         mbinding?.profileEditCompletebtn.setOnClickListener(this)
        // mbinding?.profileEditImage
+        customProgressDialog= LoadingDialog(this)
 
     }
 
@@ -79,7 +83,11 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
                 onBackPressed()
             }
             mbinding?.profileEditCompletebtn->{
-                completeBtn()
+                if (mbinding?.profileEditTobeText.text.toString() !=""){
+                    completeBtn(correctionImage,true,false)
+                }else{
+                    completeBtn(correctionImage,true,true)
+                }
             }
 
         }
@@ -182,22 +190,48 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
         }
     }
-    fun completeBtn(){
-        val intent = Intent(this,MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+    fun completeBtn(image:Boolean,nickname:Boolean, tobe:Boolean){
+        var isImageComplete = !image
+        var isnicknameComplete = nickname
+        var istobeComplete = tobe
         if (correctionImage){
             val bitmap :Bitmap = mbinding?.profileEditImage.drawable.toBitmap()
             val bitmapRequestBody = bitmap?.let {  BitmapRequestBody(it)}
             val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
             InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody, completion = {responseStatus, i ->
-                
+                isImageComplete =true
+                if (istobeComplete &&isnicknameComplete &&isImageComplete){
+                    startMainActivity()
+                }
             })
-        }else{}
+        }else{
+
+        }
+        if (!istobeComplete){
+            InformationRetrofitManager.instance.CorrectionBeMyMessage(mbinding?.profileEditTobeText.text.toString()) { RESPONSE_STATUS, it ->
+                istobeComplete =true
+                if (istobeComplete &&isnicknameComplete &&isImageComplete){
+                    startMainActivity()
+                }
+            }
+
+        }
+        if (istobeComplete &&isnicknameComplete &&isImageComplete)startMainActivity()
+
+
+
+    }
+    fun tobeAPICall(tobe:String){
+        InformationRetrofitManager.instance.CorrectionBeMyMessage(tobe) { RESPONSE_STATUS, it ->
+
+        }
+    }
+    fun startMainActivity(){
+        val intent = Intent(this,MainActivity::class.java)
         intent.putExtra("fragment",fragment.information)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
-
-
     }
 
 

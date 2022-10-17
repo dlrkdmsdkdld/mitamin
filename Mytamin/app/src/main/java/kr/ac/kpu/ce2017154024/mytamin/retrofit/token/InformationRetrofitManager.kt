@@ -77,7 +77,7 @@ class InformationRetrofitManager {
                         Log.d(TAG, "user CorrectionBeMyMessage onResponse ${response}" )
                         val body =it.asJsonObject
                         //TODO 잊지말고 토큰 추가해야함
-                        val nickname = body.get("data").asJsonObject.get("statusCode").asInt
+                        val nickname = body.get("statusCode").asInt
 
                         completion(RESPONSE_STATUS.OKAY,nickname)
 
