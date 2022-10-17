@@ -79,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
@@ -96,8 +97,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:text="@string/wishlist_hidden_title"
                     android:id="@+id/wishlist_hidden_title"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
                     />
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/wishlist_hidden_title"

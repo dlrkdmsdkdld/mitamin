@@ -40,6 +40,7 @@
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_retouch_btn.xml" value="0.121" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_select_button_outline.xml" value="0.149" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_select_button_outline__1_.xml" value="0.149" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_setting.xml" value="0.175" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_so_good_disabled.xml" value="0.149" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_step_one_image.xml" value="0.163" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_step_two_image.xml" value="0.163" />
@@ -62,6 +63,7 @@
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/round_layout_background_gray.xml" value="0.1" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/round_layout_background_orange.xml" value="0.1" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/round_layout_background_semigray.xml" value="0.1765" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/round_layout_stroke_gray.xml" value="0.175" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/round_layout_subyellow.xml" value="0.163" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/round_result_check_box.xml" value="0.1765" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/round_uncheck_box.xml" value="0.14666666666666667" />
@@ -93,7 +95,7 @@
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_daynote.xml" value="0.1527777777777778" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_history.xml" value="0.22" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_information.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_information.xml" value="0.22" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_introduce_one_step.xml" value="0.32592592592592595" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_introduce_three_step.xml" value="0.31296296296296294" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/fragment_introduce_two_step.xml" value="0.31296296296296294" />
