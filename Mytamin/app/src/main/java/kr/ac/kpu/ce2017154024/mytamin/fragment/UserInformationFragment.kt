@@ -40,6 +40,8 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         Log.d(Constant.TAG,"UserInformationFragment onCreateView")
         mBinding?.informationUserImage?.setOnClickListener(this)
         mBinding?.userMydayBtn?.setOnClickListener(this)
+        mBinding?.informationEditBtn?.setOnClickListener(this)
+
         val tmp = arguments?.getByteArray("Image")
         if (tmp!=null){
             Log.d(Constant.TAG," 전달받은 사진있음")
@@ -72,16 +74,10 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0){
             mBinding?.informationUserImage->{
-                val bitmap:Bitmap = mBinding?.informationUserImage!!.drawToBitmap()
-                //mBinding?.informationUserImage!!.get
-                val bos:ByteArrayOutputStream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG,20,bos)
-                //일단 jpeg로함
-                val intent= Intent(context, ProfileEditActivity::class.java)
-                intent.putExtra("profile_image",bos.toByteArray())
-                startActivity(intent)
-
-
+                goEditActivity()
+            }
+            mBinding?.informationEditBtn ->{
+                goEditActivity()
             }
             mBinding?.userMydayBtn ->{
                 val intent = Intent(context,MydayActivity::class.java)
@@ -90,5 +86,18 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         }
 
     }
+    fun goEditActivity(){
+        val bitmap:Bitmap = mBinding?.informationUserImage!!.drawToBitmap()
+        //mBinding?.informationUserImage!!.get
+        val bos:ByteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,20,bos)
+        //일단 jpeg로함
+        val intent= Intent(context, ProfileEditActivity::class.java)
+        intent.putExtra("profile_image",bos.toByteArray())
+        intent.putExtra("nickname",myInformationViewModel.getprofile.value?.nickname)
+        startActivity(intent)
+
+    }
+
 
 }

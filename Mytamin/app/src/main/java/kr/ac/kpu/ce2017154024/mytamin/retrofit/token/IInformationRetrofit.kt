@@ -14,4 +14,6 @@ interface IInformationRetrofit {
     @GET("/user/profile")
     fun getProfile() : Call<JsonElement>
 
+    @PATCH("/user/bemy-msg")
+    fun CorrectionBeMyMessage(@Path("beMyMessage") beMyMessage:String) : Call<JsonElement>
 }

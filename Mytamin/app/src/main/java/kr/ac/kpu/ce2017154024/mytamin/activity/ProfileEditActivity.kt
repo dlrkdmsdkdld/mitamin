@@ -24,6 +24,7 @@ import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MyatminCategoryFragm
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import kr.ac.kpu.ce2017154024.mytamin.utils.choice
 import kr.ac.kpu.ce2017154024.mytamin.utils.fragment
 import okhttp3.MediaType
@@ -42,6 +43,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
     private var correctionImage:Boolean=false
     private lateinit var mbinding: ActivityProfileEditBinding
     private var fileToUpload = null
+    private lateinit var nickname:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding=ActivityProfileEditBinding.inflate(layoutInflater)
@@ -52,6 +54,11 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
             ,0,intent.getByteArrayExtra("profile_image")!!.size)
             mbinding?.profileEditImage.setImageBitmap(b)
         }
+        if (intent.hasExtra("nickname")){
+            nickname = intent.getStringExtra("nickname").toString()
+
+        }
+        Log.d(Constant.TAG,"ProfileEditActivity nickname ->$nickname")
         mbinding?.profileEditImage.setOnClickListener(this)
         mbinding?.profileEditBackbtn.setOnClickListener(this)
         mbinding?.profileEditCompletebtn.setOnClickListener(this)
@@ -182,7 +189,9 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
             val bitmap :Bitmap = mbinding?.profileEditImage.drawable.toBitmap()
             val bitmapRequestBody = bitmap?.let {  BitmapRequestBody(it)}
             val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
-            InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody)
+            InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody, completion = {responseStatus, i ->
+                
+            })
         }else{}
         intent.putExtra("fragment",fragment.information)
         startActivity(intent)

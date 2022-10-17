@@ -85,6 +85,7 @@
             android:background="@drawable/ic_correction_black"
             app:layout_constraintEnd_toEndOf="@+id/information_user_image"
             app:layout_constraintBottom_toBottomOf="@+id/information_user_image"
+            android:id="@+id/information_edit_btn"
             />
         <TextView
             android:layout_width="wrap_content"

@@ -19,19 +19,21 @@ class InformationRetrofitManager {
     }
     private val iInformationRetrofit:IInformationRetrofit? =TokenRetrofitClient.getClient()?.create(IInformationRetrofit::class.java)
 
-    fun oneImageAPICall(file: MultipartBody.Part){
+    fun oneImageAPICall(file: MultipartBody.Part,completion:(RESPONSE_STATUS,Int?) -> Unit){
         iInformationRetrofit?.editProfileImage(file)?.enqueue(object :retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 Log.d(TAG,"이미지전송성공response -> $response")
                 response.body()?.let {
                     val body =it.asJsonObject
-                    val message = body.get("message").asString
-                    Log.d(TAG, "user doCompleteBreath response message:${message} " )
+                    val statusCode = body.get("statusCode").asInt
+                    completion(RESPONSE_STATUS.OKAY, statusCode)
+                    Log.d(TAG, "user doCompleteBreath response message:${statusCode} " )
                 }
             }
 
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                 Log.d(TAG,"이미지전송실패 이유 -> $t")
+                completion(RESPONSE_STATUS.FAIL, null)
             }
 
         })
@@ -51,19 +53,40 @@ class InformationRetrofitManager {
                             profileImgUrl = data.get("profileImgUrl").asString
 
                         }
-
                         val beMyMessage = data.get("beMyMessage").asString
 
                         val result = ProfileData(nickname=nickname,profileImgUrl=profileImgUrl ,beMyMessage=beMyMessage)
 
                         completion(RESPONSE_STATUS.OKAY,result)
-
                     }
                 }
 
                 override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                     Log.d(TAG, "user Login onFailure ${t}" )
                     completion(RESPONSE_STATUS.FAIL,null)
+                }
+
+            })
+
+    }
+    fun CorrectionBeMyMessage(beMyMessage:String,completion:(RESPONSE_STATUS,Int?) -> Unit){
+        iInformationRetrofit?.CorrectionBeMyMessage(beMyMessage)
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        Log.d(TAG, "user CorrectionBeMyMessage onResponse ${response}" )
+                        val body =it.asJsonObject
+                        //TODO 잊지말고 토큰 추가해야함
+                        val nickname = body.get("data").asJsonObject.get("statusCode").asInt
+
+                        completion(RESPONSE_STATUS.OKAY,nickname)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "CorrectionBeMyMessage onFailure ${t}" )
+                    completion(RESPONSE_STATUS.OKAY,null)
                 }
 
             })

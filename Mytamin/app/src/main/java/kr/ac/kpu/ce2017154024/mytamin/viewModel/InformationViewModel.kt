@@ -1,11 +1,13 @@
 package kr.ac.kpu.ce2017154024.mytamin.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kr.ac.kpu.ce2017154024.mytamin.model.ProfileData
 import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
 class InformationViewModel : ViewModel() {
@@ -30,6 +32,10 @@ class InformationViewModel : ViewModel() {
         })
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d(TAG,"InformationViewModel onCleared ")
+    }
 
 
 }
