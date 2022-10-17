@@ -40,14 +40,14 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
             mBinding?.mytaminTimerText?.text = parsetime
             mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_one_title
             mBinding?.mytaminStepOneDiagnosis?.text = MYTAMIN.step_one_diagnosis
-            mBinding?.mytaminStepOneImage?.background= getDrawable(requireContext(),R.drawable.ic_step_one_image)
+            mBinding?.mytaminStepOneImage?.background= getDrawable(requireContext(),R.drawable.ic_step_one_big)
         }else{
             timer=15
             val parsetime=timer.parseIntToTimeLine()
             mBinding?.mytaminTimerText?.text = parsetime
             mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_two_title
             mBinding?.mytaminStepOneDiagnosis?.text = MYTAMIN.step_two_diagnosis
-            mBinding?.mytaminStepOneImage?.background= getDrawable(requireContext(),R.drawable.ic_step_two_image)
+            mBinding?.mytaminStepOneImage?.background= getDrawable(requireContext(),R.drawable.ic_step_two_image_big)
         }
         todayMytaminViewModel.timerset(timer)
         mBinding?.mytaminStartBtn?.setOnClickListener(this)

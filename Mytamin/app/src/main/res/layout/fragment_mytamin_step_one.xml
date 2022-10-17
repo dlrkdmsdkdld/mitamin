@@ -59,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/mytamin_chain2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/ic_step_one_image"
+            android:background="@drawable/ic_step_one_big"
             >
             <TextView
                 android:fontFamily="@font/appmainfont_bold"

@@ -14,13 +14,15 @@ class HomeRecyclerViewHolder (itemView: View,HomeRecylcerViewInterface:IHomeRecy
     private var step = itemView.home_item_step_text
     private val state = itemView.home_item_state_text
     private val startbtn =itemView.home_item_btn
+    private val image = itemView.home_item_step_image
     init {
         this.MyHomeRecylcerViewInterface=HomeRecylcerViewInterface
         startbtn.setOnClickListener(this)
     }
-    fun bindWithView(stepdata:Int,Statedata:String,on:Boolean=true){
+    fun bindWithView(stepdata:Int,Statedata:String,on:Boolean=true,imageD:Int){
         step.text=stepdata.toString()
         state.text=Statedata
+        image.setImageResource(imageD)
         Log.d(TAG,"바인드함")
         //3,4번째 리싸이클러뷰는 안되게막기위해 설정함 - 추후에 이미지만 보이게하면될듯?
         if (on==false){

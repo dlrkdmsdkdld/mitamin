@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView
 
+import android.content.res.TypedArray
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
     private var stepArray=ArrayList<Int>()
     private var stateArray=ArrayList<String>()
     private var onArray = ArrayList<Boolean>()
+    private var imageArray = ArrayList<Int>()
     init {
         stepArray.add(1)
         stepArray.add(2)
@@ -25,6 +27,10 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
         onArray.add(true)
         onArray.add(true)
         onArray.add(true)
+        imageArray.add(R.drawable.ic_step_one_image)
+        imageArray.add(R.drawable.ic_step_two_image)
+        imageArray.add(R.drawable.ic_step_one_image)
+        imageArray.add(R.drawable.ic_step_one_image)
         this.iHomeRecyclerview = HomeRecyclerview
     }
 
@@ -37,7 +43,7 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
-        holder.bindWithView(this.stepArray[position],this.stateArray[position],this.onArray[position])
+        holder.bindWithView(this.stepArray[position],this.stateArray[position],this.onArray[position],this.imageArray[position])
     }
     fun AlreadyTodayMytamin(no: ArrayList<Boolean>){
         var i=0
