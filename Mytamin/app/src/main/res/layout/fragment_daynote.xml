@@ -79,7 +79,7 @@
                 android:background="@drawable/ic_large_button_abled"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
-
+                android:id="@+id/daynote_no_btn"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

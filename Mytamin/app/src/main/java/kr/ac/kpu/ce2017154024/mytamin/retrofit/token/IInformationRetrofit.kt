@@ -27,5 +27,6 @@ interface IInformationRetrofit {
     @GET("/myday/info")
     fun getMyday() : Call<JsonElement>
 
-
+    @GET("/daynote/list")
+    fun getDaynote() : Call<JsonElement>
 }

@@ -11,11 +11,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/wishlist_state"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:id="@+id/wishlist_title"
         android:textColor="@color/black"
+        android:fontFamily="@font/appmainfont_bold"
+        android:includeFontPadding="false"
         />
     <FrameLayout
         android:layout_width="match_parent"
@@ -27,27 +29,31 @@
             android:id="@+id/wishlist_title_no_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible"
+            android:visibility="visible"
             >
             <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/cat"
+                android:src="@drawable/ic_x_box"
                 android:id="@+id/wishlist_title_no_image"
+                android:layout_marginTop="40dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/wishlist_title_no_image"
-                android:text="@string/daynote_no_title"
+                android:text="@string/wishlist_no_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                android:fontFamily="@font/appmainfont_bold"
+                android:includeFontPadding="false"
                 android:id="@+id/daynote_no_title"
+                android:layout_marginTop="40dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -56,26 +62,35 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/daynote_no_title"
-                android:text="@string/daynote_no_subtitle"
-
+                android:text="@string/wishlist_no_subtitle"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/appmainfont_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/darkGray"
                 />
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="107dp"
+                android:layout_height="40dp"
                 app:layout_constraintTop_toBottomOf="@+id/daynote_no_subtitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/wishlist_no_btn"
+                android:layout_marginTop="24dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/appmainfont_bold"
+                android:includeFontPadding="false"
                 android:textColor="@color/background_white"
                 android:background="@drawable/ic_large_button_abled"
+                android:id="@+id/daynote_no_btn"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <ScrollView
+            android:id="@+id/wishlist_title_yes_layout"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/wishlist_title_yes_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView

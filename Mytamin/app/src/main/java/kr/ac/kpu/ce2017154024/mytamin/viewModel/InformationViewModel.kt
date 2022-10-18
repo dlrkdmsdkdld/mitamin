@@ -50,6 +50,7 @@ class InformationViewModel : ViewModel() {
     fun getMydayAPI(){
         InformationRetrofitManager.instance.getMyday{ responseStatus, mydayData ->
             if (responseStatus == RESPONSE_STATUS.OKAY)setMydayData(mydayData)
+            Log.d(TAG,"getMydayAPI mydayData ->$mydayData ")
         }
     }
 

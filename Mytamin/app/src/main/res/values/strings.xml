@@ -100,5 +100,7 @@
     <string name="daynote_no_title">&#160;&#160;&#160;&#160;&#160;아직 작성된\n마이데이 노트가 없어요.</string>
     <string name="daynote_no_subtitle">마이데이를 기록해주세요!</string>
     <string name="wishlist_hidden_title">숨겨진 리스트</string>
+    <!--위시리스트-->
+
 
 </resources>

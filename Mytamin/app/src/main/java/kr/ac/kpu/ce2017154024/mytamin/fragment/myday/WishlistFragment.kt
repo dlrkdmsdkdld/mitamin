@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_wishlist.*
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.IWishRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.WishlistRecyclerAdapter
@@ -13,12 +15,14 @@ import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerVi
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentWishlistBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 
 
 class WishlistFragment : Fragment(), IWishRecyclerAdapter {
     private var mBinding : FragmentWishlistBinding?=null
     private lateinit var myWishlistRecyclerAdapter: WishlistRecyclerAdapter
     private lateinit var HiddenWishlistRecyclerAdapter: WishlistRecyclerAdapter
+    private val myMydayViewmodel: MydayViewmodel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +30,13 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter {
     ): View? {
         val binding = FragmentWishlistBinding.inflate(inflater,container,false)
         mBinding =binding
-
+        myMydayViewmodel.getWishlistContent.observe(viewLifecycleOwner , Observer {
+            if (it) {
+                mBinding?.wishlistTitleYesLayout?.visibility = View.VISIBLE
+                mBinding?.wishlistTitleNoLayout?.visibility=View.INVISIBLE
+                mBinding?.daynoteNoBtn?.isEnabled=false
+            }
+        })
         Log.d(Constant.TAG,"WishlistFragment onCreateView")
         return mBinding?.root
     }
