@@ -6,3 +6,10 @@ class informationClass {
 data class ProfileData(val nickname:String,val profileImgUrl:String?,val beMyMessage:String?){
 
 }
+data class MydayData(val myDayMMDD:String,val dday:String,val comment:String){}
+
+enum class WishListType {
+    Hidden,
+    Normal
+}
+data class WishList(val type:WishListType,val wishId:Int , val wishText:String,val count:Int){}

@@ -21,4 +21,11 @@ interface IInformationRetrofit {
     @PATCH("/user/nickname/{nickname}")
     fun CorrectionNickname(@Path("nickname") nickname:String) : Call<JsonElement>
 
+    @GET("/wish/list")
+    fun getWishlist() : Call<JsonElement>
+
+    @GET("/myday/info")
+    fun getMyday() : Call<JsonElement>
+
+
 }

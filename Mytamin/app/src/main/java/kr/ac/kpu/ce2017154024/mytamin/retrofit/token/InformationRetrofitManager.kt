@@ -3,7 +3,9 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 import android.util.Log
 import com.google.gson.JsonElement
 import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
+import kr.ac.kpu.ce2017154024.mytamin.model.MydayData
 import kr.ac.kpu.ce2017154024.mytamin.model.ProfileData
+import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -98,19 +100,64 @@ class InformationRetrofitManager {
             ?.enqueue(object : retrofit2.Callback<JsonElement> {
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                     response.body()?.let {
-                        Log.d(TAG, "user CorrectionBeMyMessage onResponse ${response}" )
+                        Log.d(TAG, "user CorrectionNickname onResponse ${response}" )
                         val body =it.asJsonObject
                         //TODO 잊지말고 토큰 추가해야함
                         val nickname = body.get("statusCode").asInt
-
                         completion(RESPONSE_STATUS.OKAY,nickname)
-
                     }
                 }
-
                 override fun onFailure(call: Call<JsonElement>, t: Throwable) {
-                    Log.d(TAG, "CorrectionBeMyMessage onFailure ${t}" )
+                    Log.d(TAG, "CorrectionNickname onFailure ${t}" )
                     completion(RESPONSE_STATUS.OKAY,null)
+                }
+
+            })
+
+    }
+    fun getMyday(completion:(RESPONSE_STATUS,MydayData?) -> Unit){
+        iInformationRetrofit?.getMyday()
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        Log.d(TAG, "user getMyday onResponse ${response}" )
+                        val data =it.asJsonObject.get("data").asJsonObject
+                        //TODO 잊지말고 토큰 추가해야함
+                        val myDayMMDD = data.get("myDayMMDD").asString
+                        val dday = data.get("dday").asString
+                        val comment = data.get("comment").asString
+                        val result = MydayData(myDayMMDD,dday,comment)
+                        completion(RESPONSE_STATUS.OKAY,result)
+                    }
+                }
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "getMyday onFailure ${t}" )
+                    completion(RESPONSE_STATUS.OKAY,null)
+                }
+
+            })
+
+    }
+    fun getWishlist(completion:(RESPONSE_STATUS, WishList?) -> Unit){
+        iInformationRetrofit?.getWishlist()
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        Log.d(TAG, "user getWishlist onResponse ${response}" )
+                        val data =it.asJsonObject.get("data").asJsonObject
+                        //TODO 잊지말고 토큰 추가해야함
+                        if (data.get("published").isJsonNull  ){}
+
+//                        val myDayMMDD = data.get("myDayMMDD").asString
+//                        val dday = data.get("dday").asString
+//                        val comment = data.get("comment").asString
+//                        val result = MydayData(myDayMMDD,dday,comment)
+//                        completion(RESPONSE_STATUS.OKAY,result)
+                    }
+                }
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "getWishlist onFailure ${t}" )
+                   // completion(RESPONSE_STATUS.OKAY,null)
                 }
 
             })

@@ -155,6 +155,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             app:layout_constraintTop_toBottomOf="@+id/user_myday_subtitle"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="16dp"
@@ -165,6 +166,20 @@
             android:id="@+id/user_time_text"
             android:fontFamily="@font/appmainfont_bold"
             android:includeFontPadding="false"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="50dp"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toEndOf="@+id/user_time_text"
+            app:layout_constraintTop_toBottomOf="@+id/user_myday_subtitle"
+            android:background="@drawable/ic_dday_btn"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="8dp"
+
+            android:textColor="@color/primary"
+            android:fontFamily="@font/appsubfont_r"
+            android:includeFontPadding="false"
+            android:id="@+id/user_time_btn"
             />
         <TextView
             android:layout_width="wrap_content"

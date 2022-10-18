@@ -11,11 +11,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/daynote_state"
-        android:textSize="30sp"
-        android:layout_marginTop="10dp"
+        android:textSize="24sp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
         android:textColor="@color/black"
         android:id="@+id/daynote_title"
+        android:fontFamily="@font/appmainfont_bold"
+        android:includeFontPadding="false"
         />
     <FrameLayout
         android:layout_width="match_parent"
@@ -34,7 +36,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/example_image"
+                android:src="@drawable/ic_x_box"
+                android:layout_marginTop="40dp"
                 android:id="@+id/wishlist_title_no_image"
                 />
             <TextView
@@ -45,8 +48,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:id="@+id/wishlist_no_title"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/appmainfont_bold"
+                android:includeFontPadding="false"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -56,17 +62,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/wishlist_no_title"
                 android:text="@string/wishlist_no_subtitle"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/appmainfont_medium"
+                android:includeFontPadding="false"
 
                 />
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="107dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
                 app:layout_constraintTop_toBottomOf="@+id/wishlist_no_subtitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/wishlist_no_btn"
                 android:textColor="@color/background_white"
                 android:background="@drawable/ic_large_button_abled"
+                android:fontFamily="@font/appmainfont_bold"
+                android:includeFontPadding="false"
+
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

@@ -63,6 +63,14 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
             }
 
         })
+
+        myInformationViewModel.getMydayData.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG,"getMydayData -> $it   ")
+            mBinding?.userTimeText?.text = it.myDayMMDD
+            mBinding?.userTimeBtn?.text = it.dday
+            mBinding?.userStateText?.text = it.comment
+        })
+
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
