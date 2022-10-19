@@ -31,6 +31,7 @@ import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityProfileEditBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.information.BottomProfileEditFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MyatminCategoryFragment
+import kr.ac.kpu.ce2017154024.mytamin.model.EditProfile
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.*
@@ -53,8 +54,8 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding: ActivityProfileEditBinding
     private var fileToUpload = null
     private lateinit var nickname:String
+    private lateinit var tobemessage:String
     private lateinit var customProgressDialog: Dialog
-    private var okNickname:Boolean =false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding=ActivityProfileEditBinding.inflate(layoutInflater)
@@ -67,7 +68,11 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         }
         if (intent.hasExtra("nickname")){
             nickname = intent.getStringExtra("nickname").toString()
-
+            mbinding?.profileEditNicknameText.setText("$nickname")
+        }
+        if (intent.hasExtra("tobemessage")){
+            tobemessage = intent.getStringExtra("tobemessage").toString()
+            mbinding?.profileEditTobeText.setText("$tobemessage")
         }
         Log.d(Constant.TAG,"ProfileEditActivity nickname ->$nickname")
         mbinding?.profileEditImage.setOnClickListener(this)
@@ -115,16 +120,14 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
                     Log.d(Constant.TAG,"api 호출 성공 check  = $checkOverlapData")
                     if (checkOverlapData?.status==200){
                         result = checkOverlapData.result
-                        if (result==false){//"@drawable/ic_baseline_check_24"
+                        if (!result || nickname == query){//"@drawable/ic_baseline_check_24"
                             mbinding?.profileEditNicknameLayout?.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_check_24)
                             mbinding?.profileEditNicknameLayout?.helperText=JOINSTRING.goodNickname
                             setEnableCompleteBtn(true)
-                            okNickname=true
                         }else{
                             mbinding?.profileEditNicknameLayout?.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_error_24)
                             mbinding?.profileEditNicknameLayout?.helperText=JOINSTRING.wrongNickNameoverlap
                             setEnableCompleteBtn(false)
-                            okNickname=false
                         }
                     }
                 }
@@ -146,11 +149,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
                 onBackPressed()
             }
             mbinding?.profileEditCompletebtn->{
-                if (mbinding?.profileEditTobeText.text.toString() !=""){
-                    completeBtn(correctionImage,okNickname,false)
-                }else{
-                    completeBtn(correctionImage,okNickname,true)
-                }
+                completeBtn()
             }
 
         }
@@ -250,51 +249,28 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
         }
     }
-    fun completeBtn(image:Boolean,nickname:Boolean, tobe:Boolean){
+    fun completeBtn(){
         val tmpNickname = mbinding?.profileEditNicknameText.text.toString()
         customProgressDialog.show()
-        var isImageComplete = !image
-        var isnicknameComplete = !nickname
-        var istobeComplete = tobe
+        val bitmap :Bitmap = mbinding?.profileEditImage.drawable.toBitmap()
+        val bitmapRequestBody = bitmap?.let {  BitmapRequestBody(it)}
+        val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
+        Log.d(TAG,"correctionImage -> $correctionImage")
+        val editTobe=mbinding?.profileEditTobeText.text.toString()
+        val editname=mbinding?.profileEditNicknameText.text.toString()
         if (correctionImage){
-            val bitmap :Bitmap = mbinding?.profileEditImage.drawable.toBitmap()
-            val bitmapRequestBody = bitmap?.let {  BitmapRequestBody(it)}
-            val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
-            InformationRetrofitManager.instance.oneImageAPICall(bitmapMultipartBody, completion = {responseStatus, i ->
-                isImageComplete =true
-                if (istobeComplete &&(isnicknameComplete || tmpNickname=="")  &&isImageComplete){
-                    startMainActivity()
-                }
-            })
+            val result = EditProfile(isImgEdited = "T" ,nickname = editname, beMyMessage = editTobe )
+            InformationRetrofitManager.instance.editProfile(file = bitmapMultipartBody,result){responseStatus, i ->
+                startMainActivity()
+                Log.d(TAG, "statuscode - > $i ")
+            }
         }else{
-
-        }
-        if (!istobeComplete){
-            InformationRetrofitManager.instance.CorrectionBeMyMessage(mbinding?.profileEditTobeText.text.toString()) { RESPONSE_STATUS, it ->
-                istobeComplete =true
-                if (istobeComplete &&(isnicknameComplete || tmpNickname=="") &&isImageComplete){
-                    startMainActivity()
-                    Log.d(TAG,"istobeComplete ->$istobeComplete  isnicknameComplete->$isnicknameComplete isImageComplete ->$isImageComplete ")
-                }
+            val result = EditProfile(isImgEdited = "F" ,nickname = editname, beMyMessage = editTobe )
+            InformationRetrofitManager.instance.editProfile(file = null,result){responseStatus, i ->
+                startMainActivity()
             }
 
         }
-        if (okNickname  && tmpNickname!="" ){
-            InformationRetrofitManager.instance.CorrectionNickname(tmpNickname){reponsestatus,statuscode->
-                if (RESPONSE_STATUS.OKAY ==reponsestatus  ){
-                    isnicknameComplete = true
-                    if (istobeComplete &&(isnicknameComplete || tmpNickname=="")  &&isImageComplete){
-                        startMainActivity()
-                        Log.d(TAG,"istobeComplete ->$istobeComplete  isnicknameComplete->$isnicknameComplete isImageComplete ->$isImageComplete ")
-                    }
-                }
-
-
-            }
-        }
-        if (istobeComplete &&(isnicknameComplete || tmpNickname=="")  &&isImageComplete)startMainActivity()
-
-
 
     }
     fun tobeAPICall(tobe:String){

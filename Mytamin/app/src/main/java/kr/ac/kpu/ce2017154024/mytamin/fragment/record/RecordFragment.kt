@@ -6,13 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentRecordBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 
 
-class RecordFragment : Fragment() {
+class RecordFragment : Fragment(),View.OnClickListener {
     private var mBinding : FragmentRecordBinding?=null
 
     override fun onCreateView(
@@ -22,11 +24,21 @@ class RecordFragment : Fragment() {
         val binding = FragmentRecordBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(Constant.TAG,"RecordFragment onCreateView")
+        mBinding?.recordCategoryLayout?.setOnClickListener(this)
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null
         super.onDestroyView()
         Log.d(Constant.TAG,"RecordFragment onDestroyView")
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            mBinding?.recordCategoryLayout ->{
+                findNavController().navigate(R.id.action_recordFragment_to_selectRecordFragment)
+            }
+
+        }
     }
 }

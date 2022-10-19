@@ -106,6 +106,7 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         val intent= Intent(context, ProfileEditActivity::class.java)
         intent.putExtra("profile_image",bos.toByteArray())
         intent.putExtra("nickname",myInformationViewModel.getprofile.value?.nickname)
+        intent.putExtra("tobemessage",myInformationViewModel.getprofile.value?.beMyMessage)
         startActivity(intent)
 
     }

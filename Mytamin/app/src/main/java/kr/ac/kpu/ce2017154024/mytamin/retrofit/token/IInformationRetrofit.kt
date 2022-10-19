@@ -1,8 +1,10 @@
 package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import com.google.gson.JsonElement
+import kr.ac.kpu.ce2017154024.mytamin.model.EditProfile
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -13,6 +15,13 @@ interface IInformationRetrofit {
     fun editProfileImage(@Part file:MultipartBody.Part): Call<JsonElement>
     @GET("/user/profile")
     fun getProfile() : Call<JsonElement>
+
+    @Multipart
+    @PUT("/user/profile")
+    fun editProfile(@Part file:MultipartBody.Part? ,@Part("isImgEdited") isImgEdited: RequestBody,@Part("nickname") nickname: RequestBody,
+                    @Part("beMyMessage") beMyMessage: RequestBody
+                    ) : Call<JsonElement>
+
 
 
     @PATCH("/user/bemy-msg")

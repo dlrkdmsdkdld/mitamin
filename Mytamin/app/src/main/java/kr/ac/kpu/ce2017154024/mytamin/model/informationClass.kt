@@ -13,3 +13,4 @@ enum class WishListType {
     Normal
 }
 data class WishList(val type:WishListType,val wishId:Int , val wishText:String,val count:Int){}
+data class EditProfile(val isImgEdited:String,val nickname:String , val beMyMessage:String)

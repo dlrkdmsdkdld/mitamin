@@ -6,14 +6,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
-import kr.ac.kpu.ce2017154024.mytamin.model.MydayData
-import kr.ac.kpu.ce2017154024.mytamin.model.ProfileData
-import kr.ac.kpu.ce2017154024.mytamin.model.WishList
+import kr.ac.kpu.ce2017154024.mytamin.model.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Multipart
@@ -25,9 +25,14 @@ class InformationRetrofitManager {
     }
     private val iInformationRetrofit:IInformationRetrofit? =TokenRetrofitClient.getClient()?.create(IInformationRetrofit::class.java)
 
-    fun oneImageAPICall(file: MultipartBody.Part,completion:(RESPONSE_STATUS,Int?) -> Unit){
+    private fun String?.toPlainRequestBody() = requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
+    fun editProfile(file: MultipartBody.Part?, body: EditProfile, completion:(RESPONSE_STATUS, Int?) -> Unit){
         CoroutineScope(Dispatchers.IO).launch {
-            iInformationRetrofit?.editProfileImage(file)
+            val bool : RequestBody = body.isImgEdited.toRequestBody()
+            val nicknameRequestBody : RequestBody = body.nickname.toRequestBody()
+            val beMyMessageRequestBody : RequestBody = body.beMyMessage.toRequestBody()
+//            val beMyMessageRequestBody : RequestBody = body.beMyMessage.toPlainRequestBody()
+            iInformationRetrofit?.editProfile(file = file, isImgEdited = bool, nickname = nicknameRequestBody,beMyMessage = beMyMessageRequestBody)
                 ?.enqueue(object : retrofit2.Callback<JsonElement> {
                     override fun onResponse(
                         call: Call<JsonElement>,
