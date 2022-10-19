@@ -13,7 +13,7 @@
                 android:color="@color/LineColorFat" />
 
             <solid android:color="@color/background_white" />
-            <corners android:radius="12dp"></corners>
+            <corners android:radius="8dp"></corners>
         </shape>
     </item>
 
