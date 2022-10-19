@@ -9,10 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.activity.RecordDaynoteActivity
+import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentDaynoteBinding
-import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentWishlistBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 
@@ -46,7 +44,7 @@ class DaynoteFragment : Fragment(),View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0){
             mBinding?.daynoteNoBtn ->{
-                val intent = Intent(requireContext(),RecordDaynoteActivity::class.java)
+                val intent = Intent(requireContext(),DaynoteRecordActivity::class.java)
                 startActivity(intent)
             }
         }

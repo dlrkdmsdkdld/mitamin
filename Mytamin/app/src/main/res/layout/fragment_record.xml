@@ -59,6 +59,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/record_recycler_image"
+                tools:listitem="@layout/record_item"
                 />
             <ImageButton
                 android:layout_width="121dp"
@@ -66,6 +67,7 @@
                 android:background="@drawable/ic_select_picture"
                 app:layout_constraintStart_toEndOf="@+id/record_recycler_image"
                 app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/record_new_btn"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,6 +95,15 @@
             android:textColor="@color/black"
             android:layout_marginLeft="16dp"
             android:id="@+id/record_category_text"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/ic_icon_arrow_right_black"
+            android:layout_marginRight="16.91dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

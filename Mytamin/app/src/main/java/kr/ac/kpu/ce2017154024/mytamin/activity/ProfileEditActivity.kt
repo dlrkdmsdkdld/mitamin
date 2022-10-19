@@ -155,11 +155,11 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         }
     }
     fun choiceOption(select: choice){
-        correctionImage=true
         when(select){
             choice.basic ->{
                 Log.d(TAG,"기본선택")
                 mbinding?.profileEditImage.setImageResource(R.drawable.cat)
+                correctionImage=true
             }
             choice.gallery ->{
                 Log.d(TAG,"갤러리선택")
@@ -206,7 +206,8 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
                 val selectedImageURI : Uri? = data?.data
                 if( selectedImageURI != null) {
                     showImage(selectedImageURI)
-                  //  mbinding?.profileEditImage?.setImageURI(selectedImageURI)
+                    correctionImage=true
+                    //  mbinding?.profileEditImage?.setImageURI(selectedImageURI)
 //                    val file = File(getFullPathFromUri(this,selectedImageURI))
 //                    val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
 //                    val fileToUpload = MultipartBody.Part.createFormData("file",file.name,requestBody)

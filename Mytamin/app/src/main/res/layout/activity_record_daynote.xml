@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.RecordDaynoteActivity">
+    tools:context=".activity.DaynoteRecordActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +52,10 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="@string/user_myday_complete"
+            android:textColor="@color/background_white"
             android:id="@+id/record_complete_btn"
+            android:fontFamily="@font/appmainfont_medium"
+            android:includeFontPadding="false"
             />
 
 
