@@ -93,7 +93,6 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
             resultBoolean.add(!(it.careIsDone))
             myHomeRecyclerAdapter.AlreadyTodayMytamin(resultBoolean) // 이미 한것은 다시 못하게 막음
             home_recyclerView.adapter = myHomeRecyclerAdapter //어뎁터연결
-
             if (it.reportIsDone == true ||it.careIsDone ==true ){
                 myHomeViewModel.LatestMytaminAPI(statusData)
 

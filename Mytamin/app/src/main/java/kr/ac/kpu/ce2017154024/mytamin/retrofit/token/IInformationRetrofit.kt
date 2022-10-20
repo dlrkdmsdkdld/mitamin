@@ -38,4 +38,9 @@ interface IInformationRetrofit {
 
     @GET("/daynote/list")
     fun getDaynote() : Call<JsonElement>
+
+
+    @Multipart
+    @POST("/img/list")
+    fun sendImageList(@Part file:List<MultipartBody.Part?>) : Call<JsonElement>
 }

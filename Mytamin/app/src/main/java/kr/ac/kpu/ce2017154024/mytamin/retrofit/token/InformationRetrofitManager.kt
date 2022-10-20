@@ -255,5 +255,31 @@ class InformationRetrofitManager {
                 })
         }
     }
+    fun imageListAPI(file: List<MultipartBody.Part?>, completion:(RESPONSE_STATUS, Int?) -> Unit){
+        CoroutineScope(Dispatchers.IO).launch {
+            iInformationRetrofit?.sendImageList(file = file)
+                ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                    override fun onResponse(
+                        call: Call<JsonElement>,
+                        response: Response<JsonElement>
+                    ) {
+                        Log.d(TAG, "이미지전송성공response -> $response")
+                        response.body()?.let {
+                            val body = it.asJsonObject
+                            val statusCode = body.get("statusCode").asInt
+                            completion(RESPONSE_STATUS.OKAY, statusCode)
+                            Log.d(TAG, "imageListAPI response message:${statusCode} ")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                        Log.d(TAG, "이미지전송실패 이유 -> $t")
+                        completion(RESPONSE_STATUS.FAIL, null)
+                    }
+
+                })
+        }
+    }
+
 
 }
