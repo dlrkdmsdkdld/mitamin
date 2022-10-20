@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -28,6 +29,9 @@ import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentRecordBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
+import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
@@ -39,7 +43,7 @@ import java.io.IOException
 class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     private var mBinding : FragmentRecordBinding?=null
     private lateinit var myRecyclerView :recordRecyclerAdapter
-    private var myBitmapArray=ArrayList<Bitmap>()
+    private val myRecordViewmodel: RecordViewmodel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +59,10 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myRecyclerView = recordRecyclerAdapter(this)
-
+        if (myRecordViewmodel.getbitmapList.value != null){
+            Log.d(TAG ,"비트맵 어레이 크기 -> ${myRecordViewmodel.getbitmapList.value!!.size}" )
+            myRecyclerView.submitBitmap(myRecordViewmodel.getbitmapList.value!!)
+        }
         mBinding?.recordRecyclerImage?.adapter=myRecyclerView
 
     }
@@ -80,7 +87,9 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     }
 
     override fun onSearchItemClicked(position: Int) {
-        TODO("Not yet implemented")
+        Log.d(TAG, "posisiton -> $position")
+        myRecordViewmodel.removeBitmapList(position)
+        myRecyclerView.notifyDataSetChanged()
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -122,9 +131,11 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         GlobalScope.launch {    // 1
             val bitmap = getBitmapFromUri(uri) // 2
             withContext(Dispatchers.Main) {
-                myRecyclerView.addBitmap(bitmap)
-                myBitmapArray.add(bitmap)
+               // myRecyclerView.addBitmap(bitmap)
+                Log.d(TAG , " myRecycler view -> ${myRecyclerView.itemCount}")
+                myRecordViewmodel.addbitmapList(bitmap)
                 myRecyclerView.notifyDataSetChanged()
+                Log.d(TAG , " myRecycler view 2-> ${myRecyclerView.itemCount}")
             }
         }
     }

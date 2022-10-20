@@ -20,6 +20,9 @@ class recordRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView):RecyclerView.Ad
     fun addBitmap(bitmap: Bitmap){
         this.bitmapArray.add(bitmap)
     }
+    fun submitBitmap(bitmapArr: ArrayList<Bitmap>){
+        bitmapArray =bitmapArr
+    }
     override fun onBindViewHolder(holder: recordRecycleerViewHolder, position: Int) {
         holder.bindWithView(bitmapArray[position])
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -13,15 +14,19 @@ import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityMainBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityRecordDaynoteBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
+import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
 
 class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding: ActivityRecordDaynoteBinding
     private lateinit var navController:NavController
+    private lateinit var myRecordViewmodel: RecordViewmodel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_daynote_record)
         mbinding = ActivityRecordDaynoteBinding.inflate(layoutInflater)
         setContentView(mbinding.root)
+        myRecordViewmodel= ViewModelProvider(this).get(RecordViewmodel::class.java)
 
         //네비게이션들을 담는 호스트
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.record_container) as NavHostFragment
