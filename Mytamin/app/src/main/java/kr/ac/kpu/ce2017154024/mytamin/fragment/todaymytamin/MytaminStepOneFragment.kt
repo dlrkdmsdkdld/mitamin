@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kotlinx.android.synthetic.main.fragment_mytamin_step_one.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
@@ -40,14 +39,14 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
             mBinding?.mytaminTimerText?.text = parsetime
             mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_one_title
             mBinding?.mytaminStepOneDiagnosis?.text = MYTAMIN.step_one_diagnosis
-            mBinding?.mytaminStepOneImage?.background= getDrawable(requireContext(),R.drawable.ic_step_one_big)
+            mBinding?.mytaminStepOneTimerImage?.background = getDrawable(requireContext(),R.drawable.ic_step_one_image)
         }else{
             timer=15
             val parsetime=timer.parseIntToTimeLine()
             mBinding?.mytaminTimerText?.text = parsetime
             mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_two_title
             mBinding?.mytaminStepOneDiagnosis?.text = MYTAMIN.step_two_diagnosis
-            mBinding?.mytaminStepOneImage?.background= getDrawable(requireContext(),R.drawable.ic_step_two_image_big)
+            mBinding?.mytaminStepOneTimerImage?.background = getDrawable(requireContext(),R.drawable.ic_step_two_image)
         }
         todayMytaminViewModel.timerset(timer)
         mBinding?.mytaminStartBtn?.setOnClickListener(this)

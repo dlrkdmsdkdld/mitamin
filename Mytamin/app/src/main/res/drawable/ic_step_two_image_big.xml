@@ -4,9 +4,11 @@
     android:viewportWidth="240"
     android:viewportHeight="240">
   <group>
+
     <clip-path
         android:pathData="M80,12L160,12A60,60 0,0 1,220 72L220,152A60,60 0,0 1,160 212L80,212A60,60 0,0 1,20 152L20,72A60,60 0,0 1,80 12z"/>
     <path
+
         android:pathData="M80,12L160,12A60,60 0,0 1,220 72L220,152A60,60 0,0 1,160 212L80,212A60,60 0,0 1,20 152L20,72A60,60 0,0 1,80 12z"
         android:fillColor="#ffffff"/>
     <group>

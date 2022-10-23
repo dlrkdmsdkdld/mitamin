@@ -1,6 +1,5 @@
 package kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView
 
-import android.content.res.TypedArray
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -29,8 +28,8 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
         onArray.add(true)
         imageArray.add(R.drawable.ic_step_one_image)
         imageArray.add(R.drawable.ic_step_two_image)
-        imageArray.add(R.drawable.ic_step_one_image)
-        imageArray.add(R.drawable.ic_step_one_image)
+        imageArray.add(R.drawable.ic_step_two_image)
+        imageArray.add(R.drawable.ic_step_two_image)
         this.iHomeRecyclerview = HomeRecyclerview
     }
 
