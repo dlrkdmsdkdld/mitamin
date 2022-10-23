@@ -28,5 +28,6 @@
     <color name="darkGray">#666666</color>
     <color name="LineColorFat">#DBDBDB</color>
     <color name="LineColorshort">#EDEDED</color>
+    <color name="TextColorshort">#D9D9D9</color>
     <color name="transparent">#00000000</color>
 </resources>

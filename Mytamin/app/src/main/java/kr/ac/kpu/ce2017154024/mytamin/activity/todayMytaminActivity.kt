@@ -98,15 +98,13 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
             1->{
                 val MytaminStepOneFragment = MytaminStepOneFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
-                mytamin_vitamin_right.visibility=View.VISIBLE
-                mytamin_vitamin_left.visibility=View.INVISIBLE
+
                 mytamin_indicator_two.setImageResource(R.drawable.ic_idcator_no)
             }
             2->{
                 val MytaminStepOneFragment = MytaminStepOneFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
-                mytamin_vitamin_right.visibility=View.INVISIBLE
-                mytamin_vitamin_left.visibility=View.VISIBLE
+
                 mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
                 mytamin_indicator_three.setImageResource(R.drawable.ic_idcator_no)
 

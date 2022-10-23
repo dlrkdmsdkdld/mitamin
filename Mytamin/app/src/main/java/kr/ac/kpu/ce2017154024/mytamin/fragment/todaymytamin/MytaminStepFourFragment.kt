@@ -1,6 +1,7 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -129,6 +130,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
     private fun createTagChip(context: Context, statetext: String): Chip {
         return Chip(context).apply {
             setChipBackgroundColorResource(R.color.chip_background_color)
+            setTextColor(resources.getColorStateList(R.color.chip_text_color))
 
 //            setBackgroundResource(R.drawable.ic_chip)
             isCheckedIconVisible=false
@@ -136,7 +138,6 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
             isCheckable=true
             isClickable=true
             tag = statetext
-            setTextColor(resources.getColor(R.color.Gray))
             chipStrokeWidth= 1F
             setChipStrokeColorResource(R.color.Gray)
         }
