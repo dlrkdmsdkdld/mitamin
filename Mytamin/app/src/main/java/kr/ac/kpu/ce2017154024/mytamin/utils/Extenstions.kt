@@ -1,6 +1,7 @@
 package kr.ac.kpu.ce2017154024.mytamin.utils
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import android.text.Editable
@@ -11,12 +12,23 @@ import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_one
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_two
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
+import okio.BufferedSink
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
+
+ class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
+    override fun contentType(): MediaType = "image/jpeg".toMediaType()
+    override fun writeTo(sink: BufferedSink) {
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
+    }
+}
 
 fun Int?.parseIntToTimeLine():String{
     val minute : Int? = this?.div(60)

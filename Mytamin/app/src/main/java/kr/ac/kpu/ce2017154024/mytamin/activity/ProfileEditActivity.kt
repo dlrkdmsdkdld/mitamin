@@ -244,17 +244,12 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
 
         return image
     }
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
-        override fun contentType(): MediaType = "image/jpeg".toMediaType()
-        override fun writeTo(sink: BufferedSink) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
-        }
-    }
+
     fun completeBtn(){
         val tmpNickname = mbinding?.profileEditNicknameText.text.toString()
         customProgressDialog.show()
         val bitmap :Bitmap = mbinding?.profileEditImage.drawable.toBitmap()
-        val bitmapRequestBody = bitmap?.let {  BitmapRequestBody(it)}
+        val bitmapRequestBody = bitmap?.let {  `BitmapRequestBody`(it)}
         val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
         Log.d(TAG,"correctionImage -> $correctionImage")
         val editTobe=mbinding?.profileEditTobeText.text.toString()

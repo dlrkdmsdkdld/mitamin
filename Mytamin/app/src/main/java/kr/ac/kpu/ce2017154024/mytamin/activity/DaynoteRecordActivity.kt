@@ -15,6 +15,7 @@ import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityMainBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityRecordDaynoteBinding
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.utils.BitmapRequestBody
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
@@ -62,7 +63,7 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
                         Log.d(TAG, " 현재 프래그먼트는 record프래그먼트")
                         val imageList = arrayListOf<MultipartBody.Part>()
                         myRecordViewmodel.getbitmapList.value?.forEach {
-                            val bitmapRequestBody = it?.let {  BitmapRequestBody(it)}
+                            val bitmapRequestBody = it?.let {  BitmapRequestBody(it) }
                             val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
                             imageList.add(bitmapMultipartBody)
                         }
@@ -81,12 +82,7 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
 
         }
     }
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
-        override fun contentType(): MediaType = "image/jpeg".toMediaType()
-        override fun writeTo(sink: BufferedSink) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
-        }
-    }
+
      fun permissionDenied(text:String) {
         Toast.makeText(this, "$text", Toast.LENGTH_LONG
         ).show()
