@@ -17,6 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.ManagementActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.MydayActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.ProfileEditActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
@@ -44,7 +45,7 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         mBinding?.informationUserImage?.setOnClickListener(this)
         mBinding?.userMydayBtn?.setOnClickListener(this)
         mBinding?.informationEditBtn?.setOnClickListener(this)
-
+        mBinding?.informationManageBtn?.setOnClickListener(this)
         val tmp = arguments?.getByteArray("Image")
         if (tmp!=null){
             Log.d(Constant.TAG," 전달받은 사진있음")
@@ -92,6 +93,10 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
             }
             mBinding?.userMydayBtn ->{
                 val intent = Intent(context,MydayActivity::class.java)
+                startActivity(intent)
+            }
+            mBinding?.informationManageBtn ->{
+                val intent =Intent(context,ManagementActivity::class.java)
                 startActivity(intent)
             }
         }

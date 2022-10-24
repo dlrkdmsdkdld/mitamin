@@ -88,6 +88,10 @@
     <string name="user_myday_complete">완료</string>
     <string name="user_myday_bottom1">기본 이미지 선택</string>
     <string name="user_myday_bottom2">앨범에서 사진 선택</string>
+    <string name="user_information_title">앱정보</string>
+    <string name="user_information_manage">계정관리</string>
+    <string name="user_information_guide1">서비스 이용약관</string>
+    <string name="user_information_guide2">개인정보 처리방침</string>
     <!--마이데이-->
     <string name="myday_title">마이데이</string>
     <string name="myday_edit">편집</string>
@@ -106,6 +110,12 @@
     <string name="record_comment_hint">코멘트를 남겨주세요</string>
     <string name="record_complete_title">완료한 위시리스트</string>
     <string name="record_complete_btn">선택</string>
+    <!--management-->
+    <string name="management_title">계정관리</string>
+    <string name="management_email">이메일</string>
+    <string name="management_logout">로그아웃</string>
+    <string name="management_exit">회원탈퇴</string>
+    <string name="management_init">기록 초기화</string>
 
 
 </resources>
