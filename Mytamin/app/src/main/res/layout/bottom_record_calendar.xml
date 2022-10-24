@@ -5,15 +5,66 @@
     android:layout_height="match_parent"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
 
+    tools:context=".fragment.record.BottomYearMonthFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
 
-        android:id="@+id/mytamin_bottom_sheet_calendar"
+        android:layout_marginTop="82dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/round_layout_background_gray"
+        />
+    <com.shawnlin.numberpicker.NumberPicker
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/bottom_record_year"
+        app:layout_constraintEnd_toStartOf="@+id/bottom_record_month"
+        app:np_order="ascending"
+        android:showDividers="none"
+        app:np_dividerColor="@color/transparent"
+
+        />
+    <com.shawnlin.numberpicker.NumberPicker
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bottom_record_year"
+        android:layout_marginRight="40dp"
+        android:id="@+id/bottom_record_month"
+        android:layout_marginTop="20dp"
+        app:np_dividerColor="@color/transparent"
+
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_record_month"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/round_layout_background_orange"
+        android:text="@string/mytamin_dialog_btn_positive"
+        android:textColor="@color/background_white"
+        android:fontFamily="@font/appmainfont_medium"
+        android:includeFontPadding="false"
+        android:textSize="16sp"
+        android:id="@+id/bottom_record_btn"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="19dp"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_record_btn"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

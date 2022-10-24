@@ -16,6 +16,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -28,8 +30,10 @@ import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerVi
 import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentRecordBinding
+import kr.ac.kpu.ce2017154024.mytamin.fragment.information.BottomProfileEditFragment
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
 import okhttp3.MediaType
@@ -53,6 +57,18 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         Log.d(Constant.TAG,"RecordFragment onCreateView")
         mBinding?.recordCategoryLayout?.setOnClickListener(this)
         mBinding?.recordNewBtn?.setOnClickListener(this)
+        mBinding?.recordTimeLayout?.setOnClickListener(this)
+
+        myRecordViewmodel.getyear.observe(viewLifecycleOwner, Observer {
+            mBinding?.recordTimeText?.setText("${myRecordViewmodel.getyear.value}년 ${myRecordViewmodel.getmonth.value}월의 마이데이")
+        })
+        myRecordViewmodel.getmonth.observe(viewLifecycleOwner, Observer {
+            mBinding?.recordTimeText?.setText("${myRecordViewmodel.getyear.value}년 ${myRecordViewmodel.getmonth.value}월의 마이데이")
+        })
+
+
+
+
         return mBinding?.root
     }
 
@@ -81,6 +97,10 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
                 val requestPermissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 requestPermissions(requestPermissions,101)
 
+            }
+            mBinding?.recordTimeLayout ->{
+                val calendarFragment = BottomYearMonthFragment()
+                calendarFragment.show(parentFragmentManager,calendarFragment.tag)
             }
 
         }

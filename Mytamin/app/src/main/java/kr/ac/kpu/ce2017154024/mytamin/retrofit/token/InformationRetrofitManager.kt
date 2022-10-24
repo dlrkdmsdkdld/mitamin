@@ -232,14 +232,13 @@ class InformationRetrofitManager {
                     override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                         response.body()?.let {
                             Log.d(TAG, "user getWishlist onResponse $response")
-                            val daynoteList = it.asJsonObject.get("data").asJsonObject.get("daynoteList").asJsonObject
-
-                            if (daynoteList.size()==0){
+                            val data = it.asJsonObject.get("data").asJsonObject
+                            if (data.size()==0){
                                 completion(RESPONSE_STATUS.NO_CONTENT, null)
                                 Log.d(TAG, "daynoteList onResponse nudaynoteList.size() 0")
 
                             }else{
-                                Log.d(TAG, "daynoteList onResponse daynoteList.size() ->${daynoteList.size()}")
+                                Log.d(TAG, "daynoteList onResponse daynoteList.size() ->${data.size()}")
 
                             }
 
