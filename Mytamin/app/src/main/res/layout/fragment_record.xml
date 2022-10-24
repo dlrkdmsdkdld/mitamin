@@ -41,16 +41,19 @@
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
+    <HorizontalScrollView
         app:layout_constraintTop_toBottomOf="@+id/record_time_layout"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
         android:id="@+id/record_scroll"
+        android:orientation="horizontal"
         android:layout_height="121dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            >
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
                 android:layout_height="121dp"
@@ -60,6 +63,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/record_recycler_image"
                 tools:listitem="@layout/record_item"
+                android:nestedScrollingEnabled="false"
                 />
             <ImageButton
                 android:layout_width="121dp"
@@ -72,7 +76,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </ScrollView>
+    </HorizontalScrollView>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"

@@ -1,11 +1,17 @@
 package kr.ac.kpu.ce2017154024.mytamin.viewModel
 
 import android.graphics.Bitmap
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kr.ac.kpu.ce2017154024.mytamin.MyApplication
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMM
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToHome
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToMonth
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToYear
@@ -38,6 +44,30 @@ class RecordViewmodel:ViewModel() {
         bitmapList.value = ArrayList<Bitmap>()
         setYear(parseTimeToYear())
         setmonth(parseTimeToMonth())
+    }
+    private val ok = MutableLiveData<Boolean>()
+    val getok: LiveData<Boolean>
+        get() = ok
+    fun setok(d: Boolean){
+        ok.value = d
+    }
+    fun checkAPI(){
+        val year = getyear.value
+        val month = getmonth.value.parseIntToMM()
+        InformationRetrofitManager.instance.checkrecord("${year}.$month"){responseStatus, b ->
+            if (b==false){
+                Handler(Looper.getMainLooper()).post{
+                    Toast.makeText(MyApplication.instance, "이 날짜는 마이타민 작성불가능합니다.", Toast.LENGTH_SHORT).show()
+                    setok(false)
+                }
+            }else{
+                Handler(Looper.getMainLooper()).post{
+                    Toast.makeText(MyApplication.instance, "이 날짜는 마이타민 작성가능합니다.", Toast.LENGTH_SHORT).show()
+                    setok(true)
+                }
+            }
+
+        }
     }
 
 

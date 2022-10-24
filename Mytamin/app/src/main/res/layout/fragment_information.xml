@@ -1,250 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.HomeFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/ic_icon_title"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="13dp"
-        android:id="@+id/information_logo_image"
-        />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/ic_setting"
-        android:layout_marginTop="13dp"
-        android:layout_marginRight="13dp"
-        android:id="@+id/information_setting_btn"
-        />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/information_setting_btn"
-        android:layout_marginTop="13dp"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/ic_help_circle"
-        android:id="@+id/information_help_btn"
-        />
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="84dp"
-        app:layout_constraintTop_toBottomOf="@+id/information_logo_image"
-        android:background="@drawable/round_layout_subyellow"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/information_layout"
-        android:layout_marginTop="37dp"
-        >
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_home_vitamin"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="250dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent">
 
-        </FrameLayout>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
 
-            android:id="@+id/information_user_image"
-            android:src="@drawable/cat"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="16dp"
-            />
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_correction_black"
-            app:layout_constraintEnd_toEndOf="@+id/information_user_image"
-            app:layout_constraintBottom_toBottomOf="@+id/information_user_image"
-            android:id="@+id/information_edit_btn"
-            />
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/information_user_image"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_icon_title"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="22dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/appmainfont_bold"
-            android:includeFontPadding="false"
-            android:id="@+id/information_bemy_text"
+            android:layout_marginTop="13dp"
+            android:id="@+id/information_logo_image"
             />
-        <TextView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/appmainfont_bold"
-            android:includeFontPadding="false"
-            app:layout_constraintTop_toBottomOf="@+id/information_bemy_text"
-            app:layout_constraintStart_toEndOf="@+id/information_user_image"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/information_nickname_text"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/information_layout"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/round_layout_stroke_gray"
-        android:id="@+id/information_myday_layout"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/user_mydaytitle"
-            android:includeFontPadding="false"
-            android:fontFamily="@font/appmainfont_bold"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:id="@+id/user_myday_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/ic_setting"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="13dp"
+            android:id="@+id/information_setting_btn"
             />
-        <TextView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/user_myday_title"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/user_myday_subtitle1"
-            android:textSize="14dp"
-            android:id="@+id/user_myday_subtitle"
-            android:fontFamily="@font/appsubfont_r"
-            android:includeFontPadding="false"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toBottomOf="@+id/user_myday_subtitle"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/user_myday_day"
-            android:textSize="24dp"
-            android:textColor="@color/black"
-            android:id="@+id/user_time_text"
-            android:fontFamily="@font/appmainfont_bold"
-            android:includeFontPadding="false"
-            />
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="50dp"
-            android:layout_height="24dp"
-            app:layout_constraintStart_toEndOf="@+id/user_time_text"
-            app:layout_constraintTop_toBottomOf="@+id/user_myday_subtitle"
-            android:background="@drawable/ic_dday_btn"
-            android:layout_marginTop="14dp"
-            android:layout_marginLeft="8dp"
-
-            android:textColor="@color/primary"
-            android:fontFamily="@font/appsubfont_r"
-            android:includeFontPadding="false"
-            android:id="@+id/user_time_btn"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/user_myday_state"
-            app:layout_constraintTop_toBottomOf="@+id/user_time_text"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
-            android:textSize="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/user_state_text"
-            android:fontFamily="@font/appmainfont_medium"
-            android:includeFontPadding="false"
-            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/information_setting_btn"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/ic_help_circle"
+            android:id="@+id/information_help_btn"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            app:layout_constraintTop_toBottomOf="@+id/user_state_text"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="84dp"
+            app:layout_constraintTop_toBottomOf="@+id/information_logo_image"
+            android:background="@drawable/round_layout_subyellow"
+            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/round_layout_background_orange"
-            android:drawableRight="@drawable/icon_arrow_right_small_mono"
-            android:id="@+id/user_myday_Btn"
+            android:id="@+id/information_layout"
+            android:layout_marginTop="37dp"
             >
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_home_vitamin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginLeft="250dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:id="@+id/information_user_image"
+                android:src="@drawable/cat"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="16dp"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_correction_black"
+                app:layout_constraintEnd_toEndOf="@+id/information_user_image"
+                app:layout_constraintBottom_toBottomOf="@+id/information_user_image"
+                android:id="@+id/information_edit_btn"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/user_myday_btn"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/information_user_image"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/user_btn_text"
-                android:textColor="@color/background_white"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="22dp"
                 android:textSize="16sp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:fontFamily="@font/appmainfont_medium"
+                android:textColor="@color/black"
+                android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
+                android:id="@+id/information_bemy_text"
                 />
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/icon_arrow_right_small_mono"
-                app:layout_constraintStart_toEndOf="@+id/user_btn_text"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="8dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/appmainfont_bold"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/information_bemy_text"
+                app:layout_constraintStart_toEndOf="@+id/information_user_image"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/information_nickname_text"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/information_layout"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/round_layout_stroke_gray"
+            android:id="@+id/information_myday_layout"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/user_mydaytitle"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/appmainfont_bold"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:id="@+id/user_myday_title"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/user_myday_title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/user_myday_subtitle1"
+                android:textSize="14dp"
+                android:id="@+id/user_myday_subtitle"
+                android:fontFamily="@font/appsubfont_r"
+                android:includeFontPadding="false"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@+id/user_myday_subtitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/user_myday_day"
+                android:textSize="24dp"
+                android:textColor="@color/black"
+                android:id="@+id/user_time_text"
+                android:fontFamily="@font/appmainfont_bold"
+                android:includeFontPadding="false"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="50dp"
+                android:layout_height="24dp"
+                app:layout_constraintStart_toEndOf="@+id/user_time_text"
+                app:layout_constraintTop_toBottomOf="@+id/user_myday_subtitle"
+                android:background="@drawable/ic_dday_btn"
+                android:layout_marginTop="14dp"
+                android:layout_marginLeft="8dp"
+
+                android:textColor="@color/primary"
+                android:fontFamily="@font/appsubfont_r"
+                android:includeFontPadding="false"
+                android:id="@+id/user_time_btn"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_myday_state"
+                app:layout_constraintTop_toBottomOf="@+id/user_time_text"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/user_state_text"
+                android:fontFamily="@font/appmainfont_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/user_state_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/round_layout_background_orange"
+                android:drawableRight="@drawable/icon_arrow_right_small_mono"
+                android:id="@+id/user_myday_Btn"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user_myday_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/user_btn_text"
+                    android:textColor="@color/background_white"
+                    android:textSize="16sp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/appmainfont_medium"
+                    android:includeFontPadding="false"
+                    />
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/icon_arrow_right_small_mono"
+                    app:layout_constraintStart_toEndOf="@+id/user_btn_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="8dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/information_myday_layout"
+            android:layout_marginTop="24dp"
+            android:background="@color/background_gray"
+            />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/information_myday_layout"
-        android:layout_marginTop="24dp"
-        android:background="@color/background_gray"
-        />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

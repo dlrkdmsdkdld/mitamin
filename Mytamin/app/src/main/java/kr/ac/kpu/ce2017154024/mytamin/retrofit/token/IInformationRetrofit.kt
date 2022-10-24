@@ -43,4 +43,15 @@ interface IInformationRetrofit {
     @Multipart
     @POST("/img/list")
     fun sendImageList(@Part file:List<MultipartBody.Part?>) : Call<JsonElement>
+
+    @GET("/daynote/check/{day}")
+    fun checkDaynote(@Path("day") day:String) : Call<JsonElement>
+
+
+
+
+
+
+
+
 }

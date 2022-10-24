@@ -51,6 +51,16 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
             mbinding.recordCompleteBtn.background = getDrawable(R.drawable.round_layout_background_orange)
         }else{mbinding.recordCompleteBtn.background = getDrawable(R.drawable.round_layout_background_gray)}
     }
+    fun selectwishList(can:Boolean){
+        if(can){
+            mbinding?.recordEditText.visibility = View.INVISIBLE
+            mbinding?.recordTitleText.setText("완료한 위시리스트")
+        }
+        else{
+            mbinding?.recordEditText.visibility = View.VISIBLE
+            mbinding?.recordTitleText.setText("기록 남기기")
+        }
+    }
     override fun onClick(p0: View?) {
         when(p0){
             mbinding?.recordBackBtn ->{

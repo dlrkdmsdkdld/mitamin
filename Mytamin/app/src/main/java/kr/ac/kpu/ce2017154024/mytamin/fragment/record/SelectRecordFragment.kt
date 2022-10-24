@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentRecordBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentSelectRecordBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
@@ -21,6 +22,7 @@ class SelectRecordFragment : Fragment() {
     ): View? {
         val binding = FragmentSelectRecordBinding.inflate(inflater,container,false)
         mBinding =binding
+        (activity as DaynoteRecordActivity).selectwishList(true)
         Log.d(Constant.TAG,"SelectRecordFragment onCreateView")
         return mBinding?.root
     }

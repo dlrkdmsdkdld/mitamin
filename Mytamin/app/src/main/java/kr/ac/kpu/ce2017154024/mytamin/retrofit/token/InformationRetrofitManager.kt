@@ -279,6 +279,26 @@ class InformationRetrofitManager {
                 })
         }
     }
+    fun checkrecord(day:String,completion:(RESPONSE_STATUS, Boolean?) -> Unit){
+        CoroutineScope(Dispatchers.IO).launch {
+            iInformationRetrofit?.checkDaynote(day)
+                ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                    override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                        response.body()?.let {
+                            Log.d(TAG, "user checkrecord onResponse $response")
+                            val data = it.asJsonObject.get("data").asBoolean
+                            completion(RESPONSE_STATUS.OKAY,data)
 
+                        }
+                    }
+
+                    override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                        Log.d(TAG, "checkrecord onFailure ${t}")
+                        completion(RESPONSE_STATUS.OKAY,null)
+                    }
+
+                })
+        }
+    }
 
 }
