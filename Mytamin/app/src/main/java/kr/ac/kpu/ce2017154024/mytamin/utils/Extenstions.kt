@@ -29,6 +29,11 @@ import kotlin.time.Duration.Companion.minutes
         bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
     }
 }
+ fun changeDP(value : Int,context: Context) : Int{
+    var displayMetrics = context.resources.displayMetrics
+    var dp = Math.round(value * displayMetrics.density)
+    return dp
+}
 
 fun Int?.parseIntToTimeLine():String{
     val minute : Int? = this?.div(60)

@@ -36,13 +36,13 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeRecyclerViewHolder {
         val itemViewHolder = HomeRecyclerViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_recycler_item,parent,false),this.iHomeRecyclerview!!
+                .inflate(R.layout.home_recycler_item,parent,false),this.iHomeRecyclerview!!,parent.context
         )
         return itemViewHolder
     }
 
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
-        holder.bindWithView(this.stepArray[position],this.stateArray[position],this.onArray[position],this.imageArray[position])
+        holder.bindWithView(this.stepArray[position],this.stateArray[position],this.onArray[position],this.imageArray[position],position)
     }
     fun AlreadyTodayMytamin(no: ArrayList<Boolean>){
         var i=0
