@@ -31,8 +31,12 @@
         app:layout_constraintEnd_toStartOf="@+id/bottom_record_month"
         app:np_order="ascending"
         android:showDividers="none"
+        app:np_textColor="@color/subGray"
+        app:np_selectedTextSize="24sp"
+        app:np_selectedTextColor="@color/black"
+        app:np_textSize="18sp"
         app:np_dividerColor="@color/transparent"
-
+        android:theme="@style/custom_time_picker"
         />
     <com.shawnlin.numberpicker.NumberPicker
         android:layout_width="0dp"
@@ -44,7 +48,10 @@
         android:id="@+id/bottom_record_month"
         android:layout_marginTop="20dp"
         app:np_dividerColor="@color/transparent"
-
+        app:np_textColor="@color/subGray"
+        app:np_selectedTextSize="24sp"
+        app:np_selectedTextColor="@color/black"
+        app:np_textSize="18sp"
         />
 
     <androidx.appcompat.widget.AppCompatButton

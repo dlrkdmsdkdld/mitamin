@@ -18,8 +18,8 @@ import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
 
 class BottomYearMonthFragment: BottomSheetDialogFragment(),View.OnClickListener {
     private var mBinding : BottomRecordCalendarBinding?=null
-    private var year:Int = 0
-    private var month:Int = 0
+    private var year:Int = 2021
+    private var month:Int = 1
     private val myRecordViewmodel: RecordViewmodel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,12 +87,8 @@ class BottomYearMonthFragment: BottomSheetDialogFragment(),View.OnClickListener 
     override fun onClick(p0: View?) {
         when(p0){
             mBinding?.bottomRecordBtn ->{
-                if (year!= 0 ){
-                    myRecordViewmodel.setYear(year)
-                }
-                if (month!=0){
-                    myRecordViewmodel.setmonth(month)
-                }
+                myRecordViewmodel.setYear(year)
+                myRecordViewmodel.setmonth(month)
                 onDestroyView()
             }
         }

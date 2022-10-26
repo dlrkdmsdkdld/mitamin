@@ -28,7 +28,7 @@
             android:id="@+id/wishlist_title_no_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
+            android:visibility="invisible"
             >
             <ImageView
                 android:layout_width="wrap_content"
@@ -80,20 +80,16 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/background_white"
                 android:background="@drawable/ic_large_button_abled"
-                android:id="@+id/daynote_no_btn"
+                android:id="@+id/wishlist_no_btn"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <ScrollView
-            android:id="@+id/wishlist_title_yes_layout"
-            android:visibility="invisible"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/wishlist_title_yes_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="28dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
@@ -104,31 +100,36 @@
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/wishlist_recyclerview"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/wishlist_hidden_title"
-                    android:id="@+id/wishlist_hidden_title"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="20dp"
+                <EditText
+                    android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/wishlist_hidden_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:id="@+id/wishlist_recyclerview_hidden"
-                    tools:listitem="@layout/wishlist_item"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="48dp"
+                    app:layout_constraintTop_toBottomOf="@+id/wishlist_recyclerview"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:padding="10dp"
+                    android:id="@+id/wishlist_new_wishlist"
+                    android:background="@drawable/round_layout_stroke_gray"
+                    android:hint="@string/user_myday_complete"
+                    />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    app:layout_constraintTop_toBottomOf="@+id/wishlist_new_wishlist"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/round_layout_background_orange"
+                    android:text="@string/wishlist_no_btn"
+                    android:textColor="@color/background_white"
+                    android:fontFamily="@font/appmainfont_medium"
+                    android:includeFontPadding="false"
+                    android:textSize="16sp"
+                    android:id="@+id/wishlist_complete_btn"
+                    android:visibility="invisible"
+                    android:layout_marginTop="20dp"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
 
     </FrameLayout>
 

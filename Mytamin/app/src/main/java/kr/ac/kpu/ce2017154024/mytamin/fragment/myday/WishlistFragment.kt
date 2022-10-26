@@ -1,7 +1,10 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment.myday
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +19,7 @@ import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerVi
 import kr.ac.kpu.ce2017154024.mytamin.activity.MydayActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.NewWishListActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentWishlistBinding
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
@@ -37,12 +41,12 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
             if (it) {
                 mBinding?.wishlistTitleYesLayout?.visibility = View.VISIBLE
                 mBinding?.wishlistTitleNoLayout?.visibility=View.INVISIBLE
-                mBinding?.daynoteNoBtn?.isEnabled=false
+                mBinding?.wishlistNoBtn?.isEnabled=false
             }
         })
         Log.d(Constant.TAG,"WishlistFragment onCreateView")
-        mBinding?.daynoteNoBtn?.setOnClickListener(this)
-
+        mBinding?.wishlistNoBtn?.setOnClickListener(this)
+        mBinding?.wishlistCompleteBtn?.setOnClickListener(this)
 
         return mBinding?.root
     }
@@ -53,6 +57,24 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
         myMydayViewmodel.getwishListArray.observe(viewLifecycleOwner, Observer {
             this.myWishlistRecyclerAdapter= WishlistRecyclerAdapter(this,it)
             wishlist_recyclerview.adapter = this.myWishlistRecyclerAdapter
+        })
+        mBinding?.wishlistNewWishlist?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0.toString().trim()!=""){
+                    mBinding?.wishlistCompleteBtn?.visibility=View.VISIBLE
+                    mBinding?.wishlistCompleteBtn?.isEnabled = true
+                }else{
+                    mBinding?.wishlistCompleteBtn?.visibility=View.INVISIBLE
+                    mBinding?.wishlistCompleteBtn?.isEnabled = false
+                }
+            }
+
         })
 
         Log.d(TAG,"wishlist_recyclerview.adapter  ->${wishlist_recyclerview.adapter} ")
@@ -70,11 +92,18 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0){
-            mBinding?.daynoteNoBtn ->{
+            mBinding?.wishlistNoBtn ->{
                 val intent = Intent(context,NewWishListActivity::class.java)
                 //startActivity(intent)
                 startActivityForResult(intent, MydayActivity.SUB_ACTIVITY_CODE)
             }
+            mBinding?.wishlistCompleteBtn ->{
+                InformationRetrofitManager.instance.sendNewWishlist(mBinding?.wishlistNewWishlist?.text.toString().trim()){
+                        responseStatus, wishList ->
+                    myMydayViewmodel.getWishlistAPI()
+                }
+            }
+
         }
     }
 }

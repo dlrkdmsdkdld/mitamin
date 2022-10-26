@@ -60,7 +60,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     //구글메테리얼
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.4.0'
     //라이브데이터 mvvm
     def life_version = "2.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$life_version"
