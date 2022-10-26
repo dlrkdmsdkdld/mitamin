@@ -49,14 +49,12 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
         if (intent.hasExtra("array_bundle")){
             val bundle=intent.getBundleExtra("array_bundle")
             val wishList  = bundle?.getSerializable("wishlistArray") as Array<WishList>
-            wishList.forEach { wishList ->
-                Log.d(TAG,"wishList wishId -> ${wishList.wishId} wishlisttext ${wishList.wishText}")
-            }
+            myRecordViewmodel.setWishList(wishList)
 
         }
 
     }
-    fun setEnableNextBtnPartTwo(can:Boolean){
+    fun setEnableNextBtnPart(can:Boolean){
         mbinding.recordCompleteBtn.isEnabled = can
         if (can){
             mbinding.recordCompleteBtn.background = getDrawable(R.drawable.round_layout_background_orange)

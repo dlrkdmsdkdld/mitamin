@@ -28,7 +28,6 @@ import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
     private var mBinding : FragmentWishlistBinding?=null
     private lateinit var myWishlistRecyclerAdapter: WishlistRecyclerAdapter
-    private lateinit var HiddenWishlistRecyclerAdapter: WishlistRecyclerAdapter
     private val myMydayViewmodel: MydayViewmodel by activityViewModels()
 
     override fun onCreateView(

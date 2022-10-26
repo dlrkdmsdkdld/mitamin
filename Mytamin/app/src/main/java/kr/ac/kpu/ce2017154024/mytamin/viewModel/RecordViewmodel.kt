@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.work.WorkManager
 import kr.ac.kpu.ce2017154024.mytamin.MyApplication
+import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMM
@@ -34,6 +35,14 @@ class RecordViewmodel():ViewModel(){
         get() = month
     fun setmonth(d: Int){
         month.value = d
+    }
+
+    private val wishListArray = MutableLiveData<Array<WishList>>()
+    val getwishListArray : LiveData<Array<WishList>>
+        get() = wishListArray
+    fun setWishList(i:Array<WishList>){
+        wishListArray.value = i
+        Log.d(TAG,"wishListArray List size -> ${wishListArray.value?.size}")
     }
 
     private val bitmapList = MutableLiveData<ArrayList<Bitmap>>()

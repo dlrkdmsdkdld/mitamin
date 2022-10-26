@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView
 
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ class WishlistRecyclerViewHolder(itemView: View, HomeRecylcerViewInterface: IWis
     init {
         this.RecyclerViewInterface = HomeRecylcerViewInterface
         layout.setOnClickListener(this)
+
     }
     fun bindWithView(wishlist:WishList){
         title.text=wishlist.wishText
@@ -29,11 +31,17 @@ class WishlistRecyclerViewHolder(itemView: View, HomeRecylcerViewInterface: IWis
         id=wishlist.wishId
         Log.d(Constant.TAG,"바인드함  wishlistViewHolder")
     }
+    fun getId():Int{
+        return id
+    }
+    fun selectView(d : Boolean){
+        if (d) layout.setBackgroundResource(R.drawable.round_layout_background_orange)
+        else layout.setBackgroundResource(R.drawable.round_layout_stroke_gray)
+    }
     override fun onClick(p0: View?) {
         when(p0){
             layout ->{
                 this.RecyclerViewInterface.onSearchItemClicked(adapterPosition,title.text.toString(),id)
-
             }
         }
     }

@@ -22,10 +22,10 @@ class MydayViewmodel:ViewModel() {
     fun setDaynoteContent(time:Boolean){
         DaynoteContent.value = time
     }
-    private val wishListArray = MutableLiveData<List<WishList>>()
-    val getwishListArray : LiveData<List<WishList>>
+    private val wishListArray = MutableLiveData<ArrayList<WishList>>()
+    val getwishListArray : LiveData<ArrayList<WishList>>
         get() = wishListArray
-    fun setwishListArray(i:List<WishList>){
+    fun setwishListArray(i:ArrayList<WishList>){
         wishListArray.value = i
     }
     init {

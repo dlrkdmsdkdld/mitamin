@@ -28,7 +28,7 @@
             android:id="@+id/wishlist_title_no_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible"
+            android:visibility="visible"
             >
             <ImageView
                 android:layout_width="wrap_content"
@@ -86,6 +86,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/wishlist_title_yes_layout"
+                android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
