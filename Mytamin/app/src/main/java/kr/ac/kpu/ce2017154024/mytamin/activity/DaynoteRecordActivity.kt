@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityMainBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityRecordDaynoteBinding
+import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.BitmapRequestBody
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
@@ -45,6 +46,14 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
          navController = navHostFragment.navController
         mbinding?.recordCompleteBtn.setOnClickListener(this)
         mbinding?.recordBackBtn?.setOnClickListener(this)
+        if (intent.hasExtra("array_bundle")){
+            val bundle=intent.getBundleExtra("array_bundle")
+            val wishList  = bundle?.getSerializable("wishlistArray") as Array<WishList>
+            wishList.forEach { wishList ->
+                Log.d(TAG,"wishList wishId -> ${wishList.wishId} wishlisttext ${wishList.wishText}")
+            }
+
+        }
 
     }
     fun setEnableNextBtnPartTwo(can:Boolean){

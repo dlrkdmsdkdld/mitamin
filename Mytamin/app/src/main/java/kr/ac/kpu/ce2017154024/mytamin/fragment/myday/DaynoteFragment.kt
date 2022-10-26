@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentDaynoteBinding
+import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 
@@ -45,7 +46,16 @@ class DaynoteFragment : Fragment(),View.OnClickListener {
         when(p0){
             mBinding?.daynoteNoBtn ->{
                 val intent = Intent(requireContext(),DaynoteRecordActivity::class.java)
-                startActivity(intent)
+                if (myMydayViewmodel.getWishlistContent.value == true){
+                    val bundle=Bundle()
+                    val wishlistArray = myMydayViewmodel.getwishListArray.value?.toTypedArray()
+                    bundle.putSerializable("wishlistArray",wishlistArray)
+                    intent.putExtra("array_bundle",bundle)
+                    startActivity(intent)
+                }else{
+                    startActivity(intent)
+                }
+
             }
         }
     }
