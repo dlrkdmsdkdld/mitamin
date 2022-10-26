@@ -47,9 +47,17 @@ interface IInformationRetrofit {
     @GET("/daynote/check/{day}")
     fun checkDaynote(@Path("day") day:String) : Call<JsonElement>
 
+    @POST("/wish/new")
+    fun sendNewWishlist(@Body wishText:String) : Call<JsonElement>
 
 
 
+
+    @Multipart
+    @POST("/daynote/new")
+    fun newDaynote(@Part file:List<MultipartBody.Part?>, @Part("wishText") wishText: RequestBody,@Part("note") note: RequestBody
+        ,@Part("date") date: RequestBody
+    ) : Call<JsonElement>
 
 
 

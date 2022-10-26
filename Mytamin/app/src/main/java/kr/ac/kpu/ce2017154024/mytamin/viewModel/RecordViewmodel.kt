@@ -1,13 +1,17 @@
 package kr.ac.kpu.ce2017154024.mytamin.viewModel
 
+import android.app.Application
 import android.graphics.Bitmap
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.work.WorkManager
 import kr.ac.kpu.ce2017154024.mytamin.MyApplication
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
@@ -16,7 +20,9 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToHome
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToMonth
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToYear
 
-class RecordViewmodel:ViewModel() {
+class RecordViewmodel():ViewModel(){
+
+  //  private val workManager = WorkManager.getInstance(application)
     private val year = MutableLiveData<Int>()
     val getyear : LiveData<Int>
         get() = year
@@ -73,3 +79,4 @@ class RecordViewmodel:ViewModel() {
 
 
 }
+

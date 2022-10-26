@@ -12,5 +12,5 @@ enum class WishListType {
     Hidden,
     Normal
 }
-data class WishList(val type:WishListType,val wishId:Int , val wishText:String,val count:Int){}
+data class WishList(val wishId:Int , val wishText:String,val count:Int):java.io.Serializable{}
 data class EditProfile(val isImgEdited:String,val nickname:String , val beMyMessage:String)

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -28,7 +29,8 @@ import okio.BufferedSink
 class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding: ActivityRecordDaynoteBinding
     private lateinit var navController:NavController
-    private lateinit var myRecordViewmodel: RecordViewmodel
+    // private val myRecordViewmodel: RecordViewmodel by viewModels { RecordViewModelFactory(application) }
+     private lateinit var myRecordViewmodel: RecordViewmodel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_daynote_record)

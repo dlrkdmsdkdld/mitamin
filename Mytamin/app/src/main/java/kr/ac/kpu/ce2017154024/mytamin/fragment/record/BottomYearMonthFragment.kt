@@ -35,10 +35,10 @@ class BottomYearMonthFragment: BottomSheetDialogFragment(),View.OnClickListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val yearCalendar = mBinding?.bottomRecordYear
-        val yeardata = arrayOf("2020년","2021년","2022년")
+        val yeardata = arrayOf("2021년","2022년")
         yearCalendar.apply {
             this!!.maxValue  = 2022
-            minValue = 2020
+            minValue = 2021
             displayedValues = yeardata
 
 

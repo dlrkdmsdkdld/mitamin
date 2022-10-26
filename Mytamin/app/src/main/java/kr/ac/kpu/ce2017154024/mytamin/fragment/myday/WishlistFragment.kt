@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment.myday
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,13 +13,15 @@ import kotlinx.android.synthetic.main.fragment_wishlist.*
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.IWishRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.WishlistRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView.IHomeRecyclerView
+import kr.ac.kpu.ce2017154024.mytamin.activity.MydayActivity
+import kr.ac.kpu.ce2017154024.mytamin.activity.NewWishListActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentWishlistBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 
 
-class WishlistFragment : Fragment(), IWishRecyclerAdapter {
+class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
     private var mBinding : FragmentWishlistBinding?=null
     private lateinit var myWishlistRecyclerAdapter: WishlistRecyclerAdapter
     private lateinit var HiddenWishlistRecyclerAdapter: WishlistRecyclerAdapter
@@ -38,35 +41,21 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter {
             }
         })
         Log.d(Constant.TAG,"WishlistFragment onCreateView")
+        mBinding?.daynoteNoBtn?.setOnClickListener(this)
+
+
         return mBinding?.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tmptitle = ArrayList<String>()
-        tmptitle.add("하하")
-        tmptitle.add("하1")
-        tmptitle.add("하2")
-        tmptitle.add("하2213132132132")
-        val tmpcount = ArrayList<Int>()
-        tmpcount.add(1)
-        tmpcount.add(2)
-        tmpcount.add(3)
-        tmpcount.add(4)
-        this.myWishlistRecyclerAdapter= WishlistRecyclerAdapter(this,tmptitle,tmpcount)
-        wishlist_recyclerview.adapter = this.myWishlistRecyclerAdapter
-
-        val tmptitleH = ArrayList<String>()
-        tmptitleH.add("숨겨진")
-        val tmpcountH = ArrayList<Int>()
-        tmpcountH.add(10)
-        HiddenWishlistRecyclerAdapter = WishlistRecyclerAdapter(this,tmptitleH,tmpcountH)
-        wishlist_recyclerview_hidden.adapter = this.HiddenWishlistRecyclerAdapter
-
-
+        myMydayViewmodel.getwishListArray.observe(viewLifecycleOwner, Observer {
+            this.myWishlistRecyclerAdapter= WishlistRecyclerAdapter(this,it)
+            wishlist_recyclerview.adapter = this.myWishlistRecyclerAdapter
+        })
 
         Log.d(TAG,"wishlist_recyclerview.adapter  ->${wishlist_recyclerview.adapter} ")
-       // mBinding?.wishlistRecyclerview?
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null
@@ -75,7 +64,17 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter {
     }
 
 
-    override fun onSearchItemClicked(position: Int, statetext: String) {
+    override fun onSearchItemClicked(position: Int, statetext: String,id:Int) {
         Log.d(TAG,"stateText - > $statetext")
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            mBinding?.daynoteNoBtn ->{
+                val intent = Intent(context,NewWishListActivity::class.java)
+                //startActivity(intent)
+                startActivityForResult(intent, MydayActivity.SUB_ACTIVITY_CODE)
+            }
+        }
     }
 }
