@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
@@ -93,6 +94,9 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
                     }
                     R.id.selectRecordFragment ->{
                         Log.d(TAG, " 현재 프래그먼트는 카테고리고르는 프래그먼트")
+                        onBackPressed()
+//                        navController.navigate(R.id.action_selectRecordFragment_to_recordFragment)
+//                        navController.popBackStack()
 
                     }
                 }

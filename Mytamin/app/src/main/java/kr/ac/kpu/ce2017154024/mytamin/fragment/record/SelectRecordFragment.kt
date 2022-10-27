@@ -20,7 +20,7 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
 
 
-class SelectRecordFragment : Fragment(), IWishRecyclerAdapter {
+class SelectRecordFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
     private var mBinding : FragmentSelectRecordBinding?=null
     private val myRecordViewmodel: RecordViewmodel by activityViewModels()
     private lateinit var myWishlistRecyclerAdapter: SingleSelectWishAdapter
@@ -50,10 +50,18 @@ class SelectRecordFragment : Fragment(), IWishRecyclerAdapter {
         super.onDestroyView()
         Log.d(Constant.TAG,"SelectRecordFragment onDestroyView")
     }
+    //findNavController().navigate(R.id.action_recordFragment_to_selectRecordFragment)
 
     override fun onSearchItemClicked(position: Int, statetext: String, id: Int) {
         (activity as DaynoteRecordActivity).setEnableNextBtnPart(true)
         Log.d(TAG,"StateText -> $statetext")
         Log.d(TAG,"position ->$position id->$id")
+        myRecordViewmodel.setcategoryText(statetext)
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+
+        }
     }
 }

@@ -36,6 +36,12 @@ class RecordViewmodel():ViewModel(){
     fun setmonth(d: Int){
         month.value = d
     }
+    private val categoryText = MutableLiveData<String>()
+    val getcategoryText: LiveData<String>
+        get() = categoryText
+    fun setcategoryText(d: String){
+        categoryText.value = d
+    }
 
     private val wishListArray = MutableLiveData<Array<WishList>>()
     val getwishListArray : LiveData<Array<WishList>>
