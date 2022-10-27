@@ -117,6 +117,17 @@
     <string name="management_logout">로그아웃</string>
     <string name="management_exit">회원탈퇴</string>
     <string name="management_init">기록 초기화</string>
+    <!--설정화면-->
+    <string name="setting_title">설정</string>
+    <string name="setting_subtitle">부가기능</string>
+    <string name="setting_eat_alarm">섭취 알림</string>
+    <string name="setting_eat_alarm_sub">지정한 시간에 마이타민 섭취 알림을 받을게요.</string>
+    <string name="setting_eat_alarm_btn">오후 09:00</string>
+    <string name="setting_password">앱 잠금</string>
+    <string name="setting_password_sub">앱을 시작할 때 잠금해제가 필요해요.</string>
+    <string name="setting_myday">마이데이 알림</string>
+    <string name="setting_myday_sub">마이데이가 다가오면 알림을 받을게요.</string>
+    <string name="setting_myday_btn">하루전</string>
 
 
 </resources>

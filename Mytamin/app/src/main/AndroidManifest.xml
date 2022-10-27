@@ -20,19 +20,19 @@
         android:theme="@style/Theme.Mytamin"
         tools:targetApi="31">
         <activity
+            android:name=".activity.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.NewWishListActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activity.ManagementActivity"
             android:exported="false" />
         <activity
             android:name=".activity.DaynoteRecordActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing"
-
-            />
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".activity.MydayActivity"
             android:exported="false" />
