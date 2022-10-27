@@ -168,29 +168,7 @@ class InformationRetrofitManager {
 
 
     }
-//    fun getMyday(completion:(RESPONSE_STATUS,MydayData?) -> Unit){
-//        iInformationRetrofit?.getMyday()
-//            ?.enqueue(object : retrofit2.Callback<JsonElement> {
-//                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-//                    response.body()?.let {
-//                        Log.d(TAG, "user getMyday onResponse ${response}" )
-//                        val data =it.asJsonObject.get("data").asJsonObject
-//                        //TODO 잊지말고 토큰 추가해야함
-//                        val myDayMMDD = data.get("myDayMMDD").asString
-//                        val dday = data.get("dday").asString
-//                        val comment = data.get("comment").asString
-//                        val result = MydayData(myDayMMDD,dday,comment)
-//                        completion(RESPONSE_STATUS.OKAY,result)
-//                    }
-//                }
-//                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
-//                    Log.d(TAG, "getMyday onFailure ${t}" )
-//                    completion(RESPONSE_STATUS.OKAY,null)
-//                }
-//
-//            })
-//
-//    }
+
     fun sendNewWishlist(wishtext: String,completion:(RESPONSE_STATUS, WishList?) -> Unit){
         CoroutineScope(Dispatchers.IO).launch {
             iInformationRetrofit?.sendNewWishlist(wishtext)?.enqueue(object :retrofit2.Callback<JsonElement>{

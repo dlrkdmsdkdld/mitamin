@@ -49,6 +49,7 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     private var mBinding : FragmentRecordBinding?=null
     private lateinit var myRecyclerView :recordRecyclerAdapter
     private val myRecordViewmodel: RecordViewmodel by activityViewModels()
+    private var imageUrlArray = ArrayList<Uri>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -114,6 +115,8 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     override fun onSearchItemClicked(position: Int) {
         Log.d(TAG, "posisiton -> $position")
         myRecordViewmodel.removeBitmapList(position)
+        myRecordViewmodel.removeUrlList(position)
+
         myRecyclerView.notifyDataSetChanged()
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray
@@ -142,6 +145,8 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
             2000 -> {
                 val selectedImageURI : Uri? = data?.data
                 if( selectedImageURI != null) {
+                    Log.d(TAG, " 씨발 추가됨 ")
+                    myRecordViewmodel.addUrlList(selectedImageURI)
                     showImage(selectedImageURI)
                 }else {
                     (activity as DaynoteRecordActivity).permissionDenied("사진을 가져오지 못했습니다")
@@ -173,11 +178,6 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
 
         return image
     }
-    inner class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
-        override fun contentType(): MediaType = "image/jpeg".toMediaType()
-        override fun writeTo(sink: BufferedSink) {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
-        }
-    }
+
 
 }

@@ -1,32 +1,22 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
-import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
+import androidx.work.*
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
+import kr.ac.kpu.ce2017154024.mytamin.MytaminWorker
 import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityMainBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityRecordDaynoteBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
-import kr.ac.kpu.ce2017154024.mytamin.utils.BitmapRequestBody
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
-import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okio.BufferedSink
 
 class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding: ActivityRecordDaynoteBinding
@@ -82,14 +72,48 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
                     R.id.recordFragment ->{
                         Log.d(TAG, " 현재 프래그먼트는 record프래그먼트")
                         val imageList = arrayListOf<MultipartBody.Part>()
-                        myRecordViewmodel.getbitmapList.value?.forEach {
-                            val bitmapRequestBody = it?.let {  BitmapRequestBody(it) }
-                            val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
-                            imageList.add(bitmapMultipartBody)
+                        var stringURI =ArrayList<String>()
+                        val k =myRecordViewmodel.getUrlList.value?.toArray()
+                        Log.d(TAG, "myRecordViewmodel ${myRecordViewmodel.getUrlList.value}")
+                        myRecordViewmodel.getUrlList.value?.forEach {
+                            stringURI.add(it)
                         }
-                        InformationRetrofitManager.instance.imageListAPI(imageList){ responseStatus, i ->
-                            Log.d(TAG,"InformationRetrofitManager  i -> $i")
+                        Log.d(TAG, " stringURI stringURI $stringURI")
+                        if (stringURI!=null) {
+                            Log.d(TAG, " stringURI stringURI")
+                            val inputData= Data.Builder().putStringArray(MytaminWorker.EXTRA_URI_ARRAY,
+                                stringURI.toArray(arrayOfNulls<String>(stringURI.size))).build()
+
+
+                            val uploadWorkRequest: WorkRequest =
+                               OneTimeWorkRequestBuilder<MytaminWorker>()
+                                   .setInputData(inputData)
+                                   .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                                   .build()
+                            WorkManager.getInstance(application).enqueue(uploadWorkRequest)
                         }
+                        //액티비티에선 이런식으로 사용
+                        //val uploadWorkRequest: WorkRequest =
+                        //   OneTimeWorkRequestBuilder<UploadWorker>()
+                        // .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                        //       .build()
+                        //제출
+//    WorkManager
+//    .getInstance(myContext)
+//    .enqueue(uploadWorkRequest)
+
+//    internal fun applyBlur() {
+//        workManager.enqueue(OneTimeWorkRequest.from(MytaminWorker::class.java))
+//    }
+
+//                        myRecordViewmodel.getbitmapList.value?.forEach {
+//                            val bitmapRequestBody = it?.let {  BitmapRequestBody(it) }
+//                            val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
+//                            imageList.add(bitmapMultipartBody)
+//                        }
+//                        InformationRetrofitManager.instance.imageListAPI(imageList){ responseStatus, i ->
+//                            Log.d(TAG,"InformationRetrofitManager  i -> $i")
+//                        }
 
                     }
                     R.id.selectRecordFragment ->{

@@ -2,6 +2,7 @@ package kr.ac.kpu.ce2017154024.mytamin.viewModel
 
 import android.app.Application
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -61,7 +62,20 @@ class RecordViewmodel():ViewModel(){
     fun removeBitmapList(pos:Int){
         bitmapList.value?.removeAt(pos)
     }
+
+    private val UrlList = MutableLiveData<ArrayList<String>>()
+    val getUrlList : LiveData<ArrayList<String>>
+        get() = UrlList
+    fun addUrlList(data:Uri){
+        UrlList.value?.add(data.toString())
+        Log.d(TAG,"addUrlList List size -> ${UrlList.value}")
+    }
+    fun removeUrlList(pos:Int){
+        UrlList.value?.removeAt(pos)
+    }
+
     init {
+        UrlList.value = ArrayList<String>()
         bitmapList.value = ArrayList<Bitmap>()
         setYear(parseTimeToYear())
         setmonth(parseTimeToMonth())
