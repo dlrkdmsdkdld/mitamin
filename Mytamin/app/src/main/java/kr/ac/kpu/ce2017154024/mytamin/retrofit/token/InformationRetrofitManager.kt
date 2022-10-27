@@ -315,12 +315,12 @@ class InformationRetrofitManager {
     //@Part file:List<MultipartBody.Part?>, @Part("wishText") wishText: RequestBody,@Part("note") note: RequestBody
     //        ,@Part("date") date: RequestBody
 
-    fun newdaynote(file: List<MultipartBody.Part?>, wishtext :String,note:String,date:String, completion:(RESPONSE_STATUS, Int?) -> Unit){
+    fun newdaynote(fileList: List<MultipartBody.Part?>, wishtext :String,note:String,date:String, completion:(RESPONSE_STATUS, Int?) -> Unit){
         CoroutineScope(Dispatchers.IO).launch {
             val wishtextRequestBody : RequestBody = wishtext.toRequestBody()
             val noteRequestBody : RequestBody = note.toRequestBody()
             val dateRequestBody : RequestBody = date.toRequestBody()
-            iInformationRetrofit?.newDaynote(file = file, wishText =wishtextRequestBody, note = noteRequestBody, date = dateRequestBody )
+            iInformationRetrofit?.newDaynote(fileList = fileList, wishText =wishtextRequestBody, note = noteRequestBody, date = dateRequestBody )
                 ?.enqueue(object : retrofit2.Callback<JsonElement> {
                     override fun onResponse(
                         call: Call<JsonElement>,

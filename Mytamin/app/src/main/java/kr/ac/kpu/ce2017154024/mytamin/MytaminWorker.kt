@@ -47,7 +47,7 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
         val imageList = arrayListOf<MultipartBody.Part>()
         bitmapArray.forEach {
             val bitmapRequestBody = it?.let {  BitmapRequestBody(it) }
-            val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
+            val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("fileList", "file.jpeg", bitmapRequestBody)
             imageList.add(bitmapMultipartBody)
         }
         Log.d(TAG, "MytaminWorker doWork imageList")
