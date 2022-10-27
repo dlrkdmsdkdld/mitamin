@@ -9,12 +9,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.work.*
-import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.MytaminWorker
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityRecordDaynoteBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.DAYNOTEDATE
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.NOTE
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.WISHTEXT
+import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMonth
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
 import okhttp3.MultipartBody
 
@@ -83,28 +86,21 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
                             Log.d(TAG, " stringURI stringURI")
                             val inputData= Data.Builder().putStringArray(MytaminWorker.EXTRA_URI_ARRAY,
                                 stringURI.toArray(arrayOfNulls<String>(stringURI.size))).build()
-
-
+                            NOTE= myRecordViewmodel.getnote.value.toString()
+                            WISHTEXT = myRecordViewmodel.getcategoryText.value.toString()
+                            DAYNOTEDATE ="${myRecordViewmodel.getyear.value}.${myRecordViewmodel.getmonth.value.parseIntToMonth()}"
+                            Log.d(TAG,"datae ->$DAYNOTEDATE")
+                            Log.d(TAG,"datae ->$NOTE")
+                            Log.d(TAG,"datae ->$WISHTEXT")
                             val uploadWorkRequest: WorkRequest =
                                OneTimeWorkRequestBuilder<MytaminWorker>()
                                    .setInputData(inputData)
                                    .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                                    .build()
-                            WorkManager.getInstance(application).enqueue(uploadWorkRequest)
+                            WorkManager.getInstance(applicationContext).enqueue(uploadWorkRequest)
+                            finish()
                         }
-                        //액티비티에선 이런식으로 사용
-                        //val uploadWorkRequest: WorkRequest =
-                        //   OneTimeWorkRequestBuilder<UploadWorker>()
-                        // .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-                        //       .build()
-                        //제출
-//    WorkManager
-//    .getInstance(myContext)
-//    .enqueue(uploadWorkRequest)
 
-//    internal fun applyBlur() {
-//        workManager.enqueue(OneTimeWorkRequest.from(MytaminWorker::class.java))
-//    }
 
 //                        myRecordViewmodel.getbitmapList.value?.forEach {
 //                            val bitmapRequestBody = it?.let {  BitmapRequestBody(it) }

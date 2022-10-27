@@ -8,5 +8,7 @@ object PrivateUserDataSingleton{
     fun isTokenINitialized() = ::accessToken.isInitialized
     lateinit var refreshToken:String
 
-
+    lateinit var NOTE:String
+    lateinit var WISHTEXT:String
+    lateinit var DAYNOTEDATE:String
 }

@@ -60,7 +60,14 @@ fun Int?.parseIntToMM():String{
     }
     return parseminute
 }
-
+fun Int?.parseIntToMonth():String{
+    val month:Int?=this
+    var parseminute = month.toString()
+    if (month!!<10){
+        parseminute="0$month"
+    }
+    return parseminute
+}
 fun parseTimeToState(username:String):String{
     val tmp = System.currentTimeMillis()
     val timedata=Date(tmp)

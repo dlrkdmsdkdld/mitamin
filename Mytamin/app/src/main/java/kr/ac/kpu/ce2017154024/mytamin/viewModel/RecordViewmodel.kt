@@ -43,6 +43,12 @@ class RecordViewmodel():ViewModel(){
     fun setcategoryText(d: String){
         categoryText.value = d
     }
+    private val note = MutableLiveData<String>()
+    val getnote: LiveData<String>
+        get() = note
+    fun setnote(d: String){
+        note.value = d
+    }
 
     private val wishListArray = MutableLiveData<Array<WishList>>()
     val getwishListArray : LiveData<Array<WishList>>

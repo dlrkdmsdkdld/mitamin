@@ -14,6 +14,9 @@ import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.BitmapRequestBody
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.DAYNOTEDATE
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.NOTE
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.WISHTEXT
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import okhttp3.MultipartBody
 import java.io.FileDescriptor
@@ -22,7 +25,7 @@ import java.io.IOException
 class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) {
     companion object {
         const val EXTRA_URI_ARRAY = "EXTRA_URI_ARRAY"
-        //const val EXTRA_RESULT = "EXTRA_RESULT"
+
     }
     val context = ctx
 
@@ -50,7 +53,7 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
         Log.d(TAG, "MytaminWorker doWork imageList")
 
         return try {
-            imageListAPI(imageList)
+            newDaynoteAPI(imageList)
             Result.success()
         } catch (throwable: Throwable) {
             Log.d(TAG, "Error applying work")
@@ -108,6 +111,19 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
                     }
                 }
             }
+    }
+    private fun newDaynoteAPI(imageList:List<MultipartBody.Part?>){
+        Log.d(TAG, "MytaminWorker doWork imageListAPI()")
+        InformationRetrofitManager.instance.newdaynote(imageList, wishtext = WISHTEXT, note = NOTE, date = DAYNOTEDATE){ responseStatus, i ->
+            when(responseStatus){
+                RESPONSE_STATUS.OKAY ->{
+                    Handler(Looper.getMainLooper()).post{
+                        Toast.makeText(MyApplication.instance, "데이노트 작성하기 성공", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+            }
+        }
     }
     private fun wellcomAPICall(){
         HomeRetrofitManager.instance.doCompleteBreath {responseStatus ->

@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -72,10 +74,33 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
             mBinding?.recordCategoryText?.setText(it)
         })
 
+        mBinding?.recordCommentText?.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                myRecordViewmodel.setnote(p0.toString())
+            }
+
+
+        })
 
 
 
         return mBinding?.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "다시 시작")
+        if (myRecordViewmodel.getnote.value!=null){
+            mBinding?.recordCommentText?.setText(myRecordViewmodel.getnote.value)
+
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
