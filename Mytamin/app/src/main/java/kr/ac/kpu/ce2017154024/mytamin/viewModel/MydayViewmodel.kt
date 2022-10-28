@@ -6,10 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
+import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
 class MydayViewmodel:ViewModel() {
+
+    private val daynoteDataArray = MutableLiveData<ArrayList<daynoteData>>()
+    val getdaynoteDataArray : LiveData<ArrayList<daynoteData>>
+        get() = daynoteDataArray
+    fun setdaynoteDataArray(i:ArrayList<daynoteData>){
+        daynoteDataArray.value = i
+    }
+
     private val WishlistContent = MutableLiveData<Boolean>()
     val getWishlistContent : LiveData<Boolean>
         get() = WishlistContent
@@ -47,14 +56,18 @@ class MydayViewmodel:ViewModel() {
         }
     }
     fun getdaynoteAPI(){
-        InformationRetrofitManager.instance.getDaynote{responseStatus, wishList ->
+        InformationRetrofitManager.instance.getDaynote{responseStatus, daynoteList ->
             when(responseStatus){
                 RESPONSE_STATUS.NO_CONTENT ->setDaynoteContent(false)
-                RESPONSE_STATUS.OKAY -> setDaynoteContent(true)
+                RESPONSE_STATUS.OKAY -> {
+                    setDaynoteContent(true)
+                    daynoteList?.let { setdaynoteDataArray(it) }
+                }
             }
 
         }
     }
+
 
     
 

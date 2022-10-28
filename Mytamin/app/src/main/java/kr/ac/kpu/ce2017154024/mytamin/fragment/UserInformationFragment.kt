@@ -17,10 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.activity.ManagementActivity
-import kr.ac.kpu.ce2017154024.mytamin.activity.MydayActivity
-import kr.ac.kpu.ce2017154024.mytamin.activity.ProfileEditActivity
-import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
+import kr.ac.kpu.ce2017154024.mytamin.activity.*
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentInformationBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
@@ -42,10 +39,7 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         val binding = FragmentInformationBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(Constant.TAG,"UserInformationFragment onCreateView")
-        mBinding?.informationUserImage?.setOnClickListener(this)
-        mBinding?.userMydayBtn?.setOnClickListener(this)
-        mBinding?.informationEditBtn?.setOnClickListener(this)
-        mBinding?.informationManageBtn?.setOnClickListener(this)
+        bindClickListener()
         val tmp = arguments?.getByteArray("Image")
         if (tmp!=null){
             Log.d(Constant.TAG," 전달받은 사진있음")
@@ -99,6 +93,10 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
                 val intent =Intent(context,ManagementActivity::class.java)
                 startActivity(intent)
             }
+            mBinding?.informationSettingBtn ->{
+                val intent = Intent(context , SettingActivity::class.java)
+                startActivity(intent)
+            }
         }
 
     }
@@ -115,6 +113,12 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         startActivity(intent)
 
     }
-
+    private fun bindClickListener(){
+        mBinding?.informationUserImage?.setOnClickListener(this)
+        mBinding?.userMydayBtn?.setOnClickListener(this)
+        mBinding?.informationEditBtn?.setOnClickListener(this)
+        mBinding?.informationManageBtn?.setOnClickListener(this)
+        mBinding?.informationSettingBtn?.setOnClickListener(this)
+    }
 
 }

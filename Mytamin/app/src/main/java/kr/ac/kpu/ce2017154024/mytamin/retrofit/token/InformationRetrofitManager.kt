@@ -7,16 +7,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.model.*
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Multipart
+import kotlin.math.log
+
 
 class InformationRetrofitManager {
 
@@ -237,7 +238,7 @@ class InformationRetrofitManager {
                 })
             }
         }
-    fun getDaynote(completion:(RESPONSE_STATUS, WishList?) -> Unit){
+    fun getDaynote(completion:(RESPONSE_STATUS, ArrayList<daynoteData>?) -> Unit){
         CoroutineScope(Dispatchers.IO).launch {
             iInformationRetrofit?.getDaynote()
                 ?.enqueue(object : retrofit2.Callback<JsonElement> {
@@ -245,11 +246,36 @@ class InformationRetrofitManager {
                         response.body()?.let {
                             Log.d(TAG, "user getWishlist onResponse $response")
                             val data = it.asJsonObject.get("data").asJsonObject
+
                             if (data.size()==0){
                                 completion(RESPONSE_STATUS.NO_CONTENT, null)
                                 Log.d(TAG, "daynoteList onResponse nudaynoteList.size() 0")
 
                             }else{
+                                val Mydaydata =ArrayList<daynoteData>()
+                                val iterator = data.keySet()
+                                iterator.forEach {
+                                    val yeardata =data.get(it).asJsonArray
+                                    yeardata.forEach {
+                                        val parent = it.asJsonObject
+                                        val noteid = parent.get("daynoteId").asInt
+                                        val imgList = parent.get("imgList").asJsonArray
+                                        val parseimgList = ArrayList<String>()
+                                        imgList.forEach {
+                                            parseimgList.add(it.asString)
+                                        }
+                                        val year = parent.get("year").asInt
+                                        val month = parent.get("month").asInt
+                                        val wishText = parent.get("wishText").asString
+                                        val note = parent.get("note").asString
+                                        val result = daynoteData(year = year, month = month, wishText = wishText, note = note, imgList = parseimgList, daynoteId = noteid)
+                                        Log.d(TAG,"result -> result :$result ")
+                                        Mydaydata.add(result)
+                                    }
+                                }
+                                completion(RESPONSE_STATUS.OKAY,Mydaydata)
+                                Log.d(TAG, "daynoteList iterator keySet->${iterator}")
+
                                 Log.d(TAG, "daynoteList onResponse daynoteList.size() ->${data.size()}")
 
                             }

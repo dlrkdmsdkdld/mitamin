@@ -31,8 +31,7 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
 
     override fun doWork(): Result {
 
-        Log.d(TAG, "MytaminWorker doWork work")
-        val appContext = applicationContext
+        Log.d(TAG, "MytaminWorker doWork Start")
         val string_array = inputData.getStringArray(EXTRA_URI_ARRAY)
         val uriArray =ArrayList<Uri>()
         string_array?.forEach {

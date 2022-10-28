@@ -59,9 +59,9 @@
         android:fontFamily="@font/appsubfont_r"
         android:includeFontPadding="false"
         />
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="40dp"
+        android:layout_height="20dp"
         app:layout_constraintTop_toBottomOf="@+id/setting_title_text"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="20dp"
@@ -70,6 +70,7 @@
         android:thumb="@drawable/shpae_switch_thumb"
         android:id="@+id/setting_eat_alarm"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -142,9 +143,9 @@
         android:fontFamily="@font/appsubfont_r"
         android:includeFontPadding="false"
         />
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="40dp"
+        android:layout_height="20dp"
         app:layout_constraintTop_toBottomOf="@+id/setting_line1"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="20dp"
@@ -190,9 +191,9 @@
         android:fontFamily="@font/appsubfont_r"
         android:includeFontPadding="false"
         />
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="40dp"
+        android:layout_height="20dp"
         app:layout_constraintTop_toBottomOf="@+id/setting_line2"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="20dp"
