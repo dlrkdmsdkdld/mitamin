@@ -27,6 +27,7 @@ class DaynoteChildViewHolder(itemView: View,Interface :IDaynoteChildInterface): 
         monthText.text = "${data.month}월"
         Glide.with(itemView)
             .load(data.imgList.get(0))
+            .centerCrop()
             .into(imageview)
 
     }

@@ -9,15 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.daynote_RecyclerView.DaynoteParentAdapter
+import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.daynote_RecyclerView.IDaynoteChildInterface
+import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.WishlistRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentDaynoteBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
+import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 
-class DaynoteFragment : Fragment(),View.OnClickListener {
+class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface {
     private var mBinding : FragmentDaynoteBinding?=null
     private val myMydayViewmodel: MydayViewmodel by activityViewModels()
+    private lateinit var myDaynoteParentAdapter: DaynoteParentAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +49,21 @@ class DaynoteFragment : Fragment(),View.OnClickListener {
         Log.d(Constant.TAG,"DaynoteFragment onDestroyView")
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        myMydayViewmodel.getdaynoteDataArray.observe(viewLifecycleOwner, Observer {
+            noInitLayout()
+            this.myDaynoteParentAdapter = DaynoteParentAdapter(this,it)
+            mBinding?.daynoteRecyclerview?.adapter = this.myDaynoteParentAdapter
+            mBinding?.daynoteRecyclerview?.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true)
+
+        })
+    }
+    fun noInitLayout(){
+        mBinding?.daynoteNoLayout?.visibility=View.INVISIBLE
+        mBinding?.daynoteNoBtn?.isEnabled=false
+    }
+
     override fun onClick(p0: View?) {
         when(p0){
             mBinding?.daynoteNoBtn ->{
@@ -58,5 +80,9 @@ class DaynoteFragment : Fragment(),View.OnClickListener {
 
             }
         }
+    }
+
+    override fun onSearchItemClicked(position: Int, data: daynoteData) {
+        Log.d(TAG,"onSearchItemClicked $data")
     }
 }

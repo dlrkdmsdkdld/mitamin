@@ -7,15 +7,16 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
+import kr.ac.kpu.ce2017154024.mytamin.model.daynoteDataParent
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
 class MydayViewmodel:ViewModel() {
 
-    private val daynoteDataArray = MutableLiveData<ArrayList<daynoteData>>()
-    val getdaynoteDataArray : LiveData<ArrayList<daynoteData>>
+    private val daynoteDataArray = MutableLiveData<ArrayList<daynoteDataParent>>()
+    val getdaynoteDataArray : LiveData<ArrayList<daynoteDataParent>>
         get() = daynoteDataArray
-    fun setdaynoteDataArray(i:ArrayList<daynoteData>){
+    fun setdaynoteDataArray(i:ArrayList<daynoteDataParent>){
         daynoteDataArray.value = i
     }
 
@@ -38,7 +39,7 @@ class MydayViewmodel:ViewModel() {
         wishListArray.value = i
     }
     init {
-        getWishlistAPI()
+      //  getWishlistAPI()
         getdaynoteAPI()
     }
     fun getWishlistAPI(){

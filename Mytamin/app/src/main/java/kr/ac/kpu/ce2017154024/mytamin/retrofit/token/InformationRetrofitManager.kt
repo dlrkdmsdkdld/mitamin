@@ -238,7 +238,7 @@ class InformationRetrofitManager {
                 })
             }
         }
-    fun getDaynote(completion:(RESPONSE_STATUS, ArrayList<daynoteData>?) -> Unit){
+    fun getDaynote(completion:(RESPONSE_STATUS, ArrayList<daynoteDataParent>?) -> Unit){
         CoroutineScope(Dispatchers.IO).launch {
             iInformationRetrofit?.getDaynote()
                 ?.enqueue(object : retrofit2.Callback<JsonElement> {
@@ -252,9 +252,10 @@ class InformationRetrofitManager {
                                 Log.d(TAG, "daynoteList onResponse nudaynoteList.size() 0")
 
                             }else{
-                                val Mydaydata =ArrayList<daynoteData>()
+                                val result = ArrayList<daynoteDataParent>()
                                 val iterator = data.keySet()
                                 iterator.forEach {
+                                    val Mydaydata =ArrayList<daynoteData>()
                                     val yeardata =data.get(it).asJsonArray
                                     yeardata.forEach {
                                         val parent = it.asJsonObject
@@ -272,9 +273,12 @@ class InformationRetrofitManager {
                                         Log.d(TAG,"result -> result :$result ")
                                         Mydaydata.add(result)
                                     }
+                                    val tmp =daynoteDataParent(it.toInt(),Mydaydata)
+                                    result.add(tmp)
                                 }
-                                completion(RESPONSE_STATUS.OKAY,Mydaydata)
+                                completion(RESPONSE_STATUS.OKAY,result)
                                 Log.d(TAG, "daynoteList iterator keySet->${iterator}")
+                                Log.d(TAG, "daynoteList result result->${result}")
 
                                 Log.d(TAG, "daynoteList onResponse daynoteList.size() ->${data.size()}")
 
