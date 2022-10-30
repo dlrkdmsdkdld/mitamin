@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.daynote_RecyclerView.DaynoteParentAdapter
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.daynote_RecyclerView.IDaynoteChildInterface
+import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.daynote_RecyclerView.IfooterInterface
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.WishlistRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentDaynoteBinding
@@ -21,7 +22,7 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 
-class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface {
+class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface,IfooterInterface {
     private var mBinding : FragmentDaynoteBinding?=null
     private val myMydayViewmodel: MydayViewmodel by activityViewModels()
     private lateinit var myDaynoteParentAdapter: DaynoteParentAdapter
@@ -53,7 +54,7 @@ class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface {
         super.onViewCreated(view, savedInstanceState)
         myMydayViewmodel.getdaynoteDataArray.observe(viewLifecycleOwner, Observer {
             noInitLayout()
-            this.myDaynoteParentAdapter = DaynoteParentAdapter(this,it)
+            this.myDaynoteParentAdapter = DaynoteParentAdapter(this,this,it)
             mBinding?.daynoteRecyclerview?.adapter = this.myDaynoteParentAdapter
             mBinding?.daynoteRecyclerview?.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true)
 
@@ -67,22 +68,29 @@ class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface {
     override fun onClick(p0: View?) {
         when(p0){
             mBinding?.daynoteNoBtn ->{
-                val intent = Intent(requireContext(),DaynoteRecordActivity::class.java)
-                if (myMydayViewmodel.getWishlistContent.value == true){
-                    val bundle=Bundle()
-                    val wishlistArray = myMydayViewmodel.getwishListArray.value?.toTypedArray()
-                    bundle.putSerializable("wishlistArray",wishlistArray)
-                    intent.putExtra("array_bundle",bundle)
-                    startActivity(intent)
-                }else{
-                    startActivity(intent)
-                }
+                goRecord()
 
             }
+        }
+    }
+    private fun goRecord(){
+        val intent = Intent(requireContext(),DaynoteRecordActivity::class.java)
+        if (myMydayViewmodel.getWishlistContent.value == true){
+            val bundle=Bundle()
+            val wishlistArray = myMydayViewmodel.getwishListArray.value?.toTypedArray()
+            bundle.putSerializable("wishlistArray",wishlistArray)
+            intent.putExtra("array_bundle",bundle)
+            startActivity(intent)
+        }else{
+            startActivity(intent)
         }
     }
 
     override fun onSearchItemClicked(position: Int, data: daynoteData) {
         Log.d(TAG,"onSearchItemClicked $data")
+    }
+
+    override fun onclickfooter() {
+        goRecord()
     }
 }

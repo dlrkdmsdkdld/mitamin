@@ -39,7 +39,7 @@ class MydayViewmodel:ViewModel() {
         wishListArray.value = i
     }
     init {
-      //  getWishlistAPI()
+        getWishlistAPI()
         getdaynoteAPI()
     }
     fun getWishlistAPI(){

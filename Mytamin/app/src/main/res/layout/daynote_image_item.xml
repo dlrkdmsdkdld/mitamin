@@ -10,8 +10,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/round_layout_background_gray">
     <ImageView
-        android:layout_width="99dp"
-        android:layout_height="99dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/daynote_item_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

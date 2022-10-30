@@ -7,9 +7,10 @@ import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteDataParent
 
-class DaynoteParentAdapter( Interface :IDaynoteChildInterface,data:ArrayList<daynoteDataParent>  ) :RecyclerView.Adapter<DaynoteParentVeiwHolder>(){
+class DaynoteParentAdapter(FInterface:IfooterInterface, Interface :IDaynoteChildInterface,data:ArrayList<daynoteDataParent>  ) :RecyclerView.Adapter<DaynoteParentVeiwHolder>(){
     private var DATA = data
     private var DaynoteInterface = Interface
+    private var FootInterface = FInterface
     override fun getItemCount(): Int {
         return DATA.size
     }
@@ -17,7 +18,7 @@ class DaynoteParentAdapter( Interface :IDaynoteChildInterface,data:ArrayList<day
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DaynoteParentVeiwHolder {
         val itemViewHolder = DaynoteParentVeiwHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.daynote_parent_item,parent,false)
-            ,DaynoteInterface
+            ,FootInterface,DaynoteInterface
         )
         return itemViewHolder
     }

@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 
-class DaynoteChildAdapter( Interface :IDaynoteChildInterface,data:ArrayList<daynoteData> ) :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class DaynoteChildAdapter( footerInterface: IfooterInterface,Interface :IDaynoteChildInterface,data:ArrayList<daynoteData> ) :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private var DaynoteInterface = Interface
     private var daynoteArrayList =data
+    private var myfooterInterface = footerInterface
 
     val ITEM=1
     val FOTTER=2
@@ -31,7 +32,7 @@ class DaynoteChildAdapter( Interface :IDaynoteChildInterface,data:ArrayList<dayn
 
         return when(viewType){
             ITEM ->DaynoteChildViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.daynote_image_item,parent,false),DaynoteInterface)
-            FOTTER ->FooterViewHolder( LayoutInflater.from(parent.context).inflate(R.layout.daynote_child_footer,parent,false))
+            FOTTER ->FooterViewHolder( LayoutInflater.from(parent.context).inflate(R.layout.daynote_child_footer,parent,false),myfooterInterface)
 
             else -> {
                 throw ClassCastException("Unknown viewType $viewType")
@@ -43,6 +44,7 @@ class DaynoteChildAdapter( Interface :IDaynoteChildInterface,data:ArrayList<dayn
             //holder.bind(daynoteArrayList[position])
         when(holder){
             is FooterViewHolder ->{
+
             }
             is DaynoteChildViewHolder ->{
                 holder.bindWithView(daynoteArrayList[position])

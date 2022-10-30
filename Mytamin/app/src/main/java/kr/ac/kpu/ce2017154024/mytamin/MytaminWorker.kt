@@ -30,7 +30,10 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
     val context = ctx
 
     override fun doWork(): Result {
+        Handler(Looper.getMainLooper()).post{
+            Toast.makeText(MyApplication.instance, "데이노트 작성중...", Toast.LENGTH_SHORT).show()
 
+        }
         Log.d(TAG, "MytaminWorker doWork Start")
         val string_array = inputData.getStringArray(EXTRA_URI_ARRAY)
         val uriArray =ArrayList<Uri>()

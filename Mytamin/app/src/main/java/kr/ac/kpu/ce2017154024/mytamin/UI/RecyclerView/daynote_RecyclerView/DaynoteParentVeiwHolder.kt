@@ -9,9 +9,10 @@ import kotlinx.android.synthetic.main.daynote_parent_item.view.*
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
-class DaynoteParentVeiwHolder(itemView: View, Interface :IDaynoteChildInterface):RecyclerView.ViewHolder(itemView) {
+class DaynoteParentVeiwHolder(itemView: View, footer:IfooterInterface,Interface :IDaynoteChildInterface):RecyclerView.ViewHolder(itemView) {
     private var childInterface = Interface
     private var title = itemView.daynote_parent_text
+    private var footerInterface = footer
 
     private var recyclerView = itemView.daynote_parent_recycler
 
@@ -19,7 +20,7 @@ class DaynoteParentVeiwHolder(itemView: View, Interface :IDaynoteChildInterface)
         Log.d(TAG,"bindWithView titledata = $titledata daynoteData = $daynoteData")
         title.text = "${titledata}년"
         recyclerView.apply {
-            val childAdapter = DaynoteChildAdapter(childInterface,daynoteData)
+            val childAdapter = DaynoteChildAdapter(footerInterface,childInterface,daynoteData)
             layoutManager = GridLayoutManager(context,3,GridLayoutManager.VERTICAL,false)
 
             adapter =childAdapter
