@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="99dp"
+    android:layout_height="99dp"
+    app:cardCornerRadius="8dp"
+    android:id="@+id/daynote_item_layout"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/round_layout_background_gray">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="99dp"
+        android:layout_height="99dp"
+        android:background="@drawable/cat"
+        android:id="@+id/daynote_item_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:text="7월"
+            android:fontFamily="@font/appmainfont_bold"
+            android:includeFontPadding="false"
+            android:textColor="@color/background_white"
+            android:textSize="18dp"
+            android:id="@+id/daynote_item_text"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
