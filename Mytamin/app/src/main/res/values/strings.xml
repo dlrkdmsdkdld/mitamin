@@ -130,6 +130,8 @@
     <string name="setting_myday">마이데이 알림</string>
     <string name="setting_myday_sub">마이데이가 다가오면 알림을 받을게요.</string>
     <string name="setting_myday_btn">하루전</string>
+    <!--디테일 데이노트-->
+    <string name="detail_title">마이데이 기록</string>
 
 
 </resources>

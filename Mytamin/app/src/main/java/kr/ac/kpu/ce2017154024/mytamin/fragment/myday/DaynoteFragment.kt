@@ -14,6 +14,7 @@ import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.daynote_RecyclerView.Dayno
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.daynote_RecyclerView.IDaynoteChildInterface
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.daynote_RecyclerView.IfooterInterface
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.WishlistRecyclerAdapter
+import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteDetailActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentDaynoteBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
@@ -88,6 +89,12 @@ class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface,I
 
     override fun onSearchItemClicked(position: Int, data: daynoteData) {
         Log.d(TAG,"onSearchItemClicked $data")
+        val intent=Intent(requireContext(),DaynoteDetailActivity::class.java)
+        val bundle=Bundle()
+        bundle.putSerializable("data",data)
+        intent.putExtra("bundle_data",bundle)
+        startActivity(intent)
+
     }
 
     override fun onclickfooter() {
