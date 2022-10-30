@@ -10,6 +10,8 @@ import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 
+class FooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
 class DaynoteChildViewHolder(itemView: View,Interface :IDaynoteChildInterface): RecyclerView.ViewHolder(itemView) ,View.OnClickListener{
 
     private var RecyclerViewInterface=Interface

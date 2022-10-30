@@ -7,4 +7,7 @@ interface IDaynoteChildInterface {
     //검색버튼 클릭
     fun onSearchItemClicked(position: Int,data:daynoteData)
 
+    fun onclickfooter(){
+
+    }
 }
