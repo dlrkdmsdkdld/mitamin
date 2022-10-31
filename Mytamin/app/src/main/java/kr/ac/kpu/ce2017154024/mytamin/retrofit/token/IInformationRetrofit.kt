@@ -59,6 +59,11 @@ interface IInformationRetrofit {
     @DELETE("/daynote/{daynoteId}")
     fun deleteDaynote(@Path("daynoteId") day:Int): Call<JsonElement>
 
+    @Multipart
+    @PUT("/daynote/{daynoteId}")
+    fun modifyDaynote(@Part fileList:List<MultipartBody.Part?>, @Part("wishText") wishText: RequestBody,@Part("note") note: RequestBody
+                   ,@Path("daynoteId") daynoteId:Int
+    ) : Call<JsonElement>
 
 
 }

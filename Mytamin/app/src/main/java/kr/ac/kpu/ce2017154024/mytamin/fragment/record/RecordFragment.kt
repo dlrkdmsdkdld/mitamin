@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
@@ -22,6 +23,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -61,7 +65,7 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         Log.d(Constant.TAG,"RecordFragment onCreateView")
         mBinding?.recordCategoryLayout?.setOnClickListener(this)
         mBinding?.recordNewBtn?.setOnClickListener(this)
-        mBinding?.recordTimeLayout?.setOnClickListener(this)
+        if(myRecordViewmodel.recordtype == DaynoteRecordActivity.RecordType.basic) mBinding?.recordTimeLayout?.setOnClickListener(this)
         (activity as DaynoteRecordActivity).selectwishList(false)
         myRecordViewmodel.getyear.observe(viewLifecycleOwner, Observer {
             mBinding?.recordTimeText?.setText("${myRecordViewmodel.getyear.value}년 ${myRecordViewmodel.getmonth.value}월의 마이데이")
@@ -73,7 +77,6 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         myRecordViewmodel.getcategoryText.observe(viewLifecycleOwner, Observer {
             mBinding?.recordCategoryText?.setText(it)
         })
-
         mBinding?.recordCommentText?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -93,15 +96,7 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         return mBinding?.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "다시 시작")
-        if (myRecordViewmodel.getnote.value!=null){
-            mBinding?.recordCommentText?.setText(myRecordViewmodel.getnote.value)
 
-        }
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -111,6 +106,23 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
             myRecyclerView.submitBitmap(myRecordViewmodel.getbitmapList.value!!)
         }
         mBinding?.recordRecyclerImage?.adapter=myRecyclerView
+        myRecordViewmodel.getmodifyDaynote.value?.let {
+            it.imgList.forEach {
+                Glide.with(requireContext())
+                    .asBitmap()
+                    .load(it)
+                    .into(object : CustomTarget<Bitmap>(){
+                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                            Log.d(TAG, " image리스트 it -> $it")
+                            myRecordViewmodel.addbitmapList(resource)
+                            myRecyclerView.notifyDataSetChanged()
+                        }
+                        override fun onLoadCleared(placeholder: Drawable?) {}
+
+                    })
+            }
+
+        }
 
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
@@ -140,7 +152,7 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     override fun onSearchItemClicked(position: Int) {
         Log.d(TAG, "posisiton -> $position")
         myRecordViewmodel.removeBitmapList(position)
-        myRecordViewmodel.removeUrlList(position)
+        if (myRecordViewmodel.recordtype == DaynoteRecordActivity.RecordType.basic) myRecordViewmodel.removeUrlList(position)
 
         myRecyclerView.notifyDataSetChanged()
     }

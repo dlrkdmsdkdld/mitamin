@@ -30,8 +30,7 @@ interface IHomeRetrofit {
     @GET("/mytamin/latest")
     fun getlatestMytamin() : Call<JsonElement>
 
-    @GET("/mytamin/latest")
-    suspend fun getlatestMytaminSuspend() : Response<LatestMytamin>
+
 
     @PUT("/report/{reportId}")
     fun correctionReport(@Body data:ReportData, @Path("reportId") reportId:Int): Call<JsonElement>

@@ -2,6 +2,7 @@ package kr.ac.kpu.ce2017154024.mytamin.viewModel
 
 import android.app.Application
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -13,8 +14,13 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.work.WorkManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import kr.ac.kpu.ce2017154024.mytamin.MyApplication
+import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
+import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMM
@@ -22,9 +28,23 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToHome
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToMonth
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToYear
 
-class RecordViewmodel():ViewModel(){
-
+class RecordViewmodel(application: Application):AndroidViewModel(application){
+    private val context = application
   //  private val workManager = WorkManager.getInstance(application)
+  private val modifyDaynote= MutableLiveData<daynoteData>()
+    val getmodifyDaynote : LiveData<daynoteData>
+        get() = modifyDaynote
+    fun setmodifyDaynote(d: daynoteData){
+        modifyDaynote.value = d
+        setYear(d.year)
+        setmonth(d.month)
+        setnote(d.note)
+        setcategoryText(d.wishText)
+
+    }
+
+    var recordtype :DaynoteRecordActivity.RecordType = DaynoteRecordActivity.RecordType.basic
+
     private val year = MutableLiveData<Int>()
     val getyear : LiveData<Int>
         get() = year

@@ -12,15 +12,17 @@ import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
 
-class WishlistRecyclerAdapter(WishlistRecyclerview: IWishRecyclerAdapter,idArray:List<WishList>)  : RecyclerView.Adapter<WishlistRecyclerViewHolder>(){
+class WishlistRecyclerAdapter(WishlistRecyclerview: IWishRecyclerAdapter)  : RecyclerView.Adapter<WishlistRecyclerViewHolder>(){
     private var IWishlistRecyclerview:IWishRecyclerAdapter?=null
     private var selectedPosition = -1
 
-    private lateinit var WishiListArray:List<WishList>
+    private  var WishiListArray= ArrayList<WishList>()
     init {
 
-        this.WishiListArray= idArray
         this.IWishlistRecyclerview=WishlistRecyclerview
+    }
+    fun submitData(dataArray:ArrayList<WishList>){
+        WishiListArray = dataArray
     }
     private lateinit var myholder:WishlistRecyclerViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistRecyclerViewHolder {

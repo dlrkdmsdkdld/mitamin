@@ -50,12 +50,17 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
         return mBinding?.root
     }
 
-
+//    myRecyclerView = recordRecyclerAdapter(this)
+//    if (myRecordViewmodel.getbitmapList.value != null){
+//        Log.d(TAG ,"비트맵 어레이 크기 -> ${myRecordViewmodel.getbitmapList.value!!.size}" )
+//        myRecyclerView.submitBitmap(myRecordViewmodel.getbitmapList.value!!)
+//    }
+//    mBinding?.recordRecyclerImage?.adapter=myRecyclerView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myMydayViewmodel.getwishListArray.observe(viewLifecycleOwner, Observer {
-            this.myWishlistRecyclerAdapter= WishlistRecyclerAdapter(this,it)
-            wishlist_recyclerview.adapter = this.myWishlistRecyclerAdapter
+            myWishlistRecyclerAdapter.submitData(it)
+            myWishlistRecyclerAdapter.notifyDataSetChanged()
         })
         mBinding?.wishlistNewWishlist?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -75,7 +80,8 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
             }
 
         })
-
+        this.myWishlistRecyclerAdapter= WishlistRecyclerAdapter(this)
+        mBinding?.wishlistRecyclerview?.adapter = this.myWishlistRecyclerAdapter
         Log.d(TAG,"wishlist_recyclerview.adapter  ->${wishlist_recyclerview.adapter} ")
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행

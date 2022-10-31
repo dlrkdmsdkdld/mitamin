@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,8 +12,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.work.*
 import kr.ac.kpu.ce2017154024.mytamin.MytaminWorker
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityRecordDaynoteBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
+import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.utils.BitmapRequestBody
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.DAYNOTEDATE
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.NOTE
@@ -26,12 +31,19 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var navController:NavController
     // private val myRecordViewmodel: RecordViewmodel by viewModels { RecordViewModelFactory(application) }
      private lateinit var myRecordViewmodel: RecordViewmodel
+     enum class RecordType{
+         basic,
+         modify
+     }
+    private lateinit var customProgressDialog: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_daynote_record)
         mbinding = ActivityRecordDaynoteBinding.inflate(layoutInflater)
         setContentView(mbinding.root)
         myRecordViewmodel= ViewModelProvider(this).get(RecordViewmodel::class.java)
+        customProgressDialog= LoadingDialog(this)
 
         //네비게이션들을 담는 호스트
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.record_container) as NavHostFragment
@@ -45,6 +57,12 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
             val wishList  = bundle?.getSerializable("wishlistArray") as Array<WishList>
             myRecordViewmodel.setWishList(wishList)
 
+        }
+        if (intent.hasExtra("daynotebundle")){
+            val bundle=intent.getBundleExtra("daynotebundle")
+            val daynotebundle = bundle?.getSerializable("data") as daynoteData
+            daynotebundle?.let {myRecordViewmodel.setmodifyDaynote(daynotebundle) }
+            myRecordViewmodel.recordtype = RecordType.modify
         }
 
     }
@@ -64,6 +82,44 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
             mbinding?.recordTitleText.setText("기록 남기기")
         }
     }
+    fun basicWorker(){
+        var stringURI =ArrayList<String>()
+        myRecordViewmodel.getUrlList.value?.forEach {
+            stringURI.add(it)
+        }
+        Log.d(TAG, " stringURI stringURI $stringURI")
+        if (stringURI!=null) {
+            val inputData= Data.Builder().putStringArray(MytaminWorker.EXTRA_URI_ARRAY,
+                stringURI.toArray(arrayOfNulls<String>(stringURI.size))).build()
+            NOTE= myRecordViewmodel.getnote.value.toString()
+            WISHTEXT = myRecordViewmodel.getcategoryText.value.toString()
+            DAYNOTEDATE ="${myRecordViewmodel.getyear.value}.${myRecordViewmodel.getmonth.value.parseIntToMonth()}"
+
+            val uploadWorkRequest: WorkRequest =
+                OneTimeWorkRequestBuilder<MytaminWorker>()
+                    .setInputData(inputData)
+                    .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                    .build()
+            WorkManager.getInstance(applicationContext).enqueue(uploadWorkRequest)
+            finish()
+        }
+    }
+    fun modifyWorker(){
+        customProgressDialog.show()
+        val imageList  = ArrayList<MultipartBody.Part>()
+        myRecordViewmodel.getbitmapList.value?.forEach {
+            val bitmapRequestBody = it?.let {  BitmapRequestBody(it) }
+            val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("fileList", "file.jpeg", bitmapRequestBody)
+            imageList.add(bitmapMultipartBody)
+        }
+        InformationRetrofitManager.instance.modifynote(fileList = imageList, wishtext = myRecordViewmodel.getcategoryText.value!!, note = myRecordViewmodel.getnote.value!!, noteId = myRecordViewmodel.getmodifyDaynote.value!!.daynoteId
+        ){responseStatus, i ->
+            customProgressDialog.dismiss()
+            if (i==200){
+                //성공
+            }
+        }
+    }
     override fun onClick(p0: View?) {
         when(p0){
             mbinding?.recordBackBtn ->{
@@ -74,31 +130,14 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
                 when(navController.currentDestination?.id){
                     R.id.recordFragment ->{
                         Log.d(TAG, " 현재 프래그먼트는 record프래그먼트")
-                        val imageList = arrayListOf<MultipartBody.Part>()
-                        var stringURI =ArrayList<String>()
-                        val k =myRecordViewmodel.getUrlList.value?.toArray()
-                        Log.d(TAG, "myRecordViewmodel ${myRecordViewmodel.getUrlList.value}")
-                        myRecordViewmodel.getUrlList.value?.forEach {
-                            stringURI.add(it)
-                        }
-                        Log.d(TAG, " stringURI stringURI $stringURI")
-                        if (stringURI!=null) {
-                            Log.d(TAG, " stringURI stringURI")
-                            val inputData= Data.Builder().putStringArray(MytaminWorker.EXTRA_URI_ARRAY,
-                                stringURI.toArray(arrayOfNulls<String>(stringURI.size))).build()
-                            NOTE= myRecordViewmodel.getnote.value.toString()
-                            WISHTEXT = myRecordViewmodel.getcategoryText.value.toString()
-                            DAYNOTEDATE ="${myRecordViewmodel.getyear.value}.${myRecordViewmodel.getmonth.value.parseIntToMonth()}"
-                            Log.d(TAG,"datae ->$DAYNOTEDATE")
-                            Log.d(TAG,"datae ->$NOTE")
-                            Log.d(TAG,"datae ->$WISHTEXT")
-                            val uploadWorkRequest: WorkRequest =
-                               OneTimeWorkRequestBuilder<MytaminWorker>()
-                                   .setInputData(inputData)
-                                   .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-                                   .build()
-                            WorkManager.getInstance(applicationContext).enqueue(uploadWorkRequest)
-                            finish()
+                            when(myRecordViewmodel.recordtype){
+                                RecordType.basic->{
+                                    basicWorker()
+                                }
+                                RecordType.modify->{
+                                    modifyWorker()
+                                }
+                            }
                         }
 
 
@@ -111,7 +150,7 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
 //                            Log.d(TAG,"InformationRetrofitManager  i -> $i")
 //                        }
 
-                    }
+
                     R.id.selectRecordFragment ->{
                         Log.d(TAG, " 현재 프래그먼트는 카테고리고르는 프래그먼트")
                         onBackPressed()

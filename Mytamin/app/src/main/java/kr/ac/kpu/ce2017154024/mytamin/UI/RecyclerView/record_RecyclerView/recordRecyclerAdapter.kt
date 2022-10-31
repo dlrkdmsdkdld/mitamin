@@ -21,6 +21,7 @@ class recordRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView):RecyclerView.Ad
         this.bitmapArray.add(bitmap)
     }
     fun submitBitmap(bitmapArr: ArrayList<Bitmap>){
+        bitmapArray.clear()
         bitmapArray =bitmapArr
     }
     override fun onBindViewHolder(holder: recordRecycleerViewHolder, position: Int) {

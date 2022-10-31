@@ -93,6 +93,12 @@ class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface,I
         val bundle=Bundle()
         bundle.putSerializable("data",data)
         intent.putExtra("bundle_data",bundle)
+
+        val bundleWish=Bundle()
+        val wishlistArray = myMydayViewmodel.getwishListArray.value?.toTypedArray()
+        bundleWish.putSerializable("wishlistArray",wishlistArray)
+        intent.putExtra("array_bundle",bundleWish)
+
         startActivity(intent)
 
     }

@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,16 +21,26 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.select
 class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
     private lateinit var daynotedata : daynoteData
     private lateinit var mbinding : ActivityDaynoteDetailBinding
+    private var wishbundle:Bundle? =null
+    private var daynotebundle:Bundle?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG,"DaynoteDetailActivity onCreate")
         super.onCreate(savedInstanceState)
         mbinding = ActivityDaynoteDetailBinding.inflate(layoutInflater)
         setContentView(mbinding.root)
         if (intent.hasExtra("bundle_data")){
-            val bundle=intent.getBundleExtra("bundle_data")
-            this.daynotedata  = bundle?.getSerializable("data") as daynoteData
+            daynotebundle=intent.getBundleExtra("bundle_data")
+            this.daynotedata  = daynotebundle?.getSerializable("data") as daynoteData
 
         }
+        if (intent.hasExtra("array_bundle")){
+            this.wishbundle=intent.getBundleExtra("array_bundle")
+
+        }
+
+
+
         setSlideAdapter(daynotedata.imgList)
         Log.d(TAG,"daynotedata : $daynotedata")
         mbinding?.detailTitleText?.text = daynotedata.wishText
@@ -72,14 +83,21 @@ class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
 
         }
     }
+
     fun choiceOption(selectd: select){
         when(selectd){
             select.modify ->{
                 Log.d(TAG,"수정선택")
+                val intent = Intent(this@DaynoteDetailActivity,DaynoteRecordActivity::class.java)
+                if (wishbundle!=null) intent.putExtra("array_bundle",wishbundle)
+                intent.putExtra("daynotebundle",daynotebundle)
+                startActivity(intent)
+                finish()
+
             }
             select.delete ->{
                 Log.d(TAG,"삭제선택")
-            //    InformationRetrofitManager.instance.daynoteDelete(daynotedata.daynoteId)
+                InformationRetrofitManager.instance.daynoteDelete(daynotedata.daynoteId)
                 finish()
             }
         }
