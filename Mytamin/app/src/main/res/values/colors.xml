@@ -30,4 +30,5 @@
     <color name="LineColorshort">#EDEDED</color>
     <color name="TextColorshort">#D9D9D9</color>
     <color name="transparent">#00000000</color>
+    <color name="textRed">#F04452</color>
 </resources>

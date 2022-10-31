@@ -269,11 +269,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         }
 
     }
-    fun tobeAPICall(tobe:String){
-        InformationRetrofitManager.instance.CorrectionBeMyMessage(tobe) { RESPONSE_STATUS, it ->
 
-        }
-    }
     fun startMainActivity(){
         customProgressDialog.dismiss()
         val intent = Intent(this,MainActivity::class.java)

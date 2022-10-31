@@ -132,6 +132,8 @@
     <string name="setting_myday_btn">하루전</string>
     <!--디테일 데이노트-->
     <string name="detail_title">마이데이 기록</string>
+    <string name="detail_modify">마이데이 기록 수정하기</string>
+    <string name="detail_delete">마이데이 기록 삭제하기</string>
 
 
 </resources>

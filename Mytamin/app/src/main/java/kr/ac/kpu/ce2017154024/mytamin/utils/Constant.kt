@@ -55,6 +55,10 @@ enum class choice{
     basic,
     gallery
 }
+enum class select{
+    modify,
+    delete
+}
 enum class fragment{
     home,
     information,

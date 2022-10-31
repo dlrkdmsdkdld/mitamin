@@ -5,11 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
+import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.DetailImageAdapter
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityDaynoteDetailBinding
+import kr.ac.kpu.ce2017154024.mytamin.fragment.information.BottomProfileEditFragment
+import kr.ac.kpu.ce2017154024.mytamin.fragment.myday.BottomModifyFragment
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.choice
+import kr.ac.kpu.ce2017154024.mytamin.utils.select
 
 class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
     private lateinit var daynotedata : daynoteData
@@ -30,6 +36,7 @@ class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
         mbinding?.detailSubText?.text = daynotedata.note
         mbinding?.detailTimeText?.text = "${daynotedata.year}. ${daynotedata.month}"
         mbinding?.detailBackBtn.setOnClickListener(this)
+        mbinding?.detailMoreBtn.setOnClickListener(this)
 
     }
     private fun setSlideAdapter(images:ArrayList<String>){
@@ -58,9 +65,28 @@ class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
                 onBackPressed()
             }
             mbinding?.detailMoreBtn ->{
+                val bottomModifyFragment= BottomModifyFragment()
+                bottomModifyFragment.show(supportFragmentManager,bottomModifyFragment.tag)
 
             }
 
         }
+    }
+    fun choiceOption(selectd: select){
+        when(selectd){
+            select.modify ->{
+                Log.d(TAG,"수정선택")
+            }
+            select.delete ->{
+                Log.d(TAG,"삭제선택")
+            //    InformationRetrofitManager.instance.daynoteDelete(daynotedata.daynoteId)
+                finish()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG,"DaynoteDetailActivity onDestroy")
     }
 }

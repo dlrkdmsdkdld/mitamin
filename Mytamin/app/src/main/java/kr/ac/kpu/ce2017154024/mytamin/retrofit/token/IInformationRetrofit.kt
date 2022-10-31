@@ -56,6 +56,8 @@ interface IInformationRetrofit {
         ,@Part("date") date: RequestBody
     ) : Call<JsonElement>
 
+    @DELETE("/daynote/{daynoteId}")
+    fun deleteDaynote(@Path("daynoteId") day:Int): Call<JsonElement>
 
 
 

@@ -1,11 +1,15 @@
 package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import com.google.gson.JsonElement
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kr.ac.kpu.ce2017154024.mytamin.MyApplication
 import kr.ac.kpu.ce2017154024.mytamin.model.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -16,6 +20,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.Retrofit
 import kotlin.math.log
 
 
@@ -368,9 +373,38 @@ class InformationRetrofitManager {
                     override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                         Log.d(TAG, "데이노트 작성 실패 이유 -> $t")
                         completion(RESPONSE_STATUS.FAIL, null)
+
                     }
 
                 })
+        }
+    }
+    fun daynoteDelete(noteId:Int){
+        CoroutineScope(Dispatchers.IO).launch{
+            iInformationRetrofit?.deleteDaynote(noteId)?.enqueue(object :retrofit2.Callback<JsonElement>{
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body().let {
+                        val body = it?.asJsonObject
+                        val statusCodes = body?.get("statusCode")?.asInt
+                        if(statusCodes ==200){
+                            Handler(Looper.getMainLooper()).post{
+                                Toast.makeText(MyApplication.instance, "데이노트 삭제성공", Toast.LENGTH_SHORT).show()
+                            }
+                        }else{
+                            Handler(Looper.getMainLooper()).post{
+                                Toast.makeText(MyApplication.instance, "데이노트 삭제실패", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Handler(Looper.getMainLooper()).post{
+                        Toast.makeText(MyApplication.instance, "데이노트 삭제실패", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            })
         }
     }
 }

@@ -26,7 +26,7 @@ import kotlin.time.Duration.Companion.minutes
  class BitmapRequestBody(private val bitmap: Bitmap) : RequestBody() {
     override fun contentType(): MediaType = "image/jpeg".toMediaType()
     override fun writeTo(sink: BufferedSink) {
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, sink.outputStream())
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, sink.outputStream())
     }
 }
  fun changeDP(value : Int,context: Context) : Int{
