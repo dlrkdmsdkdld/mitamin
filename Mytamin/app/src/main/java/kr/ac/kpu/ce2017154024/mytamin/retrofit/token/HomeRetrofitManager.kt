@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.gson.JsonElement
 import kr.ac.kpu.ce2017154024.mytamin.model.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import retrofit2.Call
 import retrofit2.Response
@@ -266,6 +267,22 @@ class HomeRetrofitManager {
                 }
 
             })
+    }
+    fun getCreatedTime(){
+        iHomeRetrofit?.getCreatedTime()?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    PrivateUserDataSingleton.Createdyear = it.asJsonObject.get("data").asJsonObject.get("year").asInt
+                    PrivateUserDataSingleton.Createdmonth = it.asJsonObject.get("data").asJsonObject.get("month").asInt
+                    Log.d(TAG, " getCreatedTime :::   ${PrivateUserDataSingleton.Createdyear} .${PrivateUserDataSingleton.Createdmonth}")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+            }
+
+        })
     }
 
 

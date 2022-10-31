@@ -39,5 +39,6 @@ interface IHomeRetrofit {
 
 //    @POST("/auth/signup")
 //    fun postUser(@Body data: NewUser): Call<JsonElement>
-
+    @GET("/user/created-at")
+    fun getCreatedTime() : Call<JsonElement>
 }

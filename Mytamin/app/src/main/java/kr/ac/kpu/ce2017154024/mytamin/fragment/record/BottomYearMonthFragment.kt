@@ -14,12 +14,14 @@ import kr.ac.kpu.ce2017154024.mytamin.databinding.BottomRecordCalendarBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentBottomProfileEditBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.parseBottomCalendarYear
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.RecordViewmodel
 
 class BottomYearMonthFragment: BottomSheetDialogFragment(),View.OnClickListener {
     private var mBinding : BottomRecordCalendarBinding?=null
-    private var year:Int = 2021
-    private var month:Int = 1
+    val k = parseBottomCalendarYear()
+    private var year:Int = k.get(0)
+    private var month:Int =1
     private val myRecordViewmodel: RecordViewmodel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,13 +37,23 @@ class BottomYearMonthFragment: BottomSheetDialogFragment(),View.OnClickListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val yearCalendar = mBinding?.bottomRecordYear
-        val yeardata = arrayOf("2021년","2022년")
+
+        val min =k.get(0)
+        val max = k.get(k.lastIndex)
+        val parseArrayList = ArrayList<String>()
+        k.forEach {
+            parseArrayList.add("${it}년")
+        }
+        Log.d(TAG," min = $min")
+        Log.d(TAG," max = $max")
+
+        Log.d(TAG," parseArrayList = $parseArrayList")
+        val parseArray = parseArrayList.toArray(arrayOfNulls<String>(parseArrayList.size))
+        Log.d(TAG," k = $parseArray")
         yearCalendar.apply {
-            this!!.maxValue  = 2022
-            minValue = 2021
-            displayedValues = yeardata
-
-
+            this!!.maxValue  = max
+            minValue = min
+            displayedValues = parseArray
         }
 
         yearCalendar?.setOnValueChangedListener(object : com.shawnlin.numberpicker.NumberPicker.OnValueChangeListener {
@@ -87,6 +99,7 @@ class BottomYearMonthFragment: BottomSheetDialogFragment(),View.OnClickListener 
     override fun onClick(p0: View?) {
         when(p0){
             mBinding?.bottomRecordBtn ->{
+                Log.d(TAG,"year: $year  month :$month")
                 myRecordViewmodel.setYear(year)
                 myRecordViewmodel.setmonth(month)
                 onDestroyView()

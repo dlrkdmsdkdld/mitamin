@@ -31,10 +31,13 @@ class HomeViewModel: ViewModel() {
         comment.value = icomment
     }
     init {
+        getCreateAtAPI()
         wellcomAPICall()
         StatusAPI()
     }
-
+    fun getCreateAtAPI(){
+        HomeRetrofitManager.instance.getCreatedTime()
+    }
     fun wellcomAPICall(){
         HomeRetrofitManager.instance.getWelcomeMessage(completion = {responseStatus, wellcomedata ->
             Log.d(TAG,"HomeViewModel wellcomAPICall ")

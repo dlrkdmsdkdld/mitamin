@@ -70,10 +70,10 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         (activity as DaynoteRecordActivity).selectwishList(false)
         myRecordViewmodel.getyear.observe(viewLifecycleOwner, Observer {
             mBinding?.recordTimeText?.setText("${myRecordViewmodel.getyear.value}년 ${myRecordViewmodel.getmonth.value}월의 마이데이")
-            myRecordViewmodel.checkAPI()
         })
         myRecordViewmodel.getmonth.observe(viewLifecycleOwner, Observer {
             mBinding?.recordTimeText?.setText("${myRecordViewmodel.getyear.value}년 ${myRecordViewmodel.getmonth.value}월의 마이데이")
+            myRecordViewmodel.checkAPI()
         })
         myRecordViewmodel.getcategoryText.observe(viewLifecycleOwner, Observer {
             mBinding?.recordCategoryText?.setText(it)

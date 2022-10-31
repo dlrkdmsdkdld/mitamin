@@ -22,11 +22,8 @@ import kr.ac.kpu.ce2017154024.mytamin.activity.DaynoteRecordActivity
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
+import kr.ac.kpu.ce2017154024.mytamin.utils.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
-import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMM
-import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToHome
-import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToMonth
-import kr.ac.kpu.ce2017154024.mytamin.utils.parseTimeToYear
 
 class RecordViewmodel(application: Application):AndroidViewModel(application){
     private val context = application
@@ -56,6 +53,7 @@ class RecordViewmodel(application: Application):AndroidViewModel(application){
         get() = month
     fun setmonth(d: Int){
         month.value = d
+        Log.d(TAG, " setmonth  -> $d")
     }
     private val categoryText = MutableLiveData<String>()
     val getcategoryText: LiveData<String>
@@ -114,7 +112,8 @@ class RecordViewmodel(application: Application):AndroidViewModel(application){
     }
     fun checkAPI(){
         val year = getyear.value
-        val month = getmonth.value.parseIntToMM()
+        val month = getmonth.value.parseIntToMonth()
+        Log.d(TAG,"year: ${year}.month: ${getmonth.value}")
         InformationRetrofitManager.instance.checkrecord("${year}.$month"){responseStatus, b ->
             if (b==false){
                 Handler(Looper.getMainLooper()).post{

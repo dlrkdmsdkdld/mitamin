@@ -12,6 +12,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_one
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.introduce_first_talk_two
+import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.Createdyear
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody
@@ -58,6 +59,8 @@ fun Int?.parseIntToMM():String{
     if (minute!!<10){
         parseminute="0$minute"
     }
+    Log.d(TAG, " minute :$minute")
+    Log.d(TAG, " parseminute :$parseminute")
     return parseminute
 }
 fun Int?.parseIntToMonth():String{
@@ -92,6 +95,18 @@ fun parseTimeToHome():String{
     val parseData=home_dateFormat.format(tmp)
     Log.d(TAG,"현재 날짜 ${parseData}")
     return parseData
+}
+fun parseBottomCalendarYear():ArrayList<Int>{
+    val tmp = System.currentTimeMillis()
+    val YYYYFormat= SimpleDateFormat("YYYY", Locale("En", "KR"))
+    val parseYYYY=YYYYFormat.format(tmp)
+    val arrayYear =ArrayList<Int>()
+    val tmpL =parseYYYY.toInt() -Createdyear
+    for (i in 0..tmpL){
+        arrayYear.add(Createdyear + i)
+    }
+
+    return arrayYear
 }
 fun parseTimeToYear():Int{
     val tmp = System.currentTimeMillis()
