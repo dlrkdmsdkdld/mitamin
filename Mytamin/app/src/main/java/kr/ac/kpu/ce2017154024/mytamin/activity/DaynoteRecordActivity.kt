@@ -118,6 +118,7 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
             if (i==200){
                 //성공
             }
+            finish()
         }
     }
     override fun onClick(p0: View?) {

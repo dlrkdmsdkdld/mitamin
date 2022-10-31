@@ -56,6 +56,7 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     private lateinit var myRecyclerView :recordRecyclerAdapter
     private val myRecordViewmodel: RecordViewmodel by activityViewModels()
     private var imageUrlArray = ArrayList<Uri>()
+    private var first : Boolean = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,7 +77,9 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         })
         myRecordViewmodel.getcategoryText.observe(viewLifecycleOwner, Observer {
             mBinding?.recordCategoryText?.setText(it)
+            myRecordViewmodel.getnote.value?.let { mBinding?.recordCommentText?.setText(it) }
         })
+
         mBinding?.recordCommentText?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -106,23 +109,27 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
             myRecyclerView.submitBitmap(myRecordViewmodel.getbitmapList.value!!)
         }
         mBinding?.recordRecyclerImage?.adapter=myRecyclerView
-        myRecordViewmodel.getmodifyDaynote.value?.let {
-            it.imgList.forEach {
-                Glide.with(requireContext())
-                    .asBitmap()
-                    .load(it)
-                    .into(object : CustomTarget<Bitmap>(){
-                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                            Log.d(TAG, " image리스트 it -> $it")
-                            myRecordViewmodel.addbitmapList(resource)
-                            myRecyclerView.notifyDataSetChanged()
-                        }
-                        override fun onLoadCleared(placeholder: Drawable?) {}
+        if (first){
+            myRecordViewmodel.getmodifyDaynote.value?.let {
+                first = false
+                it.imgList.forEach {
+                    Glide.with(requireContext())
+                        .asBitmap()
+                        .load(it)
+                        .into(object : CustomTarget<Bitmap>(){
+                            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                Log.d(TAG, " image리스트 it -> $it")
+                                myRecordViewmodel.addbitmapList(resource)
+                                myRecyclerView.notifyDataSetChanged()
+                            }
+                            override fun onLoadCleared(placeholder: Drawable?) {}
 
-                    })
+                        })
+                }
+
             }
-
         }
+
 
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
