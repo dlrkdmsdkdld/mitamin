@@ -59,6 +59,7 @@
         android:layout_marginTop="12dp"
         app:dotsColor="@color/primary"
         android:id="@+id/detail_indicator"
+        app:dotsSize="8dp"
         />
     <TextView
         android:layout_width="wrap_content"

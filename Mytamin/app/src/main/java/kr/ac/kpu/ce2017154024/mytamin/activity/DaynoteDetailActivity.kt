@@ -11,7 +11,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
-class DaynoteDetailActivity : AppCompatActivity() {
+class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
     private lateinit var daynotedata : daynoteData
     private lateinit var mbinding : ActivityDaynoteDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +26,11 @@ class DaynoteDetailActivity : AppCompatActivity() {
         }
         setSlideAdapter(daynotedata.imgList)
         Log.d(TAG,"daynotedata : $daynotedata")
+        mbinding?.detailTitleText?.text = daynotedata.wishText
+        mbinding?.detailSubText?.text = daynotedata.note
+        mbinding?.detailTimeText?.text = "${daynotedata.year}. ${daynotedata.month}"
+        mbinding?.detailBackBtn.setOnClickListener(this)
+
     }
     private fun setSlideAdapter(images:ArrayList<String>){
         val pagerCallback = object :ViewPager2.OnPageChangeCallback(){
@@ -45,5 +50,17 @@ class DaynoteDetailActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            mbinding?.detailBackBtn ->{
+                onBackPressed()
+            }
+            mbinding?.detailMoreBtn ->{
+
+            }
+
+        }
     }
 }
