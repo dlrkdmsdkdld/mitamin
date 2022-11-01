@@ -52,7 +52,7 @@
           android:layout_marginTop="16dp"
           app:cardElevation="10dp"
           app:cardCornerRadius="12dp"
-          android:minHeight="172dp"
+          android:minHeight="188dp"
           android:id="@+id/history_card"
           >
          <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,6 +104,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="16dp"
                 android:padding="15dp"
+                android:id="@+id/history_refresh_btn"
                 android:background="@drawable/ic_icon_refresh_mono"
                 />
             <androidx.appcompat.widget.AppCompatButton
@@ -113,6 +114,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:textColor="@color/background_white"
+                android:layout_marginTop="24dp"
                 android:textSize="16dp"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
