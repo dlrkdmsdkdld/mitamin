@@ -116,7 +116,7 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
     }
     private fun newDaynoteAPI(imageList:List<MultipartBody.Part?>){
         Log.d(TAG, "MytaminWorker doWork imageListAPI()")
-        InformationRetrofitManager.instance.newdaynote(imageList, wishtext = WISHTEXT, note = NOTE, date = DAYNOTEDATE){ responseStatus, i ->
+        InformationRetrofitManager.instance.newdaynote(imageList, wishid = WISHTEXT, note = NOTE, date = DAYNOTEDATE){ responseStatus, i ->
             when(responseStatus){
                 RESPONSE_STATUS.OKAY ->{
                     Handler(Looper.getMainLooper()).post{

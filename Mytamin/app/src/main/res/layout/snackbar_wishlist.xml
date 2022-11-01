@@ -13,10 +13,8 @@
         android:layout_marginRight="20dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="20dp"
+
         >
-
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -49,14 +47,13 @@
                 android:layout_height="40dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-
+                app:layout_constraintStart_toEndOf="@+id/snackbar_text"
                 android:text="@string/snackbar_btn"
                 android:textColor="@color/background_white"
                 android:background="@drawable/round_layout_background_orange"
                 android:textSize="16dp"
                 android:padding="10dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="8dp"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
                 android:id="@+id/snackbar_btn"

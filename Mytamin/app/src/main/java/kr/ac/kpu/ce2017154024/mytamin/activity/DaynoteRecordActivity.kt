@@ -92,8 +92,9 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
             val inputData= Data.Builder().putStringArray(MytaminWorker.EXTRA_URI_ARRAY,
                 stringURI.toArray(arrayOfNulls<String>(stringURI.size))).build()
             NOTE= myRecordViewmodel.getnote.value.toString()
-            WISHTEXT = myRecordViewmodel.getcategoryText.value.toString()
+            WISHTEXT = myRecordViewmodel.getwishId.value!!
             DAYNOTEDATE ="${myRecordViewmodel.getyear.value}.${myRecordViewmodel.getmonth.value.parseIntToMonth()}"
+            Log.d(TAG, "DAYNOTEDATE : $DAYNOTEDATE ")
 
             val uploadWorkRequest: WorkRequest =
                 OneTimeWorkRequestBuilder<MytaminWorker>()
@@ -112,14 +113,14 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
             val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("fileList", "file.jpeg", bitmapRequestBody)
             imageList.add(bitmapMultipartBody)
         }
-        InformationRetrofitManager.instance.modifynote(fileList = imageList, wishtext = myRecordViewmodel.getcategoryText.value!!, note = myRecordViewmodel.getnote.value!!, noteId = myRecordViewmodel.getmodifyDaynote.value!!.daynoteId
-        ){responseStatus, i ->
-            customProgressDialog.dismiss()
-            if (i==200){
-                //성공
-            }
-            finish()
-        }
+//        InformationRetrofitManager.instance.modifynote(fileList = imageList, wishtext = myRecordViewmodel.getcategoryText.value!!, note = myRecordViewmodel.getnote.value!!, noteId = myRecordViewmodel.getmodifyDaynote.value!!.daynoteId
+//        ){responseStatus, i ->
+//            customProgressDialog.dismiss()
+//            if (i==200){
+//                //성공
+//            }
+//            finish()
+//        }
     }
     override fun onClick(p0: View?) {
         when(p0){

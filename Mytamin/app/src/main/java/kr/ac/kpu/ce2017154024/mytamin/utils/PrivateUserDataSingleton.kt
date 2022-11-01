@@ -11,6 +11,6 @@ object PrivateUserDataSingleton{
     var Createdmonth:Int= 0
 
     lateinit var NOTE:String
-    lateinit var WISHTEXT:String
+     var WISHTEXT:Int = 0
     lateinit var DAYNOTEDATE:String
 }

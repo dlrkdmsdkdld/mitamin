@@ -290,6 +290,8 @@ class InformationRetrofitManager {
                                         note = note,
                                         imgList = parseimgList,
                                         daynoteId = noteid
+                                        , wishId = 0
+                                    //TODO
                                     )
                                     Log.d(TAG, "result -> result :$result ")
                                     Mydaydata.add(result)
@@ -367,20 +369,16 @@ class InformationRetrofitManager {
 
     fun newdaynote(
             fileList: List<MultipartBody.Part?>,
-            wishtext: String,
+            wishid: Int,
             note: String,
             date: String,
             completion: (RESPONSE_STATUS, Int?) -> Unit
         ) {
-            val wishtextRequestBody: RequestBody = wishtext.toRequestBody()
+          //  val wishtextRequestBody: RequestBody = wishtext.toRequestBody()
             val noteRequestBody: RequestBody = note.toRequestBody()
             val dateRequestBody: RequestBody = date.toRequestBody()
-            iInformationRetrofit?.newDaynote(
-                fileList = fileList,
-                wishText = wishtextRequestBody,
-                note = noteRequestBody,
-                date = dateRequestBody
-            )
+        Log.d(TAG, " date : $date note :$note  wishtext $wishid")
+            iInformationRetrofit?.newDaynote(fileList = fileList, wishId = wishid, note = noteRequestBody, date = dateRequestBody)
                 ?.enqueue(object : retrofit2.Callback<JsonElement> {
                     override fun onResponse(
                         call: Call<JsonElement>,

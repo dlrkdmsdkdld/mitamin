@@ -52,7 +52,7 @@ interface IInformationRetrofit {
 
     @Multipart
     @POST("/daynote/new")
-    fun newDaynote(@Part fileList:List<MultipartBody.Part?>, @Part("wishText") wishText: RequestBody,@Part("note") note: RequestBody
+    fun newDaynote(@Part fileList:List<MultipartBody.Part?>, @Part("wishId") wishId: Int,@Part("note") note: RequestBody
         ,@Part("date") date: RequestBody
     ) : Call<JsonElement>
 

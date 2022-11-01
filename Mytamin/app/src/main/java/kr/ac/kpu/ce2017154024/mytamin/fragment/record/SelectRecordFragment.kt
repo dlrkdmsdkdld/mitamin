@@ -57,6 +57,7 @@ class SelectRecordFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListen
         Log.d(TAG,"StateText -> $statetext")
         Log.d(TAG,"position ->$position id->$id")
         myRecordViewmodel.setcategoryText(statetext)
+        myRecordViewmodel.setwishId(id)
     }
 
     override fun onClick(p0: View?) {
