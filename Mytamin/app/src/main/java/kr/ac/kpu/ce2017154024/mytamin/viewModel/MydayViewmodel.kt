@@ -19,6 +19,15 @@ class MydayViewmodel:ViewModel() {
     fun setdaynoteDataArray(i:ArrayList<daynoteDataParent>){
         daynoteDataArray.value = i
     }
+    private val WishlistDelete = MutableLiveData<Int>()
+    val getWishlistDelete : LiveData<Int>
+        get() = WishlistDelete
+    fun setWishlistDelete(time:Int){
+        WishlistDelete.value = time
+    }
+    fun deleteWishlistAPI(id:Int){
+        InformationRetrofitManager.instance.deleteWishlist(id)
+    }
 
     private val WishlistContent = MutableLiveData<Boolean>()
     val getWishlistContent : LiveData<Boolean>

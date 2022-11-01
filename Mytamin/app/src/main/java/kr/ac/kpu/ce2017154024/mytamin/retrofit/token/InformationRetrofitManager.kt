@@ -465,6 +465,27 @@ class InformationRetrofitManager {
 
             })
         }
+    fun deleteWishlist(wishid:Int){
+        Log.d(TAG , "deleteWishlist wishid : $wishid")
+        iInformationRetrofit?.deleteWish(wishid)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body().let {
+                    val body = it?.asJsonObject
+                    val statusCodes = body?.get("statusCode")?.asInt
+                    if (statusCodes == 200) {
+
+                    } else {
+
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+            }
+
+        })
+    }
 
 
 

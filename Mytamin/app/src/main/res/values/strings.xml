@@ -105,6 +105,10 @@
     <string name="daynote_no_subtitle">마이데이를 기록해주세요!</string>
     <string name="wishlist_hidden_title">숨겨진 리스트</string>
     <string name="wishlist_hint">내용 입력</string>
+    <string name="wishlist_modify">내용 수정하기</string>
+    <string name="wishlist_delete">삭제하기</string>
+    <string name="snackbar_delete">리스트가 삭제되었어요</string>
+    <string name="snackbar_btn">실행취소</string>
     <string name="daynote_footer1">데이노트</string>
     <string name="daynote_footer2">추가</string>
     <!--recorddaynote-->

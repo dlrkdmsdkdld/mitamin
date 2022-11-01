@@ -1,6 +1,5 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment.myday
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,12 +9,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_wishlist.*
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.IWishRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.WishlistRecyclerAdapter
-import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.RecyclerView.home_RecyclerView.IHomeRecyclerView
+import kr.ac.kpu.ce2017154024.mytamin.UI.WishlistSnackbar
 import kr.ac.kpu.ce2017154024.mytamin.activity.MydayActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.NewWishListActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentWishlistBinding
@@ -47,9 +48,24 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
         mBinding?.wishlistNoBtn?.setOnClickListener(this)
         mBinding?.wishlistCompleteBtn?.setOnClickListener(this)
 
+        myMydayViewmodel.getWishlistDelete.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG,"위시리스트 아이디 : $it")
+            deleteWish(id)
+
+        })
+
         return mBinding?.root
     }
-
+    private fun deleteWish(id:Int){
+        //myMydayViewmodel.deleteWishlistAPI(id)
+        WishlistSnackbar.make(requireView(),id).show()
+//        Snackbar.make(requireView(),"삭제하시겠습니까?",Snackbar.LENGTH_SHORT).setAction("실행취소",object :View.OnClickListener{
+//            override fun onClick(p0: View?) {
+//                TODO("Not yet implemented")
+//            }
+//
+//        })
+    }
 //    myRecyclerView = recordRecyclerAdapter(this)
 //    if (myRecordViewmodel.getbitmapList.value != null){
 //        Log.d(TAG ,"비트맵 어레이 크기 -> ${myRecordViewmodel.getbitmapList.value!!.size}" )
@@ -92,7 +108,9 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
 
 
     override fun onSearchItemClicked(position: Int, statetext: String,id:Int) {
-        Log.d(TAG,"stateText - > $statetext")
+        Log.d(TAG,"stateText - > $statetext id ->$id")
+        val bottomWish  = BottomWishlistFragment(statetext,id)
+        bottomWish.show(parentFragmentManager,bottomWish.tag)
     }
 
     override fun onClick(p0: View?) {

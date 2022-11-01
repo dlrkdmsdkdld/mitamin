@@ -66,4 +66,8 @@ interface IInformationRetrofit {
     ) : Call<JsonElement>
 
 
+    @DELETE("/wish/{wishId}")
+    fun deleteWish(@Path("wishId") wishId:Int): Call<JsonElement>
+
+
 }
