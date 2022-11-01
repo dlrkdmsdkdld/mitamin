@@ -25,8 +25,7 @@ import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
-class RecordViewmodel(application: Application):AndroidViewModel(application){
-    private val context = application
+class RecordViewmodel():ViewModel(){
   //  private val workManager = WorkManager.getInstance(application)
   private val modifyDaynote= MutableLiveData<daynoteData>()
     val getmodifyDaynote : LiveData<daynoteData>
@@ -37,6 +36,7 @@ class RecordViewmodel(application: Application):AndroidViewModel(application){
         setmonth(d.month)
         setnote(d.note)
         setcategoryText(d.wishText)
+        setwishId(d.wishId)
 
     }
 
@@ -117,22 +117,24 @@ class RecordViewmodel(application: Application):AndroidViewModel(application){
         ok.value = d
     }
     fun checkAPI(){
-        val year = getyear.value
-        val month = getmonth.value.parseIntToMonth()
-        Log.d(TAG,"year: ${year}.month: ${getmonth.value}")
-        InformationRetrofitManager.instance.checkrecord("${year}.$month"){responseStatus, b ->
-            if (b==false){
-                Handler(Looper.getMainLooper()).post{
-                    Toast.makeText(MyApplication.instance, "이 날짜는 마이타민 작성불가능합니다.", Toast.LENGTH_SHORT).show()
-                    setok(false)
+        if(recordtype == DaynoteRecordActivity.RecordType.basic) {
+            val year = getyear.value
+            val month = getmonth.value.parseIntToMonth()
+            Log.d(TAG, "year: ${year}.month: ${getmonth.value}")
+            InformationRetrofitManager.instance.checkrecord("${year}.$month") { responseStatus, b ->
+                if (b == false) {
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(MyApplication.instance, "이 날짜는 마이타민 작성불가능합니다.", Toast.LENGTH_SHORT).show()
+                        setok(false)
+                    }
+                } else {
+                    Handler(Looper.getMainLooper()).post {
+                        Toast.makeText(MyApplication.instance, "이 날짜는 마이타민 작성가능합니다.", Toast.LENGTH_SHORT).show()
+                        setok(true)
+                    }
                 }
-            }else{
-                Handler(Looper.getMainLooper()).post{
-                    Toast.makeText(MyApplication.instance, "이 날짜는 마이타민 작성가능합니다.", Toast.LENGTH_SHORT).show()
-                    setok(true)
-                }
-            }
 
+            }
         }
     }
 

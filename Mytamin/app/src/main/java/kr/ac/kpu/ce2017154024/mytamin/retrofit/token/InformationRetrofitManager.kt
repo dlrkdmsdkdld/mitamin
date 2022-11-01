@@ -282,6 +282,7 @@ class InformationRetrofitManager {
                                     val year = parent.get("year").asInt
                                     val month = parent.get("month").asInt
                                     val wishText = parent.get("wishText").asString
+                                    val wishid = parent.get("wishId").asInt
                                     val note = parent.get("note").asString
                                     val result = daynoteData(
                                         year = year,
@@ -290,8 +291,7 @@ class InformationRetrofitManager {
                                         note = note,
                                         imgList = parseimgList,
                                         daynoteId = noteid
-                                        , wishId = 0
-                                    //TODO
+                                        , wishId = wishid
                                     )
                                     Log.d(TAG, "result -> result :$result ")
                                     Mydaydata.add(result)
@@ -403,12 +403,11 @@ class InformationRetrofitManager {
 
         }
 
-    fun modifynote(fileList: List<MultipartBody.Part?>, wishtext: String, note: String, noteId: Int, completion: (RESPONSE_STATUS, Int?) -> Unit) {
-            val wishtextRequestBody: RequestBody = wishtext.toRequestBody()
+    fun modifynote(fileList: List<MultipartBody.Part?>, wishid: Int, note: String, noteId: Int, completion: (RESPONSE_STATUS, Int?) -> Unit) {
             val noteRequestBody: RequestBody = note.toRequestBody()
             iInformationRetrofit?.modifyDaynote(
                 fileList = fileList,
-                wishText = wishtextRequestBody,
+                wishId = wishid,
                 note = noteRequestBody,
                 daynoteId = noteId
             )

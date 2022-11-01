@@ -61,7 +61,7 @@ interface IInformationRetrofit {
 
     @Multipart
     @PUT("/daynote/{daynoteId}")
-    fun modifyDaynote(@Part fileList:List<MultipartBody.Part?>, @Part("wishText") wishText: RequestBody,@Part("note") note: RequestBody
+    fun modifyDaynote(@Part fileList:List<MultipartBody.Part?>, @Part("wishId") wishId: Int,@Part("note") note: RequestBody
                    ,@Path("daynoteId") daynoteId:Int
     ) : Call<JsonElement>
 

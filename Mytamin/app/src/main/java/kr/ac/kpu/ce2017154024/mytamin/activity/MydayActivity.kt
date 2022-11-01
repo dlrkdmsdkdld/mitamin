@@ -25,6 +25,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mbinding:ActivityMydayBinding
     private lateinit var myMydayViewmodel: MydayViewmodel
     private lateinit var newWish:WishList
+    private var firstLoading=true
     private val tabTitleArray = arrayOf(
         "데이노트","위시리스트"
     )
@@ -40,9 +41,15 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = tabTitleArray[position]
         }.attach()
-
+        showSampleData(isLoading = true)
         mbinding?.mydayBackBtn.setOnClickListener(this)
+        myMydayViewmodel.getDaynoteContent.observe(this, Observer {
+            if (firstLoading){
+                firstLoading=false
+                showSampleData(isLoading = false)
 
+            }
+        })
 
     }
     companion object {
@@ -56,6 +63,17 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         Log.d(TAG,"onActivityResult onActivityResult SUB_ACTIVITY_CODE: $SUB_ACTIVITY_CODE RESULT_OK:$RESULT_OK ")
         if (requestCode == SUB_ACTIVITY_CODE && resultCode == RESULT_OK) {
 
+        }
+    }
+    private fun showSampleData(isLoading: Boolean) {
+        if (isLoading) {
+            mbinding?.daynoteShimmerLayout?.startShimmer()
+            mbinding?.daynoteShimmerLayout?.visibility = View.VISIBLE
+            mbinding?.daynoteMainLayout?.visibility = View.GONE
+        } else {
+            mbinding?.daynoteShimmerLayout?.stopShimmer()
+            mbinding?.daynoteShimmerLayout?.visibility = View.GONE
+            mbinding?.daynoteMainLayout?.visibility = View.VISIBLE
         }
     }
 

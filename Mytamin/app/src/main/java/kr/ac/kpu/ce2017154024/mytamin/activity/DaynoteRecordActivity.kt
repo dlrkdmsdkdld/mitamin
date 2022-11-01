@@ -113,14 +113,14 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
             val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("fileList", "file.jpeg", bitmapRequestBody)
             imageList.add(bitmapMultipartBody)
         }
-//        InformationRetrofitManager.instance.modifynote(fileList = imageList, wishtext = myRecordViewmodel.getcategoryText.value!!, note = myRecordViewmodel.getnote.value!!, noteId = myRecordViewmodel.getmodifyDaynote.value!!.daynoteId
-//        ){responseStatus, i ->
-//            customProgressDialog.dismiss()
-//            if (i==200){
-//                //성공
-//            }
-//            finish()
-//        }
+        InformationRetrofitManager.instance.modifynote(fileList = imageList, wishid = myRecordViewmodel.getwishId.value!!, note = myRecordViewmodel.getnote.value!!, noteId = myRecordViewmodel.getmodifyDaynote.value!!.daynoteId
+        ){responseStatus, i ->
+            customProgressDialog.dismiss()
+            if (i==200){
+                //성공
+            }
+            finish()
+        }
     }
     override fun onClick(p0: View?) {
         when(p0){
