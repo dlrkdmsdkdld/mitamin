@@ -50,7 +50,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
 
         myMydayViewmodel.getWishlistDelete.observe(viewLifecycleOwner, Observer {
             Log.d(TAG,"위시리스트 아이디 : $it")
-            deleteWish(id)
+            deleteWish(it)
 
         })
 
@@ -58,6 +58,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
     }
     private fun deleteWish(id:Int){
         //myMydayViewmodel.deleteWishlistAPI(id)
+        Log.d(TAG, "deleteWish i: d :$id ")
         WishlistSnackbar.make(requireView(),id).show()
 //        Snackbar.make(requireView(),"삭제하시겠습니까?",Snackbar.LENGTH_SHORT).setAction("실행취소",object :View.OnClickListener{
 //            override fun onClick(p0: View?) {

@@ -23,7 +23,7 @@ class WishlistSnackbar(view: View,wishlistid:Int) {
         .addCallback(object :BaseTransientBottomBar.BaseCallback<Snackbar>(){
             override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                 super.onDismissed(transientBottomBar, event)
-                Log.d(TAG, " 스낵바 삭제됨")
+                Log.d(TAG, " 스낵바 삭제됨 wishlistid : $wishlistid")
                 if (cancel){
                     InformationRetrofitManager.instance.deleteWishlist(wishlistid)
                 }

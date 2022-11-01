@@ -26,8 +26,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var myMydayViewmodel: MydayViewmodel
     private lateinit var newWish:WishList
     private val tabTitleArray = arrayOf(
-        "위시리스트",
-        "데이노트"
+        "데이노트","위시리스트"
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

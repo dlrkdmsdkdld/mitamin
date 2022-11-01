@@ -20,9 +20,7 @@ class HistoryFragment : Fragment() {
     ): View? {
         val binding = FragmentHistoryBinding.inflate(inflater,container,false)
         mBinding =binding
-        mBinding?.historyBtn?.setOnClickListener {
-            PreferenceUtil.clearUserData()
-        }
+
         Log.d(TAG,"HistoryFragment onCreateView")
         return mBinding?.root
     }

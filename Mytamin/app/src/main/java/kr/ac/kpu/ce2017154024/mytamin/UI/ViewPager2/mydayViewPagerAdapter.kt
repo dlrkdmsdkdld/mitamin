@@ -17,8 +17,8 @@ class mydayViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecyc
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> return WishlistFragment()
-            1 -> return DaynoteFragment()
+            1 -> return WishlistFragment()
+            0 -> return DaynoteFragment()
         }
         return DaynoteFragment()
     }

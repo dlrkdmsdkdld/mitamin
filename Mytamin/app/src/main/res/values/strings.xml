@@ -138,6 +138,13 @@
     <string name="detail_title">마이데이 기록</string>
     <string name="detail_modify">마이데이 기록 수정하기</string>
     <string name="detail_delete">마이데이 기록 삭제하기</string>
+    <!--히스토리 프래그먼트-->
+    <string name="history_praise_title">칭찬 처방 기록</string>
+    <string name="history_praise_btn">전체 처방 기록 보기</string>
+    <string name="history_care_title">감정 진단 기록</string>
+    <string name="history_care_subtitle">주간 마음 컨디션</string>
+    <string name="history_history_title">이번 달 가장 많이 느낀 감정</string>
+    <string name="history_calendar_title">마이타민 모아보기</string>
 
 
 </resources>
