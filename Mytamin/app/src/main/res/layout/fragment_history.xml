@@ -165,6 +165,13 @@
           android:id="@+id/history_report_layout"
           android:background="@drawable/round_layout_stroke_gray"
           >
+         <com.github.mikephil.charting.charts.LineChart
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             android:id="@+id/history_chart"
+             />
 
 
       </androidx.constraintlayout.widget.ConstraintLayout>

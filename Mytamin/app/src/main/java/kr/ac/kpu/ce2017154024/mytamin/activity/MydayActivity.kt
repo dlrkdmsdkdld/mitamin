@@ -51,7 +51,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         //네비게이션 컨트롤러 가져옴
         val navController = navHostFragment.navController
         tabLayout.addTab(tabLayout.newTab().setText("데이노트"))
-        tabLayout.addTab(tabLayout.newTab().setText("위시리스트`"))
+        tabLayout.addTab(tabLayout.newTab().setText("위시리스트"))
         tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position){

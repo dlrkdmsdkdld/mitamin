@@ -28,8 +28,8 @@ class HomeRecyclerAdapter(HomeRecyclerview: IHomeRecyclerView) : RecyclerView.Ad
         onArray.add(true)
         imageArray.add(R.drawable.ic_step_one_image)
         imageArray.add(R.drawable.ic_step_two_image)
-        imageArray.add(R.drawable.ic_step_two_image)
-        imageArray.add(R.drawable.ic_step_two_image)
+        imageArray.add(R.drawable.ic_step_three_image)
+        imageArray.add(R.drawable.ic_step_four_image)
         this.iHomeRecyclerview = HomeRecyclerview
     }
 

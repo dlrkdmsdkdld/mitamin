@@ -93,5 +93,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     //numberpicker
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
+    //안드로이드 차트
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }

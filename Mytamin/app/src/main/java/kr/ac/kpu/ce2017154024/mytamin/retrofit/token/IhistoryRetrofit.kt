@@ -10,6 +10,8 @@ interface IhistoryRetrofit {
 
     @GET("/report/feeling/rank")
     fun getMostFeeling() : Call<JsonElement>
+    @GET("/report/weekly/mental")
+    fun weeklyMental() : Call<JsonElement>
 
 
 }

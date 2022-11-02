@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kr.ac.kpu.ce2017154024.mytamin.model.feeling
 import kr.ac.kpu.ce2017154024.mytamin.model.randomCare
+import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -24,9 +25,16 @@ class HistoryViewModel:ViewModel() {
     fun setmostFeel(time:ArrayList<feeling>){
         mostFeel.value = time
     }
+    private val weekMental = MutableLiveData<ArrayList<weeklyMental>>()
+    val getweekMental : LiveData<ArrayList<weeklyMental>>
+        get() = weekMental
+    fun setweekMental(time:ArrayList<weeklyMental>){
+        weekMental.value = time
+    }
     init {
         randomCareAPI()
         getMostFeelAPI()
+        getWeeklyMentalAPI()
     }
     fun randomCareAPI(){
         HistoryRetrofitManager.instance.getRandomCare(){responseStatus, randomCareD ->
@@ -41,6 +49,11 @@ class HistoryViewModel:ViewModel() {
                 Log.d(TAG  , "arrayList -> $arrayList ")
                 arrayList?.let { setmostFeel(arrayList) }
             }
+        }
+    }
+    fun getWeeklyMentalAPI(){
+        HistoryRetrofitManager.instance.getWeeklyMental{responseStatus, arrayListWeek ->
+            arrayListWeek?.let {  setweekMental(it)}
         }
     }
 }

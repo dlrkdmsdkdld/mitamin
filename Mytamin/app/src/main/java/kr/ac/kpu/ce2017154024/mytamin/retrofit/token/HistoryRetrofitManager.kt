@@ -2,9 +2,9 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import android.util.Log
 import com.google.gson.JsonElement
-import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.feeling
 import kr.ac.kpu.ce2017154024.mytamin.model.randomCare
+import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import retrofit2.Call
@@ -16,11 +16,11 @@ class HistoryRetrofitManager {
         val instance = HistoryRetrofitManager()
     }
 
-    private val iInformationRetrofit: IhistoryRetrofit? =
+    private val iHistoryRetrofit: IhistoryRetrofit? =
         TokenRetrofitClient.getClient()?.create(IhistoryRetrofit::class.java)
 
     fun getRandomCare(completion: (RESPONSE_STATUS, randomCare?) -> Unit){
-        iInformationRetrofit?.getRandomCare()?.enqueue(object :retrofit2.Callback<JsonElement>{
+        iHistoryRetrofit?.getRandomCare()?.enqueue(object :retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 response.body()?.let {
                     if (!(it.asJsonObject.get("data").isJsonNull)){
@@ -45,7 +45,7 @@ class HistoryRetrofitManager {
     }
 
     fun getMostFeeling(completion: (RESPONSE_STATUS, ArrayList<feeling>?) -> Unit){
-        iInformationRetrofit?.getMostFeeling()?.enqueue(object :retrofit2.Callback<JsonElement>{
+        iHistoryRetrofit?.getMostFeeling()?.enqueue(object :retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 response.body()?.let {
                     val data = it.asJsonObject.get("data").asJsonArray
@@ -70,6 +70,28 @@ class HistoryRetrofitManager {
             }
 
         })
+    }
+    fun getWeeklyMental(completion:(RESPONSE_STATUS, ArrayList<weeklyMental>?) ->Unit){
+        iHistoryRetrofit?.weeklyMental()?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response?.body()?.let {
+                    val data = it.asJsonObject.get("data").asJsonArray
+                    var result = ArrayList<weeklyMental>()
+                    data.forEach {
+                        val dayOfWeek = it.asJsonObject.get("dayOfWeek").asString
+                        val mentalConditionCode =it.asJsonObject.get("mentalConditionCode").asInt
+                        result.add(weeklyMental(dayOfWeek,mentalConditionCode))
+                    }
+                    completion(RESPONSE_STATUS.OKAY,result)
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL,null)
+            }
+
+        })
+
     }
 
 }
