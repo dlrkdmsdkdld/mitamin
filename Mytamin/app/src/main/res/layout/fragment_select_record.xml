@@ -15,6 +15,7 @@
         android:id="@+id/record_recycler_wish"
         tools:listitem="@layout/wishlist_item"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constrainedHeight="true"
         android:orientation="vertical"
         />
 

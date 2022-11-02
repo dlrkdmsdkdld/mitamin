@@ -9,6 +9,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.mydayViewPagerAdapter
@@ -35,12 +37,38 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(mbinding.root)
         myMydayViewmodel= ViewModelProvider(this).get(MydayViewmodel::class.java)
         Log.d(TAG," MydayActivity onCreate ")
-        val viewPager = mbinding?.mydayViewpager
+//        val viewPager = mbinding?.mydayViewpager
         val tabLayout = mbinding?.mydayTablayout
-        viewPager.adapter = mydayViewPagerAdapter(supportFragmentManager,lifecycle)
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = tabTitleArray[position]
-        }.attach()
+        ///뷰페이저 + 탭레이아웃
+//        viewPager.adapter = mydayViewPagerAdapter(supportFragmentManager,lifecycle)
+//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+//            tab.text = tabTitleArray[position]
+//        }.attach()
+        ///여기까지
+        //////탭레이아웃 + 프래그먼트 컨테이너 이용코드 - 뷰페이저사용시 짤려서
+        //네비게이션들을 담는 호스트
+        val navHostFragment=supportFragmentManager.findFragmentById(R.id.myday_viewpager) as NavHostFragment
+        //네비게이션 컨트롤러 가져옴
+        val navController = navHostFragment.navController
+        tabLayout.addTab(tabLayout.newTab().setText("데이노트"))
+        tabLayout.addTab(tabLayout.newTab().setText("위시리스트`"))
+        tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab?.position){
+                    0->navController.navigate(R.id.daynoteFragment)
+                    1->navController.navigate(R.id.wishlistFragment)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+        })
+        /////////여기까지 프래그먼트사용코드
+
         showSampleData(isLoading = true)
         mbinding?.mydayBackBtn.setOnClickListener(this)
         myMydayViewmodel.getDaynoteContent.observe(this, Observer {
@@ -80,7 +108,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0){
             mbinding?.mydayBackBtn ->{
-                onBackPressed()
+                finish()
             }
         }
     }

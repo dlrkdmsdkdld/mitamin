@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myday_graph"
+    app:startDestination="@id/daynoteFragment">
+
+    <fragment
+        android:id="@+id/daynoteFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.myday.DaynoteFragment"
+        android:label="fragment_daynote"
+        tools:layout="@layout/fragment_daynote" />
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.myday.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" />
+</navigation>

@@ -62,13 +62,17 @@
                 app:tabTextColor="@color/black"
                 />
 
-            <androidx.viewpager2.widget.ViewPager2
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/myday_viewpager"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/myday_graph"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/myday_tablayout" />
+                app:layout_constraintTop_toBottomOf="@+id/myday_tablayout"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
