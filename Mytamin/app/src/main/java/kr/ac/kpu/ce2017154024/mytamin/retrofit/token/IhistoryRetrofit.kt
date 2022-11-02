@@ -7,4 +7,9 @@ import retrofit2.http.GET
 interface IhistoryRetrofit {
     @GET("/care/random")
     fun getRandomCare() : Call<JsonElement>
+
+    @GET("/report/feeling/rank")
+    fun getMostFeeling() : Call<JsonElement>
+
+
 }

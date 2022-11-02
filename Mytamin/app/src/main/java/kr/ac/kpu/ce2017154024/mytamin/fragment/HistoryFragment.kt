@@ -31,7 +31,30 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             mBinding?.historyRandomCare2?.text = it.careMsg2
             mBinding?.historyRadomTake?.text = it.takeAt
         })
+        myviewmodel.getmostFeel.observe(viewLifecycleOwner, Observer {
+            var count =1
+            it.forEach {
+                when(count){
+                    1->{
+                        mBinding?.historyMost1Status?.text= it.feeling
+                        mBinding?.historyMost1Count?.text = "${it.count}회"
+                    }
+                    2->{
+                        mBinding?.historyMost2Status?.text = it.feeling
+                        mBinding?.historyMost2Count?.text = "${it.count}회"
+                    }
+                    3->{
+                        mBinding?.historyMost3Status?.text = it.feeling
+                        mBinding?.historyMost3Count?.text = "${it.count}회"
+                    }
+                }
+                count+=1
 
+            }
+        })
+
+
+        mBinding?.historyRefreshBtn?.setOnClickListener(this)
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행

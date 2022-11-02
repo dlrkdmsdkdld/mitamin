@@ -145,6 +145,7 @@
     <string name="history_care_subtitle">주간 마음 컨디션</string>
     <string name="history_history_title">이번 달 가장 많이 느낀 감정</string>
     <string name="history_calendar_title">마이타민 모아보기</string>
+    <string name="history_praise_x">아직 칭찬한 기록이 없어요</string>
 
 
 </resources>

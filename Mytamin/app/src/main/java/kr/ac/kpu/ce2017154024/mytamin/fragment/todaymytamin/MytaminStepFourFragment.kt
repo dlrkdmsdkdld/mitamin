@@ -91,9 +91,6 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
     }
 
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
-
-
-
         var tmp = mutableListOf<String>()
         if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)}
         else{(activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)}
@@ -113,9 +110,12 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
 
         }
         checkedIds.forEach {
+            // 가끔 태그 받아오는거 안됨 잘봐야함
             val chip = group.getChildAt(it-1  - previousChildCount )
-            val tmpS=  chip.getTag()
-            tmp.add(tmpS.toString())
+            chip?.let {
+                val tmpS=  chip.getTag()?:"error"
+                if (tmpS!="error") tmp.add(tmpS.toString())
+            }
         }
         todayMytaminViewModel.setdiagnosis(tmp)
         Log.d(TAG,"chip  mutableListOf mutableListOf -> ${todayMytaminViewModel.selectediagnosis.value}")
