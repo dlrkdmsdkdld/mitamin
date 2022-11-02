@@ -44,65 +44,51 @@
             android:padding="15dp"
             android:id="@+id/information_help_btn"
             />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="84dp"
+            android:layout_height="132dp"
             app:layout_constraintTop_toBottomOf="@+id/information_logo_image"
             android:background="@drawable/round_layout_subyellow"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:id="@+id/information_layout"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="69dp"
             >
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_home_vitamin"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginLeft="250dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </FrameLayout>
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_home_vitamin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="250dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-
-                android:id="@+id/information_user_image"
-                android:src="@drawable/cat"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="16dp"
                 />
+
+
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:background="@drawable/ic_correction_black"
-                app:layout_constraintEnd_toEndOf="@+id/information_user_image"
-                app:layout_constraintBottom_toBottomOf="@+id/information_user_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/information_edit_btn"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="12dp"
+                android:padding="20dp"
+
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@+id/information_user_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="22dp"
-                android:textSize="16sp"
-                android:textColor="@color/black"
+                android:layout_marginTop="48dp"
+                android:textSize="18dp"
+                android:textColor="@color/primary"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
                 android:id="@+id/information_bemy_text"
@@ -110,18 +96,43 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="18dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
                 app:layout_constraintTop_toBottomOf="@+id/information_bemy_text"
-                app:layout_constraintStart_toEndOf="@+id/information_user_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginLeft="20dp"
                 android:id="@+id/information_nickname_text"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/appmainfont_medium"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@+id/information_nickname_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="12dp"
+                android:textColor="@color/darkGray"
+                android:id="@+id/information_provider_text"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:layout_constraintTop_toBottomOf="@+id/information_help_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
 
+            android:id="@+id/information_user_image"
+            android:src="@drawable/cat"
+            android:layout_marginTop="37dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="16dp"
+            />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

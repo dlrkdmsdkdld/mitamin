@@ -7,7 +7,7 @@ import java.io.Serializable
 class informationClass {
 }
 
-data class ProfileData(val nickname:String,val profileImgUrl:String?,val beMyMessage:String?){
+data class ProfileData(val nickname:String,val profileImgUrl:String?,val beMyMessage:String?,val provider:String?){
 
 }
 data class MydayData(val myDayMMDD:String,val dday:String,val comment:String){}

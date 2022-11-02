@@ -51,6 +51,7 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         myInformationViewModel.getprofile.observe(viewLifecycleOwner , Observer {
             mBinding?.informationNicknameText?.text = "내가 될 ${it.nickname}"
             mBinding?.informationBemyText?.text = it.beMyMessage
+            mBinding?.informationProviderText?.text = it.provider
             Log.d(TAG, "profileImgUrl -> ${it.profileImgUrl} ")
             if(it.profileImgUrl !=null){
                 mBinding?.informationUserImage?.let { it1 ->

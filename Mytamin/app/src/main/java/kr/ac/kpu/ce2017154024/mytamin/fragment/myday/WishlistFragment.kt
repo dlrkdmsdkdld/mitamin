@@ -122,7 +122,9 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
                 startActivityForResult(intent, MydayActivity.SUB_ACTIVITY_CODE)
             }
             mBinding?.wishlistCompleteBtn ->{
-                InformationRetrofitManager.instance.sendNewWishlist(mBinding?.wishlistNewWishlist?.text.toString().trim()){
+                val tmp = mBinding?.wishlistNewWishlist?.text.toString().trim()
+                mBinding?.wishlistNewWishlist?.setText("")
+                InformationRetrofitManager.instance.sendNewWishlist(tmp){
                         responseStatus, wishList ->
                     myMydayViewmodel.getWishlistAPI()
                 }

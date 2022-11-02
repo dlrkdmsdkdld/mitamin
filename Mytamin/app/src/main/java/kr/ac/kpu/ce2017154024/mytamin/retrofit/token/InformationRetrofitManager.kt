@@ -82,11 +82,13 @@ class InformationRetrofitManager {
 
                     }
                     val beMyMessage = data.get("beMyMessage").asString
+                    val provider = data.get("provider").asString
 
                     val result = ProfileData(
                         nickname = nickname,
                         profileImgUrl = profileImgUrl,
-                        beMyMessage = beMyMessage
+                        beMyMessage = beMyMessage,
+                        provider = provider
                     )
 
                     completion(RESPONSE_STATUS.OKAY, result)
