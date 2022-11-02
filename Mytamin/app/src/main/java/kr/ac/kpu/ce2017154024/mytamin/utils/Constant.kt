@@ -8,7 +8,7 @@ object Constant {
     val explainTextStepTwo = "편한 자세로 눈을 감고 주변의 소리에\n 귀를 기울여보세요. 다음에는 코로\n 들어오는 주변의 냄새를 느껴보고\n손바닥에 느껴지는 감각에도 신경을\n             기울여봅시다."
     val StepTextstepOne = "숨고르기"
     val StepTextstepTwo = "감각 깨우기"
-
+    val primaryColor = "#FF7F57"
     var emojiArray = arrayOf(0,R.drawable.ic_so_bad,R.drawable.ic_bad, R.drawable.ic_so_so,R.drawable.ic_good,R.drawable.ic_so_good)
 
     val frametwo_image_one_src = R.drawable.ic_so_bad
