@@ -71,6 +71,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
 
         showSampleData(isLoading = true)
         mbinding?.mydayBackBtn.setOnClickListener(this)
+        mbinding?.mydayRefreshBtn.setOnClickListener(this)
         myMydayViewmodel.getDaynoteContent.observe(this, Observer {
             if (firstLoading){
                 firstLoading=false
@@ -78,6 +79,13 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
 
             }
         })
+
+//        mbinding?.mydaySwipelayout.setOnRefreshListener(object :SwipeRefreshLayout.OnRefreshListener{
+//            override fun onRefresh() {
+//            }
+//
+//        })
+
 
     }
     companion object {
@@ -109,6 +117,10 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         when(p0){
             mbinding?.mydayBackBtn ->{
                 finish()
+            }
+            mbinding?.mydayRefreshBtn ->{
+                myMydayViewmodel.getWishlistAPI()
+                myMydayViewmodel.getdaynoteAPI()
             }
         }
     }
