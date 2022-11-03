@@ -16,6 +16,12 @@
         <!-- Customize your theme here. -->
 
     </style>
+    <style name="Theme.Mytamin.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/layoutYellow</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ovallogo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Mytamin</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+    </style>
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
         <item name="boxStrokeColor">@color/Gray</item>
         <item name="boxCornerRadiusBottomEnd">12dp</item>

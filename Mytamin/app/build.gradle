@@ -95,5 +95,7 @@ dependencies {
     implementation 'io.github.ShawnLin013:number-picker:2.4.13'
     //안드로이드 차트
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //스플래시 스크린
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
 }

@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mytamin"
+
         tools:targetApi="31">
         <activity
             android:name=".activity.DaynoteDetailActivity"
@@ -50,7 +51,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.firstActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Mytamin.Splash"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -106,7 +106,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             spaceMin=0.1f
             setDrawAxisLine(true)
             setDrawGridLines(false)
-            
+
             textColor = ContextCompat.getColor(requireContext(), R.color.subGray)
             axisLineColor=ContextCompat.getColor(requireContext(), R.color.LineColorshort)
 
@@ -144,14 +144,14 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             circleRadius=4f
             lineWidth=2f
             circleHoleRadius=3f
-            setDrawValues(true)
+            setDrawValues(false)
             setDrawCircles(true)
             setDrawCircleHole(true)
             circleHoleColor = ContextCompat.getColor(requireContext(), R.color.background_white)
             color=ContextCompat.getColor(requireContext(), R.color.primary)
             setCircleColor(ContextCompat.getColor(requireContext(), R.color.primary))
-            setDrawHighlightIndicators(true)
-            setDrawHorizontalHighlightIndicator(true)
+            setDrawHighlightIndicators(false)
+            setDrawHorizontalHighlightIndicator(false)
         }
         lineChart.apply {
             description.isEnabled=false

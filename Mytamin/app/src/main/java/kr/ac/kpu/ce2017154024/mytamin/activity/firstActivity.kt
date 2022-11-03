@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import android.window.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import kotlinx.android.synthetic.main.activity_first.*
 import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityFirstBinding
@@ -17,10 +19,12 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
+
 class firstActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mBinding: ActivityFirstBinding
     private lateinit var customProgressDialog: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         mBinding = ActivityFirstBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -48,6 +52,8 @@ class firstActivity : AppCompatActivity(),View.OnClickListener {
         super.onDestroy()
         Log.d(TAG,"firstActivity onDestroy")
     }
+
+
 
     override fun onClick(p0: View?) {
         when(p0){

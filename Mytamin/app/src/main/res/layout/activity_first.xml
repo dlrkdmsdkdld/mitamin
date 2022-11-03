@@ -13,7 +13,6 @@
         app:layout_constraintGuide_percent="0.15"
         />
     <TextView
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="매일 챙겨 먹는 마음 비타민"
@@ -71,7 +70,7 @@
         android:padding="10dp"
         android:text="이메일로 로그인하기"
         app:layout_constraintTop_toBottomOf="@+id/first_join_btn"
-        android:background="@drawable/round_layout_background_orange"
+        android:background="@drawable/round_layout_stroke_primary"
         android:id="@+id/first_login_btn"
         app:layout_constraintBottom_toTopOf="@+id/first_or_text"
         />
