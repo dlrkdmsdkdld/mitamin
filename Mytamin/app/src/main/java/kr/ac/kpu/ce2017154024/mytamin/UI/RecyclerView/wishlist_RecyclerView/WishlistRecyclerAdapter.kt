@@ -3,7 +3,9 @@ package kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView
 import android.R
 import android.graphics.Color
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -41,25 +43,22 @@ class WishlistRecyclerAdapter(WishlistRecyclerview: IWishRecyclerAdapter)  : Rec
     override fun onBindViewHolder(holder: WishlistRecyclerViewHolder, position: Int) {
         holder.bindWithView(this.WishiListArray[position])
         Log.d(TAG,"select position")
-//        if (this.selectedPosition == position) {
-//            holder.itemView.isSelected = true //using selector drawable
-//            holder.itemView.wishlist_layout_item.setBackgroundResource(kr.ac.kpu.ce2017154024.mytamin.R.drawable.round_layout_background_orange)
-//            holder.itemView.wishlist_count_text.setTextColor(Color.parseColor("#FFFFFFFF"))
-//            holder.itemView.wishlist_count_item.setTextColor(Color.parseColor("#FFFFFFFF"))
-//        } else {
-//            holder.itemView.isSelected = false
-//            holder.itemView.wishlist_layout_item.setBackgroundResource(kr.ac.kpu.ce2017154024.mytamin.R.drawable.round_layout_stroke_gray)
-//            holder.itemView.wishlist_count_text.setTextColor(Color.parseColor("#FF7F57"))
-//            holder.itemView.wishlist_count_item.setTextColor(Color.parseColor("#FF7F57"))
-//        }
-//
-//        holder.itemView.setOnClickListener { v ->
-//            if (selectedPosition >= 0) notifyItemChanged(selectedPosition)
-//            selectedPosition = holder.adapterPosition
-//            notifyItemChanged(selectedPosition)
-//
-//            this.IWishlistRecyclerview?.onSearchItemClicked(position,holder.itemView.wishlist_title_item.text.toString(), holder.getId())
-//        }
+        holder.itemView.wishlist_edit_item.setOnKeyListener { view, i, keyEvent ->
+            if (keyEvent?.action == KeyEvent.ACTION_DOWN && keyEvent.keyCode == KeyEvent.KEYCODE_ENTER){
+                holder.itemView.wishlist_title_item.text=holder.itemView.wishlist_edit_item.text.toString()
+                Log.d(TAG, " holder.itemView.wishlist_edit_item.text.toString()  : ${holder.itemView.wishlist_edit_item.text.toString()}")
+                holder.itemView.wishlist_edit_item.visibility=View.GONE
+                holder.itemView.wishlist_title_item.visibility = View.VISIBLE
+                // 요기에 수정데이터 전송하면될듯
+                true
+            }
+            else{
+                false
+            }
+
+        }
+
+
     }
 
 

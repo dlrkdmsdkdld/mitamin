@@ -20,7 +20,7 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:layout_marginLeft="20dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         />
     <EditText
         android:layout_width="wrap_content"
@@ -30,6 +30,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="20dp"
+        android:ems="10"
+        android:maxLength="10"
+        android:gravity="left|center"
+        android:visibility="gone"
         />
     <TextView
         android:id="@+id/wishlist_count_item"

@@ -19,6 +19,7 @@ class WishlistRecyclerViewHolder(itemView: View, HomeRecylcerViewInterface: IWis
     private var count = itemView.wishlist_count_item
     private var layout = itemView.wishlist_layout_item
     private var id:Int=0
+    private var edittext = itemView.wishlist_edit_item
 
     init {
         this.RecyclerViewInterface = HomeRecylcerViewInterface
@@ -41,7 +42,7 @@ class WishlistRecyclerViewHolder(itemView: View, HomeRecylcerViewInterface: IWis
     override fun onClick(p0: View?) {
         when(p0){
             layout ->{
-                this.RecyclerViewInterface.onSearchItemClicked(adapterPosition,title.text.toString(),id)
+                this.RecyclerViewInterface.onSearchItemClicked(adapterPosition,title.text.toString(),id,null)
             }
         }
     }

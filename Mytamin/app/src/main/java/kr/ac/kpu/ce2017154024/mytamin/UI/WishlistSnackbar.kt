@@ -50,6 +50,7 @@ class WishlistSnackbar(view: View,wishlistid:Int) {
     private fun initData(){
         snackbarBinding.snackbarBtn.setOnClickListener {
             cancel=false
+            snackbar.dismiss()
         }
     }
 

@@ -21,4 +21,5 @@ data class EditProfile(val isImgEdited:String,val nickname:String , val beMyMess
 data class daynoteData(val daynoteId:Int , val imgList:ArrayList<String> , val year :Int,val month:Int , val wishText:String,val note:String,val wishId: Int): Serializable
 
 data class daynoteDataParent(val year:Int , val daynoteArrayList: ArrayList<daynoteData>?)
+data class modifyWish(val position: Int, val statetext: String, val id: Int)
 

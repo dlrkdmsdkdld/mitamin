@@ -60,7 +60,7 @@ class SingleSelectWishAdapter(WishlistRecyclerview: IWishRecyclerAdapter,idArray
             selectedPosition = holder.adapterPosition
             notifyItemChanged(selectedPosition)
 
-            this.IWishlistRecyclerview?.onSearchItemClicked(position,holder.itemView.wishlist_title_item.text.toString(), holder.getId())
+            this.IWishlistRecyclerview?.onSearchItemClicked(position,holder.itemView.wishlist_title_item.text.toString(), holder.getId(),false)
         }
     }
 

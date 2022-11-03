@@ -9,12 +9,15 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.BottomWishlistBinding
+import kr.ac.kpu.ce2017154024.mytamin.model.modifyWish
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 
 
-class BottomWishlistFragment(statetext: String, idd: Int) : BottomSheetDialogFragment(),View.OnClickListener {
+class BottomWishlistFragment(statetext: String, idd: Int,position:Int) : BottomSheetDialogFragment(),View.OnClickListener {
     private val statetext = statetext
     private val idd = idd
+
+    private val position = position
     private lateinit var mbinding: BottomWishlistBinding
     private val myMydayViewmodel: MydayViewmodel by activityViewModels()
     override fun onCreateView(
@@ -36,7 +39,8 @@ class BottomWishlistFragment(statetext: String, idd: Int) : BottomSheetDialogFra
                 onDestroyView()
             }
             mbinding?.bottomModifyBtn->{
-
+                myMydayViewmodel.setWishlistModify(modifyWish(id = this.idd, statetext = this.statetext ,position= this.position))
+                onDestroyView()
             }
         }
     }

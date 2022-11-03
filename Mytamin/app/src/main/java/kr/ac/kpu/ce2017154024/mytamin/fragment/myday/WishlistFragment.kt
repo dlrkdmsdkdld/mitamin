@@ -14,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_wishlist.*
+import kotlinx.android.synthetic.main.wishlist_item.view.*
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.IWishRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.wishlist_RecyclerView.WishlistRecyclerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.UI.WishlistSnackbar
@@ -52,6 +53,14 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
             Log.d(TAG,"위시리스트 아이디 : $it")
             deleteWish(it)
 
+        })
+        myMydayViewmodel.getWishlistModify.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, " modfiywish 데이터 값 : $it")
+            mBinding?.wishlistRecyclerview?.findViewHolderForAdapterPosition(it.position)!!.itemView.apply {
+                this.wishlist_title_item.visibility = View.INVISIBLE
+                this.wishlist_edit_item.visibility = View.VISIBLE
+                this.wishlist_edit_item.setText(this.wishlist_title_item.text)
+            }
         })
 
         return mBinding?.root
@@ -99,6 +108,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
         })
         this.myWishlistRecyclerAdapter= WishlistRecyclerAdapter(this)
         mBinding?.wishlistRecyclerview?.adapter = this.myWishlistRecyclerAdapter
+
         Log.d(TAG,"wishlist_recyclerview.adapter  ->${wishlist_recyclerview.adapter} ")
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
@@ -108,11 +118,6 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
     }
 
 
-    override fun onSearchItemClicked(position: Int, statetext: String,id:Int) {
-        Log.d(TAG,"stateText - > $statetext id ->$id")
-        val bottomWish  = BottomWishlistFragment(statetext,id)
-        bottomWish.show(parentFragmentManager,bottomWish.tag)
-    }
 
     override fun onClick(p0: View?) {
         when(p0){
@@ -131,5 +136,12 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
             }
 
         }
+    }
+
+    override fun onSearchItemClicked(position: Int, statetext: String, id: Int, modify: Boolean?) {
+        Log.d(TAG,"stateText - > $statetext id ->$id")
+        val bottomWish  = BottomWishlistFragment(statetext,id,position)
+        bottomWish.show(parentFragmentManager,bottomWish.tag)
+
     }
 }

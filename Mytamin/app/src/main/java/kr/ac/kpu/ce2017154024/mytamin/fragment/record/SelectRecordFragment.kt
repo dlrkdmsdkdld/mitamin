@@ -43,6 +43,9 @@ class SelectRecordFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListen
             this.myWishlistRecyclerAdapter= SingleSelectWishAdapter(this,arrayList)
         }
         mBinding?.recordRecyclerWish?.adapter = this.myWishlistRecyclerAdapter
+
+
+
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
@@ -52,17 +55,18 @@ class SelectRecordFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListen
     }
     //findNavController().navigate(R.id.action_recordFragment_to_selectRecordFragment)
 
-    override fun onSearchItemClicked(position: Int, statetext: String, id: Int) {
-        (activity as DaynoteRecordActivity).setEnableNextBtnPart(true)
-        Log.d(TAG,"StateText -> $statetext")
-        Log.d(TAG,"position ->$position id->$id")
-        myRecordViewmodel.setcategoryText(statetext)
-        myRecordViewmodel.setwishId(id)
-    }
 
     override fun onClick(p0: View?) {
         when(p0){
 
         }
+    }
+
+    override fun onSearchItemClicked(position: Int, statetext: String, id: Int, modify: Boolean?) {
+        (activity as DaynoteRecordActivity).setEnableNextBtnPart(true)
+        Log.d(TAG,"StateText -> $statetext")
+        Log.d(TAG,"position ->$position id->$id")
+        myRecordViewmodel.setcategoryText(statetext)
+        myRecordViewmodel.setwishId(id)
     }
 }

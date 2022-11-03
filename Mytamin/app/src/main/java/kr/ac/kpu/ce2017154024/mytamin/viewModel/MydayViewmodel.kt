@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteDataParent
+import kr.ac.kpu.ce2017154024.mytamin.model.modifyWish
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
@@ -28,6 +29,14 @@ class MydayViewmodel:ViewModel() {
     fun deleteWishlistAPI(id:Int){
         InformationRetrofitManager.instance.deleteWishlist(id)
     }
+
+    private val WishlistModify = MutableLiveData<modifyWish>()
+    val getWishlistModify : LiveData<modifyWish>
+        get() = WishlistModify
+    fun setWishlistModify(time:modifyWish){
+        WishlistModify.value = time
+    }
+
 
     private val WishlistContent = MutableLiveData<Boolean>()
     val getWishlistContent : LiveData<Boolean>
