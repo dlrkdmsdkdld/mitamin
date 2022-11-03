@@ -3,6 +3,7 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 import android.util.Log
 import com.google.gson.JsonElement
 import kr.ac.kpu.ce2017154024.mytamin.model.feeling
+import kr.ac.kpu.ce2017154024.mytamin.model.monthMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.randomCare
 import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
@@ -93,5 +94,25 @@ class HistoryRetrofitManager {
         })
 
     }
+    fun getMonthMytamin(month:String, completion: (RESPONSE_STATUS, ArrayList<monthMytamin>?) -> Unit){
+            iHistoryRetrofit?.getMonthMytamin(month)?.enqueue(object :retrofit2.Callback<JsonElement>{
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    response.body()?.let {
+                        val result = ArrayList<monthMytamin>()
+                        val data = it.asJsonObject.get("data").asJsonArray
+                        data.forEach {
+                            val day = it.asJsonObject.get("day").asInt
+                            val mentalConditionCode = it.asJsonObject.get("mentalConditionCode").asInt
+                            result.add(monthMytamin(day,mentalConditionCode))
+                        }
+                        completion(RESPONSE_STATUS.OKAY,result)
+                    }
+                }
 
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    completion(RESPONSE_STATUS.FAIL,null)
+                }
+
+            })
+    }
 }

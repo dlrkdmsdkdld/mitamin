@@ -49,6 +49,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         //네비게이션들을 담는 호스트
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.myday_viewpager) as NavHostFragment
         //네비게이션 컨트롤러 가져옴
+
         val navController = navHostFragment.navController
         tabLayout.addTab(tabLayout.newTab().setText("데이노트"))
         tabLayout.addTab(tabLayout.newTab().setText("위시리스트"))

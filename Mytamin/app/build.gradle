@@ -99,6 +99,5 @@ dependencies {
     //스플래시 스크린
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
-
-
+    implementation 'com.haibin:calendarview:3.7.1'
 }

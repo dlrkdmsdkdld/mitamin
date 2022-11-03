@@ -5,3 +5,4 @@ data class randomCare(val careMsg1:String , val careMsg2:String,val takeAt:Strin
 data class feeling(val feeling:String , val count:Int)
 
 data class weeklyMental(val dayOfWeek:String , val mentalConditionCode:Int)
+data class monthMytamin(val day:Int , val mentalConditionCode:Int)

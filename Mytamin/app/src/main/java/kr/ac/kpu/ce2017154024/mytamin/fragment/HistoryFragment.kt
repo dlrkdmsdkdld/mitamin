@@ -25,6 +25,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.primaryColor
 import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
+import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMonth
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.HistoryViewModel
 
 
@@ -37,8 +38,13 @@ class HistoryFragment : Fragment(),View.OnClickListener {
     ): View? {
         val binding = FragmentHistoryBinding.inflate(inflater,container,false)
         mBinding =binding
+        mBinding?.historyMonthText?.text="${mBinding?.cvCalendar?.curMonth}월"
 
         Log.d(TAG,"HistoryFragment onCreateView")
+        ///처음 년 ,  월 설정
+        myviewmodel.setSelectMonthAndYear("${mBinding?.cvCalendar?.curYear}.${mBinding?.cvCalendar?.curMonth.parseIntToMonth()}")
+        myviewmodel.getMonthMytaminAPI()
+
 
         myviewmodel.getrandomcare.observe(viewLifecycleOwner, Observer {
             mBinding?.historyRandomCare1?.text = it.careMsg1
@@ -69,15 +75,18 @@ class HistoryFragment : Fragment(),View.OnClickListener {
         myviewmodel.getweekMental.observe(viewLifecycleOwner, Observer {
             drawLineChart(it)
         })
+        listener()
 
-        mBinding?.historyRefreshBtn?.setOnClickListener(this)
+
         return mBinding?.root
     }
-    inner class MyXAxisFormatter(data :ArrayList<String>) : ValueFormatter() {
-        private val data = data
-        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
 
-            return data.getOrNull(value.toInt()-1) ?: value.toString()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mBinding?.cvCalendar?.setOnMonthChangeListener { year, month ->
+            mBinding?.historyMonthText?.text ="${month}월"
+            myviewmodel.setSelectMonthAndYear("${year}.${month.parseIntToMonth()}")
         }
     }
     private fun drawLineChart(data: ArrayList<weeklyMental>){
@@ -179,7 +188,18 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             mBinding?.historyRefreshBtn ->{
                 myviewmodel.randomCareAPI()
             }
+            mBinding?.historyNextBtn ->{
+                mBinding?.cvCalendar?.scrollToNext()
+            }
+            mBinding?.historyPreviousBtn ->{
+                mBinding?.cvCalendar?.scrollToPre()
+            }
         }
     }
+    private fun listener(){
 
+        mBinding?.historyRefreshBtn?.setOnClickListener(this)
+        mBinding?.historyNextBtn?.setOnClickListener(this)
+        mBinding?.historyPreviousBtn?.setOnClickListener(this)
+    }
 }

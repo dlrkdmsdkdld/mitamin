@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kr.ac.kpu.ce2017154024.mytamin.model.feeling
+import kr.ac.kpu.ce2017154024.mytamin.model.monthMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.randomCare
 import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
@@ -31,10 +32,33 @@ class HistoryViewModel:ViewModel() {
     fun setweekMental(time:ArrayList<weeklyMental>){
         weekMental.value = time
     }
+    private val SelectMonthAndYear = MutableLiveData<String>()
+    val getSelectMonthAndYear : LiveData<String>
+        get() = SelectMonthAndYear
+    fun setSelectMonthAndYear(time:String){
+        SelectMonthAndYear.value = time
+    }
+    private val monthmytamin = MutableLiveData<ArrayList<monthMytamin>>()
+    val getmonthmytamin: LiveData<ArrayList<monthMytamin>>
+        get() = monthmytamin
+    fun setmonthmytamin(time:ArrayList<monthMytamin>){
+        monthmytamin.value = time
+    }
+
     init {
-        randomCareAPI()
-        getMostFeelAPI()
-        getWeeklyMentalAPI()
+ //       randomCareAPI()
+   //     getMostFeelAPI()
+     //   getWeeklyMentalAPI()
+    }
+    fun getMonthMytaminAPI(){
+        getSelectMonthAndYear.value?.let {
+            HistoryRetrofitManager.instance.getMonthMytamin(it){responseStatus, montharrayList ->
+                montharrayList?.let { setmonthmytamin(it) }
+                montharrayList?.forEach {
+                    Log.d(TAG,"it day: ${it.day} code : ${it.mentalConditionCode}")
+                }
+            }
+        }
     }
     fun randomCareAPI(){
         HistoryRetrofitManager.instance.getRandomCare(){responseStatus, randomCareD ->
