@@ -485,6 +485,18 @@ class InformationRetrofitManager {
 
         })
     }
+    fun modifyWishlist(wishid: Int,wishText:String){
+        iInformationRetrofit?.modifyWishlist(wishid,wishText)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+            }
+
+        })
+    }
 
 
 

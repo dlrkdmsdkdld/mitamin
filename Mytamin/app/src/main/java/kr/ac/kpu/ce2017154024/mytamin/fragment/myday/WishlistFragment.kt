@@ -54,11 +54,13 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
             deleteWish(it)
 
         })
+        //수정하기 버튼 눌렀을 때
         myMydayViewmodel.getWishlistModify.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, " modfiywish 데이터 값 : $it")
             mBinding?.wishlistRecyclerview?.findViewHolderForAdapterPosition(it.position)!!.itemView.apply {
                 this.wishlist_title_item.visibility = View.INVISIBLE
                 this.wishlist_edit_item.visibility = View.VISIBLE
+                myWishlistRecyclerAdapter.selectWishID(it.id)
                 this.wishlist_edit_item.setText(this.wishlist_title_item.text)
             }
         })

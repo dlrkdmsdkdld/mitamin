@@ -69,5 +69,7 @@ interface IInformationRetrofit {
     @DELETE("/wish/{wishId}")
     fun deleteWish(@Path("wishId") wishId:Int): Call<JsonElement>
 
+    @PUT ("/wish/{wishId}")
+    fun modifyWishlist(@Path("wishId") wishId:Int    ,@Body wishText:String ) : Call<JsonElement>
 
 }

@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.wishlist_item.view.*
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 
 
@@ -23,6 +24,8 @@ class WishlistRecyclerAdapter(WishlistRecyclerview: IWishRecyclerAdapter)  : Rec
 
         this.IWishlistRecyclerview=WishlistRecyclerview
     }
+    private var wishid = 0
+
     fun submitData(dataArray:ArrayList<WishList>){
         WishiListArray = dataArray
     }
@@ -34,8 +37,8 @@ class WishlistRecyclerAdapter(WishlistRecyclerview: IWishRecyclerAdapter)  : Rec
         )
         return itemViewHolder
     }
-    fun selectView(b:Boolean){
-        myholder.selectView(b)
+    fun selectWishID(id:Int){
+        wishid = id
     }
     override fun getItemCount(): Int {
         return this.WishiListArray.size
@@ -50,6 +53,8 @@ class WishlistRecyclerAdapter(WishlistRecyclerview: IWishRecyclerAdapter)  : Rec
                 holder.itemView.wishlist_edit_item.visibility=View.GONE
                 holder.itemView.wishlist_title_item.visibility = View.VISIBLE
                 // 요기에 수정데이터 전송하면될듯
+                InformationRetrofitManager.instance.modifyWishlist(wishid, wishText =holder.itemView.wishlist_edit_item.text.toString() )
+
                 true
             }
             else{
