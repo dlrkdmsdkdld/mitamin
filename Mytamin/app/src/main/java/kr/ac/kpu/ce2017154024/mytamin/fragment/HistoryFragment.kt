@@ -19,6 +19,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.haibin.calendarview.Calendar
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHistoryBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
@@ -84,10 +85,64 @@ class HistoryFragment : Fragment(),View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var m = mBinding!!.cvCalendar!!.curMonth
+        var y = mBinding!!.cvCalendar!!.curYear
         mBinding?.cvCalendar?.setOnMonthChangeListener { year, month ->
             mBinding?.historyMonthText?.text ="${month}월"
             myviewmodel.setSelectMonthAndYear("${year}.${month.parseIntToMonth()}")
+            m=month
+            y=year
+            myviewmodel.getMonthMytaminAPI()
         }
+        myviewmodel.getmonthmytamin.observe(viewLifecycleOwner, Observer {
+            val mapdata: MutableMap<String, Calendar> = mutableMapOf()
+            Log.d(TAG,"getmonthmytamin m ->$m y ->$y")
+
+            it.forEach {
+                when(it.mentalConditionCode){
+                    1->{
+                        mapdata.put(getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.Gray),"").toString(),
+                            getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.Gray),"")
+                        )
+                    }
+                    2->{
+                        mapdata.put(getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.primary),"").toString(),
+                            getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.primary),"")
+                        )
+                    }
+                    3->{
+                        mapdata.put(getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.LawnGreen),"").toString(),
+                            getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.LawnGreen),"")
+                        )
+                    }
+                    4->{
+                        mapdata.put(getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.subBlue),"").toString(),
+                            getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.subBlue),"")
+                        )
+                    }
+                    5->{
+                        mapdata.put(getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.layoutYellow),"").toString(),
+                            getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.layoutYellow),"")
+                        )
+                    }
+                    else ->{}
+
+                }
+            }
+            mBinding?.cvCalendar?.setSchemeDate(mapdata)
+
+        })
+    }
+    private fun getSchemeCalendar(year: Int, month: Int, day: Int, color:Int, text: String
+    ): Calendar { //캘린더 리턴해주는 함수
+        val calendar = Calendar()
+        calendar.year = year
+        calendar.month = month
+        calendar.day = day
+        calendar.schemeColor = color //如果单独标记颜色、则会使用这个颜色
+        calendar.scheme = text
+
+        return calendar
     }
     private fun drawLineChart(data: ArrayList<weeklyMental>){
         val lineChart = mBinding!!.historyChart

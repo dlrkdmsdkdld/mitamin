@@ -1,18 +1,19 @@
 package kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
+import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.MonthView
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kotlin.properties.Delegates
 
 class CustomMonthView(context: Context) : MonthView(context) {
     private val mPointPaint = Paint()
-
+    private val mycontext = context
     /**
      * 今天的背景色
      */
@@ -78,11 +79,44 @@ class CustomMonthView(context: Context) : MonthView(context) {
      * @param x        calendar item x start point
      * @param y        calendar item y start point
      */ // 특정날짜에 색칠해줄때 자동실행되는함수
+    val r = mycontext.resources
+    val codeoneimage = r.getDrawable(R.drawable.ic_calendar_1,null).toBitmap()
+    val codetwoimage =r.getDrawable(R.drawable.ic_calendar_2,null).toBitmap()
+    val codethreeimage = r.getDrawable(R.drawable.ic_calendar_3,null).toBitmap()
+    val codefourimage = r.getDrawable(R.drawable.ic_calendar_4,null).toBitmap()
+    val codefiveimage = r.getDrawable(R.drawable.ic_calendar_5,null).toBitmap()
+    var done:Boolean = false
     override fun onDrawScheme(canvas: Canvas, calendar: Calendar, x: Int, y: Int) {
-        val cx: Int = x + mItemWidth / 2
-        val cy: Int = y + mItemHeight / 2
-        val radius: Int = Math.min(mItemWidth, mItemHeight) / 5 * 2
-        canvas.drawCircle(cx.toFloat(), cy.toFloat(), radius.toFloat(), mSchemePaint)
+        val cx: Int = x + mItemWidth/3
+        val cy: Int = y + mItemHeight /4 *3
+        Log.d(TAG,"onDrawScheme : x: $x y: $y mSchemePaint.color} ${mSchemePaint.color}")
+        when (mSchemePaint.color) {
+                -2236963 ->{
+                    canvas.drawBitmap(codeoneimage, cx.toFloat(), cy.toFloat(), null)
+                }
+                -32937 -> {
+                    //위치 바꾸기
+                    canvas.drawBitmap(codetwoimage, cx.toFloat(), cy.toFloat(), null)
+
+                }
+                -2353 -> {
+                    canvas.drawBitmap(codefiveimage, cx.toFloat(), cy.toFloat(), null)
+                }
+                -8586240 -> {
+                    canvas.drawBitmap(codethreeimage, cx.toFloat(), cy.toFloat(), null)
+                }
+                -12606465 ->{
+                    canvas.drawBitmap(codefourimage, cx.toFloat(), cy.toFloat(), null)
+
+                }
+            else ->{
+//                        val radius: Int = Math.min(mItemWidth, mItemHeight) / 5 * 2
+//                      canvas.drawCircle(cx.toFloat(), cy.toFloat(), radius.toFloat(), mSchemePaint)
+            }
+        }
+
+
+
         // println("$x $y scheme 실행됨")
 
     }
@@ -134,7 +168,12 @@ class CustomMonthView(context: Context) : MonthView(context) {
                 } else {
                     if (it.isCurrentDay) mCurDayTextPaint else if (it.isCurrentMonth) mCurMonthTextPaint else mOtherMonthTextPaint
                 }
+                Log.d(TAG, "글씨 쓰는중 ")
+                val paint =Paint()
+
+                drawPaint.color = Color.BLACK
                 cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine + y, drawPaint)
+               // cit.drawText(it.day.toString(), x.toFloat(), mTextBaseLine + y, drawPaint)
             }
         }
     }

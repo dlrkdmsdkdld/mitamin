@@ -46,9 +46,9 @@ class HistoryViewModel:ViewModel() {
     }
 
     init {
- //       randomCareAPI()
-   //     getMostFeelAPI()
-     //   getWeeklyMentalAPI()
+        randomCareAPI()
+        getMostFeelAPI()
+        getWeeklyMentalAPI()
     }
     fun getMonthMytaminAPI(){
         getSelectMonthAndYear.value?.let {
