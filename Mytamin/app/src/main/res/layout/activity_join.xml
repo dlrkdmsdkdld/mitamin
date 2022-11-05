@@ -14,12 +14,14 @@
         android:id="@+id/join_title_layout"
         >
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_arraow_left_small_black"
-            android:background="@color/background_white"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/icon_arraow_left_small_black"
             android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="13dp"
+            android:layout_marginLeft="20dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/join_back_btn"
@@ -31,23 +33,21 @@
             android:id="@+id/join_title_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="@font/appmainfont_medium"
+            android:includeFontPadding="false"
+
+            android:layout_marginTop="17dp"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/semiGray"
-        android:id="@+id/join_horizontal_shape"
-        app:layout_constraintTop_toBottomOf="@+id/join_title_layout"
-        />
+
     <ProgressBar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/join_horizontal_shape"
+        android:layout_height="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/join_title_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/join_progress"
@@ -75,7 +75,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/join_next_btn"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="다음"
+        android:text="@string/next_talk"
+        android:textSize="16sp"
+        android:textColor="@color/background_white"
+        android:fontFamily="@font/appmainfont_medium"
 
         android:background="@drawable/round_layout_background_orange"
         android:layout_marginRight="20dp"

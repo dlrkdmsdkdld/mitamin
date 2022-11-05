@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/edit_box.xml" value="0.179" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_bad_big.xml" value="0.1765" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_bad_color.xml" value="0.1765" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/drawable/ic_baseline_arrow_right_24.xml" value="0.1765" />
@@ -96,7 +97,7 @@
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_daynote_record.xml" value="0.24305555555555555" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_first.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_introduce.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_join.xml" value="0.32592592592592595" />
+        <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_join.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_login.xml" value="0.32592592592592595" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dlrkd/AndroidStudioProjects/Mytamin/app/src/main/res/layout/activity_management.xml" value="0.16666666666666666" />

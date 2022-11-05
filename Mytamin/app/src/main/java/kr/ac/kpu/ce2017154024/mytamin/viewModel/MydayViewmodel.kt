@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import kr.ac.kpu.ce2017154024.mytamin.UI.WishlistSnackbar
 import kr.ac.kpu.ce2017154024.mytamin.model.WishList
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteData
 import kr.ac.kpu.ce2017154024.mytamin.model.daynoteDataParent
@@ -24,7 +25,9 @@ class MydayViewmodel:ViewModel() {
     val getWishlistDelete : LiveData<Int>
         get() = WishlistDelete
     fun setWishlistDelete(time:Int){
-        WishlistDelete.value = time
+
+            WishlistDelete.value = time
+
     }
     fun deleteWishlistAPI(id:Int){
         InformationRetrofitManager.instance.deleteWishlist(id)

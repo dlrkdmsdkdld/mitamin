@@ -151,28 +151,45 @@ class CustomMonthView(context: Context) : MonthView(context) {
                 if (it.isCurrentDay) {
 //                    val rectF = RectF(x.toFloat(), y.toFloat(), (x + mItemWidth).toFloat(), (y + mItemHeight).toFloat())
 //                    cit.drawRoundRect(rectF, 16f, 16f, mCurrentDayPaint)
-                    if (hasScheme) {
-                        //  绘制当天的标记点
-                        cit.drawCircle(
-                            (x + mItemWidth / 2).toFloat(),
-                            (y + mItemHeight - 13).toFloat(),
-                            mPointRadius,
-                            mPointPaint
-                        )
-                    }
+//                    if (hasScheme) {
+//                        //  绘制当天的标记点
+//                        cit.drawCircle(
+//                            (x + mItemWidth / 2).toFloat(),
+//                            (y + mItemHeight - 13).toFloat(),
+//                            mPointRadius,
+//                            mPointPaint
+//                        )
+//                    }
                 }
+              //  mSchemeTextPaint.color = Color.BLACK
+                mCurDayTextPaint.color = Color.RED
+                mSelectTextPaint.color = Color.BLACK
+                mCurMonthTextPaint.color = Color.BLACK
+                mSchemeTextPaint.color =  Color.BLACK
                 val drawPaint = if (isSelected && !it.isCurrentDay) {
                     mSelectTextPaint
-                } else if (hasScheme) {
+                } else if (hasScheme && !it.isCurrentDay) {
                     if (it.isCurrentMonth) mSchemeTextPaint else mOtherMonthTextPaint
-                } else {
+                }
+                else {
                     if (it.isCurrentDay) mCurDayTextPaint else if (it.isCurrentMonth) mCurMonthTextPaint else mOtherMonthTextPaint
                 }
                 Log.d(TAG, "글씨 쓰는중 ")
-                val paint =Paint()
 
-                drawPaint.color = Color.BLACK
-                cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine + y, drawPaint)
+                //val mTextBaseLine = mTextBaseLine /3*2
+
+                if (it.isCurrentMonth && !hasScheme){
+                    drawPaint.color = Color.LTGRAY
+
+                    cit.drawText(it.day.toString(), cx.toFloat(),mTextBaseLine+ y.toFloat(), drawPaint)
+                }
+                else if (it.isCurrentDay){
+                    drawPaint.color=Color.RED
+                    cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine + y, drawPaint)
+                }
+                else if (it.isCurrentMonth && hasScheme){
+                    cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine + y, drawPaint)
+                }
                // cit.drawText(it.day.toString(), x.toFloat(), mTextBaseLine + y, drawPaint)
             }
         }

@@ -10,12 +10,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="마이타민 서비스 이용약관에\n동의해 주세요."
+        android:text="@string/join_step_two_title"
 
         android:layout_margin="20dp"
         android:id="@+id/join_step_two_title"
-        android:textStyle="bold"
-        android:textSize="20sp"
+
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/appmainfont_bold"
+        android:includeFontPadding="false"
+
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         />

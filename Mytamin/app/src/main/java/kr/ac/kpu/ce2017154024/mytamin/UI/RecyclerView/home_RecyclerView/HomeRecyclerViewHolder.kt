@@ -16,6 +16,7 @@ class HomeRecyclerViewHolder (itemView: View,HomeRecylcerViewInterface:IHomeRecy
     :RecyclerView.ViewHolder(itemView),
     View.OnClickListener {//home_item_state_text
     private var MyHomeRecylcerViewInterface:IHomeRecyclerView
+
     private var step = itemView.home_item_step_text
     private val state = itemView.home_item_state_text
     private val startbtn =itemView.home_item_btn
