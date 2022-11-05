@@ -11,12 +11,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="마이타민에서 사용할\n닉네임을 입력해주세요."
+        android:text="@string/join_step_three_title"
 
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="36dp"
         android:id="@+id/join_step_three_title"
-        android:textStyle="bold"
-        android:textSize="20sp"
+        android:fontFamily="@font/appmainfont_bold"
+        android:includeFontPadding="false"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         />
@@ -25,10 +28,15 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/join_step_three_title"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_margin="20dp"
-        android:text="닉네임"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/join_step_three_subtitle"
+        android:textSize="12sp"
         android:id="@+id/join_step_three_text"
-        android:textStyle="bold"
+        android:fontFamily="@font/appmainfont_medium"
+        android:includeFontPadding="false"
+        android:textColor="@color/subGray"
+
         />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/join_step_three_name_layout"

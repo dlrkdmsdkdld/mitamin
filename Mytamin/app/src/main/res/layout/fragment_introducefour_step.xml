@@ -12,15 +12,15 @@
         android:id="@+id/introduce_four_text"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/introduce_four_title"
-        android:textSize="25sp"
+        android:textColor="@color/black"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
+        android:textSize="24sp"
+        android:fontFamily="@font/appmainfont_bold"
+        android:includeFontPadding="false"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintEnd_toEndOf="parent"
+
         />
     <TextView
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/introduce_four_text"
@@ -28,9 +28,12 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/introduce_four_subtitle"
         android:layout_marginLeft="20dp"
-        android:textSize="15sp"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        android:textColor="@color/subGray"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/appmainfont_bold"
+        android:includeFontPadding="false"
+
         />
     <TimePicker
         android:layout_marginTop="30dp"
@@ -50,8 +53,11 @@
         app:layout_constraintStart_toStartOf="parent"
         android:padding="20dp"
         android:text="@string/introduce_four_not"
+        android:textColor="@color/black"
+        android:fontFamily="@font/appmainfont_medium"
+        android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         />
 
 
