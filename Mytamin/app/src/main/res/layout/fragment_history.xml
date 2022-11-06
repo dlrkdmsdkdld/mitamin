@@ -117,6 +117,7 @@
                 android:textColor="@color/background_white"
                 android:layout_marginTop="24dp"
                 android:textSize="16dp"
+                android:id="@+id/history_care_btn"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
                 android:text="@string/history_praise_btn"

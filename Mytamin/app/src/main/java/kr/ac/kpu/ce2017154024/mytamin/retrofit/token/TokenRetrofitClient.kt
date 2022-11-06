@@ -56,6 +56,7 @@ object TokenRetrofitClient {
                 if(PrivateUserDataSingleton.isTokenINitialized()){//토큰초기화됐는지확인하고 토큰넣음
                      originalRequest = chain.request().newBuilder()
                         .addHeader("X-AUTH-TOKEN", "${PrivateUserDataSingleton.accessToken}" )
+                         .addHeader("Content-Type", "application/json")
                         .build()
                 }
                 Log.d(TAG,"추가한 토큰 ${PrivateUserDataSingleton.accessToken} ")
@@ -91,6 +92,7 @@ object TokenRetrofitClient {
             TokenRetrofitClient = Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+
                 //위에서 설정한 클라이언트로 레트로핏 클라이언트를 설정한다.
                 .client(client.build())
                 .build()

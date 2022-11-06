@@ -1,9 +1,10 @@
 package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import org.json.JSONArray
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface IhistoryRetrofit {
     @GET("/care/random")
@@ -16,4 +17,16 @@ interface IhistoryRetrofit {
 
     @GET("/mytamin/monthly/{date}")
     fun getMonthMytamin(@Path("date") date:String ) : Call<JsonElement>
+    @GET("/mytamin/weekly/{date}")
+    fun getWeekMytamin(@Path("date") date:String ) : Call<JsonElement>
+
+
+    //var k = "application/json;charset=UTF-8"
+    @GET("/care/list")
+    fun getCarehistory( @Query("careCategoryCodeList")  careCategoryCodeList: JSONArray) : Call<JsonElement>
+
+    //    @Headers("Content-Type: application/json")
+
+
+
 }

@@ -52,22 +52,23 @@ class CustomMonthView(context: Context) : MonthView(context) {
         y: Int,
         hasScheme: Boolean
     ): Boolean {
-        if (!calendar.isCurrentDay) {
-            mSelectedPaint.style = Paint.Style.STROKE
-            mSelectedPaint.strokeWidth = 2f
-            mSelectedPaint.color = ContextCompat.getColor(context, R.color.black)
-            val rectF = RectF(
-                x.toFloat(),
-                y.toFloat(),
-                (x + mItemWidth).toFloat(),
-                (y + mItemHeight).toFloat()
-            )
 
-            canvas.drawRoundRect(rectF, 16f, 16f, mSelectedPaint)
-
-
-            println("선택됨")
-        }
+//        if (!calendar.isCurrentDay) {
+//            mSelectedPaint.style = Paint.Style.STROKE
+//            mSelectedPaint.strokeWidth = 2f
+//            mSelectedPaint.color = ContextCompat.getColor(context, R.color.black)
+//            val rectF = RectF(
+//                x.toFloat(),
+//                y.toFloat(),
+//                (x + mItemWidth).toFloat(),
+//                (y + mItemHeight).toFloat()
+//            )
+//
+//            canvas.drawRoundRect(rectF, 16f, 16f, mSelectedPaint)
+//
+//
+//            println("선택됨")
+//        }
         return true
     }
 

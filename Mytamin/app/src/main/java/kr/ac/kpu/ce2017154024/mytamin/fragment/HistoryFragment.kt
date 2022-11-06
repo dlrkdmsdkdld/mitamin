@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +21,10 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.haibin.calendarview.Calendar
+import com.haibin.calendarview.CalendarView
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.CareHistoryActivity
+import kr.ac.kpu.ce2017154024.mytamin.activity.WeeklyActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHistoryBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
@@ -77,6 +81,18 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             drawLineChart(it)
         })
         listener()
+        mBinding?.cvCalendar?.setOnCalendarSelectListener(object:CalendarView.OnCalendarSelectListener{
+            override fun onCalendarOutOfRange(calendar: Calendar?) {
+
+            }
+
+            override fun onCalendarSelect(calendar: Calendar?, isClick: Boolean) {
+                val intent = Intent(requireContext(),WeeklyActivity::class.java)
+                startActivity(intent)
+                Log.d(TAG, " calendar?.day ${calendar?.day}  calendar month :${calendar?.month}   calendar year : ${calendar?.year}")
+            }
+
+        })
 
 
         return mBinding?.root
@@ -123,6 +139,11 @@ class HistoryFragment : Fragment(),View.OnClickListener {
                     5->{
                         mapdata.put(getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.layoutYellow),"").toString(),
                             getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.layoutYellow),"")
+                        )
+                    }
+                    9->{
+                        mapdata.put(getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.black),"").toString(),
+                            getSchemeCalendar(y,m,it.day,ContextCompat.getColor(requireContext(), R.color.black),"")
                         )
                     }
                     else ->{}
@@ -249,6 +270,10 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             mBinding?.historyPreviousBtn ->{
                 mBinding?.cvCalendar?.scrollToPre()
             }
+            mBinding?.historyCareBtn->{
+                val intent = Intent(requireContext(),CareHistoryActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
     private fun listener(){
@@ -256,5 +281,6 @@ class HistoryFragment : Fragment(),View.OnClickListener {
         mBinding?.historyRefreshBtn?.setOnClickListener(this)
         mBinding?.historyNextBtn?.setOnClickListener(this)
         mBinding?.historyPreviousBtn?.setOnClickListener(this)
+        mBinding?.historyCareBtn?.setOnClickListener(this)
     }
 }

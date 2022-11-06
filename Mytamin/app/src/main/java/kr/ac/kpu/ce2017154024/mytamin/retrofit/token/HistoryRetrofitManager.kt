@@ -1,13 +1,15 @@
 package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import android.util.Log
-import com.google.gson.JsonElement
+import com.google.gson.*
 import kr.ac.kpu.ce2017154024.mytamin.model.feeling
 import kr.ac.kpu.ce2017154024.mytamin.model.monthMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.randomCare
 import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 
@@ -115,4 +117,33 @@ class HistoryRetrofitManager {
 
             })
     }
+
+    fun getWeekMytamin(day:String,completion: (RESPONSE_STATUS, randomCare?) -> Unit){
+        
+
+    }
+
+    fun CareHistoryFilter(codeList:Array<Int>){
+//        val k = JsonObject()
+//       val gson = Gson()
+//        val jsondata :JsonObject = gson.toJson(codeList) as JsonObject
+//        k.add("careCategoryCodeList",codeList)
+//        val body = JsonParser.parse(k.toString()) as JsonObject
+//        val body = JsonParser.parse(jsonObject.toString()) as JsonObject
+
+
+
+//        iHistoryRetrofit?.getCarehistory()?.enqueue(object :retrofit2.Callback<JsonElement>{
+//            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+//
+//            }
+//
+//            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+//
+//            }
+//
+//        })
+    }
+
+
 }
