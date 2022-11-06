@@ -57,7 +57,7 @@ class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface,I
             noInitLayout()
             this.myDaynoteParentAdapter = DaynoteParentAdapter(this,this,it)
             mBinding?.daynoteRecyclerview?.adapter = this.myDaynoteParentAdapter
-            mBinding?.daynoteRecyclerview?.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true)
+            mBinding?.daynoteRecyclerview?.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
         })
     }
