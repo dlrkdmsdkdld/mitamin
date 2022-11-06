@@ -3,6 +3,7 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -22,8 +23,8 @@ interface IhistoryRetrofit {
 
 
     //var k = "application/json;charset=UTF-8"
-    @GET("/care/list")
-    fun getCarehistory( @Query("careCategoryCodeList")  careCategoryCodeList: JSONArray) : Call<JsonElement>
+    @POST ("/care/list")
+    fun getCarehistory( @Body careCategoryCodeList: JSONObject) : Call<JsonElement>
 
     //    @Headers("Content-Type: application/json")
 

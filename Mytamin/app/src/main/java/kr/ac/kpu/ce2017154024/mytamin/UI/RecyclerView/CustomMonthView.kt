@@ -90,7 +90,6 @@ class CustomMonthView(context: Context) : MonthView(context) {
     override fun onDrawScheme(canvas: Canvas, calendar: Calendar, x: Int, y: Int) {
         val cx: Int = x + mItemWidth/3
         val cy: Int = y + mItemHeight /4 *3
-        Log.d(TAG,"onDrawScheme : x: $x y: $y mSchemePaint.color} ${mSchemePaint.color}")
         when (mSchemePaint.color) {
                 -2236963 ->{
                     canvas.drawBitmap(codeoneimage, cx.toFloat(), cy.toFloat(), null)
@@ -175,7 +174,6 @@ class CustomMonthView(context: Context) : MonthView(context) {
                 else {
                     if (it.isCurrentDay) mCurDayTextPaint else if (it.isCurrentMonth) mCurMonthTextPaint else mOtherMonthTextPaint
                 }
-                Log.d(TAG, "글씨 쓰는중 ")
 
                 //val mTextBaseLine = mTextBaseLine /3*2
 

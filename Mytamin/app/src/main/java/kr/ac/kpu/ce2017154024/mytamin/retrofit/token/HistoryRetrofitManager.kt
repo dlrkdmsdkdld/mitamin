@@ -2,10 +2,7 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
 import android.util.Log
 import com.google.gson.*
-import kr.ac.kpu.ce2017154024.mytamin.model.feeling
-import kr.ac.kpu.ce2017154024.mytamin.model.monthMytamin
-import kr.ac.kpu.ce2017154024.mytamin.model.randomCare
-import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
+import kr.ac.kpu.ce2017154024.mytamin.model.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import org.json.JSONArray
@@ -119,30 +116,58 @@ class HistoryRetrofitManager {
     }
 
     fun getWeekMytamin(day:String,completion: (RESPONSE_STATUS, randomCare?) -> Unit){
-        
+        iHistoryRetrofit?.getWeekMytamin(day)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+            }
+
+        })
 
     }
 
-    fun CareHistoryFilter(codeList:Array<Int>){
-//        val k = JsonObject()
-//       val gson = Gson()
-//        val jsondata :JsonObject = gson.toJson(codeList) as JsonObject
-//        k.add("careCategoryCodeList",codeList)
-//        val body = JsonParser.parse(k.toString()) as JsonObject
-//        val body = JsonParser.parse(jsonObject.toString()) as JsonObject
+    fun CareHistoryFilter(codeList:ArrayList<Int>,completion:(RESPONSE_STATUS, ArrayList<monthCareMytamin>?) -> Unit){
+        val k =JSONObject( )
+        k.put("careCategoryCodeList",codeList)
+        iHistoryRetrofit?.getCarehistory(k)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    val data = it.asJsonObject.get("data").asJsonObject
+                    if(data.size() == 0){
+                        completion(RESPONSE_STATUS.NO_CONTENT,null)
+                    }else{
+                        val k = data.keySet()
+                        val result = ArrayList<monthCareMytamin>()
+                        Log.d(TAG,"k set : $k")
+                        k.forEach {
+                            val caremytaminArray = ArrayList<careMytamin>()
+                            val monthData = data.get("$it").asJsonArray
+                            monthData.forEach {
+                                val careMsg1 = it.asJsonObject.get("careMsg1").asString
+                                val careMsg2 = it.asJsonObject.get("careMsg2").asString
+                                val careCategory = it.asJsonObject.get("careCategory").asString
+                                val takeAt = it.asJsonObject.get("takeAt").asString
+                                val care = careMytamin(careMsg1, careMsg2 = careMsg2,careCategory, takeAt)
+                                caremytaminArray.add(care)
+                            }
+                            val tmp = monthCareMytamin(time = it, arrayCareMytamin = caremytaminArray)
+                            result.add(tmp)
 
+                        }
+                        completion(RESPONSE_STATUS.OKAY,result)
+                    }
+                }
+            }
 
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL,null)
 
-//        iHistoryRetrofit?.getCarehistory()?.enqueue(object :retrofit2.Callback<JsonElement>{
-//            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-//
-//            }
-//
-//            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
-//
-//            }
-//
-//        })
+            }
+
+        })
     }
 
 

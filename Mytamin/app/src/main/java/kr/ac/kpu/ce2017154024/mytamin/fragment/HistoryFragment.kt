@@ -1,8 +1,11 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment
 
+import android.content.ContentUris
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -88,6 +91,14 @@ class HistoryFragment : Fragment(),View.OnClickListener {
 
             override fun onCalendarSelect(calendar: Calendar?, isClick: Boolean) {
                 val intent = Intent(requireContext(),WeeklyActivity::class.java)
+
+
+                val day = "${calendar?.year}.${calendar?.month.parseIntToMonth()}.${calendar?.day.parseIntToMonth()}"
+                intent.putExtra("day",day)
+                startActivity(intent)
+
+
+
                 startActivity(intent)
                 Log.d(TAG, " calendar?.day ${calendar?.day}  calendar month :${calendar?.month}   calendar year : ${calendar?.year}")
             }

@@ -56,7 +56,6 @@ object TokenRetrofitClient {
                 if(PrivateUserDataSingleton.isTokenINitialized()){//토큰초기화됐는지확인하고 토큰넣음
                      originalRequest = chain.request().newBuilder()
                         .addHeader("X-AUTH-TOKEN", "${PrivateUserDataSingleton.accessToken}" )
-                         .addHeader("Content-Type", "application/json")
                         .build()
                 }
                 Log.d(TAG,"추가한 토큰 ${PrivateUserDataSingleton.accessToken} ")

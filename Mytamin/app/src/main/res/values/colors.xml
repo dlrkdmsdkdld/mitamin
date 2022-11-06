@@ -32,4 +32,9 @@
     <color name="TextColorshort">#D9D9D9</color>
     <color name="transparent">#00000000</color>
     <color name="textRed">#F04452</color>
+
+    <color name="cardGray">#FBF9F7</color>
+    <color name="cardtext">#929292</color>
+
+
 </resources>
