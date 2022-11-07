@@ -22,6 +22,8 @@ interface IhistoryRetrofit {
     @GET("/mytamin/weekly/{date}")
     fun getWeekMytamin(@Path("date") date:String ) : Call<JsonElement>
 
+    @DELETE ("/mytamin/{mytaminId}")
+    fun DeleteMytamin(@Path("mytaminId") mytaminId:Int ) : Call<JsonElement>
 
     //var k = "application/json;charset=UTF-8"
     @POST ("/care/list")

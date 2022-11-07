@@ -1,13 +1,16 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityWeeklyBinding
 import kr.ac.kpu.ce2017154024.mytamin.model.dayMytamin
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
@@ -18,12 +21,17 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMonth
 
 class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding : ActivityWeeklyBinding
-    private lateinit var ArraydayMytamin :ArrayList<dayMytamin>
+    private  var ArraydayMytamin =ArrayList<dayMytamin>()
+    private var selectmytaminId :Int= 100000000
+    private lateinit var customProgressDialog: Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding= ActivityWeeklyBinding.inflate(layoutInflater)
         setContentView(mbinding.root)
         mbinding?.weeklyBackBtn.setOnClickListener(this)
+        mbinding?.weeklyTrashBtn.setOnClickListener(this)
+        customProgressDialog= LoadingDialog(this)
+
 
         val day = intent.getStringExtra("day")
         day?.let {
@@ -126,23 +134,27 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
             }
 
             override fun onCalendarSelect(calendar: Calendar?, isClick: Boolean) {
-                ArraydayMytamin.forEach {
-                    if (it.day == calendar?.day.toString()){
-                        if (it.report == null && it.care == null){
-                            mbinding?.weeklyNoLayout.visibility = View.VISIBLE
-                            mbinding?.weeklyYesLayout.visibility = View.INVISIBLE
-                        }else{
-                            mbinding?.weeklyNoLayout.visibility = View.INVISIBLE
-                            mbinding?.weeklyYesLayout.visibility = View.VISIBLE
-                            setData(it)
+                ArraydayMytamin?.let {
+                    ArraydayMytamin.forEach {
+                        if (it.day == calendar?.day.toString()){
+                            if (it.report == null && it.care == null){
+                                mbinding?.weeklyNoLayout.visibility = View.VISIBLE
+                                mbinding?.weeklyYesLayout.visibility = View.INVISIBLE
+                            }else{
+                                mbinding?.weeklyNoLayout.visibility = View.INVISIBLE
+                                mbinding?.weeklyYesLayout.visibility = View.VISIBLE
+                                setData(it)
+                            }
                         }
                     }
                 }
+
             }
 
         })
     }
     private fun setData(data:dayMytamin){
+        selectmytaminId= data.mytaminId ?: 100000000
         data.takeAt?.let { mbinding?.weeklyYesDate.text = it }
         if (data.report == null){
             mbinding?.yesMytaminFeelingTag.text = null
@@ -178,6 +190,15 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
             mbinding?.weeklyBackBtn ->{
                 finish()
                 }
+            mbinding?.weeklyTrashBtn ->{
+                customProgressDialog.show()
+                if (selectmytaminId!=100000000) HistoryRetrofitManager.instance.deleteMytamin(selectmytaminId){responseStatus, i ->
+                    customProgressDialog.dismiss()
+                    if (i!=200){
+                        Toast.makeText(this,"마이타민 삭제 실패",Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 }

@@ -55,9 +55,7 @@ class MytaminRepository {
                 HomeRetrofitManager.instance.doCompleteReport(data) { responseStatus ->
                     when(responseStatus){
                         RESPONSE_STATUS.OKAY ->{
-                            Handler(Looper.getMainLooper()).post{
-                                Toast.makeText(MyApplication.instance, "마이타민 하루진단하기 완료", Toast.LENGTH_SHORT).show()
-                            }
+
 
                         }
                     }
@@ -72,9 +70,9 @@ class MytaminRepository {
                 HomeRetrofitManager.instance.doCorrectionReportReport(data,reportId) { responseStatus ->
                     when(responseStatus){
                         RESPONSE_STATUS.OKAY ->{
-                            Handler(Looper.getMainLooper()).post{
-                                Toast.makeText(MyApplication.instance, "마이타민 하루진단하기 완료", Toast.LENGTH_SHORT).show()
-                            }
+//                            Handler(Looper.getMainLooper()).post{
+//                                Toast.makeText(MyApplication.instance, "마이타민 하루진단하기 완료", Toast.LENGTH_SHORT).show()
+//                            }
 
                         }
                     }

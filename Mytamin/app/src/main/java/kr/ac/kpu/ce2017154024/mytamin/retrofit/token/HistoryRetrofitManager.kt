@@ -1,7 +1,10 @@
 package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 
+import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import com.google.gson.*
+import kr.ac.kpu.ce2017154024.mytamin.MyApplication
 import kr.ac.kpu.ce2017154024.mytamin.model.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -9,6 +12,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
+import java.util.logging.Handler
 
 class HistoryRetrofitManager {
 
@@ -211,5 +215,25 @@ class HistoryRetrofitManager {
         })
     }
 
+    fun deleteMytamin(DeleteMytamin:Int,completion: (RESPONSE_STATUS, Int?) -> Unit){
+        iHistoryRetrofit?.DeleteMytamin(DeleteMytamin)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    val statusCode = it.asJsonObject.get("statusCode").asInt
+                    if (statusCode ==200){
+                        completion(RESPONSE_STATUS.OKAY,200)
+                    }else{
+                        completion(RESPONSE_STATUS.FAIL,null)
 
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL,null)
+
+            }
+
+        })
+    }
 }

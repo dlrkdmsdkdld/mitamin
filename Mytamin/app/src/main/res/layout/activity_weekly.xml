@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/ic_icon_trashcan"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:padding="15dp"
             android:id="@+id/weekly_trash_btn"
 
