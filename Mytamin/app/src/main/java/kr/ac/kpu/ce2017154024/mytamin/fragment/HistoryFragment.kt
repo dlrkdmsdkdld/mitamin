@@ -33,6 +33,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.primaryColor
 import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
+import kr.ac.kpu.ce2017154024.mytamin.utils.getSchemeCalendar
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMonth
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.HistoryViewModel
 
@@ -165,17 +166,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
 
         })
     }
-    private fun getSchemeCalendar(year: Int, month: Int, day: Int, color:Int, text: String
-    ): Calendar { //캘린더 리턴해주는 함수
-        val calendar = Calendar()
-        calendar.year = year
-        calendar.month = month
-        calendar.day = day
-        calendar.schemeColor = color //如果单独标记颜色、则会使用这个颜色
-        calendar.scheme = text
 
-        return calendar
-    }
     private fun drawLineChart(data: ArrayList<weeklyMental>){
         val lineChart = mBinding!!.historyChart
 

@@ -115,13 +115,55 @@ class HistoryRetrofitManager {
             })
     }
 
-    fun getWeekMytamin(day:String,completion: (RESPONSE_STATUS, randomCare?) -> Unit){
+    fun getWeekMytamin(day:String,completion: (RESPONSE_STATUS, ArrayList<dayMytamin>?) -> Unit){
         iHistoryRetrofit?.getWeekMytamin(day)?.enqueue(object :retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                var result = ArrayList<dayMytamin>()
+                response.body()?.let {
+                    val data = it.asJsonObject.get("data").asJsonObject
+                    val iterator = data.keySet()
 
+                    iterator.forEach {
+                        if(data.get(it).isJsonNull){
+                            result.add(dayMytamin(day=it , null,null,null,null))
+                        }else{ // 안에 report 혹은 care 내용이 있는경우
+                            val tmp = data.get(it).asJsonObject
+                            val mytaminId =tmp.get("mytaminId").asInt
+                            val takeAt = tmp.get("takeAt").asString
+                            var report :dayMytaminReport?
+                            if (tmp.get("report").isJsonNull){
+                                report =null
+                            }else{
+                                val reportId = tmp.get("report").asJsonObject.get("reportId").asInt
+                                val canEdit = tmp.get("report").asJsonObject.get("canEdit").asBoolean
+                                val mentalConditionCode = tmp.get("report").asJsonObject.get("mentalConditionCode").asInt
+                                val mentalCondition = tmp.get("report").asJsonObject.get("mentalCondition").asString
+                                val feelingTag = tmp.get("report").asJsonObject.get("feelingTag").asString
+                                val todayReport = tmp.get("report").asJsonObject.get("todayReport").asString
+                                report = dayMytaminReport(reportId, canEdit, mentalConditionCode, mentalCondition, feelingTag, todayReport)
+                            }
+                            var care :dayMytaminCare?
+                            if (tmp.get("care").isJsonNull){
+                                care =null
+                            }else{
+                                val careId = tmp.get("care").asJsonObject.get("careId").asInt
+                                val canEdit = tmp.get("care").asJsonObject.get("canEdit").asBoolean
+                                val careCategory = tmp.get("care").asJsonObject.get("careCategory").asString
+                                val careMsg1 = tmp.get("care").asJsonObject.get("careMsg1").asString
+                                val careMsg2 = tmp.get("care").asJsonObject.get("careMsg2").asString
+                                care = dayMytaminCare(careId, canEdit, careCategory, careMsg1, careMsg2)
+                            }
+                            val total = dayMytamin(day = it,mytaminId=mytaminId,takeAt=takeAt,report=report,care=care)
+                            result.add(total)
+
+                        }
+                    }
+                    completion(RESPONSE_STATUS.OKAY,result)
+                }
             }
 
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL,null)
 
             }
 

@@ -35,6 +35,7 @@
 
     <color name="cardGray">#FBF9F7</color>
     <color name="cardtext">#929292</color>
+    <color name="LineWeeklyFat">#F6F4F2</color>
 
 
 </resources>
