@@ -16,14 +16,14 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.getSchemeCalendar
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMonth
 
-class WeeklyActivity : AppCompatActivity() {
+class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding : ActivityWeeklyBinding
     private lateinit var ArraydayMytamin :ArrayList<dayMytamin>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding= ActivityWeeklyBinding.inflate(layoutInflater)
         setContentView(mbinding.root)
-
+        mbinding?.weeklyBackBtn.setOnClickListener(this)
 
         val day = intent.getStringExtra("day")
         day?.let {
@@ -170,6 +170,14 @@ class WeeklyActivity : AppCompatActivity() {
         data.care?.let {
             mbinding?.yesmytaminCareMsg1.text = it.careMsg1
             mbinding?.yesmytaminCareMsg2.text = it.careMsg2
+        }
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            mbinding?.weeklyBackBtn ->{
+                finish()
+                }
         }
     }
 }

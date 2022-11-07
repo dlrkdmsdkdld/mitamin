@@ -85,22 +85,25 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             drawLineChart(it)
         })
         listener()
+
         mBinding?.cvCalendar?.setOnCalendarSelectListener(object:CalendarView.OnCalendarSelectListener{
             override fun onCalendarOutOfRange(calendar: Calendar?) {
 
             }
 
             override fun onCalendarSelect(calendar: Calendar?, isClick: Boolean) {
-                val intent = Intent(requireContext(),WeeklyActivity::class.java)
+                Log.d(TAG,"isclick : $isClick")
+                if (isClick){
+                    val intent = Intent(requireContext(),WeeklyActivity::class.java)
+                    val day = "${calendar?.year}.${calendar?.month.parseIntToMonth()}.${calendar?.day.parseIntToMonth()}"
+                    intent.putExtra("day",day)
+                    startActivity(intent)
+                }
 
 
-                val day = "${calendar?.year}.${calendar?.month.parseIntToMonth()}.${calendar?.day.parseIntToMonth()}"
-                intent.putExtra("day",day)
-                startActivity(intent)
 
 
 
-                startActivity(intent)
                 Log.d(TAG, " calendar?.day ${calendar?.day}  calendar month :${calendar?.month}   calendar year : ${calendar?.year}")
             }
 
@@ -120,6 +123,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             myviewmodel.setSelectMonthAndYear("${year}.${month.parseIntToMonth()}")
             m=month
             y=year
+
             myviewmodel.getMonthMytaminAPI()
         }
         myviewmodel.getmonthmytamin.observe(viewLifecycleOwner, Observer {
