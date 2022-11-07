@@ -48,6 +48,7 @@
         android:layout_width="match_parent"
         android:id="@+id/record_scroll"
         android:orientation="horizontal"
+        android:scrollbars="none"
         android:layout_height="121dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
