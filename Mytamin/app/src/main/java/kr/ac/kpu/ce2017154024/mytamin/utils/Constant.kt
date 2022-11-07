@@ -10,7 +10,7 @@ object Constant {
     val StepTextstepTwo = "감각 깨우기"
     val primaryColor = "#FF7F57"
     var emojiArray = arrayOf(0,R.drawable.ic_so_bad,R.drawable.ic_bad, R.drawable.ic_so_so,R.drawable.ic_good,R.drawable.ic_so_good)
-
+    val careChipText = arrayOf("없음","이루어 낸 일","잘한 일이나 행동","노력하고 있는 부분","긍정적인 변화나 깨달음","감정, 생각 혹은 신체 일부분","과거의 나","기타")
     val frametwo_image_one_src = R.drawable.ic_so_bad
     val frametwo_image_one_src_no = R.drawable.ic_so_bad_disabled
     val frametwo_image_one_text ="매우 나빠요.."

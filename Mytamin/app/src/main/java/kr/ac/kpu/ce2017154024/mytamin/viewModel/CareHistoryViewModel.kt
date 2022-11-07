@@ -11,6 +11,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.weeklyMental
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 
 class CareHistoryViewModel:ViewModel() {
 
@@ -56,6 +57,10 @@ class CareHistoryViewModel:ViewModel() {
         getcategory.value?.let {
             HistoryRetrofitManager.instance.CareHistoryFilter(it){ responseStatus, mmonthCareMytamin ->
                 Log.d(Constant.TAG,"monthCareMytamin : $mmonthCareMytamin")
+                if (responseStatus ==RESPONSE_STATUS.NO_CONTENT ){
+                    Log.d(Constant.TAG,"검색결과 없음 ")
+                    setmyMonthCareMytamin( ArrayList<monthCareMytamin>())
+                }
                 mmonthCareMytamin?.let { setmyMonthCareMytamin(mmonthCareMytamin) }
             }
         }

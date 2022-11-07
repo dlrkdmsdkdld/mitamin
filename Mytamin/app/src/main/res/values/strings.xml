@@ -176,6 +176,7 @@
     <string name="care_history_btn6">과거의 나</string>
     <string name="care_history_btn7">기타</string>
     <string name="care_history_complete">적용하기</string>
+    <string name="care_history_no">조건에 부합한 칭찬 처방 기록이 없어요</string>
 
 
 </resources>

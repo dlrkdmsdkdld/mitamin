@@ -47,13 +47,15 @@
         android:layout_width="match_parent"
         android:scrollbars="none"
         android:overScrollMode="never"
+        android:id="@+id/care_scroll"
         android:layout_height="wrap_content">
         <com.google.android.material.chip.ChipGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/care_chipgroup"
+            android:layout_marginLeft="20dp"
             app:singleLine="true"
-            
+
             android:layout_marginTop="34dp"
             />
 
@@ -62,13 +64,44 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/care_chipgroup"
+        app:layout_constraintTop_toBottomOf="@+id/care_scroll"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/item_care_parent"
 
         android:id="@+id/care_recycler"
 
         />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/care_scroll"
+        android:layout_marginTop="200dp"
+        android:id="@+id/care_no_layout"
+        android:visibility="invisible"
+        >
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/ic_icon_exclamation_circle_gray"
+            android:layout_marginLeft="53dp"
+            android:id="@+id/care_circlebtn"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/care_circlebtn"
+            android:text="@string/care_history_no"
+            android:textSize="16dp"
+            android:fontFamily="@font/appsubfont_r"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

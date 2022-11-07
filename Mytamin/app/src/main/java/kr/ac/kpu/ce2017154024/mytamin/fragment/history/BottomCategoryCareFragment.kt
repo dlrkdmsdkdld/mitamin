@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.activity.CareHistoryActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.BottomHistoryCareCategoryBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.CareHistoryViewModel
@@ -60,8 +61,13 @@ class BottomCategoryCareFragment : BottomSheetDialogFragment(),View.OnClickListe
                 select=7
             }
             mbinding?.bottomCareComplete ->{
-                select?.let {  myViewmodel.addcategory(select!!) }
+                select?.let {
+                    myViewmodel.addcategory(select!!)
+                    (activity as CareHistoryActivity).addCategory(select)
+
+                }
                 Log.d(TAG , "t선택 카테고리 select: $select")
+
                 onDestroyView()
             }
         }
