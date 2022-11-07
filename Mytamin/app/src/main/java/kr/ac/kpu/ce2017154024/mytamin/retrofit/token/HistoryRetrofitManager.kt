@@ -130,10 +130,8 @@ class HistoryRetrofitManager {
     }
 
     fun CareHistoryFilter(codeList:ArrayList<Int>,completion:(RESPONSE_STATUS, ArrayList<monthCareMytamin>?) -> Unit){
-        val k =JSONObject( )
-        k.put("careCategoryCodeList",codeList)
-        Log.d(TAG," jsonobject 값 : $k")
-        iHistoryRetrofit?.getCarehistory(k)?.enqueue(object :retrofit2.Callback<JsonElement>{
+        val tmp = careCategoryCodeList(codeList)
+        iHistoryRetrofit?.getCarehistory(tmp)?.enqueue(object :retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 response.body()?.let {
                     val data = it.asJsonObject.get("data").asJsonObject

@@ -24,6 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="22dp"
         android:layout_marginRight="20dp"
+        android:padding="15dp"
         android:background="@drawable/ic_sliders_category"
         android:id="@+id/care_category_btn"
         />
@@ -41,10 +42,27 @@
         android:textSize="16sp"
         android:textColor="@color/black"
         />
+    <HorizontalScrollView
+        app:layout_constraintTop_toBottomOf="@+id/care_category_btn"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:layout_height="wrap_content">
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/care_chipgroup"
+            app:singleLine="true"
+            
+            android:layout_marginTop="34dp"
+            />
+
+    </HorizontalScrollView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/care_back_btn"
+        app:layout_constraintTop_toBottomOf="@+id/care_chipgroup"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/item_care_parent"
 

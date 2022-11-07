@@ -9,3 +9,4 @@ data class monthMytamin(val day:Int , val mentalConditionCode:Int)
 
 data class careMytamin(val careMsg1:String , val careMsg2:String ,val careCategory:String ,val takeAt:String)
 data class monthCareMytamin(val time:String,val arrayCareMytamin:ArrayList<careMytamin>)
+data class careCategoryCodeList(val careCategoryCodeList:ArrayList<Int>)
