@@ -8,6 +8,13 @@
     <string name="first_login">이메일로 로그인</string>
     <string name="first_join">이메일로 가입하기</string>
     <string name="first_or">또는</string>
+    <!--    loginAcitivity-->
+    <string name="login_title">이메일로 로그인</string>
+    <string name="login_email">이메일</string>
+    <string name="login_password">비밀번호</string>
+    <string name="login_auto">자동 로그인</string>
+    <string name="login_login">로그인</string>
+    <string name="login_find">비밀번호를 잊어버리셨나요?</string>
 
 
 
