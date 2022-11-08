@@ -16,6 +16,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.dayMytamin
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import kr.ac.kpu.ce2017154024.mytamin.utils.getSchemeCalendar
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMonth
 
@@ -39,7 +40,7 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
             Log.d(TAG,"dayDate ->$dayDate")
             mbinding?.weeklyCalendar.scrollToCalendar(dayDate[0].toInt(),dayDate[1].toInt(),dayDate[2].toInt())
             setSchema(null,it, dayDate[1].toInt() ,dayDate[0].toInt())
-            mbinding?.weeklyTimeText.text = "${mbinding?.weeklyCalendar.curYear}년 ${mbinding?.weeklyCalendar.curMonth}월"
+            mbinding?.weeklyTimeText.text = "${dayDate[0].toInt()}년 ${dayDate[1].toInt()}월"
         }
         selectCalend()
         mbinding?.weeklyCalendar.setOnWeekChangeListener(object :CalendarView.OnWeekChangeListener{
@@ -190,14 +191,17 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
             mbinding?.weeklyBackBtn ->{
                 finish()
                 }
-            mbinding?.weeklyTrashBtn ->{
-                customProgressDialog.show()
-                if (selectmytaminId!=100000000) HistoryRetrofitManager.instance.deleteMytamin(selectmytaminId){responseStatus, i ->
-                    customProgressDialog.dismiss()
-                    if (i!=200){
-                        Toast.makeText(this,"마이타민 삭제 실패",Toast.LENGTH_SHORT).show()
+            mbinding?.weeklyTrashBtn -> {
+                if (selectmytaminId != 100000000) {
+                    customProgressDialog.show()
+                    HistoryRetrofitManager.instance.deleteMytamin(selectmytaminId) { responseStatus, i ->
+                        customProgressDialog.dismiss()
+                        if (responseStatus != RESPONSE_STATUS.OKAY) {
+                            Toast.makeText(this, "마이타민 삭제 실패", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
+
             }
         }
     }
