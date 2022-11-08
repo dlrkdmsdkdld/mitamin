@@ -21,12 +21,13 @@
         android:text="@string/introduce_first_talk_one"
         />
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="145.6dp"
+        android:layout_height="124.8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="60dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginBottom="91.6dp"
+        android:src="@drawable/ic_main_logo"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

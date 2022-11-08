@@ -5,26 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.IntroduceActivity">
-    <ImageButton
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/icon_arraow_left_small_black"
-        android:layout_marginTop="13dp"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/introduce_back_btn"
-        />
+
     <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introduce_back_btn"
+        app:layout_constraintTop_toTopOf="parent"
         app:dotsColor="@color/primary"
         android:id="@+id/introduce_indicator"
         app:dotsSize="12dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="70dp"
         />
 
 

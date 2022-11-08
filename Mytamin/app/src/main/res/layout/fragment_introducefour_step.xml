@@ -17,7 +17,6 @@
         android:textSize="24sp"
         android:fontFamily="@font/appmainfont_bold"
         android:includeFontPadding="false"
-        android:textStyle="bold"
 
         />
     <TextView
@@ -35,15 +34,66 @@
         android:includeFontPadding="false"
 
         />
-    <TimePicker
-        android:layout_marginTop="30dp"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/introduce_timePicker"
+        android:layout_height="56dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+
+        android:layout_marginTop="132dp"
         app:layout_constraintTop_toBottomOf="@+id/introduce_four_subtext"
-        android:timePickerMode="spinner"
+        android:background="@drawable/round_layout_background_gray"
+        />
+    <com.shawnlin.numberpicker.NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/introduce_four_subtext"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="70dp"
+        android:id="@+id/introduce_record_night"
+        app:np_order="ascending"
+        android:showDividers="none"
+        app:np_textColor="@color/subGray"
+        app:np_selectedTextSize="24sp"
+        app:np_selectedTextColor="@color/black"
+        app:np_textSize="18sp"
+        app:np_dividerColor="@color/transparent"
+        android:theme="@style/custom_time_picker"
+        />
+    <com.shawnlin.numberpicker.NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/introduce_four_subtext"
+        app:layout_constraintEnd_toStartOf="@+id/introduce_record_time"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="70dp"
+        android:id="@+id/introduce_record_Hour"
+        app:np_order="ascending"
+        android:showDividers="none"
+        app:np_textColor="@color/subGray"
+        app:np_selectedTextSize="24sp"
+        app:np_selectedTextColor="@color/black"
+        app:np_textSize="18sp"
+        app:np_dividerColor="@color/transparent"
+        android:theme="@style/custom_time_picker"
+        />
+    <com.shawnlin.numberpicker.NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/introduce_four_subtext"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="24dp"
+        android:id="@+id/introduce_record_time"
+        android:layout_marginTop="70dp"
+        app:np_dividerColor="@color/transparent"
+        app:np_textColor="@color/subGray"
+        app:np_selectedTextSize="24sp"
+        app:np_selectedTextColor="@color/black"
+        app:np_textSize="18sp"
         />
     <TextView
         android:id="@+id/introduce_start_btn"
