@@ -34,10 +34,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/join_step_two_layout"
         >
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginLeft="20dp"
+            android:button="@drawable/join_checkbox"
             android:id="@+id/join_step_two_all_check"
             />
 
@@ -54,21 +55,14 @@
              />
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/join_step_two_layout_Second"
-        app:layout_constraintTop_toBottomOf="@+id/join_step_two_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/join_step_two_layout"
+            android:button="@drawable/join_checkbox"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
             android:id="@+id/join_step_two_first_check"
             />
 
@@ -79,26 +73,25 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@+id/join_step_two_first_check"
             android:text="@string/join_step_two_sub2"
+            android:layout_marginTop="12dp"
 
             android:layout_marginLeft="8dp"
             android:textSize="14sp"
             android:textColor="@color/subGray"
             android:fontFamily="@font/appmainfont_medium"
             android:includeFontPadding="false"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/join_step_two_layout"
 
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/join_step_detail"
-            android:padding="20dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/join_step_two_layout"
             android:id="@+id/join_step_two_first_text"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="20dp"
             android:textSize="14sp"
             android:textColor="@color/black"
             android:fontFamily="@font/appmainfont_medium"
@@ -106,24 +99,16 @@
 
 
             />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/join_step_two_layout_Second"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/join_step_two_layout_two"
-        >
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:button="@drawable/join_checkbox"
+            android:layout_marginTop="12dp"
             android:layout_marginLeft="20dp"
             android:id="@+id/join_step_two_second_check"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/join_step_two_first_check"
+
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
@@ -132,23 +117,24 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@+id/join_step_two_second_check"
             android:text="@string/join_step_two_sub3"
+            android:layout_marginTop="12dp"
 
             android:layout_marginLeft="8dp"
             android:textSize="14sp"
             android:textColor="@color/subGray"
             android:fontFamily="@font/appmainfont_medium"
             android:includeFontPadding="false"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/join_step_two_first_check"
+
 
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/join_step_detail"
-            android:padding="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/join_step_two_first_check"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="20dp"
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/join_step_two_second_text"
             android:textSize="14sp"
@@ -156,6 +142,5 @@
             android:fontFamily="@font/appmainfont_medium"
             android:includeFontPadding="false"
             />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
