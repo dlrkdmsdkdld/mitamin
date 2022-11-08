@@ -12,89 +12,86 @@
         android:id="@+id/first_guideline"
         app:layout_constraintGuide_percent="0.15"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="매일 챙겨 먹는 마음 비타민"
-        app:layout_constraintTop_toBottomOf="@+id/first_guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/first_title_image"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:id="@+id/first_title_text"
 
-        app:layout_constraintVertical_bias="1"
-        />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/image_first_title"
-        app:layout_constraintTop_toBottomOf="@+id/first_title_text"
+        android:src="@drawable/ic_mitamin_title"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/first_title_image"
-        app:layout_constraintBottom_toTopOf="@+id/first_main_image"
-        />
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:layout_constraintTop_toBottomOf="@+id/first_title_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/first_main_image"
-        app:layout_constraintBottom_toTopOf="@+id/first_join_btn"
-        />
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/first_main_image"
-        android:padding="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:text="이메일로 가입하기"
-        android:background="@drawable/round_layout_background_orange"
-        android:id="@+id/first_join_btn"
-        app:layout_constraintBottom_toTopOf="@+id/first_login_btn"
-        />
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:text="이메일로 로그인하기"
-        app:layout_constraintTop_toBottomOf="@+id/first_join_btn"
-        android:background="@drawable/round_layout_stroke_primary"
-        android:id="@+id/first_login_btn"
-        app:layout_constraintBottom_toTopOf="@+id/first_or_text"
+        android:layout_marginTop="130dp"
         />
     <TextView
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_title"
+        app:layout_constraintTop_toBottomOf="@+id/first_title_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        android:fontFamily="@font/appmainfont_medium"
+        android:includeFontPadding="false"
+        android:textColor="@color/darkGray"
+        android:layout_marginTop="12dp"
+        android:id="@+id/first_title_text"
+
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/first_title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_main_logo"
+        android:id="@+id/first_main_image"
+        android:layout_marginTop="16dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first_login_btn"
-        android:id="@+id/first_or_text"
-        app:layout_constraintBottom_toTopOf="@+id/first_social_layout"
-        android:layout_marginTop="30dp"
-        android:text="또는"/>
-    <LinearLayout
+        android:padding="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/round_layout_stroke_primary"
+        android:text="@string/first_join"
+        android:fontFamily="@font/appmainfont_medium"
+        android:includeFontPadding="false"
+        android:textSize="16dp"
+        android:textColor="@color/primary"
+        android:id="@+id/first_join_btn"
+        />
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/first_or_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/first_social_layout"
-        android:orientation="horizontal"
-        >
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
+        android:background="@drawable/round_layout_background_orange"
+        android:text="@string/first_login"
+        app:layout_constraintTop_toBottomOf="@+id/first_main_image"
+        android:id="@+id/first_login_btn"
+        android:includeFontPadding="false"
+        android:textSize="16dp"
+        android:textColor="@color/background_white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_join_btn"
+        android:id="@+id/first_or_text"
+        android:layout_marginTop="40dp"
+        android:visibility="invisible"
+        android:text="@string/first_or"/>
 
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

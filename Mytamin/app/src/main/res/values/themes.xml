@@ -17,7 +17,7 @@
 
     </style>
     <style name="Theme.Mytamin.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/layoutYellow</item>
+        <item name="windowSplashScreenBackground">@color/primary</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ovallogo</item>
         <item name="postSplashScreenTheme">@style/Theme.Mytamin</item>
         <item name="windowSplashScreenAnimationDuration">1000</item>

@@ -1,7 +1,16 @@
 <resources>
-    <string name="app_name">Mytamin</string>
+    <string name="app_name">mitamin</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    firstAcitivity-->
+
+    <string name="first_title">매일 챙겨 먹는 마음 비타민</string>
+    <string name="first_login">이메일로 로그인</string>
+    <string name="first_join">이메일로 가입하기</string>
+    <string name="first_or">또는</string>
+
+
+
     <!--    join 부분 String-->
     <string name="join_step_one_title">나를 위한 마음 비타민,\n오늘부터 섭치해 보시겠어요?</string>
     <string name="join_step_email_title">이메일</string>
