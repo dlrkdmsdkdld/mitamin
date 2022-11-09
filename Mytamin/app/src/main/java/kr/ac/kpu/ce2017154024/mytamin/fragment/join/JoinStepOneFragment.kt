@@ -126,7 +126,14 @@ class joinStepOneFragment : Fragment() {
     //join_step_one_password_confirm_text -- >패스워드 확인창
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//        join_step_one_password_text.setOnFocusChangeListener { view, b ->
+//            if (b) {
+//                mBinding?.joinStepOnePasswordText?.hint = ""
+//                mBinding?.joinStepOnePasswordLayout?.hint = ""
+//                Log.d(TAG,"hint - > ${ mBinding?.joinStepOnePasswordText?.hint}")
+//                Log.d(TAG,"포커스됨")
+//            }
+//        }
         join_step_one_password_text.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -135,9 +142,12 @@ class joinStepOneFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                mBinding?.joinStepOnePasswordText?.hint = ""
+                mBinding?.joinStepOnePasswordLayout?.hint = ""
                 Log.d(TAG,"join_step_one_password_text afterTextChanged $p0  ${p0?.trim()}")
                 if (Pattern.matches("^[a-zA-Z0-9]*\$", p0) && (8 <=p0!!.count() && p0!!.count()<31 )  && p0.toString()==p0.toString().trim()) {
                     join_step_one_password_layout.helperText="사용 가능한 비밀번호입니다"
+                    join_step_one_password_layout.hint = ""
                     passwordValue=p0.toString().trim()
                     OkAllItem()
                 }
@@ -158,6 +168,8 @@ class joinStepOneFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                join_step_one_password_confirm_layout.hint = ""
+                join_step_one_password_confirm_text.hint = ""
                 if (passwordValue == p0.toString()){
                     join_step_one_password_confirm_layout.helperText="비밀번호가 일치합니다."
                     RepasswordValue=true
@@ -179,6 +191,8 @@ class joinStepOneFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 (activity as joinActivity).canEnableNextbtn(false)
+                join_step_one_email_text.hint =""
+                join_step_one_password_confirm_layout.hint = ""
             }
 
         })

@@ -50,12 +50,12 @@ class joinStepThreeFragment : Fragment() {
                         (it.toString()=="")
                         if (it.toString()=="" ){tmp="1"}
                         if (it.toString()==tmp && it.toString()!="" ){
-                            mBinding?.joinStepThreeNameLayout?.endIconDrawable=resources.getDrawable(R.drawable.ic_baseline_replay_24)
-                            mBinding?.joinStepThreeNameLayout?.helperText = JOINSTRING.searchingEmail
+                            Handler(Looper.getMainLooper()).post(Runnable {
+                                mBinding?.joinStepThreeNameLayout?.helperText = JOINSTRING.searchingEmail
                             CheckNameAPICall(it.toString())
+                            })
                         }else{
                             Handler(Looper.getMainLooper()).post(Runnable {
-                                mBinding?.joinStepThreeNameLayout?.endIconDrawable=resources.getDrawable(R.drawable.ic_baseline_error_24)
                                 mBinding?.joinStepThreeNameLayout?.helperText= JOINSTRING.wrongNickNameEmpty
                                 (activity as joinActivity).canEnableNextbtn(false)
 
@@ -76,15 +76,14 @@ class joinStepThreeFragment : Fragment() {
                     if (checkOverlapData?.status==200){
                         result = checkOverlapData.result
                         if (result==false){//"@drawable/ic_baseline_check_24"
-                            join_step_three_name_layout.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_check_24)
                             join_step_three_name_layout.helperText=JOINSTRING.goodNickname
                             (activity as joinActivity).canEnableNextbtn(true)
                             joinViewModel.setname(query!!)
 
 
                         }else{
-                            join_step_three_name_layout.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_error_24)
-                            join_step_three_name_layout.helperText=JOINSTRING.wrongNickNameoverlap
+                            join_step_three_name_layout.error=JOINSTRING.wrongNickNameoverlap
+
                             (activity as joinActivity).canEnableNextbtn(false)
                         }
                     }
@@ -104,6 +103,8 @@ class joinStepThreeFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                join_step_three_name_text.hint=""
+                mBinding?.joinStepThreeNameLayout?.hint=""
                 (activity as joinActivity).canEnableNextbtn(false)
 
             }

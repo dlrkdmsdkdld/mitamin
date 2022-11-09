@@ -45,6 +45,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         app:helperTextTextColor="@color/primary"
+        app:boxStrokeColor="@color/text_input_selector"
+        android:hint="@string/join_step_password_hint"
+        app:hintTextColor="@drawable/hint_focus_selector"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconMode="password_toggle"
         >
@@ -53,7 +56,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/join_step_password_hint"
 
             android:inputType="textPassword"
             android:id="@+id/find_two_one_password_text"
@@ -80,12 +82,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/find_two_subtitle2"
         android:layout_marginTop="20dp"
+        app:boxStrokeColor="@color/text_input_selector"
         app:boxBackgroundColor="@color/background_white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
 
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconMode="password_toggle"
+        app:hintTextColor="@drawable/hint_focus_selector"
         app:helperTextTextColor="@color/primary"
         app:endIconCheckable="true"
         android:hint="@string/join_step_password_hint2"

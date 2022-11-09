@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="13dp"
             android:layout_marginBottom="13dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="14dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/join_back_btn"
@@ -79,8 +79,7 @@
         android:textSize="16sp"
         android:textColor="@color/background_white"
         android:fontFamily="@font/appmainfont_medium"
-
-        android:background="@drawable/round_layout_background_orange"
+        android:background="@drawable/round_layout_selector_orange"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"

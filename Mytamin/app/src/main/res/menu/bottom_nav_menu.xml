@@ -16,12 +16,7 @@
         android:icon="@drawable/ic_icon_card_mono"
 
         />
-    <item
-        android:id="@+id/manageMentFragment"
-        android:title="감정관리"
-        android:enabled="true"
-        android:icon="@drawable/ic_icon_headphone_mono"
-        />
+
     <item
         android:id="@+id/userInformationFragment"
         android:title="마이페이지"

@@ -42,19 +42,24 @@
         app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_title"
         app:boxBackgroundColor="@color/background_white"
         android:layout_marginLeft="20dp"
-        app:helperTextTextColor="@color/primary"
+        app:boxStrokeErrorColor="@color/primary"
         android:layout_marginRight="20dp"
+        app:boxStrokeColor="@color/text_input_selector"
+
+
         android:hint="@string/join_step_email_hint"
+        app:hintTextColor="@drawable/hint_focus_selector"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconCheckable="true"
         app:endIconMode="custom"
         >
 <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
 <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/join_step_one_email_text"
+
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -77,13 +82,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/join_step_one_password_title"
-        app:boxBackgroundColor="@color/background_white"
+        app:boxBackgroundColor="@color/transparent"
         android:layout_marginLeft="20dp"
         app:endIconCheckable="true"
 
+        app:hintTextColor="@drawable/hint_focus_selector"
+        app:boxStrokeColor="@color/text_input_selector"
         app:helperTextTextColor="@color/primary"
         android:layout_marginRight="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         app:endIconMode="password_toggle"
         >
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
@@ -92,8 +99,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/join_step_password_hint"
-
+            android:textColorHint="@drawable/hint_focus_selector"
             android:inputType="textPassword"
+
             android:id="@+id/join_step_one_password_text"
             />
 
@@ -123,8 +131,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        app:boxStrokeColor="@color/text_input_selector"
         app:endIconMode="password_toggle"
         app:helperTextTextColor="@color/primary"
+        app:hintTextColor="@drawable/hint_focus_selector"
         app:endIconCheckable="true"
         android:hint="@string/join_step_password_hint2"
         >

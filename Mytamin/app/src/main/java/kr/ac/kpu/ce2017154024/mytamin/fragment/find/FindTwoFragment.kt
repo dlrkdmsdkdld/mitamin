@@ -47,6 +47,7 @@ class FindTwoFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                mbinding.findTwoPasswordLayout.hint =""
                 Log.d(Constant.TAG,"join_step_one_password_text afterTextChanged $p0  ${p0?.trim()}")
                 if (Pattern.matches("^[a-zA-Z0-9]*\$", p0) && (8 <=p0!!.count() && p0!!.count()<31 )  && p0.toString()==p0.toString().trim()) {
                     mbinding.findTwoPasswordLayout.helperText="사용 가능한 비밀번호에요!"
@@ -56,6 +57,7 @@ class FindTwoFragment : Fragment() {
                 else {
                     mbinding.findTwoPasswordLayout.helperText="영문, 숫자를 포함한 8~30자리 조합으로 설정해주세요."
                     passwordValue=null
+                    OkAllItem()
                 }
 
             }
@@ -70,6 +72,7 @@ class FindTwoFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
+                mbinding.findTwoPasswordConfirmLayout.hint =""
                 if (passwordValue == p0.toString()){
                     mbinding.findTwoPasswordConfirmLayout.helperText="비밀번호가 일치해요!"
                     okRepassword=true
@@ -77,7 +80,7 @@ class FindTwoFragment : Fragment() {
 
                 }else{mbinding.findTwoPasswordConfirmLayout.helperText="비밀번호가 일치하지 않습니다."
                     okRepassword=false
-
+                    OkAllItem()
                 }
             }
 
@@ -88,6 +91,9 @@ class FindTwoFragment : Fragment() {
         if (passwordValue!=null && okRepassword) {
             (activity as FindPasswordActivity).enableComplete(true)
             myViewModel.setPassword(passwordValue!!)
+        }else{
+            (activity as FindPasswordActivity).enableComplete(false)
+
         }
     }
 

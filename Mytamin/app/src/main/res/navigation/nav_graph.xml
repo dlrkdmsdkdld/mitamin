@@ -16,11 +16,6 @@
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
-        android:id="@+id/manageMentFragment"
-        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.ManageMentFragment"
-        android:label="fragment_manage_ment"
-        tools:layout="@layout/fragment_manage_ment" />
-    <fragment
         android:id="@+id/userInformationFragment"
         android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.UserInformationFragment"
         android:label="fragment_user_information"

@@ -44,10 +44,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/join_step_three_text"
         app:boxBackgroundColor="@color/background_white"
+        app:boxStrokeColor="@color/text_input_selector"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:endIconMode="custom"
+        app:helperTextTextColor="@color/primary"
+
+        app:errorTextColor="@color/textRed"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:hint="공백없이 9자 이내로 입력해주세요"
+
+        app:endIconMode="clear_text"
         >
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
         <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
@@ -55,7 +61,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/join_step_three_name_text"
-            android:hint="공백없이 9자 이내로 입력해주세요"
             />
 
     </com.google.android.material.textfield.TextInputLayout>

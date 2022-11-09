@@ -162,8 +162,11 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
             mbinding?.yesMytaminMentalConditionMsg.text =null
             mbinding?.yesmytaminTodayReport.text=null
             mbinding?.yesMytaminImage.setImageResource(R.drawable.ic_x_box)
+            mbinding?.yesMytaminStep3Btn.visibility=View.GONE
         }
         data.report?.let {
+            if(!it.canEdit) mbinding?.yesMytaminStep3Btn.visibility=View.GONE
+            else mbinding?.yesMytaminStep3Btn.visibility=View.VISIBLE
             mbinding?.yesMytaminFeelingTag.text = it.feelingTag
             mbinding?.yesMytaminMentalConditionMsg.text = it.mentalCondition
             mbinding?.yesmytaminTodayReport.text = it.todayReport
@@ -177,10 +180,13 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
 
         }
         if (data.care == null){
+            mbinding?.yesMytaminStep4Btn.visibility = View.GONE
             mbinding?.yesmytaminCareMsg1.text = ""
             mbinding?.yesmytaminCareMsg2.text = ""
         }
         data.care?.let {
+            if(!it.canEdit) mbinding?.yesMytaminStep4Btn.visibility=View.GONE
+            else mbinding?.yesMytaminStep4Btn.visibility=View.VISIBLE
             mbinding?.yesmytaminCareMsg1.text = it.careMsg1
             mbinding?.yesmytaminCareMsg2.text = it.careMsg2
         }

@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="13dp"
                     android:layout_marginTop="24dp"
-                    android:src="@drawable/ic_icon_title"
+                    android:src="@drawable/ic_mitamin_logo_title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
