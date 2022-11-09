@@ -125,6 +125,7 @@
         android:textColor="@color/subGray"
         android:fontFamily="@font/appsubfont_r"
         android:includeFontPadding="false"
+        android:id="@+id/login_find_btn"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

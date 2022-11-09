@@ -16,6 +16,16 @@
     <string name="login_login">로그인</string>
     <string name="login_find">비밀번호를 잊어버리셨나요?</string>
 
+    <!--    findAcitivity-->
+    <string name="find_title">비밀번호 찾기</string>
+    <string name="find_1_title">가입할 때 사용한\n이메일을 입력해주세요.</string>
+    <string name="find_1_email">이메일</string>
+    <string name="find_1_email_hint">내용입력</string>
+    <string name="find_1_email_btn">인증요청</string>
+    <string name="find_1_code">인증코드</string>
+    <string name="find_1_code_btn">인증확인</string>
+    <string name="find_3_title">&#160;&#160;&#160;&#160;&#160;&#160;&#160;비밀번호 변경이\n 성공적으로 완료되었어요!</string>
+    <string name="find_3_subtitle">다시 마이타민을 시작하러 갈까요?</string>
 
 
     <!--    join 부분 String-->

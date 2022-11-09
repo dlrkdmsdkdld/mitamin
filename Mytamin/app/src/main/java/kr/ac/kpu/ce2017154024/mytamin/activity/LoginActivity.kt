@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
         customProgressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         login_login_Btn.setOnClickListener(this)
         login_back_btn.setOnClickListener(this)
+        mbinding?.loginFindBtn.setOnClickListener(this)
        // PreferenceUtil.clearUserData()
 
 
@@ -52,6 +53,10 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener {
                 val intent= Intent(this,firstActivity::class.java)
                 startActivity(intent)
                 finish()
+            }
+            mbinding?.loginFindBtn ->{
+                val intent= Intent(this,FindPasswordActivity::class.java)
+                startActivity(intent)
             }
         }
     }

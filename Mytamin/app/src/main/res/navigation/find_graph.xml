@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/find_graph"
+    app:startDestination="@id/findOneFragment">
+
+    <fragment
+        android:id="@+id/findOneFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.find.FindOneFragment"
+        android:label="fragment_find_one"
+        tools:layout="@layout/fragment_find_one" />
+    <fragment
+        android:id="@+id/findTwoFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.find.FindTwoFragment"
+        android:label="fragment_find_two"
+        tools:layout="@layout/fragment_find_two" />
+    <fragment
+        android:id="@+id/findThreeFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.find.FindThreeFragment"
+        android:label="fragment_find_three"
+        tools:layout="@layout/fragment_find_three" />
+</navigation>
