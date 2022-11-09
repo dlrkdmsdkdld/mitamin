@@ -47,7 +47,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
     ): View? {
         val binding = FragmentHistoryBinding.inflate(inflater,container,false)
         mBinding =binding
-        mBinding?.historyMonthText?.text="${mBinding?.cvCalendar?.curMonth}월"
+        mBinding?.historyMonthText?.text="${mBinding?.cvCalendar?.curYear}년 ${mBinding?.cvCalendar?.curMonth}월"
 
         Log.d(TAG,"HistoryFragment onCreateView")
         ///처음 년 ,  월 설정

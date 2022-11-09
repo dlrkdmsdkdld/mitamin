@@ -46,11 +46,11 @@ class CustomWeekView(context: Context) :WeekView(context) {
     val codefourimage = r.getDrawable(R.drawable.ic_calendar_4,null).toBitmap()
     val codefiveimage = r.getDrawable(R.drawable.ic_calendar_5,null).toBitmap()
     override fun onDrawScheme(canvas: Canvas, calendar: Calendar?, x: Int) {
-        val cx: Int = x + mItemWidth/3
+        val cx: Int = x + mItemWidth/3 -10
         val cy = y+(mItemHeight/2)
         when (mSchemePaint.color) {
             -2236963 ->{
-                canvas.drawBitmap(codeoneimage, cx.toFloat(), y+(mItemHeight/2), null)
+                canvas.drawBitmap(codeoneimage, cx.toFloat(), cy, null)
             }
             -32937 -> {
                 //위치 바꾸기

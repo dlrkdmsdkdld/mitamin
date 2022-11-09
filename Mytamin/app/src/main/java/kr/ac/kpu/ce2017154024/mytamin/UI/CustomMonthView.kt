@@ -1,14 +1,12 @@
-package kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView
+package kr.ac.kpu.ce2017154024.mytamin.UI
 
 import android.content.Context
 import android.graphics.*
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.MonthView
 import kr.ac.kpu.ce2017154024.mytamin.R
-import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kotlin.properties.Delegates
 
 class CustomMonthView(context: Context) : MonthView(context) {
@@ -88,8 +86,8 @@ class CustomMonthView(context: Context) : MonthView(context) {
     val codefiveimage = r.getDrawable(R.drawable.ic_calendar_5,null).toBitmap()
     var done:Boolean = false
     override fun onDrawScheme(canvas: Canvas, calendar: Calendar, x: Int, y: Int) {
-        val cx: Int = x + mItemWidth/3
-        val cy: Int = y + mItemHeight /4 *3
+        val cx = x + (mItemWidth*14/48) -8
+        val cy: Int = y + mItemHeight /3 +20
         when (mSchemePaint.color) {
                 -2236963 ->{
                     canvas.drawBitmap(codeoneimage, cx.toFloat(), cy.toFloat(), null)
@@ -176,18 +174,17 @@ class CustomMonthView(context: Context) : MonthView(context) {
                 }
 
                 //val mTextBaseLine = mTextBaseLine /3*2
-
                 if (it.isCurrentMonth && !hasScheme){
                     drawPaint.color = Color.LTGRAY
 
-                    cit.drawText(it.day.toString(), cx.toFloat(),mTextBaseLine+ y.toFloat(), drawPaint)
+                    cit.drawText(it.day.toString(), cx.toFloat(),mTextBaseLine/2+ y.toFloat(), drawPaint)
                 }
                 else if (it.isCurrentDay){
                     drawPaint.color=Color.RED
-                    cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine + y, drawPaint)
+                    cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine/2+ y.toFloat(), drawPaint)
                 }
                 else if (it.isCurrentMonth && hasScheme){
-                    cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine + y, drawPaint)
+                    cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine/2+y.toFloat(), drawPaint)
                 }
                // cit.drawText(it.day.toString(), x.toFloat(), mTextBaseLine + y, drawPaint)
             }

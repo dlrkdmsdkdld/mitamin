@@ -13,26 +13,18 @@
       <ImageButton
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:background="@drawable/ic_icon_title"
+          android:background="@drawable/ic_mitamin_logo_title"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           android:layout_marginLeft="20dp"
-          android:layout_marginTop="13dp"
+          android:layout_marginTop="17dp"
+          android:id="@+id/history_title"
           />
-      <ImageButton
-          android:layout_width="24dp"
-          android:layout_height="24dp"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          android:layout_marginTop="13dp"
-          android:layout_marginRight="13dp"
-          android:background="@drawable/ic_icon_notice"
-          android:id="@+id/history_notify_btn"
-          />
+
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          app:layout_constraintTop_toBottomOf="@+id/history_notify_btn"
+          app:layout_constraintTop_toBottomOf="@+id/history_title"
           app:layout_constraintStart_toStartOf="parent"
           android:id="@+id/history_praise_title"
           android:text="@string/history_praise_title"
@@ -363,7 +355,7 @@
           android:text="10월"
           android:textColor="@color/black"
           android:textSize="16sp"
-          android:layout_marginTop="26dp"
+          android:layout_marginTop="24dp"
           android:fontFamily="@font/appmainfont_medium"
           android:includeFontPadding="false"
 
@@ -396,7 +388,10 @@
          app:layout_constraintTop_toBottomOf="@+id/history_next_btn"
           android:paddingBottom="10dp"
           android:layout_marginTop="20dp"
-          app:month_view="kr.ac.kpu.ce2017154024.mytamin.UI.RecyclerView.CustomMonthView"
+          
+          android:layout_marginRight="15dp"
+          android:layout_marginLeft="15dp"
+          app:month_view="kr.ac.kpu.ce2017154024.mytamin.UI.CustomMonthView"
           />
    </androidx.constraintlayout.widget.ConstraintLayout>
 
