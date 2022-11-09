@@ -47,8 +47,9 @@
         android:textSize="14dp"
         android:fontFamily="@font/appsubfont_r"
         android:includeFontPadding="false"
-        android:background="@color/background_white"
+        android:background="@null"
         android:hint="@string/find_1_email_hint"
+
         android:gravity="left|top"
         />
     <androidx.appcompat.widget.AppCompatButton
@@ -99,7 +100,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/round_layout_stroke_seletor_primary"
         android:text="@string/find_1_code_btn"
-        android:textColor="@color/primary"
+        android:textColor="@color/notEnabled"
         android:textSize="12dp"
         android:layout_marginRight="20dp"
         android:enabled="false"

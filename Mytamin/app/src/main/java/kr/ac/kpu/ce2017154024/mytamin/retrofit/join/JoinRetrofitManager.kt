@@ -2,10 +2,7 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.join
 
 import android.util.Log
 import com.google.gson.JsonElement
-import kr.ac.kpu.ce2017154024.mytamin.model.CheckOverlapData
-import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
-import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
-import kr.ac.kpu.ce2017154024.mytamin.model.ReturnLoginData
+import kr.ac.kpu.ce2017154024.mytamin.model.*
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitClient
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -121,6 +118,44 @@ class JoinRetrofitManager {
                 }
 
             })
+    }
+    fun postEmailCode(emaild:String,completion: (RESPONSE_STATUS) -> Unit){
+        val parseEmail = email(emaild)
+        iJoinRetrofit?.postEmailCode(parseEmail)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    if (it.asJsonObject.get("statusCode").asInt ==200){
+                        completion(RESPONSE_STATUS.OKAY)
+                    }else completion(RESPONSE_STATUS.FAIL)
+
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL)
+            }
+
+        })
+    }
+    fun postCertificate(email:String,authCode:String,completion: (RESPONSE_STATUS,Boolean) -> Unit){
+        val certificate = emailCertificate(email,authCode)
+        iJoinRetrofit?.postCertificate(certificate)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    if (it.asJsonObject.get("statusCode").asInt ==200){
+                        if (it.asJsonObject.get("data").asBoolean) completion(RESPONSE_STATUS.OKAY,true)
+                        else completion(RESPONSE_STATUS.OKAY,false)
+                    }else completion(RESPONSE_STATUS.FAIL,false)
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL,false)
+            }
+
+
+        })
+
     }
 
 

@@ -4,3 +4,7 @@ data class NewUser(val email:String,val password:String,val nickname:String,val 
 
 
 }
+data class email(val email:String)
+
+data class emailCertificate(val email:String,val authCode:String)
+
