@@ -26,6 +26,11 @@
     <string name="find_1_code_btn">인증확인</string>
     <string name="find_3_title">&#160;&#160;&#160;&#160;&#160;&#160;&#160;비밀번호 변경이\n 성공적으로 완료되었어요!</string>
     <string name="find_3_subtitle">다시 마이타민을 시작하러 갈까요?</string>
+    <string name="find_2_title">새롭게 사용하실\n비밀번호를 입력해주세요.</string>
+    <string name="find_2_password">비밀번호</string>
+    <string name="find_2_password_hint">새롭게 사용하실\n비밀번호를 입력해주세요.</string>
+    <string name="find_2_password2">새롭게 사용하실\n비밀번호를 입력해주세요.</string>
+    <string name="find_2_password_hint2">새롭게 사용하실\n비밀번호를 입력해주세요.</string>
 
 
     <!--    join 부분 String-->

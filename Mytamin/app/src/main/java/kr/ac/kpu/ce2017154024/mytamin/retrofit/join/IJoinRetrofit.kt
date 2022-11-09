@@ -2,10 +2,7 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.join
 
 
 import com.google.gson.JsonElement
-import kr.ac.kpu.ce2017154024.mytamin.model.LoginData
-import kr.ac.kpu.ce2017154024.mytamin.model.NewUser
-import kr.ac.kpu.ce2017154024.mytamin.model.email
-import kr.ac.kpu.ce2017154024.mytamin.model.emailCertificate
+import kr.ac.kpu.ce2017154024.mytamin.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -36,5 +33,8 @@ interface IJoinRetrofit {
 
     @POST("/auth/code")
     fun postCertificate(@Body certificate: emailCertificate): Call<JsonElement>
+
+    @PUT("/auth/password")
+    fun ChangePassword(@Body ChangePassword: ChangePassword): Call<JsonElement>
 
 }

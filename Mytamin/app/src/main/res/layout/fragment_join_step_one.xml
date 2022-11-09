@@ -42,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_title"
         app:boxBackgroundColor="@color/background_white"
         android:layout_marginLeft="20dp"
+        app:helperTextTextColor="@color/primary"
         android:layout_marginRight="20dp"
         android:hint="@string/join_step_email_hint"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
@@ -80,6 +81,7 @@
         android:layout_marginLeft="20dp"
         app:endIconCheckable="true"
 
+        app:helperTextTextColor="@color/primary"
         android:layout_marginRight="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconMode="password_toggle"
@@ -122,6 +124,7 @@
         android:layout_marginRight="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
         app:endIconMode="password_toggle"
+        app:helperTextTextColor="@color/primary"
         app:endIconCheckable="true"
         android:hint="@string/join_step_password_hint2"
         >
