@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.core.view.drawToBitmap
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -23,6 +24,7 @@ import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentInformationBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.HomeViewModel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.InformationViewModel
 import java.io.ByteArrayOutputStream
@@ -91,10 +93,7 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
                 val intent = Intent(context,MydayActivity::class.java)
                 startActivity(intent)
             }
-            mBinding?.informationManageBtn ->{
-                val intent =Intent(context,ManagementActivity::class.java)
-                startActivity(intent)
-            }
+
             mBinding?.informationSettingBtn ->{
                 val intent = Intent(context , SettingActivity::class.java)
                 startActivity(intent)
@@ -103,6 +102,33 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW , Uri.parse("https://mitamin.notion.site/44cd80e96a314911b79650ee55944017"))
                 startActivity(intent)
             }
+            //////////////
+            mBinding?.informationTermsofserviceBtn ->{
+                val intent = Intent(Intent.ACTION_VIEW , Uri.parse("https://mitamin.notion.site/db7bcaab097344e8a8c8ce38bfd7c100"))
+                startActivity(intent)
+            }
+            mBinding?.informationTreatmentBtn ->{
+                val intent = Intent(Intent.ACTION_VIEW , Uri.parse("https://mitamin.notion.site/836c999489f64ce5a88aca635127aa01"))
+                startActivity(intent)
+            }
+            mBinding?.informationInitBtn ->{
+                val i = Intent(context,UserInitActivity::class.java)
+                startActivity(i)
+            }
+            mBinding?.informationExitBtn ->{
+                PreferenceUtil.clearUserData()
+                val intent = Intent(context,firstActivity::class.java)
+                startActivity(intent)
+                activity?.finishAffinity()
+            }
+            mBinding?.informationQuitBtn ->{
+
+            }
+            mBinding?.informationPasswordBtn ->{
+
+            }
+
+
         }
 
     }
@@ -123,9 +149,23 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         mBinding?.informationUserImage?.setOnClickListener(this)
         mBinding?.userMydayBtn?.setOnClickListener(this)
         mBinding?.informationEditBtn?.setOnClickListener(this)
-        mBinding?.informationManageBtn?.setOnClickListener(this)
         mBinding?.informationSettingBtn?.setOnClickListener(this)
         mBinding?.informationHelpBtn?.setOnClickListener(this)
+        mBinding?.informationTermsofserviceBtn?.setOnClickListener(this)
+        mBinding?.informationTreatmentBtn?.setOnClickListener(this)
+        mBinding?.informationInitBtn?.setOnClickListener(this)
+        mBinding?.informationExitBtn?.setOnClickListener(this)
+        mBinding?.informationQuitBtn?.setOnClickListener(this)
+        mBinding?.informationPasswordBtn?.setOnClickListener(this)
+
+
+
+
+
+
+
     }
+
+
 
 }

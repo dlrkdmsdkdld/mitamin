@@ -31,7 +31,7 @@
         android:fontFamily="@font/appmainfont_medium"
         android:includeFontPadding="false"
         android:layout_marginTop="17dp"
-        android:layout_marginRight="17dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/record_edit_text"
         />
     <ImageButton

@@ -152,6 +152,13 @@
     <string name="user_information_manage">계정관리</string>
     <string name="user_information_guide1">서비스 이용약관</string>
     <string name="user_information_guide2">개인정보 처리방침</string>
+    <string name="user_information_guide3">버전 1.1.0</string>
+    <string name="user_information_guide4">최신버전 입니다.</string>
+    <string name="user_information_guide5">계정 정보</string>
+    <string name="user_information_guide6">비밀번호 변경</string>
+    <string name="user_information_guide7">기록 초기화</string>
+    <string name="user_information_guide8">로그아웃</string>
+    <string name="user_information_guide9"><u>회원탈퇴</u></string>
     <!--마이데이-->
     <string name="myday_title">마이데이</string>
     <string name="myday_edit">편집</string>

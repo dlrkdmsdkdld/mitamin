@@ -1,15 +1,17 @@
 package kr.ac.kpu.ce2017154024.mytamin.UI
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.RectF
+import android.util.TypedValue
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.WeekView
 import kr.ac.kpu.ce2017154024.mytamin.R
+
 
 class CustomWeekView(context: Context) :WeekView(context) {
     override fun onDrawSelected(
@@ -20,24 +22,42 @@ class CustomWeekView(context: Context) :WeekView(context) {
     ): Boolean {
 
         if (!calendar.isCurrentDay) {
-            mSelectedPaint.style = Paint.Style.STROKE
-            mSelectedPaint.strokeWidth = 2f
-            mSelectedPaint.color = ContextCompat.getColor(context, R.color.black)
-            val rectF = RectF(
-                x.toFloat(),
-                y.toFloat(),
-                (x + mItemWidth).toFloat(),
-                (y + mItemHeight).toFloat()
-            )
-
-            canvas.drawRoundRect(rectF, 16f, 16f, mSelectedPaint)
-
+            mSelectedPaint.style = Paint.Style.FILL
+            mSelectedPaint.strokeWidth = 1f
+            mSelectedPaint.color = ContextCompat.getColor(context, R.color.primary)
+//            val rectF = RectF(
+//                x.toFloat(),
+//                y.toFloat(),
+//                (x + mItemWidth).toFloat(),
+//                (y + mItemHeight).toFloat()
+//            )
+//            canvas.drawRoundRect(rectF, 16f, 16f, mSelectedPaint)
+            val cx : Int =  x + mItemWidth / 2
+            val cy : Float =  y
+          //  val radius : Int=Math.min(mItemWidth, mItemHeight) / 5 * 2
+            val radius=dp2px(resources,11)
+            canvas.drawCircle(cx.toFloat(), mTextBaseLine/3, radius.toFloat(), mSelectedPaint)
 
             println("선택됨")
         }
+       // cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine/2 , mCurDayTextPaint)
 
 
         return true
+    }
+    fun px2dp(resource: Resources, px: Float): Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_PX,
+            px,
+            resource.getDisplayMetrics()
+        )
+    }
+    fun dp2px(resource: Resources, dp: Int): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp.toFloat(),
+            resource.displayMetrics
+        ).toInt()
     }
     val r = context.resources
     val codeoneimage = r.getDrawable(R.drawable.ic_calendar_1,null).toBitmap()

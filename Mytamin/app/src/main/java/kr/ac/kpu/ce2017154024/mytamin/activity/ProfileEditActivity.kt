@@ -158,7 +158,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         when(select){
             choice.basic ->{
                 Log.d(TAG,"기본선택")
-                mbinding?.profileEditImage.setImageResource(R.drawable.cat)
+                mbinding?.profileEditImage.setImageResource(R.drawable.ic_profile)
                 correctionImage=true
             }
             choice.gallery ->{
