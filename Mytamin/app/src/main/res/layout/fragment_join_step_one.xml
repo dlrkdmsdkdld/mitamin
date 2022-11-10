@@ -51,7 +51,7 @@
         android:includeFontPadding="false"
         android:background="@null"
         android:hint="@string/find_1_email_hint"
-        android:paddingLeft="10dp"
+        android:paddingLeft="15dp"
 
         android:gravity="left|top"
         />
@@ -115,6 +115,7 @@
         >
         <EditText
             android:layout_width="0dp"
+            android:paddingLeft="15dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/find_one_timer"
@@ -123,6 +124,7 @@
             android:layout_marginLeft="20dp"
             android:id="@+id/find_one_email_code"
             android:textSize="14dp"
+            android:paddingTop="5dp"
             android:fontFamily="@font/appsubfont_r"
             android:includeFontPadding="false"
             android:background="@color/background_white"
@@ -149,6 +151,7 @@
             app:layout_constraintEnd_toStartOf="@+id/find_one_code_btn"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/appsubfont_r"
             android:includeFontPadding="false"
             android:textSize="12dp"
@@ -239,7 +242,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/join_step_one_password_confirm_title"
-
         app:boxBackgroundColor="@color/background_white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -249,8 +251,8 @@
         app:helperTextTextColor="@color/primary"
         app:hintTextColor="@drawable/hint_focus_selector"
         app:endIconCheckable="true"
+
         android:hint="@string/join_step_password_hint2"
-        android:gravity="left"
 
         >
 

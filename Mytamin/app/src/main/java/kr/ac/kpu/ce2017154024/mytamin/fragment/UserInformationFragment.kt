@@ -2,6 +2,7 @@ package kr.ac.kpu.ce2017154024.mytamin.fragment
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -98,6 +99,10 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
                 val intent = Intent(context , SettingActivity::class.java)
                 startActivity(intent)
             }
+            mBinding?.informationHelpBtn ->{
+                val intent = Intent(Intent.ACTION_VIEW , Uri.parse("https://mitamin.notion.site/44cd80e96a314911b79650ee55944017"))
+                startActivity(intent)
+            }
         }
 
     }
@@ -120,6 +125,7 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         mBinding?.informationEditBtn?.setOnClickListener(this)
         mBinding?.informationManageBtn?.setOnClickListener(this)
         mBinding?.informationSettingBtn?.setOnClickListener(this)
+        mBinding?.informationHelpBtn?.setOnClickListener(this)
     }
 
 }

@@ -51,6 +51,11 @@ enum class RESPONSE_STATUS{
     USER_NOT_FOUND_ERROR,
     PASSWORD_PATTERN_ERROR
 }
+enum class WebViewType{
+    mitamin,
+    userdata,
+    curious
+}
 enum class choice{
     basic,
     gallery

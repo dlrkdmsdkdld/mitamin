@@ -233,8 +233,9 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                join_step_one_password_confirm_layout.hint = ""
-                join_step_one_password_confirm_text.hint = ""
+
+                mBinding?.joinStepOnePasswordConfirmLayout?.hint = ""
+                mBinding?.joinStepOnePasswordConfirmText?.hint = ""
                 if (passwordValue == p0.toString()){
                     join_step_one_password_confirm_layout.helperText="비밀번호가 일치합니다."
                     RepasswordValue=true
@@ -257,7 +258,7 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
             override fun afterTextChanged(p0: Editable?) {
                 (activity as joinActivity).canEnableNextbtn(false)
                 join_step_one_email_text.hint =""
-                join_step_one_password_confirm_layout.hint = ""
+                //join_step_one_password_confirm_layout.hint = ""
             }
 
         })

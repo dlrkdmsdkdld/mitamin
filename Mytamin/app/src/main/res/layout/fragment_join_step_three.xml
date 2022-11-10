@@ -48,6 +48,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         app:helperTextTextColor="@color/primary"
+        app:hintTextColor="@drawable/hint_focus_selector"
 
         app:errorTextColor="@color/textRed"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
