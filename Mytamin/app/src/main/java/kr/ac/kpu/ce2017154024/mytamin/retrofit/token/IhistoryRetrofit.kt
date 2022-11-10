@@ -3,6 +3,7 @@ package kr.ac.kpu.ce2017154024.mytamin.retrofit.token
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import kr.ac.kpu.ce2017154024.mytamin.model.careCategoryCodeList
+import kr.ac.kpu.ce2017154024.mytamin.model.initdata
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
@@ -30,7 +31,10 @@ interface IhistoryRetrofit {
     fun getCarehistory( @Body careCategoryCodeList: careCategoryCodeList) : Call<JsonElement>
 
     //    @Headers("Content-Type: application/json")
+//    @DELETE ("/user/init")
+//    fun initmitamin( @Body data: initdata) : Call<JsonElement>
 
-
+    @HTTP(method = "DELETE", path = "/user/init", hasBody = true)
+    fun initmitamin( @Body data: initdata) : Call<JsonElement>
 
 }

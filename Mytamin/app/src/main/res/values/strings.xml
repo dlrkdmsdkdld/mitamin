@@ -119,7 +119,20 @@
     <string name="mytamin_dialog_btn_negative">취소</string>
 
     <!--마이페이지-->
-    <!--마이페이지-->
+    <!--초기화 액티비티 -->
+    <string name="init_title">기록초기화</string>
+    <string name="init_maintitle">초기화를 진행할 경우</string>
+    <string name="init_subtitle">다시는 복구할 수 없습니다.</string>
+    <string name="init_sbusbstitle">신중하게 선택한 뒤 아래의 초기화 버튼을 눌러주세요.</string>
+    <string name="init_downtitle">초기화하고자 하는 기록을 선택해주세요.</string>
+    <string name="init_report">마음진단</string>
+    <string name="init_reportsub">마음 컨디션,감정단어,진단 내용,이를 포함한 모든 통계가\n초기화 됩니다.</string>
+    <string name="init_care">칭찬 처방</string>
+    <string name="init_caresub">칭찬 카테고리,칭찬 기록이 초기화됩니다.</string>
+    <string name="init_myday">마이데이</string>
+    <string name="init_mydaysub">위시리스트, 데이노트 내용이 초기화됩니다.</string>
+    <string name="init_init">초기화</string>
+
     <!--마이페이지-->
     <string name="user_title">마이페이지</string>
     <string name="user_beMyMessage">날먹하고싶은</string>
@@ -132,7 +145,7 @@
     <string name="user_myday_nickname">닉네임</string>
     <string name="user_myday_tobe">되고 싶은 내모습</string>
     <string name="user_myday_tobe_sub">내가 될</string>
-    <string name="user_myday_complete">완료</string>
+    <string name="user_myday_complete">나를 위한 새로운 행동 추가하기</string>
     <string name="user_myday_bottom1">기본 이미지 선택</string>
     <string name="user_myday_bottom2">앨범에서 사진 선택</string>
     <string name="user_information_title">앱정보</string>

@@ -36,6 +36,7 @@ class BottomWishlistFragment(statetext: String, idd: Int,position:Int) : BottomS
         when(p0){
             mbinding?.bottomDeleteBtn ->{
                 myMydayViewmodel.setWishlistDelete(idd)
+
                 onDestroyView()
             }
             mbinding?.bottomModifyBtn->{

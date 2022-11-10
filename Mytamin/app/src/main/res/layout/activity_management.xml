@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="24dp"
             android:layout_marginLeft="20dp"
-            android:fontFamily="@font/appmainfont_medium"
+            android:fontFamily="@font/appsubfont_r"
             android:includeFontPadding="false"
             android:text="@string/management_email"
             />
@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="24dp"
             android:layout_marginRight="20dp"
-            android:fontFamily="@font/appmainfont_medium"
+            android:fontFamily="@font/appsubfont_r"
             android:includeFontPadding="false"
             android:id="@+id/management_email_text"
             />
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/management_email_text"
         app:layout_constraintStart_toStartOf="parent"
         android:text="카카오톡 회원"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:fontFamily="@font/appmainfont_medium"
         android:includeFontPadding="false"
         android:layout_marginLeft="20dp"
@@ -90,7 +90,7 @@
         android:layout_height="8dp"
         app:layout_constraintTop_toBottomOf="@+id/management_init_btn"
         android:layout_marginTop="24dp"
-        android:background="@color/background_gray"
+        android:background="@color/line_gray"
         android:id="@+id/management_horizontal"
         />
     <TextView
@@ -102,7 +102,7 @@
         android:textSize="16sp"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
-        android:fontFamily="@font/appmainfont_medium"
+        android:fontFamily="@font/appsubfont_r"
         android:includeFontPadding="false"
         android:text="@string/management_logout"
         android:id="@+id/management_logout_btn"
@@ -117,7 +117,7 @@
         android:textSize="16sp"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="20dp"
-        android:fontFamily="@font/appmainfont_medium"
+        android:fontFamily="@font/appsubfont_r"
         android:includeFontPadding="false"
         android:text="@string/management_exit"
         android:id="@+id/management_withdrawal_btn"

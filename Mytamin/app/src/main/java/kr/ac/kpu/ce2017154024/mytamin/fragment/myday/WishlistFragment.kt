@@ -92,24 +92,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
             myWishlistRecyclerAdapter.submitData(it)
             myWishlistRecyclerAdapter.notifyDataSetChanged()
         })
-        mBinding?.wishlistNewWishlist?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                if (p0.toString().trim()!=""){
-                    mBinding?.wishlistCompleteBtn?.visibility=View.VISIBLE
-                    mBinding?.wishlistCompleteBtn?.isEnabled = true
-                }else{
-                    mBinding?.wishlistCompleteBtn?.visibility=View.INVISIBLE
-                    mBinding?.wishlistCompleteBtn?.isEnabled = false
-                }
-            }
-
-        })
         this.myWishlistRecyclerAdapter= WishlistRecyclerAdapter(this)
         mBinding?.wishlistRecyclerview?.adapter = this.myWishlistRecyclerAdapter
 

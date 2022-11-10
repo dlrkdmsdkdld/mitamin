@@ -22,4 +22,5 @@ data class daynoteData(val daynoteId:Int , val imgList:ArrayList<String> , val y
 
 data class daynoteDataParent(val year:Int , val daynoteArrayList: ArrayList<daynoteData>?)
 data class modifyWish(val position: Int, val statetext: String, val id: Int)
+data class initdata(val initReport: Boolean, val initCare: Boolean, val initMyday: Boolean)
 
