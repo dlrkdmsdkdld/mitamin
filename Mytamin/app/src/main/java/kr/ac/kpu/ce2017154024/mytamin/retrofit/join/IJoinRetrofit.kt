@@ -37,4 +37,9 @@ interface IJoinRetrofit {
     @PUT("/auth/password")
     fun ChangePassword(@Body ChangePassword: ChangePassword): Call<JsonElement>
 
+
+
+    @POST("/auth/signup/code")
+    fun postSignupEmailCode(@Body email: email): Call<JsonElement>
+
 }

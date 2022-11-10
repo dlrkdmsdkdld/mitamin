@@ -58,9 +58,8 @@
         <item name="colorPrimaryDark">@color/semiGray</item>
         <item name="colorAccent">@color/background_white</item>
     </style>
-    <style name="TextLabel">
-        <item name="android:textSize">0sp</item>
-
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">14sp</item>
     </style>
     <style name="hintTextSize" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
         <item name="android:textSize">1sp</item>

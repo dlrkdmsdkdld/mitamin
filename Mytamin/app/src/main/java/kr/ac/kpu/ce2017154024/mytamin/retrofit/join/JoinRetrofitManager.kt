@@ -172,6 +172,22 @@ class JoinRetrofitManager {
 
         })
     }
+    fun postSignupEmailCode(emaild:String,completion: (RESPONSE_STATUS) -> Unit){
+        val parseEmail = email(emaild)
+        iJoinRetrofit?.postSignupEmailCode(parseEmail)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    if (it.asJsonObject.get("statusCode").asInt ==200){
+                        completion(RESPONSE_STATUS.OKAY)
+                    }else completion(RESPONSE_STATUS.FAIL)
 
+                }
+            }
 
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL)
+            }
+
+        })
+    }
 }

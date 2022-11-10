@@ -35,34 +35,146 @@
         android:textColor="@color/subGray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/join_step_one_title" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/join_step_one_email_layout"
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/join_one_email_btn"
+        app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_title"
+        app:layout_constraintBottom_toTopOf="@+id/join_one_line1"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/join_step_one_email_text"
+        android:textSize="14dp"
+        android:fontFamily="@font/appsubfont_r"
+        android:includeFontPadding="false"
+        android:background="@null"
+        android:hint="@string/find_1_email_hint"
+        android:paddingLeft="10dp"
+
+        android:gravity="left|top"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="63dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_title"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_layout_stroke_seletor_primary"
+        android:text="@string/find_1_email_btn"
+        android:textColor="@color/primary"
+        android:textSize="12dp"
+        android:layout_marginRight="20dp"
+        android:visibility="visible"
+        android:id="@+id/join_one_email_btn"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_title"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"
+        android:id="@+id/join_one_email_ok"
+        android:src="@drawable/ic_icon_check_circle_line_mono"
+
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/join_one_email_btn"
+        android:background="@color/LineColorFat"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/join_one_line1"
+
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/join_one_line1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/appmainfont_medium"
+        android:includeFontPadding="false"
+        android:textSize="12sp"
+        android:id="@+id/join_one_helperemail"
+        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_title"
-        app:boxBackgroundColor="@color/background_white"
-        android:layout_marginLeft="20dp"
-        app:boxStrokeErrorColor="@color/primary"
-        android:layout_marginRight="20dp"
-        app:boxStrokeColor="@color/text_input_selector"
-
-
-        android:hint="@string/join_step_email_hint"
-        app:hintTextColor="@drawable/hint_focus_selector"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:endIconCheckable="true"
-        app:endIconMode="custom"
+        android:layout_marginTop="40dp"
+        android:id="@+id/join_one_code_layout"
+        android:visibility="gone"
         >
-<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/join_step_one_email_text"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/find_one_timer"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/find_one_line2"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/find_one_email_code"
+            android:textSize="14dp"
+            android:fontFamily="@font/appsubfont_r"
+            android:includeFontPadding="false"
+            android:background="@color/background_white"
+            android:hint="@string/find_1_code"
+            android:gravity="left|top"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="63dp"
+            android:layout_height="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/round_layout_stroke_seletor_primary"
+            android:text="@string/find_1_code_btn"
+            android:textColor="@color/primary"
+            android:textSize="12dp"
+            android:layout_marginRight="20dp"
+            android:enabled="true"
 
+            android:id="@+id/find_one_code_btn"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/find_one_code_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="12dp"
+            android:fontFamily="@font/appsubfont_r"
+            android:includeFontPadding="false"
+            android:textSize="12dp"
+            android:id="@+id/find_one_timer"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintTop_toBottomOf="@+id/find_one_code_btn"
+            android:background="@color/LineColorFat"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/find_one_line2"
             />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/join_step_one_password_layout_all"
+        >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,8 +182,8 @@
         android:textColor="@color/subGray"
         android:textSize="12sp"
         android:fontFamily="@font/appmainfont_medium"
+        app:layout_constraintTop_toTopOf="parent"
         android:includeFontPadding="false"
-        app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_layout"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
@@ -85,22 +197,23 @@
         app:boxBackgroundColor="@color/transparent"
         android:layout_marginLeft="20dp"
         app:endIconCheckable="true"
-
         app:hintTextColor="@drawable/hint_focus_selector"
         app:boxStrokeColor="@color/text_input_selector"
         app:helperTextTextColor="@color/primary"
+        android:hint="@string/join_step_password_hint"
         android:layout_marginRight="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         app:endIconMode="password_toggle"
+
         >
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
         <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/join_step_password_hint"
             android:textColorHint="@drawable/hint_focus_selector"
             android:inputType="textPassword"
+            android:textSize="14dp"
 
             android:id="@+id/join_step_one_password_text"
             />
@@ -137,6 +250,8 @@
         app:hintTextColor="@drawable/hint_focus_selector"
         app:endIconCheckable="true"
         android:hint="@string/join_step_password_hint2"
+        android:gravity="left"
+
         >
 
         <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
@@ -146,9 +261,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/join_step_one_password_confirm_text"
             android:inputType="textPassword"
-
+            android:textSize="14dp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

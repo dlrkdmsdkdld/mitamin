@@ -10,8 +10,10 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -27,12 +29,13 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING.searchingEmail
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import kr.ac.kpu.ce2017154024.mytamin.utils.checkEmail
+import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToTimeLine
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.joinViewModel
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 
-class joinStepOneFragment : Fragment() {
+class joinStepOneFragment : Fragment(), View.OnClickListener {
     private var mBinding : FragmentJoinStepOneBinding?=null
     private var emailValue:String?=null
     private var passwordValue:String?=null
@@ -49,7 +52,8 @@ class joinStepOneFragment : Fragment() {
         mBinding =binding
         Log.d(Constant.TAG,"joinStepOneFragment onCreateView")
         //CheckEmailAPICall("mytamin@naver.com")
-
+        mBinding?.joinOneEmailBtn?.setOnClickListener(this)
+        mBinding?.findOneCodeBtn?.setOnClickListener(this)
         //이메일 텍스트 옵저버블
         val edittextChangeObservable = mBinding?.joinStepOneEmailText?.textChanges()
 
@@ -60,14 +64,21 @@ class joinStepOneFragment : Fragment() {
                     onNext = {
                         val inputEmail = it.toString().trim()
                         checkEmail(inputEmail)
-                        if(!checkEmail(inputEmail)){
+                        if(inputEmail=="")
+                        else if(!checkEmail(inputEmail)){
                             //아이디 검색조건에 맞지않음
+                            Handler(Looper.getMainLooper()).post(Runnable {
+                            setEnableEmail(false)
+                            mBinding?.joinOneHelperemail?.text = "이메일 형식에 맞지 않아요.."
+                            mBinding?.joinOneHelperemail?.setTextColor(resources.getColor(R.color.textRed,null))
+                            })
                         }else{
                             //ui 쓰레드에서돌리기
                             Handler(Looper.getMainLooper()).post(Runnable {
-                                mBinding?.joinStepOneEmailLayout?.endIconDrawable=resources.getDrawable(R.drawable.ic_baseline_replay_24)
-                                mBinding?.joinStepOneEmailLayout?.helperText = searchingEmail
                                 CheckEmailAPICall(inputEmail)
+                                mBinding?.joinOneHelperemail?.text = searchingEmail
+                                mBinding?.joinOneHelperemail?.setTextColor(resources.getColor(R.color.primary,null))
+                                setEnableEmail(false)
                             })
                         }
                         Log.d(TAG,"checkEmailTextSubscription onNext : $it")
@@ -86,12 +97,40 @@ class joinStepOneFragment : Fragment() {
         return mBinding?.root
 
     }
-    fun submitpasswordValue(): String {
-        return this.passwordValue!!
-    }
-    fun submitUseremailValue(): String {
 
-        return this.emailValue!!
+    private fun EmailcodeAPI(email:String){
+        email?.let {
+            setEnableEmail(false)
+            JoinRetrofitManager.instance.postSignupEmailCode(email){
+                if (it ==RESPONSE_STATUS.OKAY){
+                    setEnableEmail(true)
+                    mBinding?.joinOneCodeLayout?.visibility=View.VISIBLE
+                    mBinding?.findOneCodeBtn?.setOnClickListener(this)
+                    emailValue = email
+                    joinViewModel.timerDestory()
+
+                    joinViewModel.timerset()
+                    joinViewModel.timerStart()
+                    joinViewModel.timerCount.observe(viewLifecycleOwner, Observer {
+                        mBinding?.findOneTimer?.text = it.parseIntToTimeLine()
+                        if (it==0){
+                            setEnable(false)
+                        }
+                    })
+
+                }
+            }
+        }
+
+    }
+    private fun setEnableEmail(data:Boolean){
+        if (data){
+            mBinding?.joinOneEmailBtn?.setTextColor(resources.getColor(R.color.primary,null))
+            mBinding?.joinOneEmailBtn?.isEnabled = true
+        }else{
+            mBinding?.joinOneEmailBtn?.setTextColor(resources.getColor(R.color.notEnabled,null))
+            mBinding?.joinOneEmailBtn?.isEnabled = false
+        }
     }
     private fun CheckEmailAPICall(query:String): Boolean? {
         var result :Boolean = true
@@ -102,15 +141,17 @@ class joinStepOneFragment : Fragment() {
                     if (checkOverlapData?.status==200){
                         result = checkOverlapData.result
                         if (result==false){//"@drawable/ic_baseline_check_24"
-                            join_step_one_email_layout.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_check_24)
-                            join_step_one_email_layout.helperText="사용 가능한 이메일입니다"
                             emailValue=query
                             OkAllItem()
+                            mBinding?.joinOneHelperemail?.text = "사용 가능한 이메일 주소에요!"
+                            mBinding?.joinOneHelperemail?.setTextColor(resources.getColor(R.color.primary,null))
+                            setEnableEmail(true)
 
 
                         }else{
-                            join_step_one_email_layout.endIconDrawable= resources.getDrawable(R.drawable.ic_baseline_error_24)
-                            join_step_one_email_layout.helperText="이미 사용 중인 이메일입니다"
+                            setEnableEmail(false)
+                            mBinding?.joinOneHelperemail?.text = "사용할 수 없는 이메일 주소에요!"
+                            mBinding?.joinOneHelperemail?.setTextColor(resources.getColor(R.color.textRed,null))
                             OkAllItem()
                         }
                     }
@@ -120,20 +161,44 @@ class joinStepOneFragment : Fragment() {
         })
         return result
     }
+    private fun setEnable(data:Boolean){
+        if (data){
+            mBinding?.findOneCodeBtn?.setTextColor(resources.getColor(R.color.primary,null))
+            mBinding?.findOneCodeBtn?.isEnabled = true
+        }else{
+            mBinding?.findOneCodeBtn?.setTextColor(resources.getColor(R.color.notEnabled,null))
+            mBinding?.findOneCodeBtn?.isEnabled = false
+        }
+    }
+    private fun sendEmailWithCode(code:String){
+        emailValue?.let {
+            JoinRetrofitManager.instance.postCertificate(it,code){responseStatus, b ->
+                setEnable(true)
+                if (b){
+                    mBinding?.joinOneCodeLayout?.visibility=View.GONE
+                    mBinding?.joinStepOnePasswordLayoutAll?.visibility = View.VISIBLE
+                    mBinding?.joinOneEmailOk?.visibility=View.VISIBLE
+                    mBinding?.joinOneEmailBtn?.visibility=View.INVISIBLE
+                    setEnableEmail(false)
+                    joinViewModel.timerDestory()
+                    mBinding?.joinOneHelperemail?.text = "인증이 완료되었어요!"
+                    mBinding?.joinOneHelperemail?.setTextColor(resources.getColor(R.color.primary,null))
+
+                }
+                else{
+                    Toast.makeText(requireActivity(),"인증코드가 틀려요..",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    }
 
     //join_step_one_email_text --> 이메일 입력창
     //join_step_one_password_text --> 패스워드 입력창
     //join_step_one_password_confirm_text -- >패스워드 확인창
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        join_step_one_password_text.setOnFocusChangeListener { view, b ->
-//            if (b) {
-//                mBinding?.joinStepOnePasswordText?.hint = ""
-//                mBinding?.joinStepOnePasswordLayout?.hint = ""
-//                Log.d(TAG,"hint - > ${ mBinding?.joinStepOnePasswordText?.hint}")
-//                Log.d(TAG,"포커스됨")
-//            }
-//        }
+
         join_step_one_password_text.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -199,6 +264,7 @@ class joinStepOneFragment : Fragment() {
 
 
     }
+
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null
         this.EmailCompositeDisposable.clear()
@@ -217,6 +283,18 @@ class joinStepOneFragment : Fragment() {
             (activity as joinActivity).canEnableNextbtn(false)
             Log.d(TAG,"joinStepOneFragment OkAllItem -> RepasswordValue : $RepasswordValue" +
                     "  passwordValue : $passwordValue  emailValue:$emailValue")
+        }
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            mBinding?.joinOneEmailBtn ->{
+                EmailcodeAPI(mBinding?.joinStepOneEmailText?.text.toString())
+            }
+            mBinding?.findOneCodeBtn ->{
+                sendEmailWithCode(mBinding?.findOneEmailCode?.text.toString())
+                setEnable(false)
+            }
         }
     }
 

@@ -31,7 +31,7 @@ class FindOneFragment : Fragment(),View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         mbinding=FragmentFindOneBinding.inflate(inflater,container,false)
-        mbinding?.findOneEmailBtn.setOnClickListener(this)
+        mbinding?.joinOneEmailBtn.setOnClickListener(this)
         mbinding?.findOneCodeBtn.setOnClickListener(this)
 
         myViewModel.timerCount.observe(requireActivity(), Observer {
@@ -46,7 +46,7 @@ class FindOneFragment : Fragment(),View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0){
-            mbinding?.findOneEmailBtn ->{
+            mbinding?.joinOneEmailBtn ->{
                 if (checkEmail(mbinding?.findOneEmailText.text.toString().trim()) ){
                     wantCode(mbinding?.findOneEmailText.text.toString().trim())
                     setEnableEmail(false)
@@ -73,7 +73,7 @@ class FindOneFragment : Fragment(),View.OnClickListener {
                 myViewModel.timerStart()
                 sendEmail=email
                 myViewModel.setemail(email)
-                mbinding?.findOneEmailBtn.text = "재전송"
+                mbinding?.joinOneEmailBtn.text = "재전송"
                 setEnableEmail(true)
 
             }
@@ -90,11 +90,11 @@ class FindOneFragment : Fragment(),View.OnClickListener {
     }
     private fun setEnableEmail(data:Boolean){
         if (data){
-            mbinding?.findOneEmailBtn.setTextColor(resources.getColor(R.color.primary,null))
-            mbinding?.findOneEmailBtn.isEnabled = true
+            mbinding?.joinOneEmailBtn.setTextColor(resources.getColor(R.color.primary,null))
+            mbinding?.joinOneEmailBtn.isEnabled = true
         }else{
-            mbinding?.findOneEmailBtn.setTextColor(resources.getColor(R.color.notEnabled,null))
-            mbinding?.findOneEmailBtn.isEnabled = false
+            mbinding?.joinOneEmailBtn.setTextColor(resources.getColor(R.color.notEnabled,null))
+            mbinding?.joinOneEmailBtn.isEnabled = false
         }
     }
 

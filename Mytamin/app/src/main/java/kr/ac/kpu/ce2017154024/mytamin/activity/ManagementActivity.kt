@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +19,9 @@ class ManagementActivity : AppCompatActivity() {
         mbinding.managementEmailText.setText(PrivateUserDataSingleton.userEmail)
         mbinding?.managementLogoutBtn.setOnClickListener {
             PreferenceUtil.clearUserData()
+            val intent = Intent(this,firstActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
         }
         mbinding?.managementBackBtn.setOnClickListener {
             onBackPressed()
