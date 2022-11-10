@@ -22,8 +22,11 @@ class CareHistoryViewModel:ViewModel() {
     fun setcategory(time:ArrayList<Int>){
         category.value = time
     }
-    fun addcategory(p : Int){
-        categoryItem.add(p)
+    fun addcategory(p: IntArray){
+        p.forEach {
+            categoryItem.add(it)
+        }
+
         setcategory(categoryItem)
         Log.d(TAG,"추가됨 p : $p")
 

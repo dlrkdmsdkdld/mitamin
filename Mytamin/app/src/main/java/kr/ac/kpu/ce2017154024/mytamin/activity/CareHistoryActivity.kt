@@ -26,7 +26,7 @@ class CareHistoryActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var mbinding:ActivityCareHistoryBinding
     private lateinit var myrecylcerview : CareParentAdapter
     private lateinit var myviewmodel : CareHistoryViewModel
-    private var categoryArray=ArrayList<Int>()
+    private var categoryArray= mutableSetOf<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding=ActivityCareHistoryBinding.inflate(layoutInflater)
@@ -59,10 +59,17 @@ class CareHistoryActivity : AppCompatActivity(),View.OnClickListener {
 
 
     }
-    fun addCategory(ad:Int?){
+    fun addCategory(ad:IntArray?){
         ad?.let {
-            categoryArray.add(ad)
-            mbinding?.careChipgroup.addView(createTagChip(this,careChipText[ad],ad))
+            it.forEach {
+                val oldCount = categoryArray.count()
+                categoryArray.add(it)
+                val newCount = categoryArray.count()
+                mbinding?.careScroll.visibility = View.VISIBLE
+                if (oldCount!=newCount) mbinding?.careChipgroup.addView(createTagChip(this,careChipText[it],it))
+                Log.d(TAG,"데이터 총 = $ad")
+            }
+
         }
     }
     private fun createTagChip(context: Context, statetext: String,categorycode:Int): Chip {
@@ -86,6 +93,7 @@ class CareHistoryActivity : AppCompatActivity(),View.OnClickListener {
                     mbinding?.careChipgroup.removeView(this@apply)
                     categoryArray.remove(tag)
                     myviewmodel.removeCategory(tag as Int)
+                    if(mbinding?.careChipgroup.childCount==0) mbinding?.careScroll.visibility=View.GONE
                     Log.d(TAG," categoryArray :$categoryArray")
                 }
             })

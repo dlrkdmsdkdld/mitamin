@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/ic_x_box"
+                android:src="@drawable/ic_daynote"
                 android:layout_marginTop="40dp"
                 android:id="@+id/wishlist_title_no_image"
                 />

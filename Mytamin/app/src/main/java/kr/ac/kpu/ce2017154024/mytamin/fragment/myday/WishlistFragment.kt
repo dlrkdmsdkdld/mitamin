@@ -39,15 +39,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
     ): View? {
         val binding = FragmentWishlistBinding.inflate(inflater,container,false)
         mBinding =binding
-        myMydayViewmodel.getWishlistContent.observe(viewLifecycleOwner , Observer {
-            if (it) {
-                mBinding?.wishlistTitleYesLayout?.visibility = View.VISIBLE
-                mBinding?.wishlistTitleNoLayout?.visibility=View.INVISIBLE
-                mBinding?.wishlistNoBtn?.isEnabled=false
-            }
-        })
-        Log.d(Constant.TAG,"WishlistFragment onCreateView")
-        mBinding?.wishlistNoBtn?.setOnClickListener(this)
+
         mBinding?.wishlistCompleteBtn?.setOnClickListener(this)
 
         myMydayViewmodel.getWishlistDelete.observe(viewLifecycleOwner, Observer {
@@ -133,11 +125,11 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0){
-            mBinding?.wishlistNoBtn ->{
-                val intent = Intent(context,NewWishListActivity::class.java)
-                //startActivity(intent)
-                startActivityForResult(intent, MydayActivity.SUB_ACTIVITY_CODE)
-            }
+//            mBinding?.wishlistNoBtn ->{
+//                val intent = Intent(context,NewWishListActivity::class.java)
+//                //startActivity(intent)
+//                startActivityForResult(intent, MydayActivity.SUB_ACTIVITY_CODE)
+//            }
             mBinding?.wishlistCompleteBtn ->{
                 val tmp = mBinding?.wishlistNewWishlist?.text.toString().trim()
                 mBinding?.wishlistNewWishlist?.setText("")

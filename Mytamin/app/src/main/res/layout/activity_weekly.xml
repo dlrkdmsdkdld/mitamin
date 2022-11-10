@@ -32,7 +32,7 @@
             android:textSize="16sp"
             android:fontFamily="@font/appmainfont_medium"
             android:includeFontPadding="false"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="13dp"
             />
         <ImageButton
             android:layout_width="24dp"
@@ -47,35 +47,19 @@
 
             />
 
-        <ImageButton
-            android:layout_width="15dp"
-            android:layout_height="14dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginRight="4dp"
-            android:background="@drawable/ic_calendar"
-            app:layout_constraintEnd_toStartOf="@+id/weekly_time_text"
-            app:layout_constraintTop_toBottomOf="@+id/weekly_trash_btn" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/weekly_trash_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            android:fontFamily="@font/appmainfont_bold"
-            android:includeFontPadding="false"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="42dp"
-            android:id="@+id/weekly_time_text"
-            />
+
 
 
         <com.haibin.calendarview.CalendarLayout
-            app:layout_constraintTop_toBottomOf="@+id/weekly_time_text"
+            app:layout_constraintTop_toBottomOf="@+id/weekly_back_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="vertical"
             app:default_status="shrink"
+            android:layout_marginTop="10dp"
+            app:calendar_show_mode="only_week_view"
             android:id="@+id/weekly_calendar_layout"
             >
             <com.haibin.calendarview.CalendarView
@@ -88,7 +72,36 @@
                 />
 
         </com.haibin.calendarview.CalendarLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/background_white"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="@+id/weekly_calendar_layout"
+            />
+        <ImageButton
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/ic_calendar"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/weekly_image"
+            app:layout_constraintTop_toBottomOf="@+id/weekly_trash_btn" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/weekly_trash_btn"
+            app:layout_constraintStart_toEndOf="@+id/weekly_image"
+            android:fontFamily="@font/appmainfont_bold"
+            android:includeFontPadding="false"
+            android:textSize="16sp"
+            android:text="2022년 9월"
+            android:textColor="@color/black"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="4dp"
+            android:id="@+id/weekly_time_text"
+            />
         <View
             android:layout_width="match_parent"
             android:layout_height="8dp"
@@ -101,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/weekly_line"
-            android:layout_marginTop="263dp"
+            android:layout_marginTop="236dp"
             android:id="@+id/weekly_no_layout"
             android:visibility="invisible"
             >
@@ -112,7 +125,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/ic_icon_exclamation_circle_gray"
-                android:layout_marginLeft="53dp"
+                android:layout_marginLeft="39dp"
                 android:id="@+id/care_circlebtn"
                 />
             <TextView
@@ -123,6 +136,7 @@
                 app:layout_constraintStart_toEndOf="@+id/care_circlebtn"
                 android:text="@string/weekly_no"
                 android:textSize="16dp"
+                android:textColor="@color/darkGray"
                 android:layout_marginLeft="8dp"
                 android:fontFamily="@font/appsubfont_r"
 
@@ -148,6 +162,7 @@
                 android:id="@+id/weekly_yes_date"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:text="9월9일의 마이타민"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
                 />
@@ -167,8 +182,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="88dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/weekly_yes_date"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/ic_retouch_btn"
 
@@ -182,17 +196,16 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/ic_bad"
                 app:layout_constraintTop_toBottomOf="@+id/yesmytamin_todayReport_title"
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/yes_mytamin_image"
                 />
             <LinearLayout
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="27dp"
                 app:layout_constraintStart_toEndOf="@+id/yes_mytamin_image"
                 app:layout_constraintTop_toBottomOf="@+id/yesmytamin_todayReport_title"
                 android:background="@drawable/speech_buble_text"
@@ -237,14 +250,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/round_layout_background_gray"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 >
                 <TextView
                     android:id="@+id/yesmytamin_todayReport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/appsubfont_r"
-                    android:textColor="@color/subGray"
+                    android:textColor="@color/darkGray"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginTop="16dp"
@@ -282,7 +295,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/yesmytamin_talk_two"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/round_layout_background_gray"
                 android:orientation="vertical"
                 >
@@ -291,7 +304,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/appsubfont_r"
-                    android:textColor="@color/subGray"
+                    android:textColor="@color/darkGray"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginTop="16dp"
@@ -303,8 +316,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
+                    android:textSize="14sp"
+
                     android:fontFamily="@font/appsubfont_r"
-                    android:textColor="@color/subGray"
+                    android:textColor="@color/darkGray"
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"

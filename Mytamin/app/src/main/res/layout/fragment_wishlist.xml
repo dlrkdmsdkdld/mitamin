@@ -21,69 +21,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/wishlist_title_no_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wishlist_title">
-
-        <ImageView
-            android:id="@+id/wishlist_title_no_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/ic_x_box"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/daynote_no_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/appmainfont_bold"
-            android:includeFontPadding="false"
-            android:text="@string/wishlist_no_title"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/wishlist_title_no_image" />
-
-        <TextView
-            android:id="@+id/daynote_no_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/appmainfont_medium"
-            android:includeFontPadding="false"
-            android:text="@string/wishlist_no_subtitle"
-            android:textColor="@color/darkGray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/daynote_no_title" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/wishlist_no_btn"
-            android:layout_width="107dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/ic_large_button_abled"
-            android:fontFamily="@font/appmainfont_bold"
-            android:includeFontPadding="false"
-            android:text="@string/wishlist_no_btn"
-            android:textColor="@color/background_white"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/daynote_no_subtitle" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/wishlist_title_yes_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/wishlist_item" />
+            />
 
         <EditText
             android:id="@+id/wishlist_new_wishlist"
