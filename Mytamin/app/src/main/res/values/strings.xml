@@ -159,6 +159,11 @@
     <string name="user_information_guide7">기록 초기화</string>
     <string name="user_information_guide8">로그아웃</string>
     <string name="user_information_guide9"><u>회원탈퇴</u></string>
+    <string name="user_information_guide10">회원탈퇴를 하시겠어요?</string>
+    <string name="user_information_guide11">취소</string>
+    <string name="user_information_guide12">확인</string>
+
+
     <!--마이데이-->
     <string name="myday_title">마이데이</string>
     <string name="myday_edit">편집</string>

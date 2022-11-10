@@ -11,6 +11,7 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.util.logging.Handler
 
@@ -238,6 +239,21 @@ class HistoryRetrofitManager {
     }
     fun deleteinitData(data:initdata,completion: (RESPONSE_STATUS) -> Unit){
         iHistoryRetrofit?.initmitamin(data)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    if(200== it.asJsonObject.get("statusCode").asInt) completion(RESPONSE_STATUS.OKAY)
+                    else completion(RESPONSE_STATUS.FAIL)
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL)
+            }
+
+        })
+    }
+    fun quitMytamin(completion: (RESPONSE_STATUS) -> Unit){
+        iHistoryRetrofit?.quitMytamin()?.enqueue(object :Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 response.body()?.let {
                     if(200== it.asJsonObject.get("statusCode").asInt) completion(RESPONSE_STATUS.OKAY)

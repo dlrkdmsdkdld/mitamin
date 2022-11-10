@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment
 
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -19,9 +20,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
+import kr.ac.kpu.ce2017154024.mytamin.UI.MytaminCorrectionDialog
 import kr.ac.kpu.ce2017154024.mytamin.activity.*
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentInformationBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
+import kr.ac.kpu.ce2017154024.mytamin.fragment.information.QuitDialog
+import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.PreferenceUtil
@@ -34,6 +39,7 @@ import java.io.FileOutputStream
 class UserInformationFragment : Fragment(),View.OnClickListener {
     private var mBinding : FragmentInformationBinding?=null
     private val myInformationViewModel: InformationViewModel by viewModels()
+    private lateinit var customProgressDialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +48,7 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         val binding = FragmentInformationBinding.inflate(inflater,container,false)
         mBinding =binding
         Log.d(Constant.TAG,"UserInformationFragment onCreateView")
+        customProgressDialog= LoadingDialog(requireContext())
         bindClickListener()
         val tmp = arguments?.getByteArray("Image")
         if (tmp!=null){
@@ -122,6 +129,30 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
                 activity?.finishAffinity()
             }
             mBinding?.informationQuitBtn ->{
+                Log.d(TAG,"클릭됨 ")
+                val dialog=QuitDialog(requireContext())
+                dialog.show()
+                dialog.setOnClickListener(object : QuitDialog.OnClickedDialogBtn {
+                    override fun OnNegativeBtn() {
+                        Log.d(TAG,"OnNegativeBtn")
+                        dialog.dismiss()
+
+                    }
+
+                    override fun OnPositiveBtn() {
+                        Log.d(TAG,"OnPositiveBtn")
+                        dialog.dismiss()
+                        customProgressDialog.show()
+                        HistoryRetrofitManager.instance.quitMytamin {
+                            customProgressDialog.dismiss()
+                            PreferenceUtil.clearUserData()
+                            val i = Intent(requireActivity(),firstActivity::class.java)
+                            startActivity(i)
+                            activity?.finishAffinity()
+                        }
+                    }
+
+                })
 
             }
             mBinding?.informationPasswordBtn ->{

@@ -36,5 +36,7 @@ interface IhistoryRetrofit {
 
     @HTTP(method = "DELETE", path = "/user/init", hasBody = true)
     fun initmitamin( @Body data: initdata) : Call<JsonElement>
+    @DELETE ("/user/withdrawal")
+    fun quitMytamin( ) : Call<JsonElement>
 
 }
