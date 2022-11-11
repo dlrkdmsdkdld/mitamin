@@ -28,7 +28,6 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
 
     private lateinit var mytaminBinding: ActivityTodayMytaminBinding
     private lateinit var mytaminViewModel: todayMytaminViewModel
-    private val workManager=WorkManager.getInstance(application)
     private var step=0  // 마이타민 단계별 차등을 주기위한 코드
     private lateinit var resultBoolean :Status
     private lateinit var LatestMytamin :LatestMytamin
@@ -99,14 +98,14 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
                 val MytaminStepOneFragment = MytaminStepOneFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
 
-                mytamin_indicator_two.setImageResource(R.drawable.ic_idcator_no)
+                mytamin_progressbar.progress =200
             }
             2->{
                 val MytaminStepOneFragment = MytaminStepOneFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
 
-                mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
-                mytamin_indicator_three.setImageResource(R.drawable.ic_idcator_no)
+                mytamin_progressbar.progress =400
+
 
                 mytamin_layout1.visibility=View.VISIBLE
                 mytamin_pass_btn.isEnabled=true
@@ -117,9 +116,8 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
                 val MytaminStepThreeFragment = MytaminStepThreeFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepThreeFragment).commit()
                 setEnableNextBtnPartTwo(false)
-                mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
-                mytamin_indicator_three.setImageResource(R.drawable.ic_indicator_yes)
-                mytamin_indicator_four.setImageResource(R.drawable.ic_idcator_no)
+                mytamin_progressbar.progress =600
+
                 mytamin_layout1.visibility=View.INVISIBLE
                 mytamin_pass_btn.isEnabled=false
                 mytamin_next_btn.isEnabled=false
@@ -138,9 +136,8 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
             6->{
                 val MytaminStepSixFragment = MytaminStepSixFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepSixFragment).commit()
-                mytamin_indicator_two.setImageResource(R.drawable.ic_indicator_yes)
-                mytamin_indicator_three.setImageResource(R.drawable.ic_indicator_yes)
-                mytamin_indicator_four.setImageResource(R.drawable.ic_indicator_yes)
+                mytamin_progressbar.progress =800
+
                 mytamin_layout1.visibility=View.INVISIBLE
                 mytamin_pass_btn.isEnabled=false
                 mytamin_next_btn.isEnabled=false

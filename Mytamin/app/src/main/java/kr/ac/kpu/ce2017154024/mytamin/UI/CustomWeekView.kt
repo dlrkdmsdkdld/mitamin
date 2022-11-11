@@ -21,10 +21,10 @@ class CustomWeekView(context: Context) :WeekView(context) {
         hasScheme: Boolean
     ): Boolean {
 
-        if (!calendar.isCurrentDay) {
-            mSelectedPaint.style = Paint.Style.FILL
-            mSelectedPaint.strokeWidth = 1f
-            mSelectedPaint.color = ContextCompat.getColor(context, R.color.primary)
+
+        mSelectedPaint.style = Paint.Style.FILL
+        mSelectedPaint.strokeWidth = 1f
+        mSelectedPaint.color = ContextCompat.getColor(context, R.color.primary)
 //            val rectF = RectF(
 //                x.toFloat(),
 //                y.toFloat(),
@@ -32,14 +32,14 @@ class CustomWeekView(context: Context) :WeekView(context) {
 //                (y + mItemHeight).toFloat()
 //            )
 //            canvas.drawRoundRect(rectF, 16f, 16f, mSelectedPaint)
-            val cx : Int =  x + mItemWidth / 2
-            val cy : Float =  y
+        val cx : Int =  x + mItemWidth / 2
+        val cy : Float =  y
           //  val radius : Int=Math.min(mItemWidth, mItemHeight) / 5 * 2
-            val radius=dp2px(resources,11)
-            canvas.drawCircle(cx.toFloat(), mTextBaseLine/3, radius.toFloat(), mSelectedPaint)
+        val radius=dp2px(resources,11)
+        canvas.drawCircle(cx.toFloat(), mTextBaseLine/3, radius.toFloat(), mSelectedPaint)
 
-            println("선택됨")
-        }
+        println("선택됨")
+
        // cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine/2 , mCurDayTextPaint)
 
 

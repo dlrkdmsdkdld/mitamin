@@ -1,6 +1,7 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
 import android.app.Dialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +13,10 @@ import com.haibin.calendarview.CalendarView
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityWeeklyBinding
+import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
+import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.model.dayMytamin
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
-import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import kr.ac.kpu.ce2017154024.mytamin.utils.getSchemeCalendar
@@ -25,6 +27,11 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
     private  var ArraydayMytamin =ArrayList<dayMytamin>()
     private var selectmytaminId :Int= 100000000
     private lateinit var customProgressDialog: Dialog
+    private lateinit var canEditMytamin :dayMytamin
+    private lateinit var latestmytamin :LatestMytamin
+
+    private lateinit var status: Status
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding= ActivityWeeklyBinding.inflate(layoutInflater)
@@ -32,6 +39,9 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
         mbinding?.weeklyBackBtn.setOnClickListener(this)
         mbinding?.weeklyTrashBtn.setOnClickListener(this)
         customProgressDialog= LoadingDialog(this)
+
+        mbinding?.yesMytaminStep3Btn.setOnClickListener(this)
+        mbinding?.yesMytaminStep4Btn.setOnClickListener(this)
 
 
         val day = intent.getStringExtra("day")
@@ -154,6 +164,35 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
 
         })
     }
+    private fun parseLatesmytamin(canEditMytamin: dayMytamin) {
+        canEditMytamin?.report?.let {
+
+        }
+        if (canEditMytamin?.report!=null &&canEditMytamin?.care!=null){
+            status = Status(false,false,true,true )
+            latestmytamin =LatestMytamin(takeAt = "",canEditReport=true,canEditCare=false,reportId=canEditMytamin.report!!.reportId
+                , mentalConditionCode = canEditMytamin.report!!.mentalConditionCode, feelingTag = canEditMytamin.report!!.feelingTag, mentalConditionMsg = canEditMytamin.report!!.mentalCondition,
+                todayReport = canEditMytamin.report!!.todayReport, careId = canEditMytamin.care!!.careId, careCategory = canEditMytamin.care!!.careCategory, careMsg1=canEditMytamin.care!!.careMsg1, careMsg2 = canEditMytamin.care!!.careMsg2
+            )
+        }else if (canEditMytamin?.report==null&&canEditMytamin?.care!=null){
+            status = Status(false,false,false,true )
+            latestmytamin =LatestMytamin(takeAt = "",canEditReport=true,canEditCare=false,reportId=0
+                , mentalConditionCode =0, feelingTag ="", mentalConditionMsg = "",
+                todayReport = "", careId = canEditMytamin.care!!.careId, careCategory = canEditMytamin.care!!.careMsg1, careMsg1=canEditMytamin.care!!.careMsg1, careMsg2 = canEditMytamin.care!!.careMsg2
+            )
+
+        }else if (canEditMytamin?.report!=null&&canEditMytamin?.care==null) {
+            status = Status(false,false,true,false )
+            latestmytamin =LatestMytamin(takeAt = "",canEditReport=true,canEditCare=false,reportId=canEditMytamin.report!!.reportId
+                , mentalConditionCode = canEditMytamin.report!!.mentalConditionCode, feelingTag = canEditMytamin.report!!.feelingTag, mentalConditionMsg = canEditMytamin.report!!.mentalCondition,
+                todayReport = canEditMytamin.report!!.todayReport, careId = 0, careCategory ="", careMsg1="", careMsg2 = ""
+            )
+        }
+
+
+
+
+    }
     private fun setData(data:dayMytamin){
         selectmytaminId= data.mytaminId ?: 100000000
         data.takeAt?.let { mbinding?.weeklyYesDate.text = it }
@@ -166,7 +205,10 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
         }
         data.report?.let {
             if(!it.canEdit) mbinding?.yesMytaminStep3Btn.visibility=View.GONE
-            else mbinding?.yesMytaminStep3Btn.visibility=View.VISIBLE
+            else{ mbinding?.yesMytaminStep3Btn.visibility=View.VISIBLE
+                canEditMytamin =data
+                parseLatesmytamin(canEditMytamin)
+            }
             mbinding?.yesMytaminFeelingTag.text = it.feelingTag
             mbinding?.yesMytaminMentalConditionMsg.text = it.mentalCondition
             mbinding?.yesmytaminTodayReport.text = it.todayReport
@@ -209,6 +251,23 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
                 }
 
             }
+            mbinding?.yesMytaminStep3Btn ->{
+                gotodayMytaminActivity(3)
+            }
+            mbinding?.yesMytaminStep4Btn ->{
+                gotodayMytaminActivity(6)
+            }
         }
+    }
+    private fun gotodayMytaminActivity(step:Int){
+        val intent= Intent(this,todayMytaminActivity::class.java)
+        intent.putExtra("step",step)
+        val bundle = Bundle()
+        bundle.putSerializable("statusData",status)
+        intent.putExtra("bundle",bundle)
+        val bundleL = Bundle()
+        bundleL.putSerializable("LatestMytamin",latestmytamin)
+        intent.putExtra("bundleL",bundleL)
+        startActivity(intent)
     }
 }

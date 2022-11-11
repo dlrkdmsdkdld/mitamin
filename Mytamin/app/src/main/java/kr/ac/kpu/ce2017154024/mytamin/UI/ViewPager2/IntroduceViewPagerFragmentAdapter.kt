@@ -11,7 +11,8 @@ import kr.ac.kpu.ce2017154024.mytamin.fragment.introduce.IntroducefourStepFragme
 
 class IntroduceViewPagerFragmentAdapter(fa: FragmentActivity): FragmentStateAdapter(fa) {
 
-    val fragmentList = listOf<Fragment>(IntroduceOneStepFragment(),IntroduceTwoStepFragment(),IntroduceThreeStepFragment(),IntroducefourStepFragment())
+    //val fragmentList = listOf<Fragment>(IntroduceOneStepFragment(),IntroduceTwoStepFragment(),IntroduceThreeStepFragment(),IntroducefourStepFragment())
+    val fragmentList = listOf<Fragment>(IntroduceOneStepFragment(),IntroduceTwoStepFragment(),IntroduceThreeStepFragment())
 
 //    override fun getCount(): Int =4
 //
@@ -24,7 +25,7 @@ class IntroduceViewPagerFragmentAdapter(fa: FragmentActivity): FragmentStateAdap
 //        }
 //    }
 
-    override fun getItemCount(): Int=4
+    override fun getItemCount(): Int=3
 
     override fun createFragment(position: Int): Fragment {
         return fragmentList[position]

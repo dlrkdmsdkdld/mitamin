@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.view.detaches
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
@@ -21,10 +22,11 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata
 import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata.previousChildCount
+import kr.ac.kpu.ce2017154024.mytamin.utils.dp2px
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 
-class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListener {
+class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListener,View.OnClickListener {
     private var mBinding : FragmentMytaminStepFourBinding?=null
     private val todayMytaminViewModel by activityViewModels<todayMytaminViewModel>()
     private lateinit var chipGroup: ChipGroup
@@ -41,7 +43,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         Log.d(Constant.TAG,"MytaminStepFourFragment onCreateView")
         val emojitState = todayMytaminViewModel.selectemojiState.value
         setChip(emojitState!!)
-        chipChildCount=chipGroup.childCount
+        mBinding?.wishlistCompleteBtn?.setOnClickListener(this)
         return mBinding?.root
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
@@ -61,6 +63,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                 chipStringdata.verysad.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
+                chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             2->{
                 stateText=chipStringdata.sad
@@ -68,24 +71,28 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
 
                 }
+                chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             3-> {
                 stateText=chipStringdata.soso
                 chipStringdata.soso.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
+                chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             4-> {
                 stateText=chipStringdata.good
                 chipStringdata.good.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
+                chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             5-> {
                 stateText=chipStringdata.verygood
                 chipStringdata.verygood.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
+                chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
         }
     }
@@ -94,9 +101,10 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         var tmp = mutableListOf<String>()
         if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)}
         else{(activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)}
-        if (checkedIds.count()==3){
+        Log.d(TAG,"checkedIds.count() ->${checkedIds.count()}")
+        if (checkedIds.count()>=3){
             //액티비티가 파괴되면 그전에 있던 id값들이 누적돼서 이렇게해야함
-            for(i in 1+previousChildCount until group.childCount+1+previousChildCount){
+            for(i in 1+previousChildCount until chipGroup.childCount+1+previousChildCount){
                 if(i in checkedIds){
                 }
                 else{
@@ -111,10 +119,11 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         }
         checkedIds.forEach {
             // 가끔 태그 받아오는거 안됨 잘봐야함
-            val chip = group.getChildAt(it-1  - previousChildCount )
+           // val chip = group.getChildAt(it-1  - previousChildCount )
+            val chip = group.getChildAt(it -1 - previousChildCount )
             chip?.let {
                 val tmpS=  chip.getTag()?:"error"
-                if (tmpS!="error") tmp.add(tmpS.toString())
+                if (tmpS!="error" ) tmp.add(tmpS.toString())
             }
         }
         todayMytaminViewModel.setdiagnosis(tmp)
@@ -123,7 +132,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
     }
 
     override fun onDestroy() {
-        previousChildCount=chipChildCount+previousChildCount
+        previousChildCount=chipGroup.childCount+previousChildCount
         //뷰가 삭제되도 어찌된일인지 chipgroup 새로생성되는 child id가 이전꺼로부터 갱신되어서 싱글톤변수이용함 ex. 이전꺼 childcount:15 다음꺼 childcount:30됨
         super.onDestroy()
     }
@@ -131,7 +140,6 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         return Chip(context).apply {
             setChipBackgroundColorResource(R.color.chip_background_color)
             setTextColor(resources.getColorStateList(R.color.chip_text_color))
-
 //            setBackgroundResource(R.drawable.ic_chip)
             isCheckedIconVisible=false
             text  =statetext
@@ -141,6 +149,44 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
             chipStrokeWidth= 1F
             setChipStrokeColorResource(R.color.Gray)
         }
-
     }
+    private fun lastcreateTagChip(context: Context): Chip {
+        return Chip(context).apply {
+            setChipBackgroundColorResource(R.color.chip_background_color)
+            setTextColor(resources.getColorStateList(R.color.chip_text_color))
+//            setBackgroundResource(R.drawable.ic_chip)
+            isCheckedIconVisible=false
+            text  ="직접 입력"
+            isCheckable=true
+            isClickable=true
+            tag = "error"
+            this.setOnCheckedChangeListener { compoundButton, b ->
+                if (b){
+                    mBinding?.mytaminUserLayout?.visibility=View.VISIBLE
+                     }else{
+                    mBinding?.mytaminUserLayout?.visibility=View.GONE
+
+                }
+
+
+            }
+            chipStrokeWidth= 1F
+            chipIcon = resources.getDrawable(R.drawable.icon_pencil_gray,null)
+            chipIconSize =dp2px(resources,18).toFloat()
+            chipStartPadding=dp2px(resources,10).toFloat()
+            setChipStrokeColorResource(R.color.Gray)
+        }
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            mBinding?.wishlistCompleteBtn ->{
+                chipGroup?.addView(createTagChip(requireContext(),mBinding?.wishlistNewWishlist?.text.toString()))
+               // chipGroup.getChildAt(chipGroup.childCount -1- previousChildCount).performClick()
+                mBinding?.wishlistNewWishlist?.setText("")
+               // mBinding?.mytaminUserLayout?.visibility=View.GONE
+            }
+        }
+    }
+
 }

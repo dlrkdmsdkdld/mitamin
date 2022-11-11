@@ -50,4 +50,41 @@
 
     </com.google.android.material.chip.ChipGroup>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/mytamin_user_layout"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/mytamin_step_four_chipgroup"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/wishlist_new_wishlist"
+            android:layout_width="0dp"
+            android:layout_height="49dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/round_layout_stroke_gray"
+            android:hint="감정태그 추가하기"
+            android:padding="10dp"
+            android:textSize="16dp"
+            android:singleLine="true"
+            android:fontFamily="@font/appsubfont_r"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/wishlist_complete_btn"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_plus_circle_orange"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/wishlist_complete_btn"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

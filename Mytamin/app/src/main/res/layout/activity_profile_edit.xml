@@ -144,7 +144,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/round_layout_background_orange"
-        android:text="@string/user_myday_complete"
+        android:text="@string/complete"
         android:textSize="16sp"
         android:fontFamily="@font/appmainfont_medium"
         android:includeFontPadding="false"

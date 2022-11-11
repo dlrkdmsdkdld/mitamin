@@ -34,7 +34,7 @@
 
 
     <!--    join 부분 String-->
-    <string name="join_step_one_title">나를 위한 마음 비타민,\n오늘부터 섭치해 보시겠어요?</string>
+    <string name="join_step_one_title">나를 위한 마음 비타민,\n오늘부터 섭취해 보시겠어요?</string>
     <string name="join_step_email_title">이메일</string>
     <string name="join_step_email_hint">이메일을 입력해주세요.</string>
     <string name="join_step_password_title">비밀번호</string>
@@ -162,6 +162,7 @@
     <string name="user_information_guide10">회원탈퇴를 하시겠어요?</string>
     <string name="user_information_guide11">취소</string>
     <string name="user_information_guide12">확인</string>
+    <string name="complete">완료</string>
 
 
     <!--마이데이-->

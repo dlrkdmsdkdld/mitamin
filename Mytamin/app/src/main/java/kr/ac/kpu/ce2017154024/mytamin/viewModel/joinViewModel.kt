@@ -24,14 +24,14 @@ class joinViewModel: ViewModel() {
     val getpassword : LiveData<String>
         get() = password
     fun setpassword(time:String){
-        password.value = time
+        password.value = time.trim()
     }
 
     private val email = MutableLiveData<String>()
     val getemail : LiveData<String>
         get() = email
     fun setemail(time:String){
-        email.value = time
+        email.value = time.trim()
         Log.d(TAG,"joinViewModel emailValue -> ${email.value}")
     }
 
@@ -39,7 +39,7 @@ class joinViewModel: ViewModel() {
     val getname : LiveData<String>
         get() = name
     fun setname(time:String){
-        name.value = time
+        name.value = time.trim()
     }
     //프로그래스 관련함수들
     var _progressPer = MutableLiveData<Int>()

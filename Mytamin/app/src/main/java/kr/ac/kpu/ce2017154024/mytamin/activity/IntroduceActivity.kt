@@ -48,7 +48,7 @@ class IntroduceActivity : AppCompatActivity() {
         viewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if (position==3){
+                if (position==2){
                     mbinding?.introduceNextBtn.text=JOINSTRING.start
                 }else{
                     mbinding?.introduceNextBtn.text=JOINSTRING.next
@@ -57,23 +57,36 @@ class IntroduceActivity : AppCompatActivity() {
         })
         val dotsIndicator=mbinding?.introduceIndicator
         dotsIndicator.attachTo(viewPager)
+//        mbinding?.introduceNextBtn.setOnClickListener {
+//            if (viewPager.currentItem!=3){
+//                viewPager.currentItem=viewPager.currentItem+1
+//            }else{
+//                mbinding?.introduceNextBtn.text=JOINSTRING.start
+//                val parseHour = inputHour.parseIntToHH()
+//                val parseMinute = inputMinute.parseIntToMM()
+//                val postUser=NewUser(email,password,nickname,parseHour,parseMinute)
+//                customProgressDialog.show()
+//                newUserJoinAPICall(postUser)
+//              //  goLogin()
+//            }
+//
+//        }
+//        val tmp =NewUser("dlrkdmsdkdld@nav.com","a1s2d3f4","강철폭풍","11","22")
+//        newUserJoinAPICall(tmp)
         mbinding?.introduceNextBtn.setOnClickListener {
-            if (viewPager.currentItem!=3){
+            if (viewPager.currentItem!=2){
                 viewPager.currentItem=viewPager.currentItem+1
             }else{
                 mbinding?.introduceNextBtn.text=JOINSTRING.start
-                val parseHour = inputHour.parseIntToHH()
-                val parseMinute = inputMinute.parseIntToMM()
-                val postUser=NewUser(email,password,nickname,parseHour,parseMinute)
+              //  val parseHour = inputHour.parseIntToHH()
+               // val parseMinute = inputMinute.parseIntToMM()
+                val postUser=NewUser(email,password,nickname,null,null)
                 customProgressDialog.show()
                 newUserJoinAPICall(postUser)
               //  goLogin()
             }
 
         }
-//        val tmp =NewUser("dlrkdmsdkdld@nav.com","a1s2d3f4","강철폭풍","11","22")
-//        newUserJoinAPICall(tmp)
-
 
 
     }

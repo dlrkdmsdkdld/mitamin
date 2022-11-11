@@ -67,7 +67,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="@string/user_myday_complete"
+            android:text="@string/complete"
             android:textColor="@color/background_white"
             android:id="@+id/record_complete_btn"
             android:fontFamily="@font/appmainfont_medium"

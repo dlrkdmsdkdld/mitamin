@@ -1,12 +1,14 @@
 package kr.ac.kpu.ce2017154024.mytamin.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.util.TypedValue
 import android.widget.EditText
 import com.haibin.calendarview.Calendar
 import kr.ac.kpu.ce2017154024.mytamin.model.Status
@@ -41,6 +43,13 @@ import kotlin.time.Duration.Companion.minutes
     calendar.scheme = text
 
     return calendar
+}
+fun dp2px(resource: Resources, dp: Int): Int {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp.toFloat(),
+        resource.displayMetrics
+    ).toInt()
 }
  fun changeDP(value : Int,context: Context) : Int{
     var displayMetrics = context.resources.displayMetrics

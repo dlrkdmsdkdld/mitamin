@@ -156,6 +156,8 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
 
             }
             mBinding?.informationPasswordBtn ->{
+                val i = Intent(context,repasswordActivity::class.java)
+                startActivity(i)
 
             }
 
