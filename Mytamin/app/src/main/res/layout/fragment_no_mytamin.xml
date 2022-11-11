@@ -6,25 +6,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.home.NoMytaminFragment">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/orange_round"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/nomytamin_image"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="40dp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/nomytamin_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/home_no"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/appmainfont_bold"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="105dp"
+        android:id="@+id/weekly_no_layout"
+        >
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/ic_icon_exclamation_circle_gray"
+            android:layout_marginLeft="39dp"
+            android:id="@+id/care_circlebtn"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/care_circlebtn"
+            android:text="@string/home_no_layout"
+            android:textSize="16dp"
+            android:textColor="@color/darkGray"
+            android:layout_marginLeft="8dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/appmainfont_medium"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/weekly_no_layout"
+        android:layout_marginTop="122dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

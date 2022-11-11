@@ -168,10 +168,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintTop_toBottomOf="@+id/join_step_one_email_text"
+        app:layout_constraintTop_toBottomOf="@+id/join_one_helperemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/join_step_one_password_layout_all"
         >
 

@@ -35,6 +35,7 @@ class HomeRecyclerViewHolder (itemView: View,HomeRecylcerViewInterface:IHomeRecy
         if (on==false){
             startbtn.isEnabled=false
             startbtn.setBackgroundResource(R.drawable.ic_large_button_disabled)
+            startbtn.text ="완료"
         }
         if (position ==0){
             changeDP(20,context)

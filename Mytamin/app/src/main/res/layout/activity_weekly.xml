@@ -43,6 +43,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:padding="15dp"
+            android:visibility="gone"
             android:id="@+id/weekly_trash_btn"
 
             />
@@ -87,11 +88,11 @@
             android:background="@drawable/ic_calendar"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/weekly_image"
-            app:layout_constraintTop_toBottomOf="@+id/weekly_trash_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/weekly_back_btn" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/weekly_trash_btn"
+            app:layout_constraintTop_toBottomOf="@+id/weekly_back_btn"
             app:layout_constraintStart_toEndOf="@+id/weekly_image"
             android:fontFamily="@font/appmainfont_bold"
             android:includeFontPadding="false"
@@ -138,7 +139,8 @@
                 android:textSize="16dp"
                 android:textColor="@color/darkGray"
                 android:layout_marginLeft="8dp"
-                android:fontFamily="@font/appsubfont_r"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/appmainfont_medium"
 
                 />
 
@@ -152,7 +154,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="24dp"
             android:id="@+id/weekly_yes_layout"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:layout_height="match_parent">
             <TextView
                 android:layout_width="wrap_content"
@@ -182,9 +184,10 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="88dp"
                 android:layout_height="24dp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weekly_yes_date"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/ic_retouch_btn"
+                android:layout_marginTop="24dp"
 
                 android:id="@+id/yes_mytamin_step3_btn"
                 />
@@ -206,6 +209,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/weekly_tag_layout"
                 app:layout_constraintStart_toEndOf="@+id/yes_mytamin_image"
                 app:layout_constraintTop_toBottomOf="@+id/yesmytamin_todayReport_title"
                 android:background="@drawable/speech_buble_text"

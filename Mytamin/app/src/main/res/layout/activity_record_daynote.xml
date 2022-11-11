@@ -20,20 +20,7 @@
         android:id="@+id/record_title_text"
         android:layout_marginTop="17dp"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/myday_edit"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:fontFamily="@font/appmainfont_medium"
-        android:includeFontPadding="false"
-        android:layout_marginTop="17dp"
-        android:layout_marginRight="20dp"
-        android:id="@+id/record_edit_text"
-        />
+
     <ImageButton
         android:layout_width="24dp"
         android:layout_height="24dp"

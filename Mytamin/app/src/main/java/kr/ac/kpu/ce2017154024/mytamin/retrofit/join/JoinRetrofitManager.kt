@@ -91,30 +91,34 @@ class JoinRetrofitManager {
         iJoinRetrofit?.postLogin(inputData)
             ?.enqueue(object : Callback<JsonElement>{
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    Log.d(TAG,"statusCode: ${response.body()?.asJsonObject?.get("statusCode")?.asInt}")
+                    Log.d(TAG,"code: ${response.code()}")
+                    Log.d(TAG,"body: ${response.body()}")
+                    when(response.code()){
+                        404 ->completion(RESPONSE_STATUS.USER_NOT_FOUND_ERROR,null)
+                        400 ->completion(RESPONSE_STATUS.PASSWORD_PATTERN_ERROR,null)
+                        200->{
+                            response.body()?.let {
+                                Log.d(TAG, "user Login onResponse ${response}" )
+                                val body = it.asJsonObject
+                                val status = body.get("statusCode").asInt
+                                val message = body.get("message").asString
+                                val accessToken = body.get("data").asJsonObject.get("accessToken").asString
+                                val refreshToken = body.get("data").asJsonObject.get("refreshToken").asString
+                                val loginResult = ReturnLoginData(statusCode = status, message = message,
+                                    accessToken = accessToken, refreshToken = refreshToken)
+                                completion(RESPONSE_STATUS.OKAY,loginResult)
+                            }
+                        }
 
-                    if (response.code()==404){
-                        Log.d(TAG,"onResponse--- ${response.code()}-------------------------------------------- ")
-                        completion(RESPONSE_STATUS.USER_NOT_FOUND_ERROR,null)
-                    }else if (response.code()==400){
-                        Log.d(TAG,"onResponse--- ${response.code()}-------------------------------------------- ")
-                        completion(RESPONSE_STATUS.NO_CONTENT,null)
                     }
-                    response.body()?.let {
-                        Log.d(TAG, "user Login onResponse ${response}" )
-                        val body = it.asJsonObject
-                        val status = body.get("statusCode").asInt
-                        val message = body.get("message").asString
-                        val accessToken = body.get("data").asJsonObject.get("accessToken").asString
-                        val refreshToken = body.get("data").asJsonObject.get("refreshToken").asString
-                        val loginResult = ReturnLoginData(statusCode = status, message = message,
-                        accessToken = accessToken, refreshToken = refreshToken)
-                        completion(RESPONSE_STATUS.OKAY,loginResult)
 
-                    }
                 }
 
                 override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                     Log.d(TAG, "user Login onResponse ${t}" )
+                    completion(RESPONSE_STATUS.FAIL,null)
+
                 }
 
             })

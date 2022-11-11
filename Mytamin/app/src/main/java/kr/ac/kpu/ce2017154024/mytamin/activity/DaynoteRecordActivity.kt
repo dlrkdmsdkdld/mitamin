@@ -74,11 +74,9 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
     }
     fun selectwishList(can:Boolean){
         if(can){
-            mbinding?.recordEditText.visibility = View.INVISIBLE
             mbinding?.recordTitleText.setText("완료한 위시리스트")
         }
         else{
-            mbinding?.recordEditText.visibility = View.VISIBLE
             mbinding?.recordTitleText.setText("기록 남기기")
         }
     }

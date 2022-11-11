@@ -150,10 +150,12 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
                         if (it.day == calendar?.day.toString()){
                             if (it.report == null && it.care == null){
                                 mbinding?.weeklyNoLayout.visibility = View.VISIBLE
-                                mbinding?.weeklyYesLayout.visibility = View.INVISIBLE
+                                mbinding?.weeklyYesLayout.visibility = View.GONE
+                                mbinding?.weeklyTrashBtn.visibility = View.GONE
                             }else{
-                                mbinding?.weeklyNoLayout.visibility = View.INVISIBLE
+                                mbinding?.weeklyNoLayout.visibility = View.GONE
                                 mbinding?.weeklyYesLayout.visibility = View.VISIBLE
+                                mbinding?.weeklyTrashBtn.visibility = View.VISIBLE
                                 setData(it)
                             }
                         }
@@ -195,16 +197,27 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
     }
     private fun setData(data:dayMytamin){
         selectmytaminId= data.mytaminId ?: 100000000
+
+
         data.takeAt?.let { mbinding?.weeklyYesDate.text = it }
         if (data.report == null){
-            mbinding?.yesMytaminFeelingTag.text = null
-            mbinding?.yesMytaminMentalConditionMsg.text =null
-            mbinding?.yesmytaminTodayReport.text=null
-            mbinding?.yesMytaminImage.setImageResource(R.drawable.ic_x_box)
+            mbinding?.yesMytaminImage.visibility = View.GONE
             mbinding?.yesMytaminStep3Btn.visibility=View.GONE
+            mbinding?.yesMytaminLayoutOne.visibility=View.GONE
+            mbinding?.weeklyTagLayout.visibility=View.GONE
+            mbinding?.yesmytaminTodayReportTitle.visibility=View.GONE
+        }else{
+            mbinding?.yesMytaminImage.visibility = View.VISIBLE
+            mbinding?.yesMytaminStep3Btn.visibility=View.VISIBLE
+            mbinding?.yesMytaminLayoutOne.visibility=View.VISIBLE
+            mbinding?.weeklyTagLayout.visibility=View.VISIBLE
+            mbinding?.yesmytaminTodayReportTitle.visibility=View.VISIBLE
+
         }
         data.report?.let {
-            if(!it.canEdit) mbinding?.yesMytaminStep3Btn.visibility=View.GONE
+            if(!it.canEdit) {
+                mbinding?.yesMytaminStep3Btn.visibility=View.GONE
+            }
             else{ mbinding?.yesMytaminStep3Btn.visibility=View.VISIBLE
                 canEditMytamin =data
                 parseLatesmytamin(canEditMytamin)
@@ -222,9 +235,15 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
 
         }
         if (data.care == null){
+            mbinding?.yesmytaminTalkTwo.visibility = View.GONE
+            mbinding?.yesMytaminLayoutTwo.visibility = View.GONE
             mbinding?.yesMytaminStep4Btn.visibility = View.GONE
-            mbinding?.yesmytaminCareMsg1.text = ""
-            mbinding?.yesmytaminCareMsg2.text = ""
+
+        }else{
+            mbinding?.yesmytaminTalkTwo.visibility = View.VISIBLE
+            mbinding?.yesMytaminLayoutTwo.visibility = View.VISIBLE
+            mbinding?.yesMytaminStep4Btn.visibility = View.VISIBLE
+
         }
         data.care?.let {
             if(!it.canEdit) mbinding?.yesMytaminStep4Btn.visibility=View.GONE

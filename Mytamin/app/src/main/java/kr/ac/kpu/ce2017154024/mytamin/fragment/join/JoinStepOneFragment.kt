@@ -95,6 +95,7 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
 
                 )
         EmailCompositeDisposable.add(checkEmailTextSubscription)
+        setEnableEmail(false)
 
 
         return mBinding?.root
@@ -111,7 +112,7 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
                     mBinding?.findOneCodeBtn?.setOnClickListener(this)
                     emailValue = email
                     joinViewModel.timerDestory()
-
+                    mBinding?.joinOneEmailBtn?.text="재전송"
                     joinViewModel.timerset()
                     joinViewModel.timerStart()
                     joinViewModel.timerCount.observe(viewLifecycleOwner, Observer {

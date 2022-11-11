@@ -28,6 +28,7 @@
           app:layout_constraintStart_toStartOf="parent"
           android:id="@+id/history_praise_title"
           android:text="@string/history_praise_title"
+
           android:fontFamily="@font/appmainfont_bold"
           android:includeFontPadding="false"
           android:textColor="@color/black"
@@ -55,13 +56,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/history_random_care1"
                 app:layout_constraintTop_toTopOf="parent"
+
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:fontFamily="@font/appmainfont_medium"
                 android:includeFontPadding="false"
                 android:textColor="@color/black"
+                android:ems="11"
                 android:text="@string/history_praise_x"
 
                 />
@@ -88,6 +91,8 @@
                 android:fontFamily="@font/appsubfont_r"
                 android:includeFontPadding="false"
                 android:id="@+id/history_radom_take"
+                app:layout_constraintBottom_toTopOf="@+id/history_care_btn"
+                android:layout_marginBottom="24dp"
                 />
             <ImageButton
                 android:layout_width="20dp"
@@ -103,11 +108,12 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/history_radom_take"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:textColor="@color/background_white"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
                 android:textSize="16dp"
                 android:id="@+id/history_care_btn"
                 android:fontFamily="@font/appmainfont_bold"
