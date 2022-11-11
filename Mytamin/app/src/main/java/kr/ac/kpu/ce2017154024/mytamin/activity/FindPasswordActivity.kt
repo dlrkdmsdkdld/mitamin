@@ -35,6 +35,7 @@ class FindPasswordActivity : AppCompatActivity(), View.OnClickListener {
         //네비게이션 컨트롤러 가져옴
         navController = navHostFragment.navController
         mBinding?.findCompleteBtn.setOnClickListener(this)
+        mBinding?.findBackBtn.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -42,8 +43,9 @@ class FindPasswordActivity : AppCompatActivity(), View.OnClickListener {
             mBinding?.findCompleteBtn ->{
                 next()
             }
+
             mBinding?.findBackBtn ->{
-                finish()
+                onBackPressed()
             }
         }
     }

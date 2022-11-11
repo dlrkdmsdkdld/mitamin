@@ -56,7 +56,9 @@ class FindOneFragment : Fragment(),View.OnClickListener {
                 (activity as FindPasswordActivity).showLoading(true)
                 JoinRetrofitManager.instance.postCertificate(sendEmail,mbinding?.findOneEmailCode.text.toString()){responseStatus, b ->
                     (activity as FindPasswordActivity).showLoading(false)
-                    if (b) (activity as FindPasswordActivity).enableComplete(true)
+                    if (b) {
+                        (activity as FindPasswordActivity).enableComplete(true)
+                    }
                     else Toast.makeText(requireActivity(),"인증번호가 틀렸습니다",Toast.LENGTH_SHORT).show()
 
                 }
