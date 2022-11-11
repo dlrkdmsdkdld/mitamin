@@ -116,8 +116,8 @@
     <string name="mytamin_step_six_sheet7">기타</string>
     <string name="mytamin_dialog_text1">새로운 사건이 있으셨나 보네요</string>
     <string name="mytamin_dialog_text2">를 수정하시겠어요?</string>
-    <string name="mytamin_dialog_btn_positive">확인</string>
-    <string name="mytamin_dialog_btn_negative">취소</string>
+    <string name="mytamin_dialog_btn_positive">수정하기</string>
+    <string name="mytamin_dialog_btn_negative">취소하기</string>
 
     <!--마이페이지-->
     <!--초기화 액티비티 -->

@@ -1,11 +1,14 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.jakewharton.rxbinding4.view.clicks
@@ -33,6 +36,8 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
 
         (activity as todayMytaminActivity).setEnableCorrection(false)
         val dialog = MytaminCorrectionDialog(requireContext(),"하루 진단하기")
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         if (todayMytaminViewModel.getstatus.value?.reportIsDone != false){
             dialog.show()
             dialog.setOnClickListener(object :MytaminCorrectionDialog.OnClickedDialogBtn{
