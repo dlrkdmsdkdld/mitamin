@@ -13,5 +13,6 @@ data class careCategoryCodeList(val careCategoryCodeList:ArrayList<Int>)
 
 data class dayMytaminReport(val reportId:Int , val canEdit:Boolean, val mentalConditionCode :Int ,val   mentalCondition:String, val feelingTag:String,val todayReport:String  )
 data class dayMytaminCare(val careId:Int, val canEdit: Boolean,val careCategory: String,val careMsg1: String,val careMsg2: String)
-data class dayMytamin(val day:String,val mytaminId:Int?,val takeAt: String?,val report:dayMytaminReport?,val care:dayMytaminCare?)
+data class dayMytamin(val day:String, val mytaminId:Int?, val takeAt: String?,
+                      var report:dayMytaminReport?, var care:dayMytaminCare?)
 

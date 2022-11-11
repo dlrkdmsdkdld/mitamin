@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity(){
                 navController.navigate(R.id.homeFragment)
 
             }
+            fragment.history ->{
+                navController.popBackStack()
+                navController.navigate(R.id.historyFragment)
+
+            }
         }
 
     }

@@ -19,6 +19,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.dayMytamin
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
+import kr.ac.kpu.ce2017154024.mytamin.utils.fragment
 import kr.ac.kpu.ce2017154024.mytamin.utils.getSchemeCalendar
 import kr.ac.kpu.ce2017154024.mytamin.utils.parseIntToMonth
 
@@ -256,15 +257,35 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0){
             mbinding?.weeklyBackBtn ->{
-                finish()
+                onBackPressed()
                 }
             mbinding?.weeklyTrashBtn -> {
                 if (selectmytaminId != 100000000) {
                     customProgressDialog.show()
                     HistoryRetrofitManager.instance.deleteMytamin(selectmytaminId) { responseStatus, i ->
                         customProgressDialog.dismiss()
+
                         if (responseStatus != RESPONSE_STATUS.OKAY) {
                             Toast.makeText(this, "마이타민 삭제 실패", Toast.LENGTH_SHORT).show()
+                        }else{                        //삭제하면 내부에서도 안보이게 삭제 및 배열에서 제거
+                            mbinding?.weeklyNoLayout.visibility = View.VISIBLE
+                            mbinding?.weeklyYesLayout.visibility = View.GONE
+                            mbinding?.weeklyTrashBtn.visibility = View.GONE
+                            Log.d(TAG,"ArraydayMytamin -> $ArraydayMytamin")
+                            ArraydayMytamin.forEach {
+                                it?.let {
+                                    if (it.mytaminId==selectmytaminId){
+                                        Log.d(TAG,"it -> $it")
+                                        it.report=null
+                                        it.care=null
+                                    }
+                                }
+
+                            }
+
+
+
+
                         }
                     }
                 }
@@ -288,5 +309,21 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
         bundleL.putSerializable("LatestMytamin",latestmytamin)
         intent.putExtra("bundleL",bundleL)
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this,MainActivity::class.java)
+        intent.putExtra("fragment", fragment.history)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finishAffinity()
+        super.onBackPressed()
+
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+
+
+
     }
 }
