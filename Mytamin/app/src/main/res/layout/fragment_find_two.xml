@@ -72,34 +72,61 @@
         android:includeFontPadding="false"
         android:id="@+id/find_two_subtitle"
         />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/find_two_password_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/find_two_subtitle"
-        app:boxBackgroundColor="@color/background_white"
-        android:layout_marginLeft="20dp"
-        app:endIconCheckable="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:helperTextTextColor="@color/primary"
-        app:boxStrokeColor="@color/text_input_selector"
-        android:hint="@string/join_step_password_hint"
-        app:hintTextColor="@drawable/hint_focus_selector"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:endIconMode="password_toggle"
-        >
-        <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-        <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
+       <EditText
+           android:layout_marginTop="20dp"
+           android:layout_width="0dp"
+            android:layout_height="0dp"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toStartOf="@+id/find_password_btn"
+            app:layout_constraintTop_toBottomOf="@+id/find_two_subtitle"
+           app:layout_constraintBottom_toTopOf="@+id/line1"
             android:inputType="textPassword"
+           android:background="@null"
+           android:singleLine="true"
+           android:layout_marginLeft="20dp"
+           android:textSize="14dp"
+           android:fontFamily="@font/appsubfont_r"
+           android:includeFontPadding="false"
+           android:gravity="top"
+           android:hint="@string/find_2_password_hint"
             android:id="@+id/find_two_one_password_text"
             />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/find_two_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_eye_off"
+        android:layout_marginRight="20dp"
 
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginTop="20dp"
+        android:id="@+id/find_password_btn"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/line1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/LineColorFat"
+        app:layout_constraintTop_toBottomOf="@+id/find_password_btn"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/line1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/appsubfont_r"
+        android:includeFontPadding="false"
+        android:textSize="14dp"
+        android:id="@+id/find_two_password_layout"
+          />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,36 +141,60 @@
         android:includeFontPadding="false"
         android:id="@+id/find_two_subtitle2"
         />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/find_two_password_confirm_layout"
-        android:layout_width="match_parent"
+     <EditText
+         android:layout_marginTop="20dp"
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toStartOf="@+id/find_password_btn"
+         app:layout_constraintTop_toBottomOf="@+id/find_two_subtitle2"
+         app:layout_constraintBottom_toTopOf="@+id/line2"
+         android:inputType="textPassword"
+         android:background="@null"
+         android:singleLine="true"
+         android:layout_marginLeft="20dp"
+         android:textSize="14dp"
+         android:fontFamily="@font/appsubfont_r"
+         android:includeFontPadding="false"
+         android:gravity="top"
+         android:hint="@string/find_2_password_hint2"
+         android:id="@+id/find_two_password_confirm_text"
+            />
+    <ImageButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/find_two_subtitle2"
-        android:layout_marginTop="20dp"
-        app:boxStrokeColor="@color/text_input_selector"
-        app:boxBackgroundColor="@color/background_white"
-        android:layout_marginLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_eye_off"
         android:layout_marginRight="20dp"
 
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        app:endIconMode="password_toggle"
-        app:hintTextColor="@drawable/hint_focus_selector"
-        app:helperTextTextColor="@color/primary"
-        app:endIconCheckable="true"
-        android:hint="@string/join_step_password_hint2"
-        >
+        android:layout_marginTop="20dp"
+        android:id="@+id/find_repassword_btn"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/line2"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/LineColorFat"
+        app:layout_constraintTop_toBottomOf="@+id/find_repassword_btn"
 
-        <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-        <!--        app:boxStrokeColor="@color/textinputlayout_boxstroke"-->
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/find_two_password_confirm_text"
-            android:inputType="textPassword"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/line2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/appsubfont_r"
+        android:includeFontPadding="false"
+        android:layout_marginTop="12dp"
+        android:id="@+id/find_two_password_confirm_layout"
+        android:textSize="14dp"
+        />
 
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/find_complete_btn_other"
         android:layout_width="match_parent"

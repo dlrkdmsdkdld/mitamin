@@ -51,12 +51,12 @@ class joinStepThreeFragment : Fragment() {
                         if (it.toString()=="" ){tmp="1"}
                         if (it.toString()==tmp && it.toString()!="" ){
                             Handler(Looper.getMainLooper()).post(Runnable {
-                                mBinding?.joinStepThreeNameLayout?.helperText = JOINSTRING.searchingEmail
+                                mBinding?.joinStepThreeNameLayout?.helperText = "사용 가능한 닉네임이에요!"
                             CheckNameAPICall(it.toString())
                             })
                         }else{
                             Handler(Looper.getMainLooper()).post(Runnable {
-                                mBinding?.joinStepThreeNameLayout?.helperText= JOINSTRING.wrongNickNameEmpty
+                                mBinding?.joinStepThreeNameLayout?.helperText= "사용할 수 없는 닉네임이에요!"
                                 (activity as joinActivity).canEnableNextbtn(false)
 
 

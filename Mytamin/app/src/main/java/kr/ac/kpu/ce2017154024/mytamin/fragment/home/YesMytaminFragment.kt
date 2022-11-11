@@ -51,9 +51,15 @@ class YesMytaminFragment : Fragment() ,View.OnClickListener{
         }
         if (latestMytamin?.canEditReport == true){
             mBinding?.yesMytaminStep3Btn?.setOnClickListener(this)
+        }else{
+            mBinding?.yesMytaminStep3Btn?.visibility=View.GONE
+
+
         }
         if (latestMytamin?.canEditCare== true){
             mBinding?.yesMytaminStep4Btn?.setOnClickListener(this)
+        }else{
+            mBinding?.yesMytaminStep4Btn?.visibility=View.GONE
         }
 
 

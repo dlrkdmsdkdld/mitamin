@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
@@ -42,7 +43,8 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
     private var RepasswordValue:Boolean?=null
     //옵저버블 통합제거를 위한 compositeDisposable
     private var EmailCompositeDisposable = CompositeDisposable()
-
+    private var passwordeye = true
+    private var repasswordeye = true
     private val joinViewModel by activityViewModels<joinViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +56,10 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
         //CheckEmailAPICall("mytamin@naver.com")
         mBinding?.joinOneEmailBtn?.setOnClickListener(this)
         mBinding?.findOneCodeBtn?.setOnClickListener(this)
+        mBinding?.joinPasswordBtn?.setOnClickListener(this)
+        mBinding?.findRepasswordBtn   ?.setOnClickListener(this)
         //이메일 텍스트 옵저버블
         val edittextChangeObservable = mBinding?.joinStepOneEmailText?.textChanges()
-
         val checkEmailTextSubscription : Disposable =//디바운스 -> 필터링조건
             edittextChangeObservable!!.debounce(500,TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
@@ -207,17 +210,24 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                mBinding?.joinStepOnePasswordText?.hint = ""
-                mBinding?.joinStepOnePasswordLayout?.hint = ""
                 Log.d(TAG,"join_step_one_password_text afterTextChanged $p0  ${p0?.trim()}")
                 if (Pattern.matches("^[a-zA-Z0-9]*\$", p0) && (8 <=p0!!.count() && p0!!.count()<31 )  && p0.toString()==p0.toString().trim()) {
-                    join_step_one_password_layout.helperText="사용 가능한 비밀번호입니다"
-                    join_step_one_password_layout.hint = ""
+                    join_step_one_password_layout.text="사용 가능한 비밀번호입니다"
                     passwordValue=p0.toString().trim()
+                    if (passwordValue == mBinding?.joinStepOnePasswordConfirmText?.text.toString()){
+                        join_step_one_password_confirm_layout.text="비밀번호가 일치합니다."
+                        join_step_one_password_confirm_layout.setTextColor(resources.getColor(R.color.primary,null))
+                        RepasswordValue=true
+                        OkAllItem()
+
+                    }
+
+
                     OkAllItem()
                 }
                 else {
-                    join_step_one_password_layout.helperText="영문, 숫자를 포함한 8~30자리 조합으로 설정해주세요."
+                    join_step_one_password_layout.text="영문, 숫자를 포함한 8~30자리 조합으로 설정해주세요."
+                    join_step_one_password_layout.setTextColor(resources.getColor(R.color.textRed,null))
                     passwordValue=null
                     OkAllItem()
                 }
@@ -234,14 +244,15 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
 
             override fun afterTextChanged(p0: Editable?) {
 
-                mBinding?.joinStepOnePasswordConfirmLayout?.hint = ""
-                mBinding?.joinStepOnePasswordConfirmText?.hint = ""
+
                 if (passwordValue == p0.toString()){
-                    join_step_one_password_confirm_layout.helperText="비밀번호가 일치합니다."
+                    join_step_one_password_confirm_layout.text="비밀번호가 일치합니다."
+                    join_step_one_password_confirm_layout.setTextColor(resources.getColor(R.color.primary,null))
                     RepasswordValue=true
                     OkAllItem()
 
-                }else{join_step_one_password_confirm_layout.helperText="비밀번호가 일치하지 않습니다."
+                }else{join_step_one_password_confirm_layout.text="비밀번호가 일치하지 않습니다."
+                    join_step_one_password_confirm_layout.setTextColor(resources.getColor(R.color.textRed,null))
                     RepasswordValue=false
                     OkAllItem()
                 }
@@ -296,6 +307,42 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
                 sendEmailWithCode(mBinding?.findOneEmailCode?.text.toString())
                 setEnable(false)
             }
+            mBinding?.joinPasswordBtn ->{
+                passwordEye()
+            }
+            mBinding?.findRepasswordBtn ->{
+                repasswordEye()
+            }
+        }
+    }
+    private fun passwordEye(){
+        if (passwordeye) {
+            passwordeye=false
+            mBinding?.joinPasswordBtn?.setBackgroundResource(R.drawable.ic_eye_off)
+            mBinding?.joinStepOnePasswordText?.inputType=(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
+            mBinding?.joinStepOnePasswordText?.setSelection(mBinding?.joinStepOnePasswordText?.text?.length?:0)
+            //mbinding?.findTwoOnePasswordText.transformationMethod = PasswordTransformationMethod.getInstance()
+        }else{
+            passwordeye=true
+            mBinding?.joinPasswordBtn?.setBackgroundResource(R.drawable.ic_baseline_remove_red_eye_24)
+            // InputType.TYPE_CLASS_TEXT
+            mBinding?.joinStepOnePasswordText?.inputType= InputType.TYPE_CLASS_TEXT
+            mBinding?.joinStepOnePasswordText?.setSelection(mBinding?.joinStepOnePasswordText?.text?.length?:0)
+
+        }
+    }
+    private fun repasswordEye(){
+        if (repasswordeye) {
+            repasswordeye=false
+            mBinding?.findRepasswordBtn?.setBackgroundResource(R.drawable.ic_eye_off)
+            mBinding?.joinStepOnePasswordConfirmText?.inputType= InputType.TYPE_CLASS_TEXT or  InputType.TYPE_TEXT_VARIATION_PASSWORD
+            mBinding?.joinStepOnePasswordConfirmText?.setSelection(mBinding?.joinStepOnePasswordConfirmText?.text?.length?:0)
+        }else{
+            repasswordeye=true
+            mBinding?.findRepasswordBtn?.setBackgroundResource(R.drawable.ic_baseline_remove_red_eye_24)
+            mBinding?.joinStepOnePasswordConfirmText?.inputType= InputType.TYPE_CLASS_TEXT
+            mBinding?.joinStepOnePasswordConfirmText?.setSelection(mBinding?.joinStepOnePasswordConfirmText?.text?.length?:0)
+
         }
     }
 
