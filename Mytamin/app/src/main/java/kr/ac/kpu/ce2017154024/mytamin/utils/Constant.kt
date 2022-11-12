@@ -49,7 +49,8 @@ enum class RESPONSE_STATUS{
     FAIL,
     NO_CONTENT,
     USER_NOT_FOUND_ERROR,
-    PASSWORD_PATTERN_ERROR
+    PASSWORD_PATTERN_ERROR,
+    WISH_ALREADY_EXIST_ERROR
 }
 enum class WebViewType{
     mitamin,

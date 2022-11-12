@@ -25,6 +25,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.modifyWish
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 
 
@@ -75,6 +76,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
         //myMydayViewmodel.deleteWishlistAPI(id)
         Log.d(TAG, "deleteWish i: d :$id ")
         WishlistSnackbar.make(requireView(),id).show()
+        
 //        Snackbar.make(requireView(),"삭제하시겠습니까?",Snackbar.LENGTH_SHORT).setAction("실행취소",object :View.OnClickListener{
 //            override fun onClick(p0: View?) {
 //                TODO("Not yet implemented")
@@ -120,7 +122,11 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
                 mBinding?.wishlistNewWishlist?.setText("")
                 InformationRetrofitManager.instance.sendNewWishlist(tmp){
                         responseStatus, wishList ->
-                    myMydayViewmodel.getWishlistAPI()
+                    when(responseStatus){
+                        RESPONSE_STATUS.OKAY -> myMydayViewmodel.getWishlistAPI()
+                        RESPONSE_STATUS.WISH_ALREADY_EXIST_ERROR -> Toast.makeText(requireContext(),"이미 존재하는 위시리스트에요",Toast.LENGTH_SHORT).show()
+                    }
+
                 }
             }
 

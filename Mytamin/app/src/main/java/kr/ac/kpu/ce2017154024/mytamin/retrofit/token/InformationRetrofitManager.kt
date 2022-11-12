@@ -188,20 +188,27 @@ class InformationRetrofitManager {
         iInformationRetrofit?.sendNewWishlist(wishtext)
             ?.enqueue(object : retrofit2.Callback<JsonElement> {
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-                    response.body()?.let {
-                        val statusCode = it.asJsonObject.get("statusCode").asInt
-                        if (statusCode == 201) {
-                            val wishId =
-                                it.asJsonObject.get("data").asJsonObject.get("wishId").asInt
-                            val wishText =
-                                it.asJsonObject.get("data").asJsonObject.get("wishText").asString
-                            val count = it.asJsonObject.get("data").asJsonObject.get("count").asInt
-                            val result = WishList(wishId, wishText, count)
-                            completion(RESPONSE_STATUS.OKAY, result)
-                        }
-                        completion(RESPONSE_STATUS.FAIL, null)
+                    Log.d(TAG,"response.code : ${response.code()}")
+                    if (response.code() ==409){
+                        completion(RESPONSE_STATUS.WISH_ALREADY_EXIST_ERROR,null)
+                    }else if (response.code() ==201){
+                        response.body()?.let {
+                            val statusCode = it.asJsonObject.get("statusCode").asInt
+                            Log.d(TAG," statusCode : $statusCode")
+                            if (statusCode == 201) {
+                                val wishId =
+                                    it.asJsonObject.get("data").asJsonObject.get("wishId").asInt
+                                val wishText =
+                                    it.asJsonObject.get("data").asJsonObject.get("wishText").asString
+                                val count = it.asJsonObject.get("data").asJsonObject.get("count").asInt
+                                val result = WishList(wishId, wishText, count)
+                                completion(RESPONSE_STATUS.OKAY, result)
+                            }
+                            completion(RESPONSE_STATUS.FAIL, null)
 
+                        }
                     }
+
 
                 }
 
