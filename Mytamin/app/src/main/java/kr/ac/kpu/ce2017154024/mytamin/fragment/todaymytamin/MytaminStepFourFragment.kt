@@ -63,7 +63,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                 chipStringdata.verysad.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
-                chipGroup?.addView( lastcreateTagChip(requireContext()))
+                //   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             2->{
                 stateText=chipStringdata.sad
@@ -71,28 +71,28 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
 
                 }
-                chipGroup?.addView( lastcreateTagChip(requireContext()))
+                //   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             3-> {
                 stateText=chipStringdata.soso
                 chipStringdata.soso.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
-                chipGroup?.addView( lastcreateTagChip(requireContext()))
+                //   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             4-> {
                 stateText=chipStringdata.good
                 chipStringdata.good.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
-                chipGroup?.addView( lastcreateTagChip(requireContext()))
+                //   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             5-> {
                 stateText=chipStringdata.verygood
                 chipStringdata.verygood.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
                 }
-                chipGroup?.addView( lastcreateTagChip(requireContext()))
+             //   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
         }
     }
@@ -119,8 +119,8 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         }
         checkedIds.forEach {
             // 가끔 태그 받아오는거 안됨 잘봐야함
-           // val chip = group.getChildAt(it-1  - previousChildCount )
-            val chip = group.getChildAt(it -1 - previousChildCount )
+            val chip = group.getChildAt(it-1  - previousChildCount ) //동적추가 없을때
+            //val chip = group.getChildAt(it -1 - previousChildCount )
             chip?.let {
                 val tmpS=  chip.getTag()?:"error"
                 if (tmpS!="error" ) tmp.add(tmpS.toString())

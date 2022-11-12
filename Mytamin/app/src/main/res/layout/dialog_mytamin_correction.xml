@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="320dp"
-    android:layout_height="360dp"
+    android:layout_height="wrap_content"
+    android:minHeight="360dp"
     app:cardCornerRadius="20dp"
     android:orientation="vertical"
     tools:context=".UI.MytaminCorrectionDialog">
@@ -19,7 +20,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_dialog_step4"
+                android:src="@drawable/ic_dialog_image2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -38,28 +39,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/mytamin_dialog_text1"
+                android:text="3.하루진단하기"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:fontFamily="@font/appmainfont_medium"
                 android:includeFontPadding="false"
                 android:layout_marginTop="20dp"
                 android:id="@+id/dialog_mytamin_title"
-                android:layout_marginRight="39dp"
-                android:layout_marginLeft="39dp"
+                android:layout_marginLeft="16dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_mytamin_title"
+                android:layout_marginLeft="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="오늘 하루 감정에 변화가 생겼나요?"
+                android:id="@+id/dialog_mytamin_subtitle"
                 android:fontFamily="@font/appmainfont_medium"
                 android:includeFontPadding="false"
-                android:id="@+id/dialog_mytamin_subtitle"
-                android:text="@string/mytamin_dialog_text2"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/dialog_mytamin_title"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/darkGray"
+                />
+            <TextView
+                android:layout_marginLeft="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:fontFamily="@font/appmainfont_medium"
+                android:includeFontPadding="false"
+                android:id="@+id/dialog_mytamin_subtitle2"
+                android:textColor="@color/darkGray"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_mytamin_subtitle"
                 app:layout_constraintStart_toStartOf="parent"
                 />
             <View
@@ -68,14 +80,14 @@
                 android:layout_height="1px"
                 android:layout_marginTop="20dp"
 
-                app:layout_constraintTop_toBottomOf="@+id/dialog_mytamin_subtitle"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_mytamin_subtitle2"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="138dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/mytamin_horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/mytamin_vertical"
                 android:id="@+id/dialog_negative_btn"
                 android:background="@drawable/round_layout_stroke_primary"
                 >
@@ -108,8 +120,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/mytamin_horizontal"
                 android:id="@+id/dialog_positive_btn"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="16dp"
                 android:background="@drawable/round_layout_background_orange"
-                app:layout_constraintStart_toEndOf="@+id/mytamin_vertical"
                 >
                 <TextView
                     android:textColor="@color/background_white"

@@ -54,7 +54,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
         //수정하기 버튼 눌렀을 때
         myMydayViewmodel.getWishlistModify.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, " modfiywish 데이터 값 : $it")
-            if (it.id!=0 && it.position!=0){ // if문이 있는이유 : obsever때문에 wishlistFragment가 oncreate될때마다 옵저버가 실행되어서
+            if (it.id!=0 && it.position!=1000){ // if문이 있는이유 : obsever때문에 wishlistFragment가 oncreate될때마다 옵저버가 실행되어서
                 //원치 않을때도 수정하기가 활성화 되는 버그가있음
                 mBinding?.wishlistRecyclerview?.findViewHolderForAdapterPosition(it.position)!!.itemView.apply {
                     this.wishlist_title_item.visibility = View.INVISIBLE
@@ -62,7 +62,9 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
                     myWishlistRecyclerAdapter.selectWishID(it.id)
                     this.wishlist_edit_item.setText(this.wishlist_title_item.text)
                 }
-                myMydayViewmodel.setWishlistModify(modifyWish(position = 0 , id = 0, statetext = ""))
+                myMydayViewmodel.setWishlistModify(modifyWish(position = 1000 , id = 0, statetext = ""))
+            }else{
+
             }
 
         })

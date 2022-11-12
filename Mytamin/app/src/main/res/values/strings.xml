@@ -118,6 +118,7 @@
     <string name="mytamin_dialog_text2">를 수정하시겠어요?</string>
     <string name="mytamin_dialog_btn_positive">수정하기</string>
     <string name="mytamin_dialog_btn_negative">취소하기</string>
+    <string name="mytamin_dialog_btn_positive2">나가기</string>
 
     <!--마이페이지-->
     <!--초기화 액티비티 -->

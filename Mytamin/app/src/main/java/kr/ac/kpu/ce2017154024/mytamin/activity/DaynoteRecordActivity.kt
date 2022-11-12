@@ -90,17 +90,20 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
             val inputData= Data.Builder().putStringArray(MytaminWorker.EXTRA_URI_ARRAY,
                 stringURI.toArray(arrayOfNulls<String>(stringURI.size))).build()
             NOTE= myRecordViewmodel.getnote.value.toString()
-            WISHTEXT = myRecordViewmodel.getwishId.value!!
-            DAYNOTEDATE ="${myRecordViewmodel.getyear.value}.${myRecordViewmodel.getmonth.value.parseIntToMonth()}"
-            Log.d(TAG, "DAYNOTEDATE : $DAYNOTEDATE ")
+            myRecordViewmodel.getwishId.value?.let {
+                WISHTEXT = myRecordViewmodel.getwishId.value!!
+                DAYNOTEDATE ="${myRecordViewmodel.getyear.value}.${myRecordViewmodel.getmonth.value.parseIntToMonth()}"
+                Log.d(TAG, "DAYNOTEDATE : $DAYNOTEDATE ")
 
-            val uploadWorkRequest: WorkRequest =
-                OneTimeWorkRequestBuilder<MytaminWorker>()
-                    .setInputData(inputData)
-                    .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-                    .build()
-            WorkManager.getInstance(applicationContext).enqueue(uploadWorkRequest)
-            finish()
+                val uploadWorkRequest: WorkRequest =
+                    OneTimeWorkRequestBuilder<MytaminWorker>()
+                        .setInputData(inputData)
+                        .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                        .build()
+                WorkManager.getInstance(applicationContext).enqueue(uploadWorkRequest)
+                finish()
+            }
+
         }
     }
     fun modifyWorker(){
@@ -129,6 +132,7 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
                 //navController.currentDestination?.id
                 when(navController.currentDestination?.id){
                     R.id.recordFragment ->{
+
                         Log.d(TAG, " 현재 프래그먼트는 record프래그먼트")
                             when(myRecordViewmodel.recordtype){
                                 RecordType.basic->{

@@ -35,7 +35,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
         Log.d(Constant.TAG,"MytaminStepOneFragment onCreateView")
 
         (activity as todayMytaminActivity).setEnableCorrection(false)
-        val dialog = MytaminCorrectionDialog(requireContext(),"하루 진단하기")
+        val dialog = MytaminCorrectionDialog(requireContext(),3)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         if (todayMytaminViewModel.getstatus.value?.reportIsDone != false){

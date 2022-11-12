@@ -64,7 +64,7 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
                 k+=1
             }
 
-            val dialog = MytaminCorrectionDialog(requireContext(),"칭찬 처방하기")
+            val dialog = MytaminCorrectionDialog(requireContext(),4)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             if (todayMytaminViewModel.getstatus.value?.careIsDone != false){
