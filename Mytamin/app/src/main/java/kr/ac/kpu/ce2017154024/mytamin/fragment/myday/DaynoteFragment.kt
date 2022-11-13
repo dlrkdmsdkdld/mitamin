@@ -36,9 +36,11 @@ class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface,I
         mBinding =binding
         myMydayViewmodel.getDaynoteContent.observe(viewLifecycleOwner , Observer {
             if (it) {
-                mBinding?.daynoteNoLayout?.visibility = View.INVISIBLE
-                //mBinding?.wishlistTitleNoLayout?.visibility=View.INVISIBLE
-                mBinding?.daynoteNoBtn?.isEnabled=false
+                mBinding?.daynoteNoLayout?.visibility = View.GONE
+                mBinding?.daynoteRecyclerview?.visibility=View.VISIBLE
+            }else{
+                mBinding?.daynoteNoLayout?.visibility = View.VISIBLE
+                mBinding?.daynoteRecyclerview?.visibility=View.GONE
             }
         })
         Log.d(Constant.TAG,"DaynoteFragment onCreateView")
@@ -54,7 +56,7 @@ class DaynoteFragment : Fragment(),View.OnClickListener,IDaynoteChildInterface,I
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myMydayViewmodel.getdaynoteDataArray.observe(viewLifecycleOwner, Observer {
-            noInitLayout()
+           // noInitLayout()
             this.myDaynoteParentAdapter = DaynoteParentAdapter(this,this,it)
             mBinding?.daynoteRecyclerview?.adapter = this.myDaynoteParentAdapter
             mBinding?.daynoteRecyclerview?.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)

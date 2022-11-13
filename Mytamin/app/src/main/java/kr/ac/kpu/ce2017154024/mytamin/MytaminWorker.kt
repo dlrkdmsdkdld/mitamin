@@ -10,6 +10,7 @@ import android.os.ParcelFileDescriptor
 import android.util.Log
 import android.widget.Toast
 import androidx.work.*
+import kotlinx.coroutines.*
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HomeRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.BitmapRequestBody
@@ -19,21 +20,23 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.NOTE
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton.WISHTEXT
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import okhttp3.MultipartBody
+import okhttp3.internal.wait
 import java.io.FileDescriptor
 import java.io.IOException
 
-class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) {
+class MytaminWorker(ctx: Context, params: WorkerParameters) :CoroutineWorker(ctx,params) {
     companion object {
         const val EXTRA_URI_ARRAY = "EXTRA_URI_ARRAY"
 
     }
     val context = ctx
 
-    override fun doWork(): Result {
+    override suspend fun doWork(): Result {
         Handler(Looper.getMainLooper()).post{
             Toast.makeText(MyApplication.instance, "데이노트 작성중...", Toast.LENGTH_SHORT).show()
 
         }
+        Log.d(TAG,"MytaminWorker tags : $tags")
         Log.d(TAG, "MytaminWorker doWork Start")
         val string_array = inputData.getStringArray(EXTRA_URI_ARRAY)
         val uriArray =ArrayList<Uri>()
@@ -53,14 +56,15 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
             imageList.add(bitmapMultipartBody)
         }
         Log.d(TAG, "MytaminWorker doWork imageList")
+        newDaynoteAPI(imageList)
+        return Result.failure()
+//         try {
+//             newDaynoteAPI(imageList)
+//        } catch (throwable: Throwable) {
+//            Log.d(TAG, "Error applying work")
+//            Result.failure()
+//        }
 
-        return try {
-            newDaynoteAPI(imageList)
-            Result.success()
-        } catch (throwable: Throwable) {
-            Log.d(TAG, "Error applying work")
-            Result.failure()
-        }
     }
 //        return try {
 //            wellcomAPICall()
@@ -70,14 +74,7 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
 //            Result.failure()
 //        }
 //    }
-    //                        myRecordViewmodel.getbitmapList.value?.forEach {
-//                            val bitmapRequestBody = it?.let {  BitmapRequestBody(it) }
-//                            val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
-//                            imageList.add(bitmapMultipartBody)
-//                        }
-//                        InformationRetrofitManager.instance.imageListAPI(imageList){ responseStatus, i ->
-//                            Log.d(TAG,"InformationRetrofitManager  i -> $i")
-//                        }
+
     @Throws(IOException::class)
     fun getBitmapFromUri(uri: Uri): Bitmap {
 
@@ -88,58 +85,61 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :Worker(ctx,params) 
 
         return image
     }
-    //액티비티에선 이런식으로 사용
-    //val uploadWorkRequest: WorkRequest =
-    //   OneTimeWorkRequestBuilder<UploadWorker>()
-   // .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
-    //       .build()
-    //제출
-//    WorkManager
-//    .getInstance(myContext)
-//    .enqueue(uploadWorkRequest)
-
-//    internal fun applyBlur() {
-//        workManager.enqueue(OneTimeWorkRequest.from(MytaminWorker::class.java))
-//    }
-    private fun imageListAPI(imageList:List<MultipartBody.Part?>){
-        Log.d(TAG, "MytaminWorker doWork imageListAPI()")
-        InformationRetrofitManager.instance.imageListAPI(imageList){ responseStatus, i ->
+    interface EventListener {
+        fun onEvent(goo:Boolean):Result
+    }
+    private lateinit var a: Job
+    class newDaynoteAPIC(val imageList:List<MultipartBody.Part?>,var listener: EventListener ){
+        fun newDaynoteAPI() {
+            InformationRetrofitManager.instance.newdaynote(imageList, wishid = WISHTEXT, note = NOTE, date = DAYNOTEDATE){ responseStatus, i ->
+                listener.onEvent(true)
                 when(responseStatus){
                     RESPONSE_STATUS.OKAY ->{
                         Handler(Looper.getMainLooper()).post{
-                            Toast.makeText(MyApplication.instance, "이미지 리스트 전송 성공", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(MyApplication.instance, "데이노트 작성하기 성공", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+    class EventPrinter(val imageList:List<MultipartBody.Part?>):EventListener {
+        override fun onEvent(goo: Boolean): Result {
+            return Result.success()
+        }
+        fun start(){
+            // this 를 통해 EventListener 구현부를 넘겨줌 (다형성 활용!)
+            newDaynoteAPIC(imageList,this).newDaynoteAPI() //
+        }
+    }
+    val KEY_RESULT = "result"
+
+    fun newDaynoteAPI(imageList:List<MultipartBody.Part?>  ) {
+            InformationRetrofitManager.instance.newdaynote(imageList, wishid = WISHTEXT, note = NOTE, date = DAYNOTEDATE){ responseStatus, i ->
+                when(responseStatus){
+                    RESPONSE_STATUS.OKAY ->{
+                        Handler(Looper.getMainLooper()).post{
+                            Result.success()
+                            val a= inputData.getBoolean("d",true)
+                            val b =workDataOf(KEY_RESULT to a)
+
+                            Result.success(b)
+                            Log.d(TAG,"ㅣkkkkkkkkkkkkkkkk")
+                            Log.d(TAG,"kkkkkkkkkkkkkkkkkkk")
+                            Log.d(TAG,"kkkkkkkkkkkkkkkkkk")
+                            Toast.makeText(MyApplication.instance, "데이노트 작성하기 성공", Toast.LENGTH_SHORT).show()
                         }
 
-                    }
-                }
-            }
-    }
-    private fun newDaynoteAPI(imageList:List<MultipartBody.Part?>){
-        Log.d(TAG, "MytaminWorker doWork imageListAPI()")
-        InformationRetrofitManager.instance.newdaynote(imageList, wishid = WISHTEXT, note = NOTE, date = DAYNOTEDATE){ responseStatus, i ->
-            when(responseStatus){
-                RESPONSE_STATUS.OKAY ->{
-                    Handler(Looper.getMainLooper()).post{
-                        Toast.makeText(MyApplication.instance, "데이노트 작성하기 성공", Toast.LENGTH_SHORT).show()
-                    }
 
-                }
-            }
-        }
-    }
-    private fun wellcomAPICall(){
-        HomeRetrofitManager.instance.doCompleteBreath {responseStatus ->
-            when(responseStatus){
-                RESPONSE_STATUS.OKAY ->{
-                    Handler(Looper.getMainLooper()).post{
-                        Toast.makeText(MyApplication.instance, "마이타민 숨 쉬기 완료", Toast.LENGTH_SHORT).show()
-                    }
+
+                    }else -> Result.failure()
 
                 }
             }
 
-        }
     }
+
     private fun doworkMytaminWorkOneTime(){
         val workRequest = OneTimeWorkRequestBuilder<MytaminWorker>().build()
 

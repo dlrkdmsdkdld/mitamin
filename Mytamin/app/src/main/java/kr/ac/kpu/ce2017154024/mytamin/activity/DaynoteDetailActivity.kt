@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.DetailImageAdapter
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityDaynoteDetailBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.information.BottomProfileEditFragment
@@ -23,6 +25,7 @@ class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
     private lateinit var mbinding : ActivityDaynoteDetailBinding
     private var wishbundle:Bundle? =null
     private var daynotebundle:Bundle?=null
+    private lateinit var customProgressDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(TAG,"DaynoteDetailActivity onCreate")
@@ -48,6 +51,7 @@ class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
         mbinding?.detailTimeText?.text = "${daynotedata.year}. ${daynotedata.month}"
         mbinding?.detailBackBtn.setOnClickListener(this)
         mbinding?.detailMoreBtn.setOnClickListener(this)
+        customProgressDialog = LoadingDialog(this)
 
     }
     private fun setSlideAdapter(images:ArrayList<String>){
@@ -96,8 +100,12 @@ class DaynoteDetailActivity : AppCompatActivity() ,View.OnClickListener{
 
             }
             select.delete ->{
+                customProgressDialog.show()
                 Log.d(TAG,"삭제선택")
-                InformationRetrofitManager.instance.daynoteDelete(daynotedata.daynoteId)
+                InformationRetrofitManager.instance.daynoteDelete(daynotedata.daynoteId){responseStatus ->
+                    customProgressDialog.dismiss()
+
+                }
                 finish()
             }
         }

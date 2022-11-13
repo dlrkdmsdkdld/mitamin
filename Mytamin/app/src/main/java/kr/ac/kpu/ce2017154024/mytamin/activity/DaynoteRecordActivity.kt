@@ -94,13 +94,17 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
                 WISHTEXT = myRecordViewmodel.getwishId.value!!
                 DAYNOTEDATE ="${myRecordViewmodel.getyear.value}.${myRecordViewmodel.getmonth.value.parseIntToMonth()}"
                 Log.d(TAG, "DAYNOTEDATE : $DAYNOTEDATE ")
-
-                val uploadWorkRequest: WorkRequest =
+                //MydayActivity().
+                val uploadWorkRequest: OneTimeWorkRequest =
                     OneTimeWorkRequestBuilder<MytaminWorker>()
                         .setInputData(inputData)
                         .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                        .addTag("newdaynote")
                         .build()
-                WorkManager.getInstance(applicationContext).enqueue(uploadWorkRequest)
+                WorkManager.getInstance(applicationContext)
+                    .enqueue(uploadWorkRequest)
+
+
                 finish()
             }
 

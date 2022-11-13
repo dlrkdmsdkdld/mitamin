@@ -76,7 +76,7 @@ class WishlistFragment : Fragment(), IWishRecyclerAdapter,View.OnClickListener {
         //myMydayViewmodel.deleteWishlistAPI(id)
         Log.d(TAG, "deleteWish i: d :$id ")
         WishlistSnackbar.make(requireView(),id).show()
-        
+
 //        Snackbar.make(requireView(),"삭제하시겠습니까?",Snackbar.LENGTH_SHORT).setAction("실행취소",object :View.OnClickListener{
 //            override fun onClick(p0: View?) {
 //                TODO("Not yet implemented")

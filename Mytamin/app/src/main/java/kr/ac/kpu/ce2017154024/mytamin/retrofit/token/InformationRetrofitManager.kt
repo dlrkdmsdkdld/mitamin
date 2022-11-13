@@ -38,11 +38,20 @@ class InformationRetrofitManager {
     private fun String?.toPlainRequestBody() =
         requireNotNull(this).toRequestBody("text/plain".toMediaTypeOrNull())
 
-    fun editProfile(file: MultipartBody.Part?, body: EditProfile, completion: (RESPONSE_STATUS, Int?) -> Unit) {
+    fun editProfile(
+        file: MultipartBody.Part?,
+        body: EditProfile,
+        completion: (RESPONSE_STATUS, Int?) -> Unit
+    ) {
         val bool: RequestBody = body.isImgEdited.toRequestBody()
         val nicknameRequestBody: RequestBody = body.nickname.toRequestBody()
         val beMyMessageRequestBody: RequestBody = body.beMyMessage.toRequestBody()
-        iInformationRetrofit?.editProfile(file = file, isImgEdited = bool, nickname = nicknameRequestBody, beMyMessage = beMyMessageRequestBody)
+        iInformationRetrofit?.editProfile(
+            file = file,
+            isImgEdited = bool,
+            nickname = nicknameRequestBody,
+            beMyMessage = beMyMessageRequestBody
+        )
             ?.enqueue(object : retrofit2.Callback<JsonElement> {
                 override fun onResponse(
                     call: Call<JsonElement>,
@@ -182,25 +191,24 @@ class InformationRetrofitManager {
     }
 
 
-
-
     fun sendNewWishlist(wishtext: String, completion: (RESPONSE_STATUS, WishList?) -> Unit) {
         iInformationRetrofit?.sendNewWishlist(wishtext)
             ?.enqueue(object : retrofit2.Callback<JsonElement> {
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-                    Log.d(TAG,"response.code : ${response.code()}")
-                    if (response.code() ==409){
-                        completion(RESPONSE_STATUS.WISH_ALREADY_EXIST_ERROR,null)
-                    }else if (response.code() ==201){
+                    Log.d(TAG, "response.code : ${response.code()}")
+                    if (response.code() == 409) {
+                        completion(RESPONSE_STATUS.WISH_ALREADY_EXIST_ERROR, null)
+                    } else if (response.code() == 201) {
                         response.body()?.let {
                             val statusCode = it.asJsonObject.get("statusCode").asInt
-                            Log.d(TAG," statusCode : $statusCode")
+                            Log.d(TAG, " statusCode : $statusCode")
                             if (statusCode == 201) {
                                 val wishId =
                                     it.asJsonObject.get("data").asJsonObject.get("wishId").asInt
                                 val wishText =
                                     it.asJsonObject.get("data").asJsonObject.get("wishText").asString
-                                val count = it.asJsonObject.get("data").asJsonObject.get("count").asInt
+                                val count =
+                                    it.asJsonObject.get("data").asJsonObject.get("count").asInt
                                 val result = WishList(wishId, wishText, count)
                                 completion(RESPONSE_STATUS.OKAY, result)
                             }
@@ -229,10 +237,10 @@ class InformationRetrofitManager {
                         Log.d(TAG, "user getWishlist onResponse ${response}")
                         val data = it.asJsonObject.get("data").asJsonArray
                         val dataCount = data.count()
-    //                            val pulished = data.get("published").asJsonArray
-    //                            val pulishedCount = pulished.count()
-    //                            val hidden = data.get("hidden").asJsonArray
-    //                            val hiddenCount = hidden.count()
+                        //                            val pulished = data.get("published").asJsonArray
+                        //                            val pulishedCount = pulished.count()
+                        //                            val hidden = data.get("hidden").asJsonArray
+                        //                            val hiddenCount = hidden.count()
                         if (dataCount == 0) {
                             completion(RESPONSE_STATUS.NO_CONTENT, null)
                         } else {
@@ -299,8 +307,7 @@ class InformationRetrofitManager {
                                         wishText = wishText,
                                         note = note,
                                         imgList = parseimgList,
-                                        daynoteId = noteid
-                                        , wishId = wishid
+                                        daynoteId = noteid, wishId = wishid
                                     )
                                     Log.d(TAG, "result -> result :$result ")
                                     Mydaydata.add(result)
@@ -377,86 +384,103 @@ class InformationRetrofitManager {
     //        ,@Part("date") date: RequestBody
 
     fun newdaynote(
-            fileList: List<MultipartBody.Part?>,
-            wishid: Int,
-            note: String,
-            date: String,
-            completion: (RESPONSE_STATUS, Int?) -> Unit
-        ) {
-          //  val wishtextRequestBody: RequestBody = wishtext.toRequestBody()
-            val noteRequestBody: RequestBody = note.toRequestBody()
-            val dateRequestBody: RequestBody = date.toRequestBody()
+        fileList: List<MultipartBody.Part?>,
+        wishid: Int,
+        note: String,
+        date: String,
+        completion: (RESPONSE_STATUS, Int?) -> Unit
+    ) {
+        //  val wishtextRequestBody: RequestBody = wishtext.toRequestBody()
+        val noteRequestBody: RequestBody = note.toRequestBody()
+        val dateRequestBody: RequestBody = date.toRequestBody()
         Log.d(TAG, " date : $date note :$note  wishtext $wishid")
-            iInformationRetrofit?.newDaynote(fileList = fileList, wishId = wishid, note = noteRequestBody, date = dateRequestBody)
-                ?.enqueue(object : retrofit2.Callback<JsonElement> {
-                    override fun onResponse(
-                        call: Call<JsonElement>,
-                        response: Response<JsonElement>
-                    ) {
-                        Log.d(TAG, "데이노트 작성 성공 response -> $response")
-                        response.body()?.let {
-                            val body = it.asJsonObject
-                            val statusCode = body.get("statusCode").asInt
-                            completion(RESPONSE_STATUS.OKAY, statusCode)
-                            Log.d(TAG, "데이노트 작성 성공h response message:${statusCode} ")
-                        }
-                    }
-
-                    override fun onFailure(call: Call<JsonElement>, t: Throwable) {
-                        Log.d(TAG, "데이노트 작성 실패 이유 -> $t")
-                        completion(RESPONSE_STATUS.FAIL, null)
-
-                    }
-
-                })
-
-        }
-
-    fun modifynote(fileList: List<MultipartBody.Part?>, wishid: Int, note: String, noteId: Int, completion: (RESPONSE_STATUS, Int?) -> Unit) {
-            val noteRequestBody: RequestBody = note.toRequestBody()
-            iInformationRetrofit?.modifyDaynote(
-                fileList = fileList,
-                wishId = wishid,
-                note = noteRequestBody,
-                daynoteId = noteId
-            )
-                ?.enqueue(object : retrofit2.Callback<JsonElement> {
-                    override fun onResponse(
-                        call: Call<JsonElement>,
-                        response: Response<JsonElement>
-                    ) {
-                        response.body()?.let {
-                            val body = it.asJsonObject
-                            val statusCode = body.get("statusCode").asInt
-                            completion(RESPONSE_STATUS.OKAY, statusCode)
-                            Log.d(TAG, "데이노트 수정 성공 response message:${statusCode} ")
-                        }
-                    }
-
-                    override fun onFailure(call: Call<JsonElement>, t: Throwable) {
-                        Log.d(TAG, "데이노트 수정 실패 이유 -> $t")
-                        completion(RESPONSE_STATUS.FAIL, null)
+        iInformationRetrofit?.newDaynote(
+            fileList = fileList,
+            wishId = wishid,
+            note = noteRequestBody,
+            date = dateRequestBody
+        )
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(
+                    call: Call<JsonElement>,
+                    response: Response<JsonElement>
+                ) {
+                    Log.d(TAG, "데이노트 작성 성공 response -> $response")
+                    response.body()?.let {
+                        val body = it.asJsonObject
+                        val statusCode = body.get("statusCode").asInt
+                        completion(RESPONSE_STATUS.OKAY, statusCode)
+                        Log.d(TAG, "데이노트 작성 성공h response message:${statusCode} ")
 
                     }
+                }
 
-                })
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "데이노트 작성 실패 이유 -> $t")
+                    completion(RESPONSE_STATUS.FAIL, null)
 
-        }
+                }
 
-    fun daynoteDelete(noteId: Int) {
-            iInformationRetrofit?.deleteDaynote(noteId)?.enqueue(object : retrofit2.Callback<JsonElement> {
+            })
+
+    }
+
+    fun modifynote(
+        fileList: List<MultipartBody.Part?>,
+        wishid: Int,
+        note: String,
+        noteId: Int,
+        completion: (RESPONSE_STATUS, Int?) -> Unit
+    ) {
+        val noteRequestBody: RequestBody = note.toRequestBody()
+        iInformationRetrofit?.modifyDaynote(
+            fileList = fileList,
+            wishId = wishid,
+            note = noteRequestBody,
+            daynoteId = noteId
+        )
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(
+                    call: Call<JsonElement>,
+                    response: Response<JsonElement>
+                ) {
+                    response.body()?.let {
+                        val body = it.asJsonObject
+                        val statusCode = body.get("statusCode").asInt
+                        completion(RESPONSE_STATUS.OKAY, statusCode)
+                        Log.d(TAG, "데이노트 수정 성공 response message:${statusCode} ")
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "데이노트 수정 실패 이유 -> $t")
+                    completion(RESPONSE_STATUS.FAIL, null)
+
+                }
+
+            })
+
+    }
+
+    fun daynoteDelete(noteId: Int,completion: (RESPONSE_STATUS) -> Unit) {
+        iInformationRetrofit?.deleteDaynote(noteId)
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                     response.body().let {
                         val body = it?.asJsonObject
                         val statusCodes = body?.get("statusCode")?.asInt
                         if (statusCodes == 200) {
-                            Handler(Looper.getMainLooper()).post {
-                                Toast.makeText(MyApplication.instance, "데이노트 삭제성공", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
+                            completion(RESPONSE_STATUS.OKAY)
+
                         } else {
+                            completion(RESPONSE_STATUS.FAIL)
+
                             Handler(Looper.getMainLooper()).post {
-                                Toast.makeText(MyApplication.instance, "데이노트 삭제실패", Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    MyApplication.instance,
+                                    "데이노트 삭제실패",
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
                             }
                         }
@@ -465,15 +489,17 @@ class InformationRetrofitManager {
 
                 override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                     Handler(Looper.getMainLooper()).post {
-                        Toast.makeText(MyApplication.instance, "데이노트 삭제실패", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(MyApplication.instance, "데이노트 삭제실패", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
 
             })
-        }
-    fun deleteWishlist(wishid:Int){
-        Log.d(TAG , "deleteWishlist wishid : $wishid")
-        iInformationRetrofit?.deleteWish(wishid)?.enqueue(object :retrofit2.Callback<JsonElement>{
+    }
+
+    fun deleteWishlist(wishid: Int) {
+        Log.d(TAG, "deleteWishlist wishid : $wishid")
+        iInformationRetrofit?.deleteWish(wishid)?.enqueue(object : retrofit2.Callback<JsonElement> {
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 response.body().let {
                     val body = it?.asJsonObject
@@ -492,19 +518,20 @@ class InformationRetrofitManager {
 
         })
     }
-    fun modifyWishlist(wishid: Int,wishText:String){
-        iInformationRetrofit?.modifyWishlist(wishid,wishText)?.enqueue(object :retrofit2.Callback<JsonElement>{
-            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
 
-            }
+    fun modifyWishlist(wishid: Int, wishText: String) {
+        iInformationRetrofit?.modifyWishlist(wishid, wishText)
+            ?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
 
-            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                }
 
-            }
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
 
-        })
+                }
+
+            })
     }
-
 
 
 }

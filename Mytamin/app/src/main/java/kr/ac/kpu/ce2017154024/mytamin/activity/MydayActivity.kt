@@ -10,8 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kr.ac.kpu.ce2017154024.mytamin.MytaminWorker
 import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.mydayViewPagerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityJoinBinding
@@ -69,7 +72,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
 
         })
         /////////여기까지 프래그먼트사용코드
-
+        val k = true
         showSampleData(isLoading = true)
         mbinding?.mydayBackBtn.setOnClickListener(this)
         mbinding?.mydayRefreshBtn.setOnClickListener(this)
@@ -80,7 +83,23 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
 
             }
         })
+        WorkManager.getInstance(applicationContext).getWorkInfosByTagLiveData("newdaynote")
+            .observe(this, Observer {
 
+                it.forEach {
+                    //it.state==WorkInfo.State.SUCCEEDED
+                    val myResult = it.outputData.getBoolean("result", false)
+                    if (it.state.isFinished && myResult){
+                        Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅎㅎㅎㅎ")
+                        Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅎㅎㅁㄴㅎㅎ")
+                        Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅁㄴㅎㅎㅎㅎ")
+                    }
+                    Log.d(TAG,"it Work -> $it")
+                    Log.d(TAG,"it Work.state -> ${it.state}")
+
+                }
+
+            })
 //        mbinding?.mydaySwipelayout.setOnRefreshListener(object :SwipeRefreshLayout.OnRefreshListener{
 //            override fun onRefresh() {
 //            }
@@ -134,5 +153,11 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG," MydayActivity onDestroy ")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        myMydayViewmodel.getdaynoteAPI()
+        myMydayViewmodel.getWishlistAPI()
     }
 }
