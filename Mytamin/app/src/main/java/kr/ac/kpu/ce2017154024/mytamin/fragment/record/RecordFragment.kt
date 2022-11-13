@@ -84,8 +84,11 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         myRecordViewmodel.getok.observe(viewLifecycleOwner, Observer {
             (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
         })
-        //모두 작성했는지 체크
-        (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
+
+        //수정했을때만 실행됨
+        myRecordViewmodel.getbitmapList.observe(viewLifecycleOwner, Observer {
+            (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
+        })
 
         mBinding?.recordCommentText?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -114,21 +117,29 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         if (myRecordViewmodel.recordtype == DaynoteRecordActivity.RecordType.basic){
             ok= basicTypeAllOk()
         }else{
-
+            ok= modifyTypeAllOK()
         }
         return ok
+    }
+    private fun modifyTypeAllOK():Boolean{
+        var addimageOk =false
+        Log.d(TAG,"myRecyclerView.itemCount -> ${myRecyclerView.itemCount}")
+        //수정일때는 url을 안없애서 그냥 리싸이클러뷰에서 카운트함
+        myRecyclerView?.let {addimageOk= myRecyclerView.itemCount!=0 }
+        var imageOk=(myRecordViewmodel.getbitmapList.value?.isNotEmpty() == true || addimageOk)
+
+        Log.d(TAG,"myRecordViewmodel.getbitmapList.value?.isNotEmpty()  :${myRecordViewmodel.getbitmapList.value?.isNotEmpty() }")
+        val textOk =  myRecordViewmodel.getnote.value?.trim() !=""
+        return   imageOk && textOk
     }
     private fun basicTypeAllOk():Boolean{
         //이미 카테고리 텍스트를 선택했을때
         var imageOk = false
         var categoryOk = myRecordViewmodel.getcategoryText.value !=null
-
         myRecordViewmodel.getUrlList.value?.let {
             imageOk= myRecordViewmodel.getUrlList.value!!.isNotEmpty()
         }
-
         val textOk =  myRecordViewmodel.getnote.value?.trim() !=""
-        
         var tiemOk =false
         myRecordViewmodel.getok.value?.let {
             tiemOk= it
@@ -142,10 +153,10 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
             Log.d(TAG ,"비트맵 어레이 크기 -> ${myRecordViewmodel.getbitmapList.value!!.size}" )
             myRecyclerView.submitBitmap(myRecordViewmodel.getbitmapList.value!!)
         }
+
         mBinding?.recordRecyclerImage?.adapter=myRecyclerView
         if (first){
             myRecordViewmodel.getmodifyDaynote.value?.let {
-                (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
                 first = false
                 it.imgList.forEach {
                     Glide.with(requireContext())
@@ -161,9 +172,12 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
 
                         })
                 }
+                (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
 
             }
         }
+        //모두 작성했는지 체크
+        (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
 
 
     }
@@ -195,8 +209,9 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         Log.d(TAG, "posisiton -> $position")
         myRecordViewmodel.removeBitmapList(position)
         if (myRecordViewmodel.recordtype == DaynoteRecordActivity.RecordType.basic) myRecordViewmodel.removeUrlList(position)
-        (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
+
         myRecyclerView.notifyDataSetChanged()
+        (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
     }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -225,7 +240,6 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
                 val selectedImageURI : Uri? = data?.data
                 if( selectedImageURI != null) {
                     myRecordViewmodel.addUrlList(selectedImageURI)
-                    (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
                     showImage(selectedImageURI)
                 }else {
                     (activity as DaynoteRecordActivity).permissionDenied("사진을 가져오지 못했습니다")
@@ -244,6 +258,7 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
                 Log.d(TAG , " myRecycler view -> ${myRecyclerView.itemCount}")
                 myRecordViewmodel.addbitmapList(bitmap)
                 myRecyclerView.notifyDataSetChanged()
+                (activity as DaynoteRecordActivity).setEnableNextBtnPart(allOk())
                 Log.d(TAG , " myRecycler view 2-> ${myRecyclerView.itemCount}")
             }
         }
