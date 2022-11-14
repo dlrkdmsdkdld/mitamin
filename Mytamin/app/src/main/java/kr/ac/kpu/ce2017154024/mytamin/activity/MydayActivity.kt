@@ -85,18 +85,17 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         })
         WorkManager.getInstance(applicationContext).getWorkInfosByTagLiveData("newdaynote")
             .observe(this, Observer {
-
                 it.forEach {
                     //it.state==WorkInfo.State.SUCCEEDED
                     val myResult = it.outputData.getBoolean("result", false)
                     if (it.state.isFinished && myResult){
+                        //문제가 이게 존나게 많이 호출되네..
                         Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅎㅎㅎㅎ")
                         Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅎㅎㅁㄴㅎㅎ")
                         Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅁㄴㅎㅎㅎㅎ")
+                        myMydayViewmodel.getWishlistAPI()
+                        myMydayViewmodel.getdaynoteAPI()
                     }
-                    Log.d(TAG,"it Work -> $it")
-                    Log.d(TAG,"it Work.state -> ${it.state}")
-
                 }
 
             })

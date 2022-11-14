@@ -5,10 +5,7 @@ import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.google.gson.JsonElement
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kr.ac.kpu.ce2017154024.mytamin.MyApplication
 import kr.ac.kpu.ce2017154024.mytamin.model.*
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
@@ -424,7 +421,46 @@ class InformationRetrofitManager {
             })
 
     }
+    suspend fun newdaynoteCall(
+        fileList: List<MultipartBody.Part?>,
+        wishid: Int,
+        note: String,
+        date: String
+    ) :Boolean{
+        //  val wishtextRequestBody: RequestBody = wishtext.toRequestBody()
+        val noteRequestBody: RequestBody = note.toRequestBody()
+        val dateRequestBody: RequestBody = date.toRequestBody()
+        var status = RESPONSE_STATUS.USER_NOT_FOUND_ERROR
+        val res = CompletableDeferred<Boolean>()
+        val scope = CoroutineScope(Dispatchers.IO)
 
+        Log.d(TAG, " date : $date note :$note  wishtext $wishid")
+        var j :Job
+        j= scope.launch {
+        iInformationRetrofit?.newDaynote(fileList = fileList, wishId = wishid, note = noteRequestBody, date = dateRequestBody)?.enqueue(object : retrofit2.Callback<JsonElement> {
+                override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                    Log.d(TAG, "데이노트 작성 성공 response -> $response")
+                    response.body()?.let {
+                        val body = it.asJsonObject
+                        val statusCode = body.get("statusCode").asInt
+                        Log.d(TAG, "데이노트 작성 성공h response message:${statusCode} ")
+                        status=RESPONSE_STATUS.OKAY
+                        res.complete(true)
+                        Log.d(TAG,"RES 완료 ? $res")
+                    }
+                }
+                override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                    Log.d(TAG, "데이노트 작성 실패 이유 -> $t")
+                    status=RESPONSE_STATUS.FAIL
+                    res.complete(false)
+                }
+
+            })
+        }
+//        j.join()
+        Log.d(TAG, "상태 리턴 : ${status}")
+        return res.await()
+    }
     fun modifynote(
         fileList: List<MultipartBody.Part?>,
         wishid: Int,
