@@ -25,6 +25,7 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.InformationViewModel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.MydayViewmodel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
+import java.util.*
 
 class MydayActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mbinding:ActivityMydayBinding
@@ -83,21 +84,23 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
 
             }
         })
+
+
         WorkManager.getInstance(applicationContext).getWorkInfosByTagLiveData("newdaynote")
             .observe(this, Observer {
+                var first=true
                 it.forEach {
-                    //it.state==WorkInfo.State.SUCCEEDED
                     val myResult = it.outputData.getBoolean("result", false)
-                    if (it.state.isFinished && myResult){
+                    if (it.state == WorkInfo.State.SUCCEEDED && myResult&& first) {
                         //문제가 이게 존나게 많이 호출되네..
-                        Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅎㅎㅎㅎ")
-                        Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅎㅎㅁㄴㅎㅎ")
-                        Log.d(TAG,"ㅣㅏ한ㅇㅎㅁㄶㅁㄴㄶㅇㅁㄴㅇㅎㅁㄴㅎㅎㅎㅎ")
+                        first=false
+                        Log.d(TAG, "it.id -> ${it.id}")
+                        Log.d(TAG, " it.outputData.keyValueMap   ${it.outputData.keyValueMap}")
                         myMydayViewmodel.getWishlistAPI()
                         myMydayViewmodel.getdaynoteAPI()
                     }
-                }
 
+                }
             })
 //        mbinding?.mydaySwipelayout.setOnRefreshListener(object :SwipeRefreshLayout.OnRefreshListener{
 //            override fun onRefresh() {

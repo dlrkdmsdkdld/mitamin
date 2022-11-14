@@ -56,12 +56,13 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :CoroutineWorker(ctx
             imageList.add(bitmapMultipartBody)
         }
         Log.d(TAG, "MytaminWorker doWork imageList")
-        return try {
-            nowDaynoteAPI(imageList)
-        } catch (throwable: Throwable) {
-            Log.d(TAG, "Error applying work")
-            Result.failure()
-        }
+        return nowDaynoteAPI(imageList)
+//        return try {
+//            nowDaynoteAPI(imageList)
+//        } catch (throwable: Throwable) {
+//            Log.d(TAG, "Error applying work")
+//            Result.failure()
+//        }
 
     }
     @Throws(IOException::class)
@@ -84,7 +85,8 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :CoroutineWorker(ctx
             //k는 레트로핏 response 객체가 리턴되면  작성됨
             val boleandata= inputData.getBoolean("result",true)
             val workdata =workDataOf(KEY_RESULT to boleandata)
-            return Result.success(workdata)
+
+            return Result.success()
         }else{
             return Result.failure()
 

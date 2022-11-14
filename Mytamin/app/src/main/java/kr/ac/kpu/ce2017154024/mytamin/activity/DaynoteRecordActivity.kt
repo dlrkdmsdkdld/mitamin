@@ -35,6 +35,7 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
          basic,
          modify
      }
+
     private lateinit var customProgressDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,14 +96,16 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
                 DAYNOTEDATE ="${myRecordViewmodel.getyear.value}.${myRecordViewmodel.getmonth.value.parseIntToMonth()}"
                 Log.d(TAG, "DAYNOTEDATE : $DAYNOTEDATE ")
                 //MydayActivity().
-                val uploadWorkRequest: OneTimeWorkRequest =
+
+                val uploadWorkRequest:OneTimeWorkRequest =
                     OneTimeWorkRequestBuilder<MytaminWorker>()
                         .setInputData(inputData)
                         .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                         .addTag("newdaynote")
                         .build()
-                WorkManager.getInstance(applicationContext)
-                    .enqueue(uploadWorkRequest)
+
+                WorkManager.getInstance(applicationContext).enqueue(uploadWorkRequest)
+                   // .enqueue(uploadWorkRequest)
 
 
                 finish()

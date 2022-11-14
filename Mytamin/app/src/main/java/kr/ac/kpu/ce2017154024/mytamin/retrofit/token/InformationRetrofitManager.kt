@@ -431,12 +431,8 @@ class InformationRetrofitManager {
         val noteRequestBody: RequestBody = note.toRequestBody()
         val dateRequestBody: RequestBody = date.toRequestBody()
         var status = RESPONSE_STATUS.USER_NOT_FOUND_ERROR
-        val res = CompletableDeferred<Boolean>()
-        val scope = CoroutineScope(Dispatchers.IO)
-
+        val res = CompletableDeferred<Boolean>() // 완료하거나 취소할수있는 deferred
         Log.d(TAG, " date : $date note :$note  wishtext $wishid")
-        var j :Job
-        j= scope.launch {
         iInformationRetrofit?.newDaynote(fileList = fileList, wishId = wishid, note = noteRequestBody, date = dateRequestBody)?.enqueue(object : retrofit2.Callback<JsonElement> {
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                     Log.d(TAG, "데이노트 작성 성공 response -> $response")
@@ -456,7 +452,7 @@ class InformationRetrofitManager {
                 }
 
             })
-        }
+
 //        j.join()
         Log.d(TAG, "상태 리턴 : ${status}")
         return res.await()
