@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.MarkerImage
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -22,6 +23,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
@@ -123,8 +125,8 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             myviewmodel.setSelectMonthAndYear("${year}.${month.parseIntToMonth()}")
             m=month
             y=year
-
-            myviewmodel.getMonthMytaminAPI()
+              //  여기서 한달받아옴
+            //myviewmodel.getMonthMytaminAPI()
         }
         myviewmodel.getmonthmytamin.observe(viewLifecycleOwner, Observer {
             val mapdata: MutableMap<String, Calendar> = mutableMapOf()
@@ -181,7 +183,13 @@ class HistoryFragment : Fragment(),View.OnClickListener {
         data.forEach {
             entries.add(Entry(datacount.toFloat(),it.mentalConditionCode.toFloat()))
             datacount+=1
+
         }
+        val lastindex= entries.get(entries.count() -1)
+        val lastindexX =lastindex.x
+        val lastindexY = lastindex.y
+        val lastCount=entries.count() -1
+        Log.d(TAG,"lastindex -> $lastindex")
         Log.d(TAG, " entries :$entries")
         lineChart.legend.apply {
             this.isEnabled = false
@@ -197,7 +205,6 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             spaceMin=0.1f
             setDrawAxisLine(true)
             setDrawGridLines(false)
-
             textColor = ContextCompat.getColor(requireContext(), R.color.subGray)
             axisLineColor=ContextCompat.getColor(requireContext(), R.color.LineColorshort)
 
@@ -214,6 +221,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             granularity=1f
             this.gridColor=  ContextCompat.getColor(requireContext(), R.color.LineColorshort)
 
+
         }
 
         lineChart.axisRight.apply {
@@ -229,9 +237,19 @@ class HistoryFragment : Fragment(),View.OnClickListener {
        // xAxis.valueFormatter = MyXAxisFormatter(stringData)
         Log.d(TAG,"valueFormatter :${xAxis.valueFormatter}")
         val lineDataSet1 = LineDataSet(entries,"entries")
-        val chartData = LineData()
-        chartData.addDataSet(lineDataSet1)
+
+
+
         lineDataSet1.apply {
+
+//            highLightColor=ContextCompat.getColor(requireContext(), R.color.subBlue)
+//            highlightLineWidth=20f
+//            isHighlightEnabled=true
+
+
+
+
+
             circleRadius=4f
             lineWidth=2f
             circleHoleRadius=3f
@@ -241,19 +259,33 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             circleHoleColor = ContextCompat.getColor(requireContext(), R.color.background_white)
             color=ContextCompat.getColor(requireContext(), R.color.primary)
             setCircleColor(ContextCompat.getColor(requireContext(), R.color.primary))
-            setDrawHighlightIndicators(false)
-            setDrawHorizontalHighlightIndicator(false)
-        }
-        lineChart.apply {
-            description.isEnabled=false
 
+            setDrawHighlightIndicators(false)
+        }
+        val chartData = LineData()
+        chartData.addDataSet(lineDataSet1)
+        chartData.isHighlightEnabled=true
+
+        lineChart.apply {
+
+            description.isEnabled=false
+            ////////////
             this.data  =chartData
+           // val high =Highlight(lastindexX,lastindexY,lastCount)
+         //   val high =Highlight(0f,0f,0)
+         //   high.dataIndex=0
+         //   this.highlightValue(0.0f,this.data.dataSetCount,true)
+            Log.d(TAG,"chartData.dataSetCount -> ${chartData.dataSetCount}")
+            Log.d(TAG,"this.data.isHighlightEnablednt -> ${this.data.isHighlightEnabled}")
+          //  this.highlightValue(high,false)
             extraBottomOffset=15f
+
+          //  this.highlightValue(lastindexX,lastindexY,lastCount)
             invalidate()
         }
 
-
         Log.d(TAG, "entries ->$entries ")
+        Log.d(TAG, "lineChart.highlighted ->${lineChart.highlighted} ")
 
 
 

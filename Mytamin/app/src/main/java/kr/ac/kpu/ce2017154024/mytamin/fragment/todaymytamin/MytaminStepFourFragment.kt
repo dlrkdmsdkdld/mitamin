@@ -32,6 +32,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
     private lateinit var chipGroup: ChipGroup
     private  lateinit var stateText:Array<String>
     private var chipChildCount:Int=0
+    var userchipcount= 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,11 +58,13 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         chipGroup.setOnCheckedStateChangeListener(this)
     }
     fun setChip(state:Int){
+        var k =0
         when(state){
             1->{
                 stateText=chipStringdata.verysad
                 chipStringdata.verysad.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
+
                 }
                 //   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
@@ -91,10 +94,14 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                 stateText=chipStringdata.verygood
                 chipStringdata.verygood.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
+                    k+=1
                 }
-             //   chipGroup?.addView( lastcreateTagChip(requireContext()))
+                Log.d(TAG,"k 값은 :$k")
+                chipGroup?.addView( lastcreateTagChip(requireContext()))
+                userchipcount=k
             }
         }
+
     }
 
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
@@ -102,10 +109,12 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)}
         else{(activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)}
         Log.d(TAG,"checkedIds.count() ->${checkedIds.count()}")
+        Log.d(TAG,"checkedId ->${checkedIds}")
         if (checkedIds.count()>=3){
             //액티비티가 파괴되면 그전에 있던 id값들이 누적돼서 이렇게해야함
             for(i in 1+previousChildCount until chipGroup.childCount+1+previousChildCount){
                 if(i in checkedIds){
+                    Log.d(TAG,"can click = $i")
                 }
                 else{
                     group.getChildAt(i-1 - previousChildCount).isClickable=false
@@ -182,7 +191,10 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         when(p0){
             mBinding?.wishlistCompleteBtn ->{
                 chipGroup?.addView(createTagChip(requireContext(),mBinding?.wishlistNewWishlist?.text.toString()))
-               // chipGroup.getChildAt(chipGroup.childCount -1- previousChildCount).performClick()
+                Log.d(TAG,"chipGroup.childCount ->${chipGroup.childCount}")
+//                chipGroup.getChildAt(chipGroup.childCount -2- previousChildCount).performClick()
+                Log.d(TAG,"chipGroup.childCount 14 ->${chipGroup.childCount -2- previousChildCount}")
+                chipGroup.getChildAt(userchipcount).performClick()
                 mBinding?.wishlistNewWishlist?.setText("")
                // mBinding?.mytaminUserLayout?.visibility=View.GONE
             }

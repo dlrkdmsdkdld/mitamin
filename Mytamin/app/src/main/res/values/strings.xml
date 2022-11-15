@@ -176,7 +176,8 @@
     <string name="wishlist_no_subtitle">위시리스트를 채워주세요!</string>
     <string name="wishlist_no_btn">작성하기</string>
     <string name="daynote_state">이번 마이데이에는\n어떤 추억을 쌓게 될까요?</string>
-    <string name="daynote_no_title">&#160;&#160;&#160;&#160;&#160;아직 작성된\n마이데이 노트가 없어요.</string>
+    <string name="daynote_no_title">아직 작성된</string>
+    <string name="daynote_no_title2">데이노트가 없어요.</string>
     <string name="daynote_no_subtitle">마이데이를 기록해주세요!</string>
     <string name="wishlist_hidden_title">숨겨진 리스트</string>
     <string name="wishlist_hint">내용 입력</string>

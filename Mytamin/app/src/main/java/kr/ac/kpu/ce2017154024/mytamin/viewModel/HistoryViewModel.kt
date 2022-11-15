@@ -46,8 +46,8 @@ class HistoryViewModel:ViewModel() {
     }
 
     init {
-        randomCareAPI()
-        getMostFeelAPI()
+       // randomCareAPI()
+       // getMostFeelAPI()
         getWeeklyMentalAPI()
     }
     fun getMonthMytaminAPI(){

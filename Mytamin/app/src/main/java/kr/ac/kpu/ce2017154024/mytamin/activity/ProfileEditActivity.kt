@@ -83,22 +83,22 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
 
         val edittextChangeObservable = mbinding.profileEditNicknameText.textChanges()
 
-        val checkNameTextSubscription : Disposable =
-            edittextChangeObservable!!.debounce(500, TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                    onNext ={
-                        Handler(Looper.getMainLooper()).post(Runnable {
-                            if (it.toString()!=""){
-                                setEnableCompleteBtn(false)
-                                mbinding?.profileEditNicknameLayout?.endIconDrawable=resources.getDrawable(R.drawable.ic_baseline_replay_24)
-                                mbinding?.profileEditNicknameLayout?.helperText = JOINSTRING.searchingEmail
-                                CheckNameAPICall(it.toString())
-                            }
-                        })
-
-                    }
-                )
+//        val checkNameTextSubscription : Disposable =
+//            edittextChangeObservable!!.debounce(500, TimeUnit.MILLISECONDS)
+//                .subscribeOn(Schedulers.io())
+//                .subscribeBy(
+//                    onNext ={
+//                        Handler(Looper.getMainLooper()).post(Runnable {
+//                            if (it.toString()!=""){
+//                                setEnableCompleteBtn(false)
+//                                mbinding?.profileEditNicknameLayout?.endIconDrawable=resources.getDrawable(R.drawable.ic_baseline_replay_24)
+//                                mbinding?.profileEditNicknameLayout?.helperText = JOINSTRING.searchingEmail
+//                                CheckNameAPICall(it.toString())
+//                            }
+//                        })
+//
+//                    }
+//                )
 
 
 
@@ -249,7 +249,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         val tmpNickname = mbinding?.profileEditNicknameText.text.toString()
         customProgressDialog.show()
         val bitmap :Bitmap = mbinding?.profileEditImage.drawable.toBitmap()
-        val bitmapRequestBody = bitmap?.let {  `BitmapRequestBody`(it)}
+        val bitmapRequestBody = bitmap?.let {  BitmapRequestBody(it)}
         val bitmapMultipartBody: MultipartBody.Part = MultipartBody.Part.createFormData("file", "file.jpeg", bitmapRequestBody)
         Log.d(TAG,"correctionImage -> $correctionImage")
         val editTobe=mbinding?.profileEditTobeText.text.toString()

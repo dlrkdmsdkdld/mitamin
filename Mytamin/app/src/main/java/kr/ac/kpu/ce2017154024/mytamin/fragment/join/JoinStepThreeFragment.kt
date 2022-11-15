@@ -40,30 +40,30 @@ class joinStepThreeFragment : Fragment() {
 
         val edittextChangeObservable = mBinding?.joinStepThreeNameText?.textChanges()
 
-        val checkNameTextSubscription :Disposable=
-            edittextChangeObservable!!.debounce(500,TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .subscribeBy(
-                    onNext ={
-                        var tmp = it.toString().replace(" ","")
-                        var inputName = it.toString().trim()
-                        (it.toString()=="")
-                        if (it.toString()=="" ){tmp="1"}
-                        if (it.toString()==tmp && it.toString()!="" ){
-                            Handler(Looper.getMainLooper()).post(Runnable {
-                                mBinding?.joinStepThreeNameLayout?.helperText = "사용 가능한 닉네임이에요!"
-                            CheckNameAPICall(it.toString())
-                            })
-                        }else{
-                            Handler(Looper.getMainLooper()).post(Runnable {
-                                mBinding?.joinStepThreeNameLayout?.helperText= "사용할 수 없는 닉네임이에요!"
-                                (activity as joinActivity).canEnableNextbtn(false)
-
-
-                            })
-                        }
-                    }
-                )
+//        val checkNameTextSubscription :Disposable=
+//            edittextChangeObservable!!.debounce(500,TimeUnit.MILLISECONDS)
+//                .subscribeOn(Schedulers.io())
+//                .subscribeBy(
+//                    onNext ={
+//                        var tmp = it.toString().replace(" ","")
+//                        var inputName = it.toString().trim()
+//                        (it.toString()=="")
+//                        if (it.toString()=="" ){tmp="1"}
+//                        if (it.toString()==tmp && it.toString()!="" ){
+//                            Handler(Looper.getMainLooper()).post(Runnable {
+//                                mBinding?.joinStepThreeNameLayout?.helperText = "사용 가능한 닉네임이에요!"
+//                            CheckNameAPICall(it.toString())
+//                            })
+//                        }else{
+//                            Handler(Looper.getMainLooper()).post(Runnable {
+//                                mBinding?.joinStepThreeNameLayout?.helperText= "사용할 수 없는 닉네임이에요!"
+//                                (activity as joinActivity).canEnableNextbtn(false)
+//
+//
+//                            })
+//                        }
+//                    }
+//                )
 
         return mBinding?.root
     }
@@ -105,7 +105,13 @@ class joinStepThreeFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
                 join_step_three_name_text.hint=""
                 mBinding?.joinStepThreeNameLayout?.hint=""
-                (activity as joinActivity).canEnableNextbtn(false)
+                if (p0.toString().trim()!=""){
+                    (activity as joinActivity).canEnableNextbtn(false)
+                    mBinding?.joinStepThreeNameLayout?.helperText="멋진 이름이네요:)"
+
+                }
+                else (activity as joinActivity).canEnableNextbtn(false)
+
 
             }
 
