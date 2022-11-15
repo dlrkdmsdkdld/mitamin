@@ -16,3 +16,5 @@ data class dayMytaminCare(val careId:Int, val canEdit: Boolean,val careCategory:
 data class dayMytamin(val day:String, val mytaminId:Int?, val takeAt: String?,
                       var report:dayMytaminReport?, var care:dayMytaminCare?)
 
+data class mytaminAlarm(val isOn:Boolean,val whentime:String?)
+data class mydayAlarm(val isOn:Boolean,val whentime:String?)

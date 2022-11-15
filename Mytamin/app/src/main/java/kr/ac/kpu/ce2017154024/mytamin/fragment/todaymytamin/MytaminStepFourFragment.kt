@@ -64,31 +64,34 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                 stateText=chipStringdata.verysad
                 chipStringdata.verysad.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
-
+                    k+=1
                 }
-                //   chipGroup?.addView( lastcreateTagChip(requireContext()))
+                   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             2->{
                 stateText=chipStringdata.sad
                 chipStringdata.sad.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
-
+                    k+=1
                 }
-                //   chipGroup?.addView( lastcreateTagChip(requireContext()))
+                   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             3-> {
                 stateText=chipStringdata.soso
                 chipStringdata.soso.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
+                    k+=1
                 }
-                //   chipGroup?.addView( lastcreateTagChip(requireContext()))
+
+                   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             4-> {
                 stateText=chipStringdata.good
                 chipStringdata.good.forEach { statetext ->
                     chipGroup?.addView(createTagChip(requireContext(),statetext))
+                    k+=1
                 }
-                //   chipGroup?.addView( lastcreateTagChip(requireContext()))
+                   chipGroup?.addView( lastcreateTagChip(requireContext()))
             }
             5-> {
                 stateText=chipStringdata.verygood
@@ -98,9 +101,9 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
                 }
                 Log.d(TAG,"k 값은 :$k")
                 chipGroup?.addView( lastcreateTagChip(requireContext()))
-                userchipcount=k
             }
         }
+        userchipcount=k
 
     }
 

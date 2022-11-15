@@ -267,4 +267,30 @@ class HistoryRetrofitManager {
 
         })
     }
+    fun getAlarmState(completion: (RESPONSE_STATUS, mytaminAlarm?,mydayAlarm?) -> Unit){
+        iHistoryRetrofit?.getAlarmState()?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    val mytamin=it.asJsonObject.get("data").asJsonObject.get("mytamin").asJsonObject
+                    val mytaminisOn=mytamin.get("isOn").asBoolean
+                    var resultmytamin:mytaminAlarm
+                    if (mytaminisOn) resultmytamin=mytaminAlarm(mytaminisOn,mytamin.get("when").asString)
+                    else resultmytamin=mytaminAlarm(mytaminisOn,null)
+                    val myday=it.asJsonObject.get("data").asJsonObject.get("myday").asJsonObject
+                    val mydayisOn=myday.get("isOn").asBoolean
+                    var resultmyday:mydayAlarm
+                    if (mydayisOn) resultmyday=mydayAlarm(mydayisOn,mytamin.get("when").asString)
+                    else resultmyday=mydayAlarm(mydayisOn,null)
+                    completion(RESPONSE_STATUS.OKAY,resultmytamin,resultmyday)
+
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.OKAY,null,null)
+
+            }
+
+        })
+    }
 }

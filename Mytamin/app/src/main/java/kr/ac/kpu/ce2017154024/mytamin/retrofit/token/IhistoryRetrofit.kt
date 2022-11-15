@@ -39,4 +39,10 @@ interface IhistoryRetrofit {
     @DELETE ("/user/withdrawal")
     fun quitMytamin( ) : Call<JsonElement>
 
+
+    @GET("/alarm/status")
+    fun getAlarmState() : Call<JsonElement>
+
+
+
 }

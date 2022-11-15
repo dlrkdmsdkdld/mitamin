@@ -30,7 +30,7 @@
             android:background="@drawable/ic_setting"
             android:layout_marginTop="13dp"
             android:layout_marginRight="13dp"
-            android:visibility="gone"
+            android:visibility="visible"
 
             android:id="@+id/information_setting_btn"
             android:padding="15dp"
