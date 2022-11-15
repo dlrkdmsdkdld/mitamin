@@ -293,4 +293,36 @@ class HistoryRetrofitManager {
 
         })
     }
+
+
+    fun mytaminAlarmOn(data:mytaminAlarmTime,completion: (RESPONSE_STATUS) -> Unit){
+        iHistoryRetrofit?.setMytmainAlarmOn(data)?.enqueue(object :retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    if (it.asJsonObject.get("statusCode").asInt ==200) completion(RESPONSE_STATUS.OKAY)
+                    else completion(RESPONSE_STATUS.FAIL)
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL)
+            }
+
+        })
+    }
+    fun mytaminAlarmOff(completion: (RESPONSE_STATUS) -> Unit){
+        iHistoryRetrofit?.setMytmainAlarmOff()?.enqueue(object :Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                response.body()?.let {
+                    if (it.asJsonObject.get("statusCode").asInt ==200) completion(RESPONSE_STATUS.OKAY)
+                    else completion(RESPONSE_STATUS.FAIL)
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL)
+            }
+
+        })
+    }
 }

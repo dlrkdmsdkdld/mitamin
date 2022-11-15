@@ -4,6 +4,7 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import kr.ac.kpu.ce2017154024.mytamin.model.careCategoryCodeList
 import kr.ac.kpu.ce2017154024.mytamin.model.initdata
+import kr.ac.kpu.ce2017154024.mytamin.model.mytaminAlarmTime
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Call
@@ -43,6 +44,10 @@ interface IhistoryRetrofit {
     @GET("/alarm/status")
     fun getAlarmState() : Call<JsonElement>
 
+    @PATCH("/alarm/mytamin/on")
+    fun setMytmainAlarmOn( @Body data: mytaminAlarmTime) : Call<JsonElement>
 
+    @PATCH("/alarm/mytamin/off")
+    fun setMytmainAlarmOff( ) : Call<JsonElement>
 
 }

@@ -18,3 +18,10 @@ data class dayMytamin(val day:String, val mytaminId:Int?, val takeAt: String?,
 
 data class mytaminAlarm(val isOn:Boolean,val whentime:String?)
 data class mydayAlarm(val isOn:Boolean,val whentime:String?)
+
+data class mytaminAlarmTime(val mytaminHour:String,val mytaminMin:String)
+
+
+
+
+
