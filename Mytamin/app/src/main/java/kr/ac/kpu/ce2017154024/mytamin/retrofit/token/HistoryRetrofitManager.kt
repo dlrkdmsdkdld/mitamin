@@ -273,13 +273,16 @@ class HistoryRetrofitManager {
                 response.body()?.let {
                     val mytamin=it.asJsonObject.get("data").asJsonObject.get("mytamin").asJsonObject
                     val mytaminisOn=mytamin.get("isOn").asBoolean
+
                     var resultmytamin:mytaminAlarm
                     if (mytaminisOn) resultmytamin=mytaminAlarm(mytaminisOn,mytamin.get("when").asString)
                     else resultmytamin=mytaminAlarm(mytaminisOn,null)
+
                     val myday=it.asJsonObject.get("data").asJsonObject.get("myday").asJsonObject
                     val mydayisOn=myday.get("isOn").asBoolean
+
                     var resultmyday:mydayAlarm
-                    if (mydayisOn) resultmyday=mydayAlarm(mydayisOn,mytamin.get("when").asString)
+                    if (mydayisOn) resultmyday=mydayAlarm(mydayisOn,myday.get("when").asString)
                     else resultmyday=mydayAlarm(mydayisOn,null)
                     completion(RESPONSE_STATUS.OKAY,resultmytamin,resultmyday)
 
@@ -321,6 +324,34 @@ class HistoryRetrofitManager {
 
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                 completion(RESPONSE_STATUS.FAIL)
+            }
+
+        })
+    }
+    fun mydayAlarmOff(completion: (RESPONSE_STATUS) -> Unit){
+        iHistoryRetrofit?.setMydayAlarmOff()?.enqueue(object :Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+                if (response.code()==200) completion(RESPONSE_STATUS.OKAY)
+                else completion(RESPONSE_STATUS.FAIL)
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL)
+            }
+
+        })
+    }
+    fun setMydayAlarmOn(time:Int,completion: (RESPONSE_STATUS) -> Unit){
+        iHistoryRetrofit?.setMydayAlarmOn(time)?.enqueue(object :Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                if (response.code()==200) completion(RESPONSE_STATUS.OKAY)
+                else completion(RESPONSE_STATUS.FAIL)
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                completion(RESPONSE_STATUS.FAIL)
+
             }
 
         })

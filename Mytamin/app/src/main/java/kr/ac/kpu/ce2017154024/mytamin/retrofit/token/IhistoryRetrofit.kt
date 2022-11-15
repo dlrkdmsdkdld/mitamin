@@ -49,5 +49,9 @@ interface IhistoryRetrofit {
 
     @PATCH("/alarm/mytamin/off")
     fun setMytmainAlarmOff( ) : Call<JsonElement>
+    @PATCH("/alarm/myday/off")
+    fun setMydayAlarmOff( ) : Call<JsonElement>
+    @PATCH("/alarm/myday/on/{time}")
+    fun setMydayAlarmOn( @Path("time") time: Int) : Call<JsonElement>
 
 }

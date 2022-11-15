@@ -35,6 +35,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
     private val tabTitleArray = arrayOf(
         "데이노트","위시리스트"
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding= ActivityMydayBinding.inflate(layoutInflater)
@@ -88,12 +89,12 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
 
         WorkManager.getInstance(applicationContext).getWorkInfosByTagLiveData("newdaynote")
             .observe(this, Observer {
-                var first=true
+                var firstd=true
                 it.forEach {
                     val myResult = it.outputData.getBoolean("result", false)
-                    if (it.state == WorkInfo.State.SUCCEEDED && myResult&& first) {
+                    if (it.state == WorkInfo.State.SUCCEEDED && firstd) {
                         //문제가 이게 존나게 많이 호출되네..
-                        first=false
+                        firstd=false
                         Log.d(TAG, "it.id -> ${it.id}")
                         Log.d(TAG, " it.outputData.keyValueMap   ${it.outputData.keyValueMap}")
                         myMydayViewmodel.getWishlistAPI()
@@ -157,9 +158,17 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         Log.d(TAG," MydayActivity onDestroy ")
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        myMydayViewmodel.getdaynoteAPI()
-        myMydayViewmodel.getWishlistAPI()
+    override fun onResume() {
+        super.onResume()
+        if (!firstLoading){
+            myMydayViewmodel.getdaynoteAPI()
+            myMydayViewmodel.getWishlistAPI()
+        }
+        Log.d(TAG," mydayAcitivy 다시시작됨 =")
+
+    }
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG," mydayAcitivy 잠시 멈춤")
     }
 }

@@ -13,6 +13,7 @@ import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivitySettingBinding
 import kr.ac.kpu.ce2017154024.mytamin.fragment.record.BottomYearMonthFragment
 import kr.ac.kpu.ce2017154024.mytamin.fragment.setting.AlarmCalendarFragment
+import kr.ac.kpu.ce2017154024.mytamin.fragment.setting.AlarmMydayFragment
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.HistoryRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
@@ -23,6 +24,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var customProgressDialog: Dialog
     lateinit var mysettingviewmodel: settingViewmodel
     var first:Boolean=true
+    var firstMyday:Boolean=true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mbinding= ActivitySettingBinding.inflate(layoutInflater)
@@ -33,7 +35,12 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
         customProgressDialog.show()
         alramStateObserver()
         mytaminAlarmTimeObserver()
+        mydayAlarmObserver()
+
         mbinding?.settingEatAlarmBtn?.setOnClickListener(this)
+        mbinding?.settingMydayBtn?.setOnClickListener(this)
+        mbinding?.settingBackBtn?.setOnClickListener(this)
+
         mbinding?.settingEatAlarm.setOnCheckedChangeListener { compoundButton, b ->
             //처음에 oncreate 될때도 자꾸 바텀시트가 열려서 처음 들어온건지 확ㅇ니
             if (b && !first){
@@ -46,6 +53,18 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
             first=false
 
         }
+        mbinding?.settingMydaySwitch.setOnCheckedChangeListener { compoundButton, b ->
+            if (b && !firstMyday){
+                Log.d(TAG,"활성화됨")
+                mbinding?.settingMydayBtn.performClick()
+            }else if(!b && !firstMyday) {
+                mydayAlarmOffAPI()
+              //  mytaminAlarmOffAPI()
+                Log.d(TAG,"비활성화됨")
+            }
+            firstMyday=false
+
+        }
     }
 
     override fun onClick(p0: View?) {
@@ -55,7 +74,23 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
                 calendarFragment.show(supportFragmentManager,calendarFragment.tag)
 
             }
+            mbinding?.settingMydayBtn ->{
+                val bottomMyday=AlarmMydayFragment()
+                bottomMyday.show(supportFragmentManager,bottomMyday.tag)
+            }
+            mbinding?.settingBackBtn ->{
+                finish()
+            }
         }
+    }
+    private fun mydayAlarmObserver(){
+        mysettingviewmodel.getmydayTime.observe(this,Observer{
+            customProgressDialog.show()
+            mysettingviewmodel.setMydayAlarmOn(it)
+            firstMyday=true
+            mbinding?.settingMydaySwitch.isChecked=true
+            firstMyday=false
+        })
     }
     private fun mytaminAlarmTimeObserver(){
         mysettingviewmodel.getmytaminTime.observe(this,Observer{ resetTime->
@@ -86,6 +121,16 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
         })
         mysettingviewmodel.getmyDayData.observe(this, Observer {
             mbinding?.settingMydaySwitch.isChecked=it.isOn
+            mbinding?.settingMydayBtn.isEnabled=it.isOn
+            Log.d(TAG, " it -> $it")
+            if (it.isOn){
+                mbinding?.settingMydayText.setTextColor(resources.getColor(R.color.primary,null))
+                mbinding?.settingMydayImage.setBackgroundResource(R.drawable.icon_arrow_down_primary)
+            }else{
+                mbinding?.settingMydayText.setTextColor(resources.getColor(R.color.notEnabled,null))
+                mbinding?.settingMydayImage.setBackgroundResource(R.drawable.icon_arrow_down_gray)
+            }
+            firstMyday=false
             it.whentime?.let{mbinding?.settingMydayText.text=it}
             if (customProgressDialog.isShowing)customProgressDialog.dismiss()
         })
@@ -93,6 +138,12 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
     private fun mytaminAlarmOffAPI(){
         customProgressDialog.show()
         HistoryRetrofitManager.instance.mytaminAlarmOff {
+            mysettingviewmodel.getAlarmAPI()
+        }
+    }
+    private fun mydayAlarmOffAPI(){
+        customProgressDialog.show()
+        HistoryRetrofitManager.instance.mydayAlarmOff {
             mysettingviewmodel.getAlarmAPI()
         }
     }

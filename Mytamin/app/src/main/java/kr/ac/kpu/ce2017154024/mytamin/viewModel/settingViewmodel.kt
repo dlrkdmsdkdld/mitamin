@@ -35,6 +35,13 @@ class settingViewmodel:ViewModel() {
     fun setmytaminTime(time: mytaminAlarmTime?){
         time?.let {  mytaminTime.value=it}
     }
+    private val mydayTime = MutableLiveData<Int>()
+    val getmydayTime: LiveData<Int>
+        get() = mydayTime
+
+    fun setdayTime(time: Int?){
+        time?.let {  mydayTime.value=it}
+    }
 
 
     init {
@@ -49,6 +56,12 @@ class settingViewmodel:ViewModel() {
     fun mytaminAlarmOn(data:mytaminAlarmTime){
         HistoryRetrofitManager.instance.mytaminAlarmOn(data){responseStatus: RESPONSE_STATUS ->
             getAlarmAPI()
+        }
+    }
+    fun setMydayAlarmOn(time:Int){
+        HistoryRetrofitManager.instance.setMydayAlarmOn(time){r->
+            getAlarmAPI()
+
         }
     }
 

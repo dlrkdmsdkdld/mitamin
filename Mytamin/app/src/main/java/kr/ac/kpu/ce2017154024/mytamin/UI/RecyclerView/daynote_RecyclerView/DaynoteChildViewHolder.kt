@@ -42,10 +42,13 @@ class DaynoteChildViewHolder(itemView: View,Interface :IDaynoteChildInterface): 
     fun bindWithView(data: daynoteData){
         this.daynote=data
         monthText.text = "${data.month}월"
-        Glide.with(itemView)
-            .load(data.imgList.get(0))
-            .centerCrop()
-            .into(imageview)
+        data.imgList?.let {
+            Glide.with(itemView)
+                .load(data.imgList.get(0))
+                .centerCrop()
+                .into(imageview)
+        }
+
 
     }
     override fun onClick(p0: View?) {

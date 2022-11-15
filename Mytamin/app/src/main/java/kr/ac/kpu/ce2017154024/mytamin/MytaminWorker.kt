@@ -88,6 +88,10 @@ class MytaminWorker(ctx: Context, params: WorkerParameters) :CoroutineWorker(ctx
 
             return Result.success()
         }else{
+            Handler(Looper.getMainLooper()).post{
+                Toast.makeText(MyApplication.instance, "데이노트 작성실패했어요..", Toast.LENGTH_SHORT).show()
+
+            }
             return Result.failure()
 
         }

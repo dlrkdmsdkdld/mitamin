@@ -209,7 +209,10 @@
     <string name="setting_password_sub">앱을 시작할 때 잠금해제가 필요해요.</string>
     <string name="setting_myday">마이데이 알림</string>
     <string name="setting_myday_sub">마이데이가 다가오면 알림을 받을게요.</string>
-    <string name="setting_myday_btn">하루전</string>
+    <string name="setting_myday_btn">하루 전</string>
+    <string name="setting_myday_1">당일</string>
+    <string name="setting_myday_2">하루 전</string>
+    <string name="setting_myday_3">일주일 전</string>
     <!--디테일 데이노트-->
     <string name="detail_title">마이데이 기록</string>
     <string name="detail_modify">마이데이 기록 수정하기</string>
