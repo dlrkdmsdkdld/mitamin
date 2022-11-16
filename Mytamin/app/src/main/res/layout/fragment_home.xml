@@ -91,7 +91,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:textColor="@color/black"
+                    android:textColor="@color/realblack"
                     android:layout_marginTop="24dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"

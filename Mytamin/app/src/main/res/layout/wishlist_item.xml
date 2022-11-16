@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/black"
+        android:textColor="@color/realblack"
         android:textSize="15sp"
         android:layout_marginLeft="20dp"
         android:visibility="visible"

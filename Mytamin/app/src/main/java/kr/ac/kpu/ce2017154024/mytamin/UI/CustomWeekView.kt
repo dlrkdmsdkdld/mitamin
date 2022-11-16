@@ -98,7 +98,9 @@ class CustomWeekView(context: Context) :WeekView(context) {
         val cx = x + mItemWidth / 2
         calendar?.let {
             canvas?.let { cit->
-                mCurDayTextPaint.color = Color.BLACK
+                mCurDayTextPaint.color = resources.getColor(R.color.black,null)
+//                if (resources.getString(R.string.mode) == "Day") mCurDayTextPaint.color = resources.getColor(R.color.black,null)
+//                else mCurDayTextPaint.color = resources.getColor(R.color.black,null)
                 cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine/2 , mCurDayTextPaint)
             }
 

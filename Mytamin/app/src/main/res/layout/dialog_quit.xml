@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/user_information_guide10"
-        android:textColor="@color/black"
+        android:textColor="@color/realblack"
         android:textSize="20sp"
         android:fontFamily="@font/appmainfont_medium"
         android:includeFontPadding="false"
@@ -44,7 +44,7 @@
         android:id="@+id/dialog_negative_btns"
         >
         <TextView
-            android:textColor="@color/black"
+            android:textColor="@color/realblack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
         app:layout_constraintStart_toEndOf="@+id/mytamin_vertical"
         >
         <TextView
-            android:textColor="@color/black"
+            android:textColor="@color/realblack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

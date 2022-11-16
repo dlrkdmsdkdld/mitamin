@@ -14,6 +14,9 @@ object PreferenceUtil {
     private const val KEY_EMAIL_HISTORY = "key_email_history"
     private const val KEY_PASSWORD_HISTORY = "key_password_history"
 
+    private const val INPUT_TOKEN_HISTORY = "input_token_history"
+    private const val KEY_TOKEN_HISTORY = "key_token_history"
+
     fun storeUserData(email:String,password:String){
         Log.d(TAG,"SharedPrefManager - storeUserData called")
         val sharedEmail = MyApplication.instance.getSharedPreferences(INPUT_EMAIL_HISTORY,Context.MODE_PRIVATE)
@@ -25,6 +28,17 @@ object PreferenceUtil {
         editorPassword.putString(KEY_PASSWORD_HISTORY,password)
         editorPassword.apply()
 
+    }
+    fun storeUserToken(token:String){
+        val sharedtoken = MyApplication.instance.getSharedPreferences(INPUT_TOKEN_HISTORY,Context.MODE_PRIVATE)
+        val editortoken = sharedtoken.edit()
+        editortoken.putString(KEY_TOKEN_HISTORY,token)
+        editortoken.apply()
+    }
+    fun obtainToken():String{
+        val sharedtoken = MyApplication.instance.getSharedPreferences(INPUT_TOKEN_HISTORY,Context.MODE_PRIVATE)
+        val token = sharedtoken.getString(KEY_TOKEN_HISTORY,"null").toString()
+        return token
     }
     fun obtainUserData():Pair<String,String>{
         val sharedEmail = MyApplication.instance.getSharedPreferences(INPUT_EMAIL_HISTORY,Context.MODE_PRIVATE)

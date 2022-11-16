@@ -72,7 +72,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:id="@+id/mytamin_timer_text"
-                    android:textColor="@color/black"
+                    android:textColor="@color/realblack"
                     android:includeFontPadding="false"
                     android:layout_marginTop="15dp"
                     />

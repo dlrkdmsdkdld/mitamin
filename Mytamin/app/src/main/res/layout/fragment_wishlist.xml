@@ -57,6 +57,7 @@
             android:hint="@string/user_myday_complete"
             android:padding="10dp"
             android:textSize="16dp"
+            android:textColor="@color/realblack"
             android:singleLine="true"
             android:fontFamily="@font/appsubfont_r"
             android:includeFontPadding="false"

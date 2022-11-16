@@ -14,6 +14,8 @@ import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityNewWishListBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityProfileEditBinding
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.token.InformationRetrofitManager
 
+
+///안쓰는 액티비티
 class NewWishListActivity : AppCompatActivity() {
     private lateinit var mbinding: ActivityNewWishListBinding
     private lateinit var customProgressDialog: Dialog

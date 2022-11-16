@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/profile_edit_nickname_text"
-            android:textColor="@color/black"
+            android:textColor="@color/realblack"
             android:gravity="left|center"
             />
 
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/profile_edit_tobe_text"
             android:gravity="left|center"
-            android:textColor="@color/black"
+            android:textColor="@color/realblack"
             android:background="@null"
 
             />

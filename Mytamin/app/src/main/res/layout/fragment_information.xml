@@ -87,7 +87,6 @@
                 app:layout_constraintStart_toStartOf="parent"
 
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="20dp"
                 android:layout_marginTop="48dp"
                 android:textSize="18dp"
                 android:textColor="@color/primary"
@@ -99,13 +98,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18dp"
-                android:textColor="@color/black"
+                android:textColor="@color/realblack"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
                 app:layout_constraintTop_toBottomOf="@+id/information_bemy_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginLeft="20dp"
                 android:id="@+id/information_nickname_text"
                 />
             <TextView
@@ -116,7 +114,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/information_nickname_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="12dp"
                 android:textColor="@color/darkGray"
                 android:id="@+id/information_provider_text"
                 />
@@ -133,7 +130,6 @@
             android:src="@drawable/ic_profile"
             android:layout_marginTop="37dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginLeft="16dp"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -154,7 +150,7 @@
                 android:includeFontPadding="false"
                 android:fontFamily="@font/appmainfont_bold"
                 android:textSize="18dp"
-                android:textColor="@color/black"
+                android:textColor="@color/realblack"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
                 android:id="@+id/user_myday_title"
@@ -168,6 +164,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/user_myday_subtitle1"
                 android:textSize="14dp"
+                android:textColor="@color/darkGray"
                 android:id="@+id/user_myday_subtitle"
                 android:fontFamily="@font/appsubfont_r"
                 android:includeFontPadding="false"
@@ -182,7 +179,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/user_myday_day"
                 android:textSize="24dp"
-                android:textColor="@color/black"
+                android:textColor="@color/realblack"
                 android:id="@+id/user_time_text"
                 android:fontFamily="@font/appmainfont_bold"
                 android:includeFontPadding="false"
@@ -212,7 +209,7 @@
                 android:id="@+id/user_state_text"
                 android:fontFamily="@font/appmainfont_medium"
                 android:includeFontPadding="false"
-                android:textColor="@color/black"
+                android:textColor="@color/realblack"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

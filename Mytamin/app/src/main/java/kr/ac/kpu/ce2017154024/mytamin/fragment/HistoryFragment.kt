@@ -126,7 +126,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             m=month
             y=year
               //  여기서 한달받아옴
-            //myviewmodel.getMonthMytaminAPI()
+            myviewmodel.getMonthMytaminAPI()
         }
         myviewmodel.getmonthmytamin.observe(viewLifecycleOwner, Observer {
             val mapdata: MutableMap<String, Calendar> = mutableMapOf()

@@ -11,8 +11,10 @@
     <color name="test">#e14f50</color>
     <color name="black">#121212</color>
     <color name="background_white">#FFFFFFFF</color>
+    <color name="realblack">#121212</color>
     <color name="background_gray">#F2F4F6</color>
     <color name="background_yellow">#FFF3AB</color>
+    <color name="background_whiteAndDark">#FFFFFFFF</color>
 
     <color name="semiGray">#CECFD6</color>
     <color name="LawnGreen">#FF7CFc00</color>

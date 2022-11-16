@@ -18,7 +18,7 @@
         android:includeFontPadding="false"
         android:layout_marginTop="16dp"
         android:textSize="14dp"
-        android:textColor="@color/black"
+        android:textColor="@color/realblack"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         android:fontFamily="@font/appsubfont_r"
         android:includeFontPadding="false"
         android:textSize="14dp"
-        android:textColor="@color/black"
+        android:textColor="@color/realblack"
 
         />
     <TextView
