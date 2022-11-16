@@ -22,6 +22,7 @@ import kr.ac.kpu.ce2017154024.mytamin.activity.joinActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentJoinStepThreeBinding
 import kr.ac.kpu.ce2017154024.mytamin.retrofit.join.JoinRetrofitManager
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.JOINSTRING
 import kr.ac.kpu.ce2017154024.mytamin.utils.RESPONSE_STATUS
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.joinViewModel
@@ -105,11 +106,19 @@ class joinStepThreeFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
                 join_step_three_name_text.hint=""
                 mBinding?.joinStepThreeNameLayout?.hint=""
-                if (p0.toString().trim()!=""){
-                    (activity as joinActivity).canEnableNextbtn(true)
-                    mBinding?.joinStepThreeNameLayout?.helperText="멋진 이름이네요:)"
-                    joinViewModel.setname(p0.toString().trim())
 
+                if (p0.toString().trim().length>9){
+                        Log.d(TAG,"p0.toString().trim().  ->${p0.toString().trim()}")
+                    (activity as joinActivity).canEnableNextbtn(false)
+                    mBinding?.joinStepThreeNameLayout?.setHelperTextColor(resources.getColorStateList(R.color.textRed,null))
+                    mBinding?.joinStepThreeNameLayout?.helperText="9자를 넘었어요"
+
+                }
+                else if(p0.toString().trim()!=""){
+                    (activity as joinActivity).canEnableNextbtn(true)
+                    joinViewModel.setname(p0.toString().trim())
+                    mBinding?.joinStepThreeNameLayout?.setHelperTextColor(resources.getColorStateList(R.color.primary,null))
+                    mBinding?.joinStepThreeNameLayout?.helperText="멋진 이름이네요:)"
                 }
                 else (activity as joinActivity).canEnableNextbtn(false)
 

@@ -74,8 +74,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             PrivateUserDataSingleton.refreshToken = returnLoginData?.refreshToken
                             PrivateUserDataSingleton.userEmail = query.email
                             PrivateUserDataSingleton.userPassword = query.password
+                            //자동로그인 체크안해도 토큰은 계속 저장해야함
+                            PreferenceUtil.storeUserToken(returnLoginData?.accessToken)
                             if (login_check.isChecked) {
-                                PreferenceUtil.storeUserToken(returnLoginData?.accessToken)
                                 PreferenceUtil.storeUserData(query.email, query.password)
                             }
                             //유저 데이터 preference에 저장

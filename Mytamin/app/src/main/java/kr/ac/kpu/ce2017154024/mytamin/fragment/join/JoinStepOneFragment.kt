@@ -214,6 +214,7 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
                 Log.d(TAG,"join_step_one_password_text afterTextChanged $p0  ${p0?.trim()}")
                 if (Pattern.matches("^[a-zA-Z0-9]*\$", p0) && (8 <=p0!!.count() && p0!!.count()<31 )  && p0.toString()==p0.toString().trim()) {
                     join_step_one_password_layout.text="사용 가능한 비밀번호입니다"
+                    join_step_one_password_layout.setTextColor(resources.getColor(R.color.primary,null))
                     passwordValue=p0.toString().trim()
                     if (passwordValue == mBinding?.joinStepOnePasswordConfirmText?.text.toString()){
                         join_step_one_password_confirm_layout.text="비밀번호가 일치합니다."
@@ -286,7 +287,8 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
         Log.d(Constant.TAG,"joinStepOneFragment onDestroyView")
     }
     private fun OkAllItem(){
-        if (RepasswordValue==true && passwordValue!=null   && emailValue!=null  ){
+        val RepasswordValue =  mBinding?.joinStepOnePasswordConfirmText?.text.toString() == mBinding?.joinStepOnePasswordText?.text.toString()
+        if (RepasswordValue && passwordValue!=null && emailValue!=null){
             (activity as joinActivity).canEnableNextbtn(true)
             Log.d(TAG,"joinStepOneFragment OkAllItem -> RepasswordValue : $RepasswordValue" +
                     "  passwordValue : $passwordValue  emailValue:$emailValue")

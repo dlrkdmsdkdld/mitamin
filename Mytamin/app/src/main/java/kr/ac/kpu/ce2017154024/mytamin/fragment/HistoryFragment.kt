@@ -121,7 +121,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
         var m = mBinding!!.cvCalendar!!.curMonth
         var y = mBinding!!.cvCalendar!!.curYear
         mBinding?.cvCalendar?.setOnMonthChangeListener { year, month ->
-            mBinding?.historyMonthText?.text ="${month}월"
+            mBinding?.historyMonthText?.text ="${year}년 ${month}월"
             myviewmodel.setSelectMonthAndYear("${year}.${month.parseIntToMonth()}")
             m=month
             y=year

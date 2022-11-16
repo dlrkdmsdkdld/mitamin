@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.chip.Chip
@@ -193,13 +194,18 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
     override fun onClick(p0: View?) {
         when(p0){
             mBinding?.wishlistCompleteBtn ->{
-                chipGroup?.addView(createTagChip(requireContext(),mBinding?.wishlistNewWishlist?.text.toString()))
-                Log.d(TAG,"chipGroup.childCount ->${chipGroup.childCount}")
+                val newChipText = mBinding?.wishlistNewWishlist?.text.toString()
+                if (newChipText.length>10){
+                    Toast.makeText(requireContext(),"감정 태그는 10자 이내로 해주세요!",Toast.LENGTH_SHORT).show()
+
+                }
+                else{
+                    chipGroup?.addView(createTagChip(requireContext(),mBinding?.wishlistNewWishlist?.text.toString()))
+                    Log.d(TAG,"chipGroup.childCount ->${chipGroup.childCount}")
 //                chipGroup.getChildAt(chipGroup.childCount -2- previousChildCount).performClick()
-                Log.d(TAG,"chipGroup.childCount 14 ->${chipGroup.childCount -2- previousChildCount}")
-                chipGroup.getChildAt(userchipcount).performClick()
-                mBinding?.wishlistNewWishlist?.setText("")
-               // mBinding?.mytaminUserLayout?.visibility=View.GONE
+                    chipGroup.getChildAt(userchipcount).performClick()
+                    mBinding?.wishlistNewWishlist?.setText("")
+                }
             }
         }
     }

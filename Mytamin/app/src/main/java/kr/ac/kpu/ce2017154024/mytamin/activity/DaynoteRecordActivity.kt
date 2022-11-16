@@ -69,9 +69,7 @@ class DaynoteRecordActivity : AppCompatActivity(),View.OnClickListener {
     }
     fun setEnableNextBtnPart(can:Boolean){
         mbinding.recordCompleteBtn.isEnabled = can
-        if (can){
-            mbinding.recordCompleteBtn.background = getDrawable(R.drawable.round_layout_background_orange)
-        }else{mbinding.recordCompleteBtn.background = getDrawable(R.drawable.round_layout_background_gray)}
+
     }
     fun selectwishList(can:Boolean){
         if(can){
