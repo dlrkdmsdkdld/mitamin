@@ -200,68 +200,72 @@ class HomeRetrofitManager {
 
 
 
-    fun getlatestMytamin (status: Status , completion: (RESPONSE_STATUS,LatestMytamin?) -> Unit){
+    fun getlatestMytamin ( completion: (RESPONSE_STATUS,LatestMytamin?) -> Unit){
         iHomeRetrofit?.getlatestMytamin()
             ?.enqueue(object :retrofit2.Callback<JsonElement>{
                 override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                     response.body()?.let {
                         val body =it.asJsonObject
-                        val data = body.get("data").asJsonObject
-                        if (data.isJsonNull) completion(RESPONSE_STATUS.OKAY,null)
-                        else{
-                            
+                        if (body.get("data").isJsonNull) completion(RESPONSE_STATUS.OKAY,null)
+                        else {
+                            val data = body.get("data").asJsonObject
+
+
+                            if (!data.get("report").isJsonNull && data.get("care").isJsonNull) { //진단하기만하고 칭찬처방은 안한경우
+                                val report = data.get("report").asJsonObject
+                                val takeAtTime = data.get("takeAt").asString
+                                //val canEditCare = data.get("canEditCare").asBoolean
+                                val canEditReport = report.get("canEdit").asBoolean
+                                val reportId = report.get("reportId").asInt
+                                val mentalConditionCode = report.get("mentalConditionCode").asInt
+                                val feelingTag = report.get("feelingTag").asString
+                                val mentalConditionMsg = report.get("mentalCondition").asString
+                                val todayReport = report.get("todayReport").asString
+                                val result = LatestMytamin(takeAtTime, canEditReport,
+                                    false, reportId, mentalConditionCode, feelingTag, mentalConditionMsg, todayReport
+                                )
+                                completion(RESPONSE_STATUS.OKAY, result)
+
+                            } else if (!data.get("report").isJsonNull && !data.get("care").isJsonNull) {//진단하기,칭찬처방 둘다한경우우
+                                val message = body.get("message").asString
+                                val takeAtTime = data.get("takeAt").asString
+
+                                val report = data.get("report").asJsonObject
+                                val reportId = report.get("reportId").asInt
+                                val canEditReport = report.get("canEdit").asBoolean
+                                val mentalConditionCode = report.get("mentalConditionCode").asInt
+                                val feelingTag = report.get("feelingTag").asString
+                                val mentalConditionMsg = report.get("mentalCondition").asString
+                                val todayReport = report.get("todayReport").asString
+
+                                val care = data.get("care").asJsonObject
+                                val careId = care.get("careId").asInt
+                                val careMsg1 = care.get("careMsg1").asString
+                                val careMsg2 = care.get("careMsg2").asString
+                                val canEditCare = care.get("canEdit").asBoolean
+                                val careCategory = care.get("careCategory").asString
+
+                                val result = LatestMytamin(takeAtTime, canEditReport, canEditCare, reportId, mentalConditionCode, feelingTag, mentalConditionMsg,
+                                    todayReport, careId, careCategory, careMsg1, careMsg2
+                                )
+                                Log.d(TAG, "user doCompleteReport response message:${message}  updatedTime:$takeAtTime")
+                                completion(RESPONSE_STATUS.OKAY, result)
+
+                            } else if (data.get("report").isJsonNull && !data.get("care").isJsonNull) {
+                                val takeAtTime =
+                                    body.get("data").asJsonObject.get("takeAt").asString
+
+                                val care = data.get("care").asJsonObject
+                                val careId = care.get("careId").asInt
+                                val careMsg1 = care.get("careMsg1").asString
+                                val careMsg2 = care.get("careMsg2").asString
+                                val canEditCare = care.get("canEdit").asBoolean
+                                val result = LatestMytamin(takeAt = takeAtTime, canEditReport = false, canEditCare = canEditCare,
+                                    careId = careId, careMsg1 = careMsg1, careMsg2 = careMsg2)
+                                completion(RESPONSE_STATUS.OKAY, result)
+
+                            }
                         }
-
-                        if (status.reportIsDone ==true && status.careIsDone == false ){ //진단하기만하고 칭찬처방은 안한경우
-                            val takeAtTime = data.get("takeAt").asString
-                            //val canEditCare = data.get("canEditCare").asBoolean
-                            val report = data.get("report").asJsonObject
-                            val canEditReport = report.get("canEdit").asBoolean
-                            val reportId = report.get("reportId").asInt
-                            val mentalConditionCode = report.get("mentalConditionCode").asInt
-                            val feelingTag = report.get("feelingTag").asString
-                            val mentalConditionMsg =report.get("mentalCondition").asString
-                            val todayReport = report.get("todayReport").asString
-                            val result = LatestMytamin(takeAtTime,canEditReport,false,reportId,mentalConditionCode,feelingTag,mentalConditionMsg,todayReport)
-                            completion(RESPONSE_STATUS.OKAY,result)
-
-                        }
-                        else if(status.reportIsDone ==true && status.careIsDone ==true){//진단하기,칭찬처방 둘다한경우우
-                           val message = body.get("message").asString
-                            val takeAtTime = data.get("takeAt").asString
-
-                            val report = data.get("report").asJsonObject
-                            val reportId = report.get("reportId").asInt
-                            val canEditReport = report.get("canEdit").asBoolean
-                            val mentalConditionCode = report.get("mentalConditionCode").asInt
-                            val feelingTag = report.get("feelingTag").asString
-                            val mentalConditionMsg =report.get("mentalCondition").asString
-                            val todayReport = report.get("todayReport").asString
-
-                            val care = data.get("care").asJsonObject
-                            val careId = care.get("careId").asInt
-                            val careMsg1 = care.get("careMsg1").asString
-                            val careMsg2 = care.get("careMsg2").asString
-                            val canEditCare = care.get("canEdit").asBoolean
-                            val careCategory = care.get("careCategory").asString
-
-                            val result = LatestMytamin(takeAtTime,canEditReport,canEditCare,reportId,mentalConditionCode,feelingTag,mentalConditionMsg,todayReport,careId,careCategory,careMsg1,careMsg2)
-                            Log.d(TAG, "user doCompleteReport response message:${message}  updatedTime:$takeAtTime" )
-                            completion(RESPONSE_STATUS.OKAY,result)
-
-                        }else if (status.careIsDone ==true && status.reportIsDone ==false){
-                            val takeAtTime = body.get("data").asJsonObject.get("takeAt").asString
-
-                            val care = data.get("care").asJsonObject
-                            val careId = care.get("careId").asInt
-                            val careMsg1 = care.get("careMsg1").asString
-                            val careMsg2 = care.get("careMsg2").asString
-                            val canEditCare = care.get("canEdit").asBoolean
-                            val result = LatestMytamin(takeAt = takeAtTime,canEditReport=false,canEditCare=canEditCare,careId = careId, careMsg1 = careMsg1, careMsg2 = careMsg2)
-                            completion(RESPONSE_STATUS.OKAY,result)
-
-                        }
-
 
                     }
                 }

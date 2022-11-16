@@ -93,23 +93,22 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
             resultBoolean.add(!(it.careIsDone))
             myHomeRecyclerAdapter.AlreadyTodayMytamin(resultBoolean) // 이미 한것은 다시 못하게 막음
             home_recyclerView.adapter = myHomeRecyclerAdapter //어뎁터연결
-            if (it.reportIsDone == true ||it.careIsDone ==true ){
-                myHomeViewModel.LatestMytaminAPI(statusData)
+             myHomeViewModel.LatestMytaminAPI()
 
-                  Log.d(TAG,"최근 마이타민 섭취기록있음")
-            //    myHomeViewModel.LatestMytaminAPI()
-            }else{
-                showSampleData(isLoading = false)
-                val NoMytaminFragment = NoMytaminFragment()
-                childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,NoMytaminFragment).commit()
-                Log.d(TAG,"최근 마이타민 섭취기록없음")
-            }
         })
         myHomeViewModel.getLatestMytamin.observe(viewLifecycleOwner, Observer {
             Log.d(TAG,"getlatestMytamin observe -> $it")
             showSampleData(isLoading = false)
-            val yesMytaminFragment = YesMytaminFragment()
-            childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
+            if (it==null){
+                val NoMytaminFragment = NoMytaminFragment()
+                childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,NoMytaminFragment).commit()
+            }
+            it?.let {
+                mBinding?.homeDateText?.text=it.takeAt
+                val yesMytaminFragment = YesMytaminFragment()
+                childFragmentManager.beginTransaction().replace(R.id.home_fragment_container,yesMytaminFragment).commit()
+
+            }
         })
 
     }

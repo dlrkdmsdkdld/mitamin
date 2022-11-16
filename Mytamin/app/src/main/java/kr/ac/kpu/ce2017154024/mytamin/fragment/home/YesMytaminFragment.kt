@@ -57,7 +57,7 @@ class YesMytaminFragment : Fragment() ,View.OnClickListener{
         return mBinding?.root
     }
     private fun initData(status:Status,latestMytamin:LatestMytamin){
-        if (status!!.reportIsDone==true && status!!.careIsDone==true ){
+        latestMytamin?.reportId?.let {
             mBinding?.yesMytaminImage?.setImageResource(emojiArray[latestMytamin!!.mentalConditionCode])
             mBinding?.yesMytaminFeelingTag?.text = latestMytamin?.feelingTag?: ""
             mBinding?.yesMytaminMentalConditionMsg?.text = latestMytamin?.mentalConditionMsg?: ""
@@ -65,16 +65,22 @@ class YesMytaminFragment : Fragment() ,View.OnClickListener{
 
             mBinding?.yesmytaminCareMsg1?.text = latestMytamin?.careMsg1?: ""
             mBinding?.yesmytaminCareMsg2?.text = latestMytamin?.careMsg2?: ""
-        }else if(status!!.reportIsDone==true && status!!.careIsDone==false){
-            mBinding?.yesMytaminImage?.setImageResource(emojiArray[latestMytamin!!.mentalConditionCode])
-            mBinding?.yesMytaminFeelingTag?.text = latestMytamin?.feelingTag?: ""
-            mBinding?.yesMytaminMentalConditionMsg?.text = latestMytamin?.mentalConditionMsg?: ""
-            mBinding?.yesmytaminTodayReport?.text = latestMytamin?.todayReport?: ""
         }
-        else if(status!!.reportIsDone==false && status!!.careIsDone==true){
+        latestMytamin?.careId?.let {
             mBinding?.yesmytaminCareMsg1?.text = latestMytamin?.careMsg1?: ""
             mBinding?.yesmytaminCareMsg2?.text = latestMytamin?.careMsg2?: ""
         }
+//        if (status!!.reportIsDone==true && status!!.careIsDone==true ){
+//
+//        }else if(status!!.reportIsDone==true && status!!.careIsDone==false){
+//            mBinding?.yesMytaminImage?.setImageResource(emojiArray[latestMytamin!!.mentalConditionCode])
+//            mBinding?.yesMytaminFeelingTag?.text = latestMytamin?.feelingTag?: ""
+//            mBinding?.yesMytaminMentalConditionMsg?.text = latestMytamin?.mentalConditionMsg?: ""
+//            mBinding?.yesmytaminTodayReport?.text = latestMytamin?.todayReport?: ""
+//        }
+//        else if(status!!.reportIsDone==false && status!!.careIsDone==true){
+//
+//        }
     }
 
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
