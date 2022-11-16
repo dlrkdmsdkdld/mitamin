@@ -220,6 +220,7 @@ class joinStepOneFragment : Fragment(), View.OnClickListener {
                         join_step_one_password_confirm_layout.setTextColor(resources.getColor(R.color.primary,null))
                         RepasswordValue=true
                         OkAllItem()
+                    }else{
 
                     }
 

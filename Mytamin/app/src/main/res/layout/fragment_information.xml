@@ -300,6 +300,7 @@
 
                 />
             <ImageButton
+                android:id="@+id/information_termsofservice_subbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -328,6 +329,7 @@
 
                 />
             <ImageButton
+                android:id="@+id/information_treatment_subbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -396,6 +398,7 @@
                 android:includeFontPadding="false"
                 />
             <ImageButton
+                android:id="@+id/information_password_subbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -431,6 +434,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/ic_icon_arrow_right_black"
+                android:id="@+id/information_init_subbtn"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -459,6 +463,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/information_exit_subbtn"
                 android:background="@drawable/ic_icon_arrow_right_black"
                 />
 

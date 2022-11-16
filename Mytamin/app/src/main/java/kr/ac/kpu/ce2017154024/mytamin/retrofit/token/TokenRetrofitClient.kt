@@ -48,19 +48,24 @@ object TokenRetrofitClient {
         val baseParameterInterceptor : Interceptor = (object  : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
                 Log.d(Constant.TAG,"RetrofitClient - Interceptor called ")
-                var originalRequest = chain.request().newBuilder().build()
+                var originalRequest = chain.request().newBuilder()
+                    .addHeader("X-AUTH-TOKEN", "${PreferenceUtil.obtainToken()}" )
+                    .build()
                  //   .addHeader("X-AUTH-TOKEN", "${PrivateUserDataSingleton.accessToken}" )
+                  //  Log.d(TAG,"변수에서 토큰 가져옴1 ${PrivateUserDataSingleton.accessToken} ")
+                  //  Log.d(TAG,"변수에서 토큰 가져옴2 ${PreferenceUtil.obtainToken()} ")
 
-                if(PrivateUserDataSingleton.isTokenINitialized()){//토큰초기화됐는지확인하고 토큰넣음
-                     originalRequest = chain.request().newBuilder()
-                        .addHeader("X-AUTH-TOKEN", "${PrivateUserDataSingleton.accessToken}" )
-                        .build()
-                }else{
-                    Log.d(TAG,"기기에서 토큰가져옴 ${PreferenceUtil.obtainToken()} ")
-                    originalRequest = chain.request().newBuilder()
-                        .addHeader("X-AUTH-TOKEN", "${PreferenceUtil.obtainToken()}" )
-                        .build()
-                }
+//                if(PrivateUserDataSingleton.isTokenINitialized()){//토큰초기화됐는지확인하고 토큰넣음
+//                     originalRequest = chain.request().newBuilder()
+//                        .addHeader("X-AUTH-TOKEN", "${PrivateUserDataSingleton.accessToken}" )
+//                        .build()
+//                    Log.d(TAG,"변수에서 토큰 가져옴 ${PrivateUserDataSingleton.accessToken} ")
+//                }else{
+//                    Log.d(TAG,"기기에서 토큰가져옴 ${PreferenceUtil.obtainToken()} ")
+//                    originalRequest = chain.request().newBuilder()
+//                        .addHeader("X-AUTH-TOKEN", "${PreferenceUtil.obtainToken()}" )
+//                        .build()
+//                }
                // Log.d(TAG,"추가한 토큰 ${PrivateUserDataSingleton.accessToken} ")
                 val finalRequest = originalRequest.newBuilder()
                     .method(originalRequest.method,originalRequest.body)

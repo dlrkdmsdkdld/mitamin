@@ -129,6 +129,11 @@ class HomeFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     override fun onSearchItemClicked(position: Int) {
         Log.d(TAG,"클릭한 리싸이클러뷰 $position 번째")
         val intent= Intent(context,todayMytaminActivity::class.java)

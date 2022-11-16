@@ -207,6 +207,11 @@ class HomeRetrofitManager {
                     response.body()?.let {
                         val body =it.asJsonObject
                         val data = body.get("data").asJsonObject
+                        if (data.isJsonNull) completion(RESPONSE_STATUS.OKAY,null)
+                        else{
+                            
+                        }
+
                         if (status.reportIsDone ==true && status.careIsDone == false ){ //진단하기만하고 칭찬처방은 안한경우
                             val takeAtTime = data.get("takeAt").asString
                             //val canEditCare = data.get("canEditCare").asBoolean

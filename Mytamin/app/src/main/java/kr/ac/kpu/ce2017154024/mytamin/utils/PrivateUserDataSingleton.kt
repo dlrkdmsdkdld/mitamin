@@ -5,7 +5,7 @@ object PrivateUserDataSingleton{
     lateinit var userEmail:String
     lateinit var userPassword:String
     lateinit var accessToken:String
-    fun isTokenINitialized() = ::accessToken.isInitialized
+    fun isTokenINitialized() :Boolean= ::accessToken.isInitialized
     lateinit var refreshToken:String
     var Createdyear:Int = 0
     var Createdmonth:Int= 0

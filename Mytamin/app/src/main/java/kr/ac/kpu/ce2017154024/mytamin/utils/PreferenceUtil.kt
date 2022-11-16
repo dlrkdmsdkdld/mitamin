@@ -38,6 +38,7 @@ object PreferenceUtil {
     fun obtainToken():String{
         val sharedtoken = MyApplication.instance.getSharedPreferences(INPUT_TOKEN_HISTORY,Context.MODE_PRIVATE)
         val token = sharedtoken.getString(KEY_TOKEN_HISTORY,"null").toString()
+        //Log.d(TAG,"obtainToken  token : $token")
         return token
     }
     fun obtainUserData():Pair<String,String>{

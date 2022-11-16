@@ -12,6 +12,8 @@ import kr.ac.kpu.ce2017154024.mytamin.R
 import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHistoryBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentYesMytaminBinding
+import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
+import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.emojiArray
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.HomeViewModel
@@ -31,6 +33,30 @@ class YesMytaminFragment : Fragment() ,View.OnClickListener{
         val status = homeviewmodel.getstatus.value
         val latestMytamin = homeviewmodel.getLatestMytamin.value
         Log.d(Constant.TAG,"HomeFragment의 자식 프래그먼트 YesMytaminFragment status - > $status")
+        status?.let {
+            var status=it
+            latestMytamin?.let {
+                initData(status,it)
+            }
+        }
+
+        if (latestMytamin?.canEditReport == true){
+            mBinding?.yesMytaminStep3Btn?.setOnClickListener(this)
+        }else{
+            mBinding?.yesMytaminStep3Btn?.visibility=View.GONE
+
+
+        }
+        if (latestMytamin?.canEditCare== true){
+            mBinding?.yesMytaminStep4Btn?.setOnClickListener(this)
+        }else{
+            mBinding?.yesMytaminStep4Btn?.visibility=View.GONE
+        }
+
+
+        return mBinding?.root
+    }
+    private fun initData(status:Status,latestMytamin:LatestMytamin){
         if (status!!.reportIsDone==true && status!!.careIsDone==true ){
             mBinding?.yesMytaminImage?.setImageResource(emojiArray[latestMytamin!!.mentalConditionCode])
             mBinding?.yesMytaminFeelingTag?.text = latestMytamin?.feelingTag?: ""
@@ -49,23 +75,7 @@ class YesMytaminFragment : Fragment() ,View.OnClickListener{
             mBinding?.yesmytaminCareMsg1?.text = latestMytamin?.careMsg1?: ""
             mBinding?.yesmytaminCareMsg2?.text = latestMytamin?.careMsg2?: ""
         }
-        if (latestMytamin?.canEditReport == true){
-            mBinding?.yesMytaminStep3Btn?.setOnClickListener(this)
-        }else{
-            mBinding?.yesMytaminStep3Btn?.visibility=View.GONE
-
-
-        }
-        if (latestMytamin?.canEditCare== true){
-            mBinding?.yesMytaminStep4Btn?.setOnClickListener(this)
-        }else{
-            mBinding?.yesMytaminStep4Btn?.visibility=View.GONE
-        }
-
-
-        return mBinding?.root
     }
-
 
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null

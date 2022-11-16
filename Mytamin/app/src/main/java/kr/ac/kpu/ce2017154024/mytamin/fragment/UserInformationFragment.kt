@@ -190,11 +190,13 @@ class UserInformationFragment : Fragment(),View.OnClickListener {
         mBinding?.informationExitBtn?.setOnClickListener(this)
         mBinding?.informationQuitBtn?.setOnClickListener(this)
         mBinding?.informationPasswordBtn?.setOnClickListener(this)
+        mBinding?.informationTermsofserviceSubbtn?.setOnClickListener { mBinding?.informationTermsofserviceBtn?.performClick() }
+        mBinding?.informationTreatmentSubbtn?.setOnClickListener { mBinding?.informationTreatmentBtn?.performClick() }
+        mBinding?.informationPasswordSubbtn?.setOnClickListener { mBinding?.informationPasswordBtn?.performClick() }
 
+        mBinding?.informationInitSubbtn?.setOnClickListener { mBinding?.informationInitBtn?.performClick() }
 
-
-
-
+        mBinding?.informationExitSubbtn?.setOnClickListener { mBinding?.informationExitBtn?.performClick() }
 
 
     }

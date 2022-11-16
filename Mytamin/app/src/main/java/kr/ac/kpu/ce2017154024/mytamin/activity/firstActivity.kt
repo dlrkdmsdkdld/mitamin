@@ -81,7 +81,7 @@ class firstActivity : AppCompatActivity(), View.OnClickListener {
                             PrivateUserDataSingleton.refreshToken = returnLoginData?.refreshToken
                             PrivateUserDataSingleton.userEmail = query.email.trim()
                             PrivateUserDataSingleton.userPassword = query.password
-                            PreferenceUtil.storeUserToken(returnLoginData?.refreshToken)
+                            PreferenceUtil.storeUserToken(returnLoginData?.accessToken)
                             //유저 데이터 preference에 저장
                             Log.d(
                                 TAG, "PrivateUserDataSingleton 성공" +

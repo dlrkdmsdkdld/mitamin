@@ -106,8 +106,9 @@ class joinStepThreeFragment : Fragment() {
                 join_step_three_name_text.hint=""
                 mBinding?.joinStepThreeNameLayout?.hint=""
                 if (p0.toString().trim()!=""){
-                    (activity as joinActivity).canEnableNextbtn(false)
+                    (activity as joinActivity).canEnableNextbtn(true)
                     mBinding?.joinStepThreeNameLayout?.helperText="멋진 이름이네요:)"
+                    joinViewModel.setname(p0.toString().trim())
 
                 }
                 else (activity as joinActivity).canEnableNextbtn(false)

@@ -25,6 +25,7 @@ class HistoryRetrofitManager {
         TokenRetrofitClient.getClient()?.create(IhistoryRetrofit::class.java)
 
     fun getRandomCare(completion: (RESPONSE_STATUS, randomCare?) -> Unit){
+
         iHistoryRetrofit?.getRandomCare()?.enqueue(object :retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 response.body()?.let {

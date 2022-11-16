@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             PrivateUserDataSingleton.userEmail = query.email
                             PrivateUserDataSingleton.userPassword = query.password
                             if (login_check.isChecked) {
-                                PreferenceUtil.storeUserToken(returnLoginData?.refreshToken)
+                                PreferenceUtil.storeUserToken(returnLoginData?.accessToken)
                                 PreferenceUtil.storeUserData(query.email, query.password)
                             }
                             //유저 데이터 preference에 저장

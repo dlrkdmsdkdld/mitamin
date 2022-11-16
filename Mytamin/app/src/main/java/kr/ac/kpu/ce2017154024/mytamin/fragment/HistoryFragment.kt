@@ -252,6 +252,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
 
             circleRadius=4f
             lineWidth=2f
+            formLineWidth=2f
             circleHoleRadius=3f
             setDrawValues(false)
             setDrawCircles(true)
