@@ -143,6 +143,7 @@ class CustomMonthView(context: Context) : MonthView(context) {
         hasScheme: Boolean,
         isSelected: Boolean
     ) {
+        val font =resources.getFont(R.font.appsubfont_m)
         val cx = x + mItemWidth / 2
         calendar?.let {
             canvas?.let { cit ->
@@ -160,29 +161,34 @@ class CustomMonthView(context: Context) : MonthView(context) {
 //                    }
                 }
               //  mSchemeTextPaint.color = Color.BLACK
+
                 mCurDayTextPaint.color = Color.RED
                 mSelectTextPaint.color = Color.BLACK
                 mCurMonthTextPaint.color = Color.BLACK
                 mSchemeTextPaint.color =  Color.BLACK
-                val drawPaint = if (isSelected && !it.isCurrentDay) {
-                    mSelectTextPaint
-                } else if (hasScheme && !it.isCurrentDay) {
+                val drawPaint =  if (hasScheme && !it.isCurrentDay) {
                     if (it.isCurrentMonth) mSchemeTextPaint else mOtherMonthTextPaint
                 }
+                else if(it.isCurrentDay){
+                    mCurDayTextPaint
+                }
                 else {
-                    if (it.isCurrentDay) mCurDayTextPaint else if (it.isCurrentMonth) mCurMonthTextPaint else mOtherMonthTextPaint
+                     if (it.isCurrentMonth) mCurMonthTextPaint else mOtherMonthTextPaint
                 }
 
+                drawPaint.isAntiAlias=true
+                drawPaint.typeface = font
+               // drawPaint.setTypeface(font)
                 //val mTextBaseLine = mTextBaseLine /3*2
-                if (it.isCurrentMonth && !hasScheme){
-                    drawPaint.color = Color.LTGRAY
-
-                    cit.drawText(it.day.toString(), cx.toFloat(),mTextBaseLine/2+ y.toFloat(), drawPaint)
-                }
-                else if (it.isCurrentDay){
+                if (it.isCurrentDay){
                     drawPaint.color=Color.RED
                     cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine/2+ y.toFloat(), drawPaint)
                 }
+                else if (it.isCurrentMonth && !hasScheme){
+                    drawPaint.color = Color.LTGRAY
+                    cit.drawText(it.day.toString(), cx.toFloat(),mTextBaseLine/2+ y.toFloat(), drawPaint)
+                }
+
                 else if (it.isCurrentMonth && hasScheme){
                     cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine/2+y.toFloat(), drawPaint)
                 }

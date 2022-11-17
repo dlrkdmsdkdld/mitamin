@@ -50,10 +50,11 @@
 
         <LinearLayout
             android:id="@+id/yes_mytamin_layout_three"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="wrap_content"
             android:minHeight="60dp"
-            android:layout_marginLeft="27dp"
+            android:layout_marginLeft="11dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/speech_buble_text"
             android:orientation="vertical"
@@ -67,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:ems="15"
                 android:layout_marginRight="20dp"
                 android:fontFamily="@font/appsubfont_r"
                 android:includeFontPadding="false"

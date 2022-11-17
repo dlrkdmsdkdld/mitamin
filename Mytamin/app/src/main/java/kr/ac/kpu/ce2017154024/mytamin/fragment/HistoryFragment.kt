@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.fragment
 
+import android.app.Dialog
 import android.content.ContentUris
 import android.content.Intent
 import android.graphics.Color
@@ -28,6 +29,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.activity.CareHistoryActivity
 import kr.ac.kpu.ce2017154024.mytamin.activity.WeeklyActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentHistoryBinding
@@ -43,6 +45,7 @@ import kr.ac.kpu.ce2017154024.mytamin.viewModel.HistoryViewModel
 class HistoryFragment : Fragment(),View.OnClickListener {
     private var mBinding : FragmentHistoryBinding?=null
     private val myviewmodel : HistoryViewModel by viewModels()
+    private lateinit var customProgressDialog: Dialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,11 +56,13 @@ class HistoryFragment : Fragment(),View.OnClickListener {
 
         Log.d(TAG,"HistoryFragment onCreateView")
         ///처음 년 ,  월 설정
+        customProgressDialog = LoadingDialog(requireContext())
         myviewmodel.setSelectMonthAndYear("${mBinding?.cvCalendar?.curYear}.${mBinding?.cvCalendar?.curMonth.parseIntToMonth()}")
         myviewmodel.getMonthMytaminAPI()
 
 
         myviewmodel.getrandomcare.observe(viewLifecycleOwner, Observer {
+            if(customProgressDialog.isShowing)customProgressDialog.dismiss()
             mBinding?.historyRandomCare1?.text = it.careMsg1
             mBinding?.historyRandomCare2?.text = it.careMsg2
             mBinding?.historyRadomTake?.text = it.takeAt
@@ -203,7 +208,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             textColor=ContextCompat.getColor(requireContext(), R.color.Gray)
             spaceMax =0.1f
             spaceMin=0.1f
-            setDrawAxisLine(true)
+            setDrawAxisLine(false) //y=0일때 라인 제거
             setDrawGridLines(false)
             textColor = ContextCompat.getColor(requireContext(), R.color.subGray)
             axisLineColor=ContextCompat.getColor(requireContext(), R.color.LineColorshort)
@@ -214,10 +219,13 @@ class HistoryFragment : Fragment(),View.OnClickListener {
             //isEnabled=false
             axisLineWidth=2f
             this.setDrawLabels(false)
-            setDrawGridLines(true)
+            this.setDrawZeroLine(false)
             this.setDrawAxisLine(false)
-            this.axisMaximum = 5f
-            this.axisMinimum=0f
+            setDrawGridLines(true)
+//            this.axisMaximum = 5f
+//            this.axisMinimum=0f
+            this.axisMaximum = 5.1f
+            this.axisMinimum=-0.1f
             granularity=1f
             this.gridColor=  ContextCompat.getColor(requireContext(), R.color.LineColorshort)
 
@@ -301,6 +309,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0){
             mBinding?.historyRefreshBtn ->{
+                customProgressDialog.show()
                 myviewmodel.randomCareAPI()
             }
             mBinding?.historyNextBtn ->{

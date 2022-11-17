@@ -207,9 +207,12 @@
                 />
             <LinearLayout
                 android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:minHeight="60dp"
                 android:id="@+id/weekly_tag_layout"
+                android:layout_marginLeft="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/yes_mytamin_image"
                 app:layout_constraintTop_toBottomOf="@+id/yesmytamin_todayReport_title"
                 android:background="@drawable/speech_buble_text"
@@ -221,12 +224,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/appsubfont_r"
+                    android:ems="15"
                     android:textColor="@color/subGray"
                     android:paddingLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textSize="12sp"
                     android:includeFontPadding="false"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="8dp"
 
                     />
 
@@ -241,7 +245,7 @@
                     android:includeFontPadding="false"
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="8dp"
                     />
 
             </LinearLayout>
@@ -250,7 +254,7 @@
                 android:id="@+id/yes_mytamin_layout_one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/yes_mytamin_image"
+                app:layout_constraintTop_toBottomOf="@+id/weekly_tag_layout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/round_layout_background_gray"

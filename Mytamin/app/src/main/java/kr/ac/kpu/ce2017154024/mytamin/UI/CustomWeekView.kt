@@ -95,10 +95,13 @@ class CustomWeekView(context: Context) :WeekView(context) {
     }
 
     override fun onDrawText(canvas: Canvas?, calendar: Calendar?, x: Int, hasScheme: Boolean, isSelected: Boolean) {
+        val font =resources.getFont(R.font.appsubfont_r)
         val cx = x + mItemWidth / 2
         calendar?.let {
             canvas?.let { cit->
                 mCurDayTextPaint.color = resources.getColor(R.color.black,null)
+                mCurDayTextPaint.typeface=font
+                mCurDayTextPaint.isAntiAlias=true
 //                if (resources.getString(R.string.mode) == "Day") mCurDayTextPaint.color = resources.getColor(R.color.black,null)
 //                else mCurDayTextPaint.color = resources.getColor(R.color.black,null)
                 cit.drawText(it.day.toString(), cx.toFloat(), mTextBaseLine/2 , mCurDayTextPaint)
