@@ -18,7 +18,7 @@
         android:includeFontPadding="false"
         android:layout_marginTop="16dp"
         android:textSize="14dp"
-        android:ems="18"
+        android:ems="15"
         android:textColor="@color/realblack"
         />
     <TextView
@@ -29,7 +29,7 @@
         android:layout_marginLeft="16dp"
         android:id="@+id/care_child_msg2"
         android:fontFamily="@font/appsubfont_r"
-        android:ems="18"
+        android:ems="15"
         android:includeFontPadding="false"
         android:textSize="14dp"
         android:textColor="@color/realblack"
@@ -64,6 +64,11 @@
         android:layout_marginTop="10dp"
         />
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/care_child_take"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

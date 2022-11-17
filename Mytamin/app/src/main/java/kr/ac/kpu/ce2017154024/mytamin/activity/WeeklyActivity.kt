@@ -63,7 +63,7 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
             }
 
         })
-        
+
 
 
 

@@ -217,7 +217,7 @@ class HistoryFragment : Fragment(),View.OnClickListener {
 
         lineChart.axisLeft.apply {
             //isEnabled=false
-            axisLineWidth=2f
+            axisLineWidth=1f
             this.setDrawLabels(false)
             this.setDrawZeroLine(false)
             this.setDrawAxisLine(false)

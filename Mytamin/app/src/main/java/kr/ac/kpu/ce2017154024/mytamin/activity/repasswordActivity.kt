@@ -78,7 +78,6 @@ class repasswordActivity : AppCompatActivity(), View.OnClickListener {
                     mbinding.findTwoPasswordLayout.setTextColor(resources.getColor(R.color.primary,null))
                     passwordValue=p0.toString().trim()
                     if (passwordValue == mbinding.findTwoPasswordConfirmText.text.toString()){
-                        okRepassword=true
                         mbinding.findTwoPasswordConfirmLayout.text="비밀번호가 일치해요!"
                         mbinding.findTwoPasswordConfirmLayout.setTextColor(resources.getColor(R.color.primary,null))
                     }
@@ -106,12 +105,10 @@ class repasswordActivity : AppCompatActivity(), View.OnClickListener {
                 mbinding.findTwoPasswordConfirmLayout.hint =""
                 if (passwordValue == p0.toString()){
                     mbinding.findTwoPasswordConfirmLayout.text="비밀번호가 일치해요!"
-                    okRepassword=true
                     mbinding.findTwoPasswordConfirmLayout.setTextColor(resources.getColor(R.color.primary,null))
                     OkAllItem()
 
                 }else{mbinding.findTwoPasswordConfirmLayout.text="비밀번호가 일치하지 않습니다."
-                    okRepassword=false
                     mbinding.findTwoPasswordConfirmLayout.setTextColor(resources.getColor(R.color.textRed,null))
                     OkAllItem()
                 }
@@ -154,6 +151,6 @@ class repasswordActivity : AppCompatActivity(), View.OnClickListener {
 
     }
     private fun OkAllItem(){
-        mbinding.findCompleteBtnOther.isEnabled = passwordValue!=null && okRepassword
+        mbinding.findCompleteBtnOther.isEnabled = passwordValue!=null && (mbinding?.findTwoOnePasswordText.text.toString() ==mbinding.findTwoPasswordConfirmText.text.toString())
     }
 }

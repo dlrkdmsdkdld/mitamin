@@ -120,7 +120,6 @@
         android:ems="3"
         android:textSize="14sp"
         android:fontFamily="@font/appsubfont_r"
-        android:lines="3"
         android:gravity="top"
         android:padding="10dp"
         android:background="@drawable/edit_box"

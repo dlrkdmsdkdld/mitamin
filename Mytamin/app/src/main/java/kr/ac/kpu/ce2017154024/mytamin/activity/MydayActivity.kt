@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.activity
 
+import android.app.Dialog
 import android.app.PendingIntent.getActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.ac.kpu.ce2017154024.mytamin.MytaminWorker
 import kr.ac.kpu.ce2017154024.mytamin.R
+import kr.ac.kpu.ce2017154024.mytamin.UI.LoadingDialog
 import kr.ac.kpu.ce2017154024.mytamin.UI.ViewPager2.mydayViewPagerAdapter
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityJoinBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.ActivityMydayBinding
@@ -32,6 +34,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var myMydayViewmodel: MydayViewmodel
     private lateinit var newWish:WishList
     private var firstLoading=true
+    private lateinit var customProgressDialog: Dialog
     private val tabTitleArray = arrayOf(
         "데이노트","위시리스트"
     )
@@ -44,6 +47,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         Log.d(TAG," MydayActivity onCreate ")
 //        val viewPager = mbinding?.mydayViewpager
         val tabLayout = mbinding?.mydayTablayout
+        customProgressDialog = LoadingDialog(this)
         ///뷰페이저 + 탭레이아웃
 //        viewPager.adapter = mydayViewPagerAdapter(supportFragmentManager,lifecycle)
 //        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -79,6 +83,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
         mbinding?.mydayBackBtn.setOnClickListener(this)
         mbinding?.mydayRefreshBtn.setOnClickListener(this)
         myMydayViewmodel.getDaynoteContent.observe(this, Observer {
+            if (customProgressDialog.isShowing) customProgressDialog.dismiss()
             if (firstLoading){
                 firstLoading=false
                 showSampleData(isLoading = false)
@@ -141,7 +146,7 @@ class MydayActivity : AppCompatActivity(), View.OnClickListener {
             mbinding?.mydayBackBtn ->{
                 finish()
             }
-            mbinding?.mydayRefreshBtn ->{
+            mbinding?.mydayRefreshBtn ->{customProgressDialog.show()
                 myMydayViewmodel.getWishlistAPI()
                 myMydayViewmodel.getdaynoteAPI()
             }

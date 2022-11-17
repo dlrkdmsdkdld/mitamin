@@ -24,7 +24,6 @@ class FindTwoFragment : Fragment() {
     private lateinit var mbinding:FragmentFindTwoBinding
     private  var passwordValue :String? =null
     private val myViewModel by activityViewModels<findPasswordViewmodel>()
-    private var okRepassword:Boolean =false
     private var passwordeye = true
     private var repasswordeye = true
     override fun onCreateView(
@@ -61,7 +60,6 @@ class FindTwoFragment : Fragment() {
                     mbinding?.findTwoPasswordLayout.setTextColor(resources.getColor(R.color.primary,null))
                     passwordValue=p0.toString().trim()
                     if (passwordValue == mbinding.findTwoPasswordConfirmText.text.toString()){
-                        okRepassword=true
                         mbinding.findTwoPasswordConfirmLayout.text="비밀번호가 일치해요!"
                         mbinding?.findTwoPasswordConfirmLayout.setTextColor(resources.getColor(R.color.primary,null))
                     }
@@ -89,13 +87,10 @@ class FindTwoFragment : Fragment() {
                 if (passwordValue == p0.toString()){
                     mbinding.findTwoPasswordConfirmLayout.text="비밀번호가 일치해요!"
                     mbinding?.findTwoPasswordConfirmLayout.setTextColor(resources.getColor(R.color.primary,null))
-                    okRepassword=true
                     OkAllItem()
-
 
                 }else{mbinding.findTwoPasswordConfirmLayout.text="비밀번호가 일치하지 않습니다."
                     mbinding?.findTwoPasswordConfirmLayout.setTextColor(resources.getColor(R.color.textRed,null))
-                    okRepassword=false
                     OkAllItem()
                 }
             }
@@ -104,7 +99,7 @@ class FindTwoFragment : Fragment() {
 
     }
     private fun OkAllItem(){
-        if (passwordValue!=null && okRepassword) {
+        if (passwordValue!=null && mbinding?.findTwoOnePasswordText.text.toString()==mbinding?.findTwoPasswordConfirmText.text.toString()) {
             (activity as FindPasswordActivity).enableComplete(true)
             myViewModel.setPassword(passwordValue!!)
         }else{

@@ -76,6 +76,7 @@
         android:layout_marginTop="16dp"
         android:id="@+id/join_one_line1"
         />
+
     <EditText
         android:layout_width="0dp"
         android:layout_height="0dp"
