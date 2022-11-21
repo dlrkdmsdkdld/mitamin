@@ -34,14 +34,14 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
         val step=todayMytaminViewModel.getstep.value
 
         if (step==1){
-            timer=60
+            timer=5
             val parsetime=timer.parseIntToTimeLine()
             mBinding?.mytaminTimerText?.text = parsetime
             mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_one_title
             mBinding?.mytaminStepOneDiagnosis?.text = MYTAMIN.step_one_diagnosis
             mBinding?.mytaminStepOneTimerImage?.background = getDrawable(requireContext(),R.drawable.ic_step_one_image)
         }else{
-            timer=180
+            timer=10
             val parsetime=timer.parseIntToTimeLine()
             mBinding?.mytaminTimerText?.text = parsetime
             mBinding?.mytaminStepOneTitleText?.text= MYTAMIN.step_two_title
@@ -77,13 +77,17 @@ class MytaminStepOneFragment : Fragment() ,View.OnClickListener{
                 if (currentTime==0){
                     startbtn=0
                     mBinding?.mytaminStartBtn?.background= getDrawable(requireContext(),R.drawable.ic_restart_button)
+                    (activity as todayMytaminActivity).finishTimer()
                     //스위치가 체크되어있으면 자동으로 다음 단계로 넘어가짐
                     if(mBinding?.mytaminSwitch?.isChecked!!){
+                        (activity as todayMytaminActivity).clickPerformNextBtn()
                         val nowstep = todayMytaminViewModel.getstep.value
-                        todayMytaminViewModel.setstep(nowstep!!+1)
+                        //todayMytaminViewModel.setstep(nowstep!!+1)
                         todayMytaminViewModel.timerDestory()
                         todayMytaminViewModel.autoset(true)
-                        (activity as todayMytaminActivity).replaceFragment(nowstep!!+1)
+
+
+                       // (activity as todayMytaminActivity).replaceFragment(nowstep!!+1)
                         startbtn=2
                     }else{
                         todayMytaminViewModel.timerDestory()
