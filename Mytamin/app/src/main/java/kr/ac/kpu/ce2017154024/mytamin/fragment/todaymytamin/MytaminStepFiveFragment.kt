@@ -47,13 +47,13 @@ class MytaminStepFiveFragment : Fragment() {
 
                         (activity as todayMytaminActivity).setEnableCorrection(true)
                     }else{
-                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                        (activity as todayMytaminActivity).setEnableNextBtn(true)
                     }
                 }else{
                     if (todayMytaminViewModel.getstatus.value!!.reportIsDone){
                         (activity as todayMytaminActivity).setEnableCorrection(false)
                     }else{
-                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                        (activity as todayMytaminActivity).setEnableNextBtn(false)
                     }
                 }
             }

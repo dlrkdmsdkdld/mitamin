@@ -62,6 +62,14 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
         if (resultBoolean.reportIsDone ){
             mytaminViewModel.reportset(LatestMytamin.todayReport)
             mytaminViewModel.setselectemojiState(LatestMytamin.mentalConditionCode)
+            val tmp = LatestMytamin.feelingTag.replace("#".toRegex(),"")
+            val arr = tmp.split(" ")
+            mytaminViewModel.setdiagnosis(arr)
+
+            //
+            ///
+            ////
+            //
         }
         if (resultBoolean.careIsDone){
             mytaminViewModel.setcareMsg1(LatestMytamin.careMsg1)
@@ -95,10 +103,8 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
     }
     fun setEnableCorrection(can:Boolean){
         mytamin_correction_btn.isEnabled=can
-        if (can){
-            mytamin_correction_btn.background = getDrawable(R.drawable.ic_large_button_outline)
-        }else{mytamin_correction_btn.background = getDrawable(R.drawable.ic_large_button_disabled)}
-
+        if (can) mytaminBinding.mytaminCorrectionBtn.setTextColor(resources.getColor(R.color.primary,null))
+        else mytaminBinding.mytaminCorrectionBtn.setTextColor(resources.getColor(R.color.background_white,null))
     }
     fun finishTimer(){
         mytaminBinding.mytaminPassBtn.visibility=View.GONE
@@ -184,6 +190,8 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
                     if (it) {
                         mytaminBinding.mytaminNextBtn.visibility=View.GONE
                         mytamin_correction_btn.visibility=View.VISIBLE
+                        mytamin_correction_btn.isEnabled=false
+                        mytamin_correction_btn.setTextColor(resources.getColor(R.color.notEnabled,null))
                     }else{
                         mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
                         mytamin_correction_btn.visibility=View.GONE
@@ -310,17 +318,22 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
                 Log.d(TAG,"현재 단계 : -> $step")
             }
             mytamin_correction_btn->{
-                if(mytaminViewModel.getstatus.value?.reportIsDone==true && step==5){
-                    mytaminViewModel.CorrectionReport(LatestMytamin.reportId)
+                when(step){
+                    3,4,5 -> {
+                        mytaminViewModel.CorrectionReport(LatestMytamin.reportId)
+                        step+=1
+                        mytaminViewModel.setstep(step)
+                        next_btn(step)
+                    }
+
+                    6-> {
+                        mytaminViewModel.correctionCare(LatestMytamin.careId)
+                        val intent= Intent(this,MainActivity::class.java)
+                        finishAffinity()
+                        startActivity(intent)
+
+                    }
                 }
-                else if(mytaminViewModel.getstatus.value?.careIsDone==true  && step==6){
-                    Log.d(TAG,"LatestMytamin token ::: ${PrivateUserDataSingleton.accessToken}")
-                    Log.d(TAG,"LatestMytamin.careId ::: ${LatestMytamin.careId}")
-                    mytaminViewModel.correctionCare(LatestMytamin.careId)
-                }
-                val intent= Intent(this,MainActivity::class.java)
-                finishAffinity()
-                startActivity(intent)
 
             }
 
