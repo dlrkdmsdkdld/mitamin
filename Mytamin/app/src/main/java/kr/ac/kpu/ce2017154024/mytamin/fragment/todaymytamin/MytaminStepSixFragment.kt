@@ -75,7 +75,9 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
                         Log.d(TAG,"OnNegativeBtn")
                         dialog.dismiss()
                         (activity as todayMytaminActivity).onBackPressed()
-
+                        val intent= Intent(requireActivity(),MainActivity::class.java)
+                        finishAffinity(requireActivity())
+                        startActivity(intent)
                     }
 
                     override fun OnPositiveBtn() {
@@ -104,13 +106,13 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
                     if (status?.careIsDone==true){
                         (activity as todayMytaminActivity).setEnableCorrection(true)
                     }else{
-                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                        (activity as todayMytaminActivity).setEnableNextBtn(true)
                     }
                 }else{
                     if (status?.careIsDone==false){
                         (activity as todayMytaminActivity).setEnableCorrection(false)
                     }else{
-                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                        (activity as todayMytaminActivity).setEnableNextBtn(false)
                     }
                 }
             }
@@ -129,13 +131,13 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
                     if (status?.careIsDone==true){
                         (activity as todayMytaminActivity).setEnableCorrection(true)
                     }else{
-                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                        (activity as todayMytaminActivity).setEnableNextBtn(true)
                     }
                 }else{
                     if (status?.careIsDone==false){
                         (activity as todayMytaminActivity).setEnableCorrection(false)
                     }else{
-                        (activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)
+                        (activity as todayMytaminActivity).setEnableNextBtn(false)
                     }
                 }
             }

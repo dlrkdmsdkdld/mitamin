@@ -127,7 +127,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 mBinding?.mytaminFrametwoImageOne?.setBackgroundResource(Constant.frametwo_image_one_src)
                 nowselect=1
                 todayMytaminViewModel.setselectemojiState(1)
-                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                setOk()
             }
             mBinding?.mytaminFrametwoImageTwo->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_two_src)
@@ -136,7 +136,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 mBinding?.mytaminFrametwoImageTwo?.setBackgroundResource(Constant.frametwo_image_two_src)
                 nowselect=2
                 todayMytaminViewModel.setselectemojiState(2)
-                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                setOk()
             }
             mBinding?.mytaminFrametwoImageThree->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_three_src)
@@ -145,14 +145,14 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 mBinding?.mytaminFrametwoImageThree?.setBackgroundResource(Constant.frametwo_image_three_src)
                 nowselect=3
                 todayMytaminViewModel.setselectemojiState(3)
-                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                setOk()
             }
             mBinding?.mytaminFrametwoImageFour->{
                 mBinding?.mytaminFrametwoSelectImageView?.setImageResource(Constant.frametwo_image_four_src)
                 mBinding?.mytaminFrametwoState?.text  = Constant.frametwo_image_four_text
                 nochoiceImage(nowselect)
                 nowselect=4
-                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                setOk()
                 mBinding?.mytaminFrametwoImageFour?.setBackgroundResource(Constant.frametwo_image_four_src)
                 todayMytaminViewModel.setselectemojiState(4)
             }
@@ -162,7 +162,7 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
                 nochoiceImage(nowselect)
                 nowselect=5
                 todayMytaminViewModel.setselectemojiState(5)
-                (activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)
+                setOk()
                 mBinding?.mytaminFrametwoImageFive?.setBackgroundResource(Constant.frametwo_image_five_src)
             }
 
@@ -176,5 +176,13 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
         mBinding?.mytaminFrametwoImageFour?.setOnClickListener(this)
         mBinding?.mytaminFrametwoImageFive?.setOnClickListener(this)
         ///
+    }
+    private fun setOk(){
+        if (todayMytaminViewModel.getstatus.value!!.reportIsDone){
+
+            (activity as todayMytaminActivity).setEnableCorrection(true)
+        }else{
+            (activity as todayMytaminActivity).setEnableNextBtn(true)
+        }
     }
 }

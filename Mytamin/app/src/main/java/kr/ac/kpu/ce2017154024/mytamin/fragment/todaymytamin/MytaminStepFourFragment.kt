@@ -110,8 +110,10 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
 
     override fun onCheckedChanged(group: ChipGroup, checkedIds: MutableList<Int>) {
         var tmp = mutableListOf<String>()
-        if (checkedIds.count()>=1){(activity as todayMytaminActivity).setEnableNextBtnPartTwo(true)}
-        else{(activity as todayMytaminActivity).setEnableNextBtnPartTwo(false)}
+
+        if (checkedIds.count()>=1){okBtn(true)}
+        else{okBtn(false)}
+
         Log.d(TAG,"checkedIds.count() ->${checkedIds.count()}")
         Log.d(TAG,"checkedId ->${checkedIds}")
         if (checkedIds.count()>=3){
@@ -143,7 +145,15 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         Log.d(TAG,"chip  mutableListOf mutableListOf -> ${todayMytaminViewModel.selectediagnosis.value}")
 
     }
+    fun okBtn(d:Boolean){
+        if (todayMytaminViewModel.getstatus.value!!.reportIsDone){
 
+            (activity as todayMytaminActivity).setEnableCorrection(d)
+        }else{
+            (activity as todayMytaminActivity).setEnableNextBtn(d)
+        }
+
+    }
     override fun onDestroy() {
         previousChildCount=chipGroup.childCount+previousChildCount
         //뷰가 삭제되도 어찌된일인지 chipgroup 새로생성되는 child id가 이전꺼로부터 갱신되어서 싱글톤변수이용함 ex. 이전꺼 childcount:15 다음꺼 childcount:30됨

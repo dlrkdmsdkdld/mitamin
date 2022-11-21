@@ -9,6 +9,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.work.WorkManager
 import kotlinx.android.synthetic.main.activity_today_mytamin.*
 import kr.ac.kpu.ce2017154024.mytamin.R
@@ -25,6 +27,7 @@ import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCorrectionDialog.OnClickedDialogBtn  {
 
+    private lateinit var navController: NavController
 
     private lateinit var mytaminBinding: ActivityTodayMytaminBinding
     private lateinit var mytaminViewModel: todayMytaminViewModel
@@ -59,6 +62,14 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
         if (resultBoolean.reportIsDone ){
             mytaminViewModel.reportset(LatestMytamin.todayReport)
             mytaminViewModel.setselectemojiState(LatestMytamin.mentalConditionCode)
+            val tmp = LatestMytamin.feelingTag.replace("#".toRegex(),"")
+            val arr = tmp.split(" ")
+            mytaminViewModel.setdiagnosis(arr)
+
+            //
+            ///
+            ////
+            //
         }
         if (resultBoolean.careIsDone){
             mytaminViewModel.setcareMsg1(LatestMytamin.careMsg1)
@@ -66,7 +77,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
             mytaminViewModel.setcareCategoryCodeMsg(LatestMytamin.careCategory)
         }
         connectClicklistner()
-       // setOnClickjoin()
+        // setOnClickjoin()
         //stepParse(step)
         replaceFragment(step)
         setEnableCorrection(false)
@@ -74,22 +85,30 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
     }
     fun setEnableNextBtn(can:Boolean){
         mytamin_next_btn.isEnabled = can
-        if (can){
-            mytamin_next_btn.background = getDrawable(R.drawable.ic_large_button_abled)
-        }else{mytamin_next_btn.background = getDrawable(R.drawable.ic_large_button_disabled)}
+//        if (can){
+//            mytaminBinding.mytaminNextBtn.setTextColor(resources.getColor(R.color.primary,null))
+//        }else{
+//            mytaminBinding.mytaminNextBtn.setTextColor(resources.getColor(R.color.background_gray,null))
+//
+//        }
+    }
+    fun clickPerformNextBtn(){
+        mytaminBinding.mytaminNextBtn.performClick()
     }
     fun setEnableNextBtnPartTwo(can:Boolean){
-        mytamin_next_btn_part2.isEnabled = can
-        if (can){
-            mytamin_next_btn_part2.background = getDrawable(R.drawable.ic_large_button_abled)
-        }else{mytamin_next_btn_part2.background = getDrawable(R.drawable.ic_large_button_disabled)}
+      //  mytamin_next_btn_part2.isEnabled = can
+    //    if (can){
+   //         mytamin_next_btn_part2.background = getDrawable(R.drawable.ic_large_button_abled)
+   //     }else{mytamin_next_btn_part2.background = getDrawable(R.drawable.ic_large_button_disabled)}
     }
     fun setEnableCorrection(can:Boolean){
         mytamin_correction_btn.isEnabled=can
-        if (can){
-            mytamin_correction_btn.background = getDrawable(R.drawable.ic_large_button_outline)
-        }else{mytamin_correction_btn.background = getDrawable(R.drawable.ic_large_button_disabled)}
-
+        if (can) mytaminBinding.mytaminCorrectionBtn.setTextColor(resources.getColor(R.color.primary,null))
+        else mytaminBinding.mytaminCorrectionBtn.setTextColor(resources.getColor(R.color.background_white,null))
+    }
+    fun finishTimer(){
+        mytaminBinding.mytaminPassBtn.visibility=View.GONE
+        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
     }
 
     fun replaceFragment(Pstep:Int){
@@ -99,50 +118,90 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
 
                 mytamin_progressbar.progress =200
+                mytaminBinding.mytaminPassBtn.visibility=View.VISIBLE
+                mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                mytamin_correction_btn.visibility=View.GONE
             }
             2->{
                 val MytaminStepOneFragment = MytaminStepOneFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepOneFragment).commit()
 
+
                 mytamin_progressbar.progress =400
 
-
-                mytamin_layout1.visibility=View.VISIBLE
-                mytamin_pass_btn.isEnabled=true
-                setEnableNextBtnPartTwo(false)
-                mytamin_layout2.visibility=View.INVISIBLE
+                mytaminBinding.mytaminPassBtn.visibility=View.VISIBLE
+                mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                mytamin_correction_btn.visibility=View.GONE
+             //   setEnableNextBtnPartTwo(false)
             }
             3->{
                 val MytaminStepThreeFragment = MytaminStepThreeFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepThreeFragment).commit()
-                setEnableNextBtnPartTwo(false)
                 mytamin_progressbar.progress =600
+                mytaminBinding.mytaminPassBtn.visibility=View.GONE
+                resultBoolean.reportIsDone?.let {
+                    if (it) {
+                        mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                        mytamin_correction_btn.visibility=View.VISIBLE
+                    }else{
+                        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
+                        mytamin_correction_btn.visibility=View.GONE
 
-                mytamin_layout1.visibility=View.INVISIBLE
-                mytamin_pass_btn.isEnabled=false
-                mytamin_next_btn.isEnabled=false
-                mytamin_layout2.visibility=View.VISIBLE
+                    }
+                }
+
             }
             4->{
                 val MytaminStepFourFragment = MytaminStepFourFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepFourFragment).commit()
+                mytaminBinding.mytaminPassBtn.visibility=View.GONE
+                resultBoolean.reportIsDone?.let {
+                    if (it) {
+                        mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                        mytamin_correction_btn.visibility=View.VISIBLE
+                    }else{
+                        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
+                        mytamin_correction_btn.visibility=View.GONE
 
+                    }
+                }
             }
             5->{
                 val MytaminStepFiveFragment = MytaminStepFiveFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepFiveFragment).commit()
+                mytaminBinding.mytaminPassBtn.visibility=View.GONE
+                resultBoolean.reportIsDone?.let {
+                    if (it) {
+                        mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                        mytamin_correction_btn.visibility=View.VISIBLE
+                    }else{
+                        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
+                        mytamin_correction_btn.visibility=View.GONE
 
+                    }
+                }
             }
             6->{
                 val MytaminStepSixFragment = MytaminStepSixFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepSixFragment).commit()
                 mytamin_progressbar.progress =800
+                mytaminBinding.mytaminPassBtn.visibility=View.GONE
+                resultBoolean.careIsDone?.let {
+                    if (it) {
+                        mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                        mytamin_correction_btn.visibility=View.VISIBLE
+                        mytamin_correction_btn.isEnabled=false
+                        mytamin_correction_btn.setTextColor(resources.getColor(R.color.notEnabled,null))
+                    }else{
+                        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
+                        mytamin_correction_btn.visibility=View.GONE
 
-                mytamin_layout1.visibility=View.INVISIBLE
-                mytamin_pass_btn.isEnabled=false
-                mytamin_next_btn.isEnabled=false
-                mytamin_correction_btn.isEnabled=false
-                mytamin_layout2.visibility=View.VISIBLE
+                    }
+                }
+//                mytamin_layout1.visibility=View.INVISIBLE
+//                mytamin_pass_btn.isEnabled=false
+//                mytamin_next_btn.isEnabled=false
+//                mytamin_correction_btn.isEnabled=false
             }
 
         }
@@ -225,14 +284,15 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
 
             mytamin_next_btn ->{
                 step+=1
+                mytaminViewModel.setstep(step)
                 next_btn(step)
                 setEnableNextBtn(false)
             }
-            mytamin_next_btn_part2 ->{
-                step+=1
-                next_btn(step)
-                setEnableNextBtnPartTwo(false)
-            }
+//            mytamin_next_btn_part2 ->{
+//                step+=1
+//                next_btn(step)
+//                setEnableNextBtnPartTwo(false)
+//            }
             mytamin_pass_btn ->{
                 step+=1
                 mytaminViewModel.timerDestory()
@@ -258,17 +318,22 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
                 Log.d(TAG,"현재 단계 : -> $step")
             }
             mytamin_correction_btn->{
-                if(mytaminViewModel.getstatus.value?.reportIsDone==true && step==5){
-                    mytaminViewModel.CorrectionReport(LatestMytamin.reportId)
+                when(step){
+                    3,4,5 -> {
+                        mytaminViewModel.CorrectionReport(LatestMytamin.reportId)
+                        step+=1
+                        mytaminViewModel.setstep(step)
+                        next_btn(step)
+                    }
+
+                    6-> {
+                        mytaminViewModel.correctionCare(LatestMytamin.careId)
+                        val intent= Intent(this,MainActivity::class.java)
+                        finishAffinity()
+                        startActivity(intent)
+
+                    }
                 }
-                else if(mytaminViewModel.getstatus.value?.careIsDone==true  && step==6){
-                    Log.d(TAG,"LatestMytamin token ::: ${PrivateUserDataSingleton.accessToken}")
-                    Log.d(TAG,"LatestMytamin.careId ::: ${LatestMytamin.careId}")
-                    mytaminViewModel.correctionCare(LatestMytamin.careId)
-                }
-                val intent= Intent(this,MainActivity::class.java)
-                finishAffinity()
-                startActivity(intent)
 
             }
 
@@ -282,7 +347,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
         mytamin_exit_btn.setOnClickListener(this)
         mytamin_pass_btn.setOnClickListener(this)
         mytamin_back_btn.setOnClickListener(this)
-        mytamin_next_btn_part2.setOnClickListener(this)
+       // mytamin_next_btn_part2.setOnClickListener(this)
         mytamin_correction_btn.setOnClickListener(this)
     }
     override fun onDestroy() {

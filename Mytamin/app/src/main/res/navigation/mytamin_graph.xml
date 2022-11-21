@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mytamin_graph"
+    app:startDestination="@id/mytaminStepOneFragment">
+
+    <fragment
+        android:id="@+id/mytaminStepOneFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepOneFragment"
+        android:label="MytaminStepOneFragment" />
+    <fragment
+        android:id="@+id/mytaminStepThreeFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepThreeFragment"
+        android:label="MytaminStepThreeFragment" />
+    <fragment
+        android:id="@+id/mytaminStepFiveFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepFiveFragment"
+        android:label="fragment_mytamin_step_five"
+        tools:layout="@layout/fragment_mytamin_step_five" />
+    <fragment
+        android:id="@+id/mytaminStepFourFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepFourFragment"
+        android:label="fragment_mytamin_step_four"
+        tools:layout="@layout/fragment_mytamin_step_four" />
+    <fragment
+        android:id="@+id/mytaminStepSixFragment"
+        android:name="kr.ac.kpu.ce2017154024.mytamin.fragment.todaymytamin.MytaminStepSixFragment"
+        android:label="fragment_mytamin_step_six"
+        tools:layout="@layout/fragment_mytamin_step_six" />
+</navigation>
