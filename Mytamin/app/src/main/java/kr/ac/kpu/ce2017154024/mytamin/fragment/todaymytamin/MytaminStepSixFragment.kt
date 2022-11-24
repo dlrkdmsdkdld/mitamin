@@ -25,6 +25,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata.category
+import kr.ac.kpu.ce2017154024.mytamin.utils.modify
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 
@@ -51,7 +52,7 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
             mBinding?.mytaminStepSixCategory?.text = selectcategory
         })
 
-        if (todayMytaminViewModel.getstatus.value?.careIsDone ==true){
+        if (todayMytaminViewModel.domodify == modify.modify && todayMytaminViewModel.getcareMsg1.value != ""){
             mBinding?.mytaminStepSixCareText?.setText(todayMytaminViewModel.getcareMsg1.value)
             mBinding?.mytaminStepSixCareSub?.setText(todayMytaminViewModel.getcareMsg2.value)
             mBinding?.mytaminStepSixCategory?.text = todayMytaminViewModel.getcareCategoryCodeMsg.value
@@ -67,7 +68,7 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
             val dialog = MytaminCorrectionDialog(requireContext(),4)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            if (todayMytaminViewModel.getstatus.value?.careIsDone != false){
+            if (todayMytaminViewModel.domodify == modify.modify){
                 dialog.show()
 
                 dialog.setOnClickListener(object : MytaminCorrectionDialog.OnClickedDialogBtn{
@@ -103,17 +104,10 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
                 todayMytaminViewModel.setcareMsg1(p0.toString())
 
                 if (todayMytaminViewModel.getcareCategoryCode.value!=null &&p0.toString()!="" && (todayMytaminViewModel.getcareMsg2.value !="" &&todayMytaminViewModel.getcareMsg2.value!=null  )){
-                    if (status?.careIsDone==true){
-                        (activity as todayMytaminActivity).setEnableCorrection(true)
-                    }else{
-                        (activity as todayMytaminActivity).setEnableNextBtn(true)
-                    }
+                    setOk(true)
+
                 }else{
-                    if (status?.careIsDone==false){
-                        (activity as todayMytaminActivity).setEnableCorrection(false)
-                    }else{
-                        (activity as todayMytaminActivity).setEnableNextBtn(false)
-                    }
+                    setOk(false)
                 }
             }
 
@@ -128,17 +122,10 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
             override fun afterTextChanged(p0: Editable?) {
                 todayMytaminViewModel.setcareMsg2(p0.toString())
                 if (todayMytaminViewModel.getcareCategoryCode.value!=null &&p0.toString()!="" && (todayMytaminViewModel.getcareMsg1.value !="" &&todayMytaminViewModel.getcareMsg1.value!=null)){
-                    if (status?.careIsDone==true){
-                        (activity as todayMytaminActivity).setEnableCorrection(true)
-                    }else{
-                        (activity as todayMytaminActivity).setEnableNextBtn(true)
-                    }
+                    setOk(true)
                 }else{
-                    if (status?.careIsDone==false){
-                        (activity as todayMytaminActivity).setEnableCorrection(false)
-                    }else{
-                        (activity as todayMytaminActivity).setEnableNextBtn(false)
-                    }
+                    setOk(false)
+
                 }
             }
 
@@ -148,6 +135,13 @@ class MytaminStepSixFragment : Fragment(),View.OnClickListener {
 
 
         return mBinding?.root
+    }
+    private fun setOk(b:Boolean){
+        if (todayMytaminViewModel.domodify==modify.modify){
+            (activity as todayMytaminActivity).setEnableCorrection(b)
+        }else{
+            (activity as todayMytaminActivity).setEnableNextBtn(b)
+        }
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null

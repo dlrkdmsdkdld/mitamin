@@ -174,13 +174,13 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
         }
         if (canEditMytamin?.report!=null &&canEditMytamin?.care!=null){
             status = Status(false,false,true,true )
-            latestmytamin =LatestMytamin(takeAt = "",canEditReport=true,canEditCare=false,reportId=canEditMytamin.report!!.reportId
+            latestmytamin =LatestMytamin(takeAt = "",canEditReport=true,canEditCare=true,reportId=canEditMytamin.report!!.reportId
                 , mentalConditionCode = canEditMytamin.report!!.mentalConditionCode, feelingTag = canEditMytamin.report!!.feelingTag, mentalConditionMsg = canEditMytamin.report!!.mentalCondition,
                 todayReport = canEditMytamin.report!!.todayReport, careId = canEditMytamin.care!!.careId, careCategory = canEditMytamin.care!!.careCategory, careMsg1=canEditMytamin.care!!.careMsg1, careMsg2 = canEditMytamin.care!!.careMsg2
             )
         }else if (canEditMytamin?.report==null&&canEditMytamin?.care!=null){
             status = Status(false,false,false,true )
-            latestmytamin =LatestMytamin(takeAt = "",canEditReport=true,canEditCare=false,reportId=0
+            latestmytamin =LatestMytamin(takeAt = "",canEditReport=false,canEditCare=true,reportId=0
                 , mentalConditionCode =0, feelingTag ="", mentalConditionMsg = "",
                 todayReport = "", careId = canEditMytamin.care!!.careId, careCategory = canEditMytamin.care!!.careMsg1, careMsg1=canEditMytamin.care!!.careMsg1, careMsg2 = canEditMytamin.care!!.careMsg2
             )
@@ -303,6 +303,7 @@ class WeeklyActivity : AppCompatActivity(),View.OnClickListener {
     private fun gotodayMytaminActivity(step:Int){
         val intent= Intent(this,todayMytaminActivity::class.java)
         intent.putExtra("step",step)
+        intent.putExtra("modify",true)
         val bundle = Bundle()
         bundle.putSerializable("statusData",status)
         intent.putExtra("bundle",bundle)
