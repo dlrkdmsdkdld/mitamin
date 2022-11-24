@@ -94,6 +94,9 @@ class YesMytaminFragment : Fragment() ,View.OnClickListener{
             mBinding?.yesMytaminStep3Btn ->{
                 val intent= Intent(context, todayMytaminActivity::class.java)
                 intent.putExtra("step",3)
+                intent.putExtra("modify",true)
+
+
                 val bundle = Bundle()
                 bundle.putSerializable("statusData",homeviewmodel.getstatus.value)
                 intent.putExtra("bundle",bundle)
@@ -106,6 +109,8 @@ class YesMytaminFragment : Fragment() ,View.OnClickListener{
             mBinding?.yesMytaminStep4Btn->{
                 val intent= Intent(context, todayMytaminActivity::class.java)
                 intent.putExtra("step",6)
+                intent.putExtra("modify",true)
+
                 val bundle = Bundle()
                 bundle.putSerializable("statusData",homeviewmodel.getstatus.value)
                 intent.putExtra("bundle",bundle)

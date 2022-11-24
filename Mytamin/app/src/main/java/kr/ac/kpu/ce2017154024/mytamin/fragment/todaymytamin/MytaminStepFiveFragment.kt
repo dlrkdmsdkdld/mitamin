@@ -16,6 +16,7 @@ import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentManageMentBinding
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepFiveBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
+import kr.ac.kpu.ce2017154024.mytamin.utils.modify
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 class MytaminStepFiveFragment : Fragment() {
@@ -42,26 +43,23 @@ class MytaminStepFiveFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
                 todayMytaminViewModel.reportset(p0.toString())
                 Log.d(Constant.TAG,"MytaminStepFiveFragment todayMytaminViewModel -. ${todayMytaminViewModel._report.value}")
-                if (p0.toString()!=""){
-                    if (todayMytaminViewModel.getstatus.value!!.reportIsDone){
+                if (p0.toString()!="")setOk(true)
+                else setOk(false)
 
-                        (activity as todayMytaminActivity).setEnableCorrection(true)
-                    }else{
-                        (activity as todayMytaminActivity).setEnableNextBtn(true)
-                    }
-                }else{
-                    if (todayMytaminViewModel.getstatus.value!!.reportIsDone){
-                        (activity as todayMytaminActivity).setEnableCorrection(false)
-                    }else{
-                        (activity as todayMytaminActivity).setEnableNextBtn(false)
-                    }
-                }
+
             }
 
         })
 
-
         return mBinding?.root
+    }
+    private fun setOk(d:Boolean){
+        if (todayMytaminViewModel.domodify== modify.modify){
+            (activity as todayMytaminActivity).setEnableCorrection(d)
+        }else{
+            (activity as todayMytaminActivity).setEnableNextBtn(d)
+        }
+
     }
     override fun onDestroyView() { // 프래그먼트 삭제될때 자동으로실행
         mBinding=null

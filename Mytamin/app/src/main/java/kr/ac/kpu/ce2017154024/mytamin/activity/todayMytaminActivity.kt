@@ -23,6 +23,7 @@ import kr.ac.kpu.ce2017154024.mytamin.model.LatestMytamin
 import kr.ac.kpu.ce2017154024.mytamin.model.Status
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
+import kr.ac.kpu.ce2017154024.mytamin.utils.modify
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCorrectionDialog.OnClickedDialogBtn  {
@@ -47,34 +48,48 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
         resultBoolean = bundle?.getSerializable("statusData") as Status
        Log.d(TAG,"resultBoolean $resultBoolean")
        Log.d(TAG,"resultBooleantype ${resultBoolean?.javaClass?.name}")
-        if (resultBoolean.reportIsDone || resultBoolean.careIsDone){
-            var bundleL = intent.getBundleExtra("bundleL")
-            LatestMytamin = bundleL?.getSerializable("LatestMytamin") as LatestMytamin
+
+//        if (resultBoolean.reportIsDone || resultBoolean.careIsDone){
+//            var bundleL = intent.getBundleExtra("bundleL")
+//            LatestMytamin = bundleL?.getSerializable("LatestMytamin") as LatestMytamin
+//
+//        }
 
 
-        }
 
         mytaminBinding = ActivityTodayMytaminBinding.inflate(layoutInflater)
         setContentView(mytaminBinding.root)
         mytaminViewModel=ViewModelProvider(this).get(todayMytaminViewModel::class.java)
         mytaminViewModel.setstep(step)
         mytaminViewModel.setstatus(resultBoolean)
-        if (resultBoolean.reportIsDone ){
-            mytaminViewModel.reportset(LatestMytamin.todayReport)
-            mytaminViewModel.setselectemojiState(LatestMytamin.mentalConditionCode)
-            val tmp = LatestMytamin.feelingTag.replace("#".toRegex(),"")
-            val arr = tmp.split(" ")
-            mytaminViewModel.setdiagnosis(arr)
+//        if (resultBoolean.reportIsDone ){
+//
+//            //
+//            ///
+//            ////
+//            //
+//        }
+        if (intent.hasExtra("modify")){
+            mytaminViewModel.domodify=modify.modify
+            var bundleL = intent.getBundleExtra("bundleL")
+            LatestMytamin = bundleL?.getSerializable("LatestMytamin") as LatestMytamin
+            if(LatestMytamin.canEditReport){
+                mytaminViewModel.reportset(LatestMytamin.todayReport)
+                mytaminViewModel.setselectemojiState(LatestMytamin.mentalConditionCode)
+                val tmp = LatestMytamin.feelingTag.replace("#".toRegex(),"")
+                val arr = tmp.split(" ")
+                mytaminViewModel.setdiagnosis(arr)
+            }
+            if (LatestMytamin.canEditCare){
+                mytaminViewModel.setcareMsg1(LatestMytamin.careMsg1)
+                mytaminViewModel.setcareMsg2(LatestMytamin.careMsg2)
+                mytaminViewModel.setcareCategoryCodeMsg(LatestMytamin.careCategory)
 
-            //
-            ///
-            ////
-            //
+            }
         }
+
         if (resultBoolean.careIsDone){
-            mytaminViewModel.setcareMsg1(LatestMytamin.careMsg1)
-            mytaminViewModel.setcareMsg2(LatestMytamin.careMsg2)
-            mytaminViewModel.setcareCategoryCodeMsg(LatestMytamin.careCategory)
+
         }
         connectClicklistner()
         // setOnClickjoin()
@@ -139,46 +154,38 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepThreeFragment).commit()
                 mytamin_progressbar.progress =600
                 mytaminBinding.mytaminPassBtn.visibility=View.GONE
-                resultBoolean.reportIsDone?.let {
-                    if (it) {
-                        mytaminBinding.mytaminNextBtn.visibility=View.GONE
-                        mytamin_correction_btn.visibility=View.VISIBLE
-                    }else{
-                        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
-                        mytamin_correction_btn.visibility=View.GONE
-
-                    }
+                if (mytaminViewModel.domodify==modify.modify && LatestMytamin.canEditReport ){
+                    mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                    mytamin_correction_btn.visibility=View.VISIBLE
+                }else{
+                    mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
+                    mytamin_correction_btn.visibility=View.GONE
                 }
+
 
             }
             4->{
                 val MytaminStepFourFragment = MytaminStepFourFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepFourFragment).commit()
                 mytaminBinding.mytaminPassBtn.visibility=View.GONE
-                resultBoolean.reportIsDone?.let {
-                    if (it) {
-                        mytaminBinding.mytaminNextBtn.visibility=View.GONE
-                        mytamin_correction_btn.visibility=View.VISIBLE
-                    }else{
-                        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
-                        mytamin_correction_btn.visibility=View.GONE
-
-                    }
+                if (mytaminViewModel.domodify==modify.modify && LatestMytamin.canEditReport){
+                    mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                    mytamin_correction_btn.visibility=View.VISIBLE
+                }else{
+                    mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
+                    mytamin_correction_btn.visibility=View.GONE
                 }
             }
             5->{
                 val MytaminStepFiveFragment = MytaminStepFiveFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepFiveFragment).commit()
                 mytaminBinding.mytaminPassBtn.visibility=View.GONE
-                resultBoolean.reportIsDone?.let {
-                    if (it) {
-                        mytaminBinding.mytaminNextBtn.visibility=View.GONE
-                        mytamin_correction_btn.visibility=View.VISIBLE
-                    }else{
-                        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
-                        mytamin_correction_btn.visibility=View.GONE
-
-                    }
+                if (mytaminViewModel.domodify==modify.modify && LatestMytamin.canEditReport){
+                    mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                    mytamin_correction_btn.visibility=View.VISIBLE
+                }else{
+                    mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
+                    mytamin_correction_btn.visibility=View.GONE
                 }
             }
             6->{
@@ -186,18 +193,19 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
                 supportFragmentManager.beginTransaction().replace(R.id.today_fragmentcontainer,MytaminStepSixFragment).commit()
                 mytamin_progressbar.progress =800
                 mytaminBinding.mytaminPassBtn.visibility=View.GONE
-                resultBoolean.careIsDone?.let {
-                    if (it) {
-                        mytaminBinding.mytaminNextBtn.visibility=View.GONE
-                        mytamin_correction_btn.visibility=View.VISIBLE
-                        mytamin_correction_btn.isEnabled=false
-                        mytamin_correction_btn.setTextColor(resources.getColor(R.color.notEnabled,null))
-                    }else{
-                        mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
-                        mytamin_correction_btn.visibility=View.GONE
+                if (mytaminViewModel.domodify==modify.modify && LatestMytamin.canEditReport){
+                    mytaminBinding.mytaminNextBtn.visibility=View.GONE
+                    mytamin_correction_btn.visibility=View.VISIBLE
+                    mytamin_correction_btn.isEnabled=false
+                    mytamin_correction_btn.setTextColor(resources.getColor(R.color.background_white,null))
 
-                    }
+                }else{
+                    mytaminBinding.mytaminNextBtn.visibility=View.VISIBLE
+                    mytaminBinding.mytaminNextBtn.text="섭취완료!"
+                    mytamin_correction_btn.visibility=View.GONE
+
                 }
+
 //                mytamin_layout1.visibility=View.INVISIBLE
 //                mytamin_pass_btn.isEnabled=false
 //                mytamin_next_btn.isEnabled=false
@@ -284,6 +292,7 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
 
             mytamin_next_btn ->{
                 step+=1
+                Log.d(TAG,"넥스트버튼 클릭됨")
                 mytaminViewModel.setstep(step)
                 next_btn(step)
                 setEnableNextBtn(false)
@@ -319,11 +328,26 @@ class todayMytaminActivity : AppCompatActivity(), View.OnClickListener,MytaminCo
             }
             mytamin_correction_btn->{
                 when(step){
-                    3,4,5 -> {
+                    3,4 -> {
+                        mytaminViewModel.CorrectionReport(LatestMytamin.reportId)
+                        step+=1
+                        replaceFragment(step)
+                        mytaminViewModel.timerDestory()
+                        mytaminViewModel.setstep(step)
+                    }
+                    5->{
                         mytaminViewModel.CorrectionReport(LatestMytamin.reportId)
                         step+=1
                         mytaminViewModel.setstep(step)
-                        next_btn(step)
+                        if (LatestMytamin.canEditCare==false){
+                            val intent= Intent(this,MainActivity::class.java)
+                            finishAffinity()
+                            startActivity(intent)
+                        }else{
+                            replaceFragment(step)
+                            mytaminViewModel.timerDestory()
+                            mytaminViewModel.setstep(step)
+                        }
                     }
 
                     6-> {

@@ -19,6 +19,8 @@ import kr.ac.kpu.ce2017154024.mytamin.activity.todayMytaminActivity
 import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepThreeBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
+import kr.ac.kpu.ce2017154024.mytamin.utils.modify
+import kr.ac.kpu.ce2017154024.mytamin.viewModel.HomeViewModel
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 
@@ -38,11 +40,11 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
         val dialog = MytaminCorrectionDialog(requireContext(),3)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        if (todayMytaminViewModel.getstatus.value?.reportIsDone != false){
+        if(todayMytaminViewModel.domodify == modify.modify  && todayMytaminViewModel.selectemojiState.value!=0){
             dialog.show()
             dialog.setOnClickListener(object :MytaminCorrectionDialog.OnClickedDialogBtn{
                 override fun OnNegativeBtn() {
-                   Log.d(TAG,"OnNegativeBtn")
+                    Log.d(TAG,"OnNegativeBtn")
                     dialog.dismiss()
                     (activity as todayMytaminActivity).onBackPressed()
 
@@ -56,6 +58,9 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
 
             })
         }
+//        if (todayMytaminViewModel.getstatus.value?.reportIsDone != false){
+//
+//        }
 
         return mBinding?.root
     }
@@ -178,11 +183,11 @@ class MytaminStepThreeFragment : Fragment() ,View.OnClickListener{
         ///
     }
     private fun setOk(){
-        if (todayMytaminViewModel.getstatus.value!!.reportIsDone){
-
+        if (todayMytaminViewModel.domodify==modify.modify){
             (activity as todayMytaminActivity).setEnableCorrection(true)
         }else{
             (activity as todayMytaminActivity).setEnableNextBtn(true)
         }
+
     }
 }

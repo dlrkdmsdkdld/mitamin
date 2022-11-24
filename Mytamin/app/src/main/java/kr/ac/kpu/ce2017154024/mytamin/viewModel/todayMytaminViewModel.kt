@@ -1,5 +1,6 @@
 package kr.ac.kpu.ce2017154024.mytamin.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,11 +10,13 @@ import kr.ac.kpu.ce2017154024.mytamin.Repository.MytaminRepository
 import kr.ac.kpu.ce2017154024.mytamin.model.CareData
 import kr.ac.kpu.ce2017154024.mytamin.model.ReportData
 import kr.ac.kpu.ce2017154024.mytamin.model.Status
+import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.PrivateUserDataSingleton
+import kr.ac.kpu.ce2017154024.mytamin.utils.modify
 
 class todayMytaminViewModel :ViewModel() {
     private val mytaminRepository= MytaminRepository()  //레포지토리 ##
-
+    var domodify: modify=modify.basic
 
     private val status = MutableLiveData<Status>()
     val getstatus : LiveData<Status>
@@ -88,6 +91,7 @@ class todayMytaminViewModel :ViewModel() {
             2 -> inputdata=ReportData(mentalConditionCode = selectemojiState.value!!, tag1 =selectediagnosis!!.value!!.get(0) , tag2 = selectediagnosis!!.value!!.get(1) ,todayReport=report.value!!)
             else -> inputdata=ReportData(mentalConditionCode = selectemojiState.value!!, tag1 =selectediagnosis!!.value!!.get(0) , tag2 = selectediagnosis!!.value!!.get(1), tag3 =selectediagnosis!!.value!!.get(2),todayReport=report.value!!)
         }
+        Log.d(TAG,"inputdata -> $inputdata")
         mytaminRepository.CorrectionReport(inputdata,reportId)
         //mytaminRepository.CorrectionReport(inputdata,"가탄")
     }

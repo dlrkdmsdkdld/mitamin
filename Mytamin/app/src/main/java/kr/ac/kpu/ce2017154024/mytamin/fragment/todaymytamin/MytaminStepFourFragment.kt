@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -24,6 +25,7 @@ import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata
 import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata.previousChildCount
 import kr.ac.kpu.ce2017154024.mytamin.utils.dp2px
+import kr.ac.kpu.ce2017154024.mytamin.utils.modify
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
 
 
@@ -42,6 +44,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         mBinding =binding
         chipGroup=mBinding?.mytaminStepFourChipgroup!!
         chipGroup.clearDisappearingChildren()
+
         Log.d(Constant.TAG,"MytaminStepFourFragment onCreateView")
         val emojitState = todayMytaminViewModel.selectemojiState.value
         setChip(emojitState!!)
@@ -132,6 +135,10 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
             }
 
         }
+        group.children.forEach {
+
+        }
+
         checkedIds.forEach {
             // 가끔 태그 받아오는거 안됨 잘봐야함
             val chip = group.getChildAt(it-1  - previousChildCount ) //동적추가 없을때
@@ -146,8 +153,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
 
     }
     fun okBtn(d:Boolean){
-        if (todayMytaminViewModel.getstatus.value!!.reportIsDone){
-
+        if (todayMytaminViewModel.domodify== modify.modify){
             (activity as todayMytaminActivity).setEnableCorrection(d)
         }else{
             (activity as todayMytaminActivity).setEnableNextBtn(d)

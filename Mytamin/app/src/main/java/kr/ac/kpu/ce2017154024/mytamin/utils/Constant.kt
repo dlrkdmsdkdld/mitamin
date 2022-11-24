@@ -65,6 +65,10 @@ enum class select{
     modify,
     delete
 }
+enum class modify{
+    modify,
+    basic
+}
 enum class fragment{
     home,
     information,
