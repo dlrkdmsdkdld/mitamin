@@ -23,7 +23,6 @@ import kr.ac.kpu.ce2017154024.mytamin.databinding.FragmentMytaminStepFourBinding
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant
 import kr.ac.kpu.ce2017154024.mytamin.utils.Constant.TAG
 import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata
-import kr.ac.kpu.ce2017154024.mytamin.utils.chipStringdata.previousChildCount
 import kr.ac.kpu.ce2017154024.mytamin.utils.dp2px
 import kr.ac.kpu.ce2017154024.mytamin.utils.modify
 import kr.ac.kpu.ce2017154024.mytamin.viewModel.todayMytaminViewModel
@@ -166,11 +165,7 @@ class MytaminStepFourFragment : Fragment(),ChipGroup.OnCheckedStateChangeListene
         }
 
     }
-    override fun onDestroy() {
-        previousChildCount=chipGroup.childCount+previousChildCount
-        //뷰가 삭제되도 어찌된일인지 chipgroup 새로생성되는 child id가 이전꺼로부터 갱신되어서 싱글톤변수이용함 ex. 이전꺼 childcount:15 다음꺼 childcount:30됨
-        super.onDestroy()
-    }
+
     private fun createTagChip(context: Context, statetext: String,idData:Int): Chip {
         return Chip(context).apply {
             setChipBackgroundColorResource(R.color.chip_background_color)
