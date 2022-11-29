@@ -22,25 +22,22 @@ object TokenRetrofitClient {
         //okhttp 인스턴스 생성
         val client = OkHttpClient.Builder()
         //로그를 찍기 위해 로깅 인터셉터 설정
-        val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
-            override fun log(message: String) {
-                Log.d(Constant.TAG,"RetrofitClient - log() called / message: $message")
-                when{
-                    message.isJsonObject() -> Log.d(Constant.TAG, JSONObject(message).toString(4))
+        val loggingInterceptor = HttpLoggingInterceptor { message ->
+            Log.d(Constant.TAG, "RetrofitClient - log() called / message: $message")
+            when {
+                message.isJsonObject() -> Log.d(Constant.TAG, JSONObject(message).toString(4))
 
-                    message.isJsonArray() -> Log.d(Constant.TAG, JSONArray(message).toString(4))
-                    else ->{
-                        try {
-                            Log.d(Constant.TAG, JSONObject(message).toString(4))
-                        }catch (e:Exception){
-                            Log.d(Constant.TAG,message)
-                        }
+                message.isJsonArray() -> Log.d(Constant.TAG, JSONArray(message).toString(4))
+                else -> {
+                    try {
+                        Log.d(Constant.TAG, JSONObject(message).toString(4))
+                    } catch (e: Exception) {
+                        Log.d(Constant.TAG, message)
                     }
-
                 }
-            }
 
-        })
+            }
+        }
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         //위에서 설정한 로깅 인터셉터를 okhttp 클라이언트에 추가한다.
         client.addInterceptor(loggingInterceptor)
