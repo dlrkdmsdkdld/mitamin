@@ -38,7 +38,7 @@
 
 
 # 🍄Build with
-+ JetPack(`recyclerview` , `workmanager` , `navigation` , `livedata` , `viewmodel` , `databinding`)
++ JetPack(`recyclerview` , `workmanager` , `navigation` , `livedata` , `viewmodel` )
 + rxjava
 + http : `retrofit2` , `okHttp3`
 + 아키텍쳐 패턴 : `MVVM` 
