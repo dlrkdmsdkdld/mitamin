@@ -17,6 +17,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.activityViewModels
@@ -227,29 +229,22 @@ class RecordFragment : Fragment(),View.OnClickListener,IHomeRecyclerView {
     fun openGallery() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
-        startActivityForResult(intent,2000)
+        startForResult.launch(intent)
     }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode != Activity.RESULT_OK) {
-            (activity as DaynoteRecordActivity).permissionDenied("잘못된 접근입니다")
-            return
-        }
-        when(requestCode) {
-            2000 -> {
-                val selectedImageURI : Uri? = data?.data
-                if( selectedImageURI != null) {
-                    myRecordViewmodel.addUrlList(selectedImageURI)
-                    showImage(selectedImageURI)
-                }else {
-                    (activity as DaynoteRecordActivity).permissionDenied("사진을 가져오지 못했습니다")
-                }
-            } else -> {
-            (activity as DaynoteRecordActivity).permissionDenied("잘못된 접근입니다")
+    val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result: ActivityResult ->
+        if(result.resultCode!= Activity.RESULT_OK){
+            Toast.makeText(requireContext(),"잘못된 접근입니다",Toast.LENGTH_SHORT).show()
+        }else{
+            val selectedImageURI : Uri? = result?.data?.data
+            if( selectedImageURI != null) {
+                myRecordViewmodel.addUrlList(selectedImageURI)
+                showImage(selectedImageURI)
+            }else {
+                Toast.makeText(requireContext(),"사진을 가져오지 못했습니다",Toast.LENGTH_SHORT).show()
             }
         }
-
     }
+
     private fun showImage(uri: Uri) {
         GlobalScope.launch {    // 1
             val bitmap = getBitmapFromUri(uri) // 2

@@ -14,6 +14,8 @@ import android.os.ParcelFileDescriptor
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import com.jakewharton.rxbinding4.widget.textChanges
@@ -192,9 +194,23 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
 //        startActivityForResult(intent, 2000)
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
-        startActivityForResult(intent,2000)
+        //startActivityForResult(intent,2000)
+        startForResult.launch(intent)
     }
-
+    val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result:ActivityResult ->
+        if(result.resultCode!= Activity.RESULT_OK){
+            Toast.makeText(this,"잘못된 접근입니다",Toast.LENGTH_SHORT).show()
+        }else{
+            val selectedImageURI : Uri? = result?.data?.data
+            if( selectedImageURI != null) {
+                showImage(selectedImageURI)
+                correctionImage=true
+            }else {
+                Toast.makeText(this,"사진을 가져오지 못했습니다",Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    /*
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode != Activity.RESULT_OK) {
@@ -221,6 +237,7 @@ class ProfileEditActivity : AppCompatActivity(),View.OnClickListener {
         }
 
     }
+    */
     private fun showImage(uri: Uri) {
         GlobalScope.launch {    // 1
             val bitmap = getBitmapFromUri(uri) // 2
